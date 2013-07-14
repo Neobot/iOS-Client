@@ -341,21 +341,12 @@
                                     <segue destination="8y5-GQ-Dwb" kind="embed" id="r7z-XJ-eJE"/>
                                 </connections>
                             </containerView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SgI-Na-jX8">
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="j9O-0O-0ZX"/>
-                                    <barButtonItem image="Toolbar - Playlist.png" style="plain" id="L1Q-4Z-HYv"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.85882359740000003" green="0.87058830259999997" blue="0.89019614459999996" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="SgI-Na-jX8" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="3Wl-CF-lmQ"/>
-                            <constraint firstItem="SgI-Na-jX8" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="SkL-t4-BqZ"/>
+                            <constraint firstItem="iHD-jE-Jg2" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="DTm-YT-Ewt"/>
                             <constraint firstItem="iHD-jE-Jg2" firstAttribute="top" secondItem="16" secondAttribute="top" type="default" id="U1Y-fj-bxY"/>
-                            <constraint firstAttribute="bottom" secondItem="iHD-jE-Jg2" secondAttribute="bottom" constant="49" id="YQn-Nb-Xga"/>
-                            <constraint firstItem="SgI-Na-jX8" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="e9x-4f-tUT"/>
-                            <constraint firstItem="SgI-Na-jX8" firstAttribute="centerX" secondItem="iHD-jE-Jg2" secondAttribute="centerX" type="default" id="mll-A0-p2k"/>
+                            <constraint firstItem="iHD-jE-Jg2" firstAttribute="centerX" secondItem="16" secondAttribute="centerX" type="default" id="b55-4D-wRw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Connection" image="Network.png" id="6"/>
@@ -369,9 +360,10 @@
             <objects>
                 <tableViewController id="8y5-GQ-Dwb" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tTb-AM-gGJ">
-                        <rect key="frame" x="0.0" y="0.0" width="531" height="906"/>
+                        <rect key="frame" x="0.0" y="0.0" width="531" height="955"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection headerTitle="Network Connection" id="N5S-IJ-cIL">
                                 <cells>
