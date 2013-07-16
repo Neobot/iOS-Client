@@ -7,6 +7,7 @@
 //
 
 #import "PXGCommProtocol.h"
+#import "PXGDataSerializer.h"
 
 typedef NS_ENUM(NSInteger, PXGMessageTag)
 {
@@ -21,6 +22,8 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
 {
     NSMutableArray* _delegates;
     int _currentMessageLength;
+    int _currentMessageInstruction;
+    NSData* _currentMessageData;
 }
 
 - (id) init
@@ -53,7 +56,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
     {
         case HEADER:
             _currentMessageLength = 0;
-            char headerData[2] = {255, 255};
+            int8_t headerData[2] = {255, 255};
             [self.socket readDataToData: [NSData dataWithBytes:headerData length:2] withTimeout:-1 tag:HEADER];
             break;
             
@@ -81,6 +84,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
 #pragma mark socket delegate
 - (void)socket:(GCDAsyncSocket *)sender didReadData:(NSData *)data withTag:(long)tag
 {
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:[NSMutableData dataWithData:data]];
     switch (tag)
     {
         case HEADER:
@@ -92,15 +96,22 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
             break;
             
         case INSTRUCTION:
+        {
+            _currentMessageInstruction = [serializer takeInt8];
             [self readDataWithTag:DATA];
             break;
-            
+        }
         case DATA:
+            _currentMessageData = data;
             [self readDataWithTag:CHECKSUM];
             break;
             
         case CHECKSUM:
             [self readDataWithTag:HEADER];
+            for (id protocol in _delegates)
+            {
+                [protocol messageReceived: _currentMessageInstruction withData:_currentMessageData];
+            }
             break;
             
         default:

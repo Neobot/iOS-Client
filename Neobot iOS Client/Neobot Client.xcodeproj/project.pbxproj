@@ -33,6 +33,7 @@
 		9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433FE3A1795BB4F0092A43B /* GCDAsyncSocket.m */; };
 		9433FE3F1795BD0A0092A43B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE3E1795BD0A0092A43B /* Security.framework */; };
 		9433FE411795BD720092A43B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE401795BD720092A43B /* CFNetwork.framework */; };
+		94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D411795D5B90024A789 /* PXGDataSerializer.m */; };
 		94CE6078179190E600D4EC6E /* Table2013.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CE6077179190E600D4EC6E /* Table2013.png */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,8 @@
 		9433FE3A1795BB4F0092A43B /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		9433FE3E1795BD0A0092A43B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9433FE401795BD720092A43B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		94835D401795D5B90024A789 /* PXGDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXGDataSerializer.h; path = ../PXGDataSerializer.h; sourceTree = "<group>"; };
+		94835D411795D5B90024A789 /* PXGDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGDataSerializer.m; path = ../PXGDataSerializer.m; sourceTree = "<group>"; };
 		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +134,8 @@
 				9433FE341795B00A0092A43B /* PXGNetworkDelegates.h */,
 				9433FE351795B0E70092A43B /* PXGCommProtocol.h */,
 				9433FE361795B0E70092A43B /* PXGCommProtocol.m */,
+				94835D401795D5B90024A789 /* PXGDataSerializer.h */,
+				94835D411795D5B90024A789 /* PXGDataSerializer.m */,
 				9425D3981791565000C6E883 /* MainStoryboard.storyboard */,
 				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
 				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
@@ -265,6 +270,7 @@
 				9425D3A41791565000C6E883 /* PXGConnectionViewController.m in Sources */,
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,
 				9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */,
+				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
