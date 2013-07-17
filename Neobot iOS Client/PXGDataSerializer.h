@@ -10,10 +10,21 @@
 
 @interface PXGDataSerializer : NSObject
 
-- (id)initWithData:(NSMutableData*) data;
+@property CFByteOrder endianness;
 
-- (void) addInt8:(int8_t) value;
-- (int8_t) takeInt8;
-- (int8_t) readInt8At: (int) position;
+- (id)initWithData:(NSMutableData*) data;
++ (void)setDefaultEndianness:(CFByteOrder)endianness;
+
+- (void) addInt8:(uint8_t) value;
+- (uint8_t) takeInt8;
+- (uint8_t) readInt8At: (int) position;
+
+- (void) addInt16:(uint16_t) value;
+- (uint16_t) takeInt16;
+- (uint16_t) readInt16At: (int) position;
+
+- (void) addInt32:(uint32_t) value;
+- (uint32_t) takeInt32;
+- (uint32_t) readInt32At: (int) position;
 
 @end
