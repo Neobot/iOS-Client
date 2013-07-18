@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
     Controled
 };
 
+#pragma mark Robot delegate
 @protocol PXGRobotInterfaceDelegate <NSObject>
 @optional
 - (void)didReceiveRobotPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta direction:(uint8_t)direction;
@@ -28,7 +29,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (BOOL)didReceiveStartSignalInMirrorMode:(BOOL)mirrored;
 - (BOOL)didReceivePing;
 - (void)didReceiveNoticeOfReceiptForInstrction:(uint8_t)instruction withResult:(BOOL)result;
-- (void)didReceiveOpponentPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
+- (void)didReceiveOpponentPositionX:(int16_t)x  Y:(int16_t)y;
 - (BOOL)shouldRestartStrategy;
 - (void)shouldQuit;
 - (void)didReceiveArrivedToObjectiveStatus;
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)didReceiveParameterNames:(NSArray*)names;
 @end
 
-
+#pragma mark Server delegate
 @protocol PXGServerInterfaceDelegate <NSObject>
 @optional
 - (void)didReceiveServerAnnouncement:(NSString*) message;
@@ -53,7 +54,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)didReceiveAx12MovementsFileData:(NSData*)data;
 @end
 
-
+#pragma mark Connected view delegate
 @protocol PXGConnectedViewDelegate <NSObject>
 @optional
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status;
@@ -73,10 +74,15 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)registerServerInterfaceDelegate:(id<PXGServerInterfaceDelegate>)serverInterfaceDelegate;
 - (void)unregisterServerInterfaceDelegate:(id<PXGServerInterfaceDelegate>)serverInterfaceDelegate;
 
-- (void) changeConnectionStatusTo:(PXGConnectionStatus)status;
+- (void)changeConnectionStatusTo:(PXGConnectionStatus)status;
 
-- (BOOL) connectToServer:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr;
-- (void) disconnectFromServer;
+- (BOOL)connectToServer:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr;
+- (void)disconnectFromServer;
+
+- (void)sendPingToRobot;
+- (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
+
+- (void)sendPingToServer;
 
 
 @property (strong, nonatomic) PXGCommProtocol* protocol;

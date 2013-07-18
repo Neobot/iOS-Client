@@ -7,6 +7,8 @@
 //
 
 #import "PXGCommInterface.h"
+#import "PXGInstructions.h"
+#import "PXGDataSerializer.h"
 
 @implementation PXGCommInterface
 {
@@ -99,7 +101,65 @@
 
 - (void) messageReceived:(int)instruction withData:(NSData*)data
 {
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:[NSMutableData dataWithData:data]];
+    switch (instruction)
+    {
+        case COORD:
+        {
+            uint16_t x = [serializer takeInt16];
+            uint16_t y = [serializer takeInt16];
+            uint16_t theta = [serializer takeInt16];
+            uint8_t dir = [serializer takeInt8];
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                [robotDelegate didReceiveRobotPositionX:x Y:y angle:(double)theta/ANGLE_FACTOR direction:dir];
+            
+            break;
+        }
+        case OPPONENT:
+        {
+            uint16_t x = [serializer takeInt16];
+            uint16_t y = [serializer takeInt16];
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                [robotDelegate didReceiveOpponentPositionX:x Y:y];
+            
+            break;
+        }
+        case IS_ARRIVED:
+        {
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                [robotDelegate didReceiveArrivedToObjectiveStatus];
+        }
+        case IS_BLOCKED:
+        {
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                [robotDelegate didReceiveBlockedStatus];
+        }
+        default:
+            break;
+    }
+}
+
+#pragma mark Send methods
+- (void)sendPingToRobot
+{
+    [_protocol writeMessage:nil forInstruction:PING];
+}
+
+- (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
     
+    [serializer addInt16:x];
+    [serializer addInt16:y];
+    [serializer addInt16:(uint16_t)theta * ANGLE_FACTOR];
+    
+    [_protocol writeMessage:messageData forInstruction:SET_POS];
+}
+
+- (void)sendPingToServer
+{
+    [_protocol writeMessage:nil forInstruction:PING_SERVER];
 }
 
 

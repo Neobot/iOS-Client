@@ -84,19 +84,21 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
     [serializer addInt8:255];
     
     //length
-    int messageLength = [data length] + 1;
+    int messageLength = data != nil ? [data length] + 1 : 0;
     [serializer addInt32:messageLength];
     
     //instruction
     [serializer addInt8:instruction];
     
     //data
-    [serializer addData:data];
+    if (data != nil)
+        [serializer addData:data];
     
     //checksum
     NSMutableData* checksumData = [[NSMutableData alloc] initWithBytes:&messageLength length:1];
     [checksumData appendBytes:&instruction length:1];
-    [checksumData appendData:data];
+    if (data != nil)
+        [checksumData appendData:data];
     uint8_t calculatedChecksum = [self calculateChecksum:checksumData];
     [serializer addInt8:calculatedChecksum];
     

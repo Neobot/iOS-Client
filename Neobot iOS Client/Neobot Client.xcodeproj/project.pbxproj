@@ -77,6 +77,7 @@
 		94835D411795D5B90024A789 /* PXGDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGDataSerializer.m; path = ../PXGDataSerializer.m; sourceTree = "<group>"; };
 		94835D43179849BE0024A789 /* PXGCommInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommInterface.h; sourceTree = "<group>"; };
 		94835D44179849BE0024A789 /* PXGCommInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCommInterface.m; sourceTree = "<group>"; };
+		94835D461798593D0024A789 /* PXGInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGInstructions.h; sourceTree = "<group>"; };
 		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +136,7 @@
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
 				94835D43179849BE0024A789 /* PXGCommInterface.h */,
 				94835D44179849BE0024A789 /* PXGCommInterface.m */,
+				94835D461798593D0024A789 /* PXGInstructions.h */,
 				9433FE351795B0E70092A43B /* PXGCommProtocol.h */,
 				9433FE361795B0E70092A43B /* PXGCommProtocol.m */,
 				94835D401795D5B90024A789 /* PXGDataSerializer.h */,
