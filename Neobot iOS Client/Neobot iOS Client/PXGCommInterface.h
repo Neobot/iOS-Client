@@ -18,24 +18,45 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 };
 
 @protocol PXGRobotInterfaceDelegate <NSObject>
-
 @optional
-
+- (void)didReceiveRobotPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta direction:(uint8_t)direction;
+- (void)didReceiveRobotObjectiveX:(int16_t)x Y:(int16_t)y angle:(double)theta;
+- (void)didReceiveAvoidingSensorsValues:(NSArray*)values;
+- (void)didReceiveMicroswitchsValues:(NSArray*)values;
+- (void)didReceiveOtherSensorsValues:(NSArray*)values;
+- (BOOL)didReceiveInitDone;
+- (BOOL)didReceiveStartSignalInMirrorMode:(BOOL)mirrored;
+- (BOOL)didReceivePing;
+- (void)didReceiveNoticeOfReceiptForInstrction:(uint8_t)instruction withResult:(BOOL)result;
+- (void)didReceiveOpponentPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
+- (BOOL)shouldRestartStrategy;
+- (void)shouldQuit;
+- (void)didReceiveArrivedToObjectiveStatus;
+- (void)didReceiveBlockedStatus;
+- (void)didReceiveLog:(NSString*) text;
+- (void)didReceiveParametersValues:(NSArray*)values;
+- (void)didReceiveParameterNames:(NSArray*)names;
 @end
 
 
 @protocol PXGServerInterfaceDelegate <NSObject>
-
 @optional
-
+- (void)didReceiveServerAnnouncement:(NSString*) message;
+- (void)didReceiveNetworkNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result;
+- (void)didReceiveStrategyNames:(NSArray*)names;
+- (void)didReceiveFileNames:(NSArray*)filenames forStrategy:(int)strategyNum;
+- (void)didReceiveFileData:(NSData*)fileData forFile:(NSString*)filename forStrategy:(int)strategyNum;
+- (void)didReceiveStatus:(BOOL)isRunning forStrategy:(int)strategyNum;
+- (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled;
+- (void)didReceiveSerialPortsInfo:(NSArray*)serialports;
+- (void)didReceivePositions:(NSArray*)positions forAx12:(NSArray*)ax12Ids;
+- (void)didReceiveAx12MovementsFileData:(NSData*)data;
 @end
 
 
 @protocol PXGConnectedViewDelegate <NSObject>
-
 @optional
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status;
-
 @end
 
 
