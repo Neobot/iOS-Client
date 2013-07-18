@@ -10,7 +10,7 @@
 
 @implementation PXGDataSerializer
 {
-     __weak NSMutableData* _data;
+    NSMutableData* _data;
     int _pos;
 }
 
@@ -32,6 +32,11 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     return self;
 }
 
+- (BOOL) checkDataLength:(int)length
+{
+    return [_data length] - _pos >= length;
+}
+
 #pragma mark Int8
 
 - (void) addInt8:(uint8_t)value
@@ -41,10 +46,13 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (uint8_t) readInt8At:(int)position
 {
+    if (![self checkDataLength:1])
+        return 0;
+    
     uint8_t value = 0;
     
     void* bytes = 0;
-    [_data getBytes:bytes length:1];
+    [_data getBytes:bytes];
     
     value = *((uint8_t*)(bytes + position));
     
@@ -82,10 +90,13 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (uint16_t) readInt16At: (int) position
 {
+    if (![self checkDataLength:2])
+        return 0;
+    
     uint16_t value = 0;
     
     void* bytes = 0;
-    [_data getBytes:bytes length:2];
+    [_data getBytes:bytes];
     
     value = *((uint16_t*)(bytes + position));
     
@@ -129,10 +140,13 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (uint32_t) readInt32At: (int) position
 {
+    if (![self checkDataLength:4])
+        return 0;
+    
     uint32_t value = 0;
     
     void* bytes = 0;
-    [_data getBytes:bytes length:4];
+    [_data getBytes:bytes];
     
     value = *((uint32_t*)(bytes + position));
     
@@ -147,6 +161,30 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     }
     
     return value;
+}
+
+#pragma mark NSData
+- (void) addData:(NSData*) data
+{
+    [_data appendData:data];
+}
+
+- (NSData*) readDataAt:(int)position withLength:(int)length
+{
+    if (![self checkDataLength:length])
+        return nil;
+    
+    void* bytes = 0;
+    [_data getBytes:bytes];
+    
+    NSData* result = [NSData dataWithBytes:bytes length:length];
+    return result;
+}
+
+- (NSData*) takeDataWithLength:(int)length
+{
+    _pos += length;
+    return [self readDataAt:(_pos - length) withLength:length];
 }
 
 

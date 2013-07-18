@@ -27,4 +27,8 @@
 - (uint32_t) takeInt32;
 - (uint32_t) readInt32At: (int) position;
 
+- (void) addData:(NSData*) data;
+- (NSData*) readDataAt:(int)position withLength:(int)length;
+- (NSData*) takeDataWithLength:(int)length;
+
 @end

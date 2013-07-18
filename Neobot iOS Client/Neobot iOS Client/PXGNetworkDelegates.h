@@ -22,10 +22,3 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void) connectionStatusChanged:(PXGConnectionStatus)status;
 
 @end
-
-@protocol PXGProtocolDelegate <NSObject>
-
-@optional
-- (BOOL) messageReceived:(int)instruction withData:(NSData*)data;
-
-@end

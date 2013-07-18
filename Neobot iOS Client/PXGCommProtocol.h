@@ -8,13 +8,28 @@
 
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
-#import "PXGNetworkDelegates.h"
 
+
+#pragma mark Protocol
+@protocol PXGProtocolDelegate <NSObject>
+
+@optional
+- (void) messageReceived:(int)instruction withData:(NSData*)data;
+- (void) protocolConnected;
+- (void) protocolDisconnectedWithError:(NSError *)error;
+
+@end
+
+#pragma mark Interface
 @interface PXGCommProtocol : NSObject
 
 - (id)init;
-- (void) addDelegate: (id<PXGProtocolDelegate>)delegate;
-- (void) removeDelegate: (id<PXGProtocolDelegate>)delegate;
+
+- (void) setDelegate:(id<PXGProtocolDelegate>)delegate;
+- (void) writeMessage:(NSData*)data forInstruction:(uint8_t) instruction;
+
+- (BOOL) connect:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr;
+- (void) disconnect;
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
 
