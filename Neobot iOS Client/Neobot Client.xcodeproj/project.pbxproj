@@ -34,6 +34,7 @@
 		9433FE3F1795BD0A0092A43B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE3E1795BD0A0092A43B /* Security.framework */; };
 		9433FE411795BD720092A43B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE401795BD720092A43B /* CFNetwork.framework */; };
 		94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D411795D5B90024A789 /* PXGDataSerializer.m */; };
+		94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D44179849BE0024A789 /* PXGCommInterface.m */; };
 		94CE6078179190E600D4EC6E /* Table2013.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CE6077179190E600D4EC6E /* Table2013.png */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +67,6 @@
 		9425D3B917915AEF00C6E883 /* sensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sensor.png; sourceTree = "<group>"; };
 		9425D3BA17915AEF00C6E883 /* Task Manager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Task Manager.png"; sourceTree = "<group>"; };
 		9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toolbar - Playlist.png"; sourceTree = "<group>"; };
-		9433FE341795B00A0092A43B /* PXGNetworkDelegates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGNetworkDelegates.h; sourceTree = "<group>"; };
 		9433FE351795B0E70092A43B /* PXGCommProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXGCommProtocol.h; path = ../PXGCommProtocol.h; sourceTree = "<group>"; };
 		9433FE361795B0E70092A43B /* PXGCommProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGCommProtocol.m; path = ../PXGCommProtocol.m; sourceTree = "<group>"; };
 		9433FE391795BB4F0092A43B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -75,6 +75,8 @@
 		9433FE401795BD720092A43B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		94835D401795D5B90024A789 /* PXGDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXGDataSerializer.h; path = ../PXGDataSerializer.h; sourceTree = "<group>"; };
 		94835D411795D5B90024A789 /* PXGDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGDataSerializer.m; path = ../PXGDataSerializer.m; sourceTree = "<group>"; };
+		94835D43179849BE0024A789 /* PXGCommInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommInterface.h; sourceTree = "<group>"; };
+		94835D44179849BE0024A789 /* PXGCommInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCommInterface.m; sourceTree = "<group>"; };
 		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,8 +132,9 @@
 			children = (
 				94E5C5DB1791FE5100333FD5 /* TCP */,
 				9425D38F1791565000C6E883 /* PXGAppDelegate.h */,
+				94835D43179849BE0024A789 /* PXGCommInterface.h */,
+				94835D44179849BE0024A789 /* PXGCommInterface.m */,
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
-				9433FE341795B00A0092A43B /* PXGNetworkDelegates.h */,
 				9433FE351795B0E70092A43B /* PXGCommProtocol.h */,
 				9433FE361795B0E70092A43B /* PXGCommProtocol.m */,
 				94835D401795D5B90024A789 /* PXGDataSerializer.h */,
@@ -271,6 +274,7 @@
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,
 				9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */,
 				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
+				94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
