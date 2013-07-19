@@ -34,6 +34,16 @@
     return self;
 }
 
++ (PXGCommInterface*)sharedInstance
+{
+    static PXGCommInterface *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[PXGCommInterface alloc] init];
+    });
+    return sharedInstance;
+}
+
 
 #pragma mark Delegate registration
 

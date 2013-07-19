@@ -65,6 +65,11 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 
 - (id) init;
 
+#pragma mark Properties
+@property (strong, nonatomic) PXGCommProtocol* protocol;
+@property PXGConnectionStatus connectionStatus;
+
+#pragma mark Delegate registration
 - (void)registerConnectedViewDelegate:(id<PXGConnectedViewDelegate>)connectedViewDelegate;
 - (void)unregisterConnectedViewDelegate:(id<PXGConnectedViewDelegate>)connectedViewDelegate;
 
@@ -74,20 +79,19 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)registerServerInterfaceDelegate:(id<PXGServerInterfaceDelegate>)serverInterfaceDelegate;
 - (void)unregisterServerInterfaceDelegate:(id<PXGServerInterfaceDelegate>)serverInterfaceDelegate;
 
+#pragma mark Connection management
 - (void)changeConnectionStatusTo:(PXGConnectionStatus)status;
 
 - (BOOL)connectToServer:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr;
 - (void)disconnectFromServer;
 
+#pragma mark Send to robot instructions
 - (void)sendPingToRobot;
 - (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
 
+#pragma mark Send to server instructions
 - (void)sendPingToServer;
 - (void)connectToRobotOnPort:(NSString*)robotPort withAx12port:(NSString*)ax12Port inSimulationMode:(BOOL)simulation;
 - (void)disconnectFromRobot;
-
-
-@property (strong, nonatomic) PXGCommProtocol* protocol;
-@property PXGConnectionStatus connectionStatus;
 
 @end

@@ -131,16 +131,10 @@
 		9425D3861791565000C6E883 /* Neobot iOS Client */ = {
 			isa = PBXGroup;
 			children = (
+				94835D4717999D8F0024A789 /* Comm */,
 				94E5C5DB1791FE5100333FD5 /* TCP */,
 				9425D38F1791565000C6E883 /* PXGAppDelegate.h */,
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
-				94835D43179849BE0024A789 /* PXGCommInterface.h */,
-				94835D44179849BE0024A789 /* PXGCommInterface.m */,
-				94835D461798593D0024A789 /* PXGInstructions.h */,
-				9433FE351795B0E70092A43B /* PXGCommProtocol.h */,
-				9433FE361795B0E70092A43B /* PXGCommProtocol.m */,
-				94835D401795D5B90024A789 /* PXGDataSerializer.h */,
-				94835D411795D5B90024A789 /* PXGDataSerializer.m */,
 				9425D3981791565000C6E883 /* MainStoryboard.storyboard */,
 				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
 				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
@@ -180,6 +174,20 @@
 				9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */,
 			);
 			name = "Tab Images";
+			sourceTree = "<group>";
+		};
+		94835D4717999D8F0024A789 /* Comm */ = {
+			isa = PBXGroup;
+			children = (
+				94835D43179849BE0024A789 /* PXGCommInterface.h */,
+				94835D44179849BE0024A789 /* PXGCommInterface.m */,
+				94835D461798593D0024A789 /* PXGInstructions.h */,
+				9433FE351795B0E70092A43B /* PXGCommProtocol.h */,
+				9433FE361795B0E70092A43B /* PXGCommProtocol.m */,
+				94835D401795D5B90024A789 /* PXGDataSerializer.h */,
+				94835D411795D5B90024A789 /* PXGDataSerializer.m */,
+			);
+			name = Comm;
 			sourceTree = "<group>";
 		};
 		94E5C5DB1791FE5100333FD5 /* TCP */ = {
