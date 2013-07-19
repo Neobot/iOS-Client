@@ -83,6 +83,8 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
 
 - (void)sendPingToServer;
+- (void)connectToRobotOnPort:(NSString*)robotPort withAx12port:(NSString*)ax12Port inSimulationMode:(BOOL)simulation;
+- (void)disconnectFromRobot;
 
 
 @property (strong, nonatomic) PXGCommProtocol* protocol;

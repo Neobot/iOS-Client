@@ -31,4 +31,16 @@
 - (NSData*) readDataAt:(int)position withLength:(int)length;
 - (NSData*) takeDataWithLength:(int)length;
 
+- (void) addBool:(BOOL)b;
+- (void) addBool:(BOOL)b1 and:(BOOL)b2;
+- (void) addBool:(BOOL)b1 and:(BOOL)b2 and:(BOOL)b3;
+- (void) readBool:(BOOL*)b1 and:(BOOL*)b2 and:(BOOL*)b3 at:(int)position;
+- (void) takeBool:(BOOL*)b;
+- (void) takeBool:(BOOL*)b1 and:(BOOL*)b2;
+- (void) takeBool:(BOOL*)b1 and:(BOOL*)b2 and:(BOOL*)b3;
+
+- (void) addString:(NSString*)string;
+- (NSString*) readStringAt:(int)position;
+- (NSString*)takeString;
+
 @end

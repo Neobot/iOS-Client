@@ -104,6 +104,7 @@
     PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:[NSMutableData dataWithData:data]];
     switch (instruction)
     {
+        //ROBOT
         case COORD:
         {
             uint16_t x = [serializer takeInt16];
@@ -134,6 +135,40 @@
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
                 [robotDelegate didReceiveBlockedStatus];
         }
+        case LOG:
+        {
+            NSString* logText = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                [robotDelegate didReceiveLog:logText];
+        }
+            
+            
+        //SERVER
+        case ANNOUNCEMENT:
+        {
+            NSString* message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                [serverDelegate didReceiveServerAnnouncement:message];
+
+        }
+            
+        //BOTH
+        case AR:
+        {
+            uint8_t inst = [serializer takeInt8];
+            BOOL result = YES;
+            [serializer takeBool:&result];
+            if (inst < 180)
+            {
+                for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                    [robotDelegate didReceiveNoticeOfReceiptForInstrction:inst withResult:result];
+            }
+            else
+            {
+                for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                    [serverDelegate didReceiveNetworkNoticeOfReceiptForInstruction:inst withResult:result];
+            }
+        }
         default:
             break;
     }
@@ -162,6 +197,22 @@
     [_protocol writeMessage:nil forInstruction:PING_SERVER];
 }
 
+- (void)connectToRobotOnPort:(NSString*)robotPort withAx12port:(NSString*)ax12Port inSimulationMode:(BOOL)simulation
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addBool:simulation];
+    [serializer addString:robotPort];
+    [serializer addString:ax12Port];
+    
+    [_protocol writeMessage:messageData forInstruction:CONNECT];
+}
+
+- (void)disconnectFromRobot
+{
+    [_protocol writeMessage:nil forInstruction:DISCONNECT];
+}
 
 
 @end

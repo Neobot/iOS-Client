@@ -187,5 +187,80 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     return [self readDataAt:(_pos - length) withLength:length];
 }
 
+#pragma mark BOOL
+- (void) addBool:(BOOL)b
+{
+    [self addBool:b and:YES and:YES];
+}
+
+- (void) addBool:(BOOL)b1 and:(BOOL)b2
+{
+    [self addBool:b1 and:b2 and:YES];
+}
+
+- (void) addBool:(BOOL)b1 and:(BOOL)b2 and:(BOOL)b3
+{
+    uint8_t value = 0;
+    if (b1)
+        value = 1;
+    if (b2)
+        value += 2;
+    if (b3)
+        value += 2 * 2;
+    
+    [self addInt8:value];
+}
+
+- (void) readBool:(BOOL*)b1 and:(BOOL*)b2 and:(BOOL*)b3 at:(int)position
+{
+    uint8_t value = [self readInt8At:position];
+    
+    *b1 = (value & 1) == 1;
+    *b2 = (value & 2) == 2;
+    *b3 = (value & 4) == 4;
+}
+
+- (void) takeBool:(BOOL*)b
+{
+    BOOL fake = YES;
+    [self takeBool:b and:&fake and:&fake];
+}
+
+- (void) takeBool:(BOOL*)b1 and:(BOOL*)b2
+{
+    BOOL fake = YES;
+    [self takeBool:b1 and:b2 and:&fake];
+}
+
+- (void) takeBool:(BOOL*)b1 and:(BOOL*)b2 and:(BOOL*)b3
+{
+    [self readBool:b1 and:b2 and:b3 at:_pos];
+    ++_pos;
+}
+
+#pragma mark Strings
+- (void) addString:(NSString*)string
+{
+    uint8_t size = [string length];
+    [self addInt8:size];
+    [self addData:[string dataUsingEncoding:NSASCIIStringEncoding]];
+}
+
+- (NSString*) readStringAt:(int)position
+{
+    uint8_t size = [self readInt8At:position];
+    NSData* strData = [self readDataAt:position + 1 withLength:size];
+    
+    return [[NSString alloc] initWithData:strData encoding:NSASCIIStringEncoding];
+}
+
+- (NSString*)takeString
+{
+    NSString* result = [self readStringAt:_pos];
+    _pos += [result length] + 1;
+    
+    return result;
+}
+
 
 @end
