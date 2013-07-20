@@ -32,9 +32,9 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     return self;
 }
 
-- (BOOL) checkDataLength:(int)length
+- (BOOL) checkDataLength:(int)length atPos:(int)position
 {
-    return [_data length] - _pos >= length;
+    return [_data length] - position >= length;
 }
 
 #pragma mark Int8
@@ -46,13 +46,11 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (uint8_t) readInt8At:(int)position
 {
-    if (![self checkDataLength:1])
+    if (![self checkDataLength:1 atPos:position])
         return 0;
     
     uint8_t value = 0;
-    
-    void* bytes = 0;
-    [_data getBytes:bytes];
+    const void* bytes = _data.bytes;
     
     value = *((uint8_t*)(bytes + position));
     
@@ -90,13 +88,11 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (uint16_t) readInt16At: (int) position
 {
-    if (![self checkDataLength:2])
+    if (![self checkDataLength:2 atPos:position])
         return 0;
     
     uint16_t value = 0;
-    
-    void* bytes = 0;
-    [_data getBytes:bytes];
+    const void* bytes = _data.bytes;
     
     value = *((uint16_t*)(bytes + position));
     
@@ -134,19 +130,17 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 - (uint32_t) takeInt32
 {
     _pos += 4;
-    return [self readInt16At:_pos - 4];
+    return [self readInt32At:_pos - 4];
     
 }
 
 - (uint32_t) readInt32At: (int) position
 {
-    if (![self checkDataLength:4])
+    if (![self checkDataLength:4 atPos:position])
         return 0;
     
     uint32_t value = 0;
-    
-    void* bytes = 0;
-    [_data getBytes:bytes];
+   const void* bytes = _data.bytes;
     
     value = *((uint32_t*)(bytes + position));
     
@@ -171,11 +165,10 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (NSData*) readDataAt:(int)position withLength:(int)length
 {
-    if (![self checkDataLength:length])
+    if (![self checkDataLength:length atPos:position])
         return nil;
     
-    void* bytes = 0;
-    [_data getBytes:bytes];
+    const void* bytes = _data.bytes;
     
     NSData* result = [NSData dataWithBytes:bytes length:length];
     return result;

@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
     Lookup,
     Disconnected,
     Connected,
-    Controled
+    Controlled
 };
 
 #pragma mark Robot delegate
@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 @interface PXGCommInterface : NSObject <PXGProtocolDelegate>
 
 - (id) init;
++ (PXGCommInterface*)sharedInstance;
 
 #pragma mark Properties
 @property (strong, nonatomic) PXGCommProtocol* protocol;

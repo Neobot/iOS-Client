@@ -34,8 +34,6 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
 		self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
         _currentMessageLength = 0;
         _currentMessageInstruction = 0;
-        
-        [self readDataWithTag:HEADER];
 	}
     
     return self;
@@ -48,7 +46,11 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
 
 - (BOOL) connect:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr
 {
-    return [self.socket connectToHost:host onPort:port error:errPtr];
+    BOOL ok = [self.socket connectToHost:host onPort:port error:errPtr];
+    if (ok)
+        [self readDataWithTag:HEADER];
+    
+    return ok;
 }
 
 - (void) disconnect
@@ -61,8 +63,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
     int checksum = 0;
     
     int dataSize = [data length];
-    void* bytes = nil;
-    [data getBytes:bytes];
+    const void* bytes = data.bytes;
     
     for(int i = 0; i < dataSize; ++i)
     {
@@ -84,7 +85,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
     [serializer addInt8:255];
     
     //length
-    int messageLength = data != nil ? [data length] + 1 : 0;
+    int messageLength = data != nil ? [data length] + 1 : 1;
     [serializer addInt32:messageLength];
     
     //instruction
@@ -116,7 +117,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
             break;
             
         case SIZE:
-            [self.socket readDataToLength:1 withTimeout:-1 tag:SIZE];
+            [self.socket readDataToLength:4 withTimeout:-1 tag:SIZE];
             break;
             
         case INSTRUCTION:
@@ -124,7 +125,10 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
             break;
             
         case DATA:
-            [self.socket readDataToLength:(_currentMessageLength - 1) withTimeout:-1 tag:DATA];
+            if (_currentMessageLength > 1)
+                [self.socket readDataToLength:(_currentMessageLength - 1) withTimeout:-1 tag:DATA];
+            else
+                [self.socket readDataToLength:1 withTimeout:-1 tag:CHECKSUM];
             break;
             
         case CHECKSUM:
@@ -149,6 +153,8 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
         case SIZE:
         {
             _currentMessageLength = [serializer takeInt32];
+            if (_currentMessageLength <= 0)
+                _currentMessageLength = 1;
             [self readDataWithTag:INSTRUCTION];
             break;
         }

@@ -18,7 +18,6 @@
 		9425D3971791565000C6E883 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3961791565000C6E883 /* Default-568h@2x.png */; };
 		9425D39A1791565000C6E883 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3981791565000C6E883 /* MainStoryboard.storyboard */; };
 		9425D39D1791565000C6E883 /* PXGRemoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9425D39C1791565000C6E883 /* PXGRemoteViewController.m */; };
-		9425D3A41791565000C6E883 /* PXGConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9425D3A31791565000C6E883 /* PXGConnectionViewController.m */; };
 		9425D3B11791580200C6E883 /* NClientIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3B01791580200C6E883 /* NClientIcon.png */; };
 		9425D3B31791585200C6E883 /* NClientIcon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3B21791585200C6E883 /* NClientIcon_retina.png */; };
 		9425D3BC17915AEF00C6E883 /* Android.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3B417915AEF00C6E883 /* Android.png */; };
@@ -35,6 +34,9 @@
 		9433FE411795BD720092A43B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE401795BD720092A43B /* CFNetwork.framework */; };
 		94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D411795D5B90024A789 /* PXGDataSerializer.m */; };
 		94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D44179849BE0024A789 /* PXGCommInterface.m */; };
+		94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D52179ABB860024A789 /* PXGCommViewController.m */; };
+		94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */; };
+		94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D5B179AC9F70024A789 /* PXGLogViewController.m */; };
 		94CE6078179190E600D4EC6E /* Table2013.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CE6077179190E600D4EC6E /* Table2013.png */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +57,6 @@
 		9425D3991791565000C6E883 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		9425D39B1791565000C6E883 /* PXGRemoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXGRemoteViewController.h; sourceTree = "<group>"; };
 		9425D39C1791565000C6E883 /* PXGRemoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXGRemoteViewController.m; sourceTree = "<group>"; };
-		9425D3A21791565000C6E883 /* PXGConnectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXGConnectionViewController.h; sourceTree = "<group>"; };
-		9425D3A31791565000C6E883 /* PXGConnectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXGConnectionViewController.m; sourceTree = "<group>"; };
 		9425D3B01791580200C6E883 /* NClientIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NClientIcon.png; sourceTree = "<group>"; };
 		9425D3B21791585200C6E883 /* NClientIcon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NClientIcon_retina.png; sourceTree = "<group>"; };
 		9425D3B417915AEF00C6E883 /* Android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Android.png; sourceTree = "<group>"; };
@@ -78,6 +78,12 @@
 		94835D43179849BE0024A789 /* PXGCommInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommInterface.h; sourceTree = "<group>"; };
 		94835D44179849BE0024A789 /* PXGCommInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCommInterface.m; sourceTree = "<group>"; };
 		94835D461798593D0024A789 /* PXGInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGInstructions.h; sourceTree = "<group>"; };
+		94835D51179ABB860024A789 /* PXGCommViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommViewController.h; sourceTree = "<group>"; };
+		94835D52179ABB860024A789 /* PXGCommViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCommViewController.m; sourceTree = "<group>"; };
+		94835D54179ABDA20024A789 /* PXGMainToolBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMainToolBarViewController.h; sourceTree = "<group>"; };
+		94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMainToolBarViewController.m; sourceTree = "<group>"; };
+		94835D5A179AC9F70024A789 /* PXGLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGLogViewController.h; sourceTree = "<group>"; };
+		94835D5B179AC9F70024A789 /* PXGLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGLogViewController.m; sourceTree = "<group>"; };
 		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,13 +139,10 @@
 			children = (
 				94835D4717999D8F0024A789 /* Comm */,
 				94E5C5DB1791FE5100333FD5 /* TCP */,
+				94835D57179ABDAE0024A789 /* View Controllers */,
 				9425D38F1791565000C6E883 /* PXGAppDelegate.h */,
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
 				9425D3981791565000C6E883 /* MainStoryboard.storyboard */,
-				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
-				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
-				9425D3A21791565000C6E883 /* PXGConnectionViewController.h */,
-				9425D3A31791565000C6E883 /* PXGConnectionViewController.m */,
 				9425D3871791565000C6E883 /* Supporting Files */,
 			);
 			path = "Neobot iOS Client";
@@ -188,6 +191,21 @@
 				94835D411795D5B90024A789 /* PXGDataSerializer.m */,
 			);
 			name = Comm;
+			sourceTree = "<group>";
+		};
+		94835D57179ABDAE0024A789 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
+				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
+				94835D51179ABB860024A789 /* PXGCommViewController.h */,
+				94835D52179ABB860024A789 /* PXGCommViewController.m */,
+				94835D54179ABDA20024A789 /* PXGMainToolBarViewController.h */,
+				94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */,
+				94835D5A179AC9F70024A789 /* PXGLogViewController.h */,
+				94835D5B179AC9F70024A789 /* PXGLogViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		94E5C5DB1791FE5100333FD5 /* TCP */ = {
@@ -280,11 +298,13 @@
 				9425D38D1791565000C6E883 /* main.m in Sources */,
 				9425D3911791565000C6E883 /* PXGAppDelegate.m in Sources */,
 				9425D39D1791565000C6E883 /* PXGRemoteViewController.m in Sources */,
-				9425D3A41791565000C6E883 /* PXGConnectionViewController.m in Sources */,
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,
 				9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */,
 				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
 				94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */,
+				94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */,
+				94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */,
+				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

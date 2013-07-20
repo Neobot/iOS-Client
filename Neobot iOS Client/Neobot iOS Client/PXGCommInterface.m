@@ -7,8 +7,8 @@
 //
 
 #import "PXGCommInterface.h"
-#import "PXGInstructions.h"
 #import "PXGDataSerializer.h"
+#import "PXGInstructions.h"
 
 @implementation PXGCommInterface
 {
@@ -83,7 +83,8 @@
 {
     self.connectionStatus = status;
     for (id<PXGConnectedViewDelegate> viewDelegate in _connectedViewDelegates)
-        [viewDelegate connectionStatusChangedTo:status];
+        if ([viewDelegate respondsToSelector:@selector(connectionStatusChangedTo:)])
+            [viewDelegate connectionStatusChangedTo:status];
 }
 
 - (BOOL) connectToServer:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr
@@ -122,7 +123,8 @@
             uint16_t theta = [serializer takeInt16];
             uint8_t dir = [serializer takeInt8];
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                [robotDelegate didReceiveRobotPositionX:x Y:y angle:(double)theta/ANGLE_FACTOR direction:dir];
+                 if ([robotDelegate respondsToSelector:@selector(didReceiveRobotPositionX:Y:angle:direction:)])
+                     [robotDelegate didReceiveRobotPositionX:x Y:y angle:(double)theta/ANGLE_FACTOR direction:dir];
             
             break;
         }
@@ -131,25 +133,29 @@
             uint16_t x = [serializer takeInt16];
             uint16_t y = [serializer takeInt16];
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                [robotDelegate didReceiveOpponentPositionX:x Y:y];
+                 if ([robotDelegate respondsToSelector:@selector(didReceiveOpponentPositionX:Y:)])
+                     [robotDelegate didReceiveOpponentPositionX:x Y:y];
             
             break;
         }
         case IS_ARRIVED:
         {
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                [robotDelegate didReceiveArrivedToObjectiveStatus];
+                 if ([robotDelegate respondsToSelector:@selector(didReceiveArrivedToObjectiveStatus)])
+                     [robotDelegate didReceiveArrivedToObjectiveStatus];
         }
         case IS_BLOCKED:
         {
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                [robotDelegate didReceiveBlockedStatus];
+                 if ([robotDelegate respondsToSelector:@selector(didReceiveBlockedStatus)])
+                     [robotDelegate didReceiveBlockedStatus];
         }
         case LOG:
         {
             NSString* logText = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                [robotDelegate didReceiveLog:logText];
+                if ([robotDelegate respondsToSelector:@selector(didReceiveLog:)])
+                    [robotDelegate didReceiveLog:logText];
         }
             
             
@@ -158,7 +164,8 @@
         {
             NSString* message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
-                [serverDelegate didReceiveServerAnnouncement:message];
+                if ([serverDelegate respondsToSelector:@selector(didReceiveServerAnnouncement:)])
+                    [serverDelegate didReceiveServerAnnouncement:message];
 
         }
             
@@ -171,12 +178,14 @@
             if (inst < 180)
             {
                 for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                    [robotDelegate didReceiveNoticeOfReceiptForInstrction:inst withResult:result];
+                    if ([robotDelegate respondsToSelector:@selector(didReceiveNoticeOfReceiptForInstrction:withResult:)])
+                        [robotDelegate didReceiveNoticeOfReceiptForInstrction:inst withResult:result];
             }
             else
             {
                 for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
-                    [serverDelegate didReceiveNetworkNoticeOfReceiptForInstruction:inst withResult:result];
+                    if ([serverDelegate respondsToSelector:@selector(didReceiveNetworkNoticeOfReceiptForInstruction:withResult:)])
+                        [serverDelegate didReceiveNetworkNoticeOfReceiptForInstruction:inst withResult:result];
             }
         }
         default:
