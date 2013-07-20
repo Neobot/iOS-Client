@@ -7,8 +7,12 @@
 //
 
 #import "PXGMainToolBarViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PXGMainToolBarViewController ()
+{
+    int _messageCount;
+}
 
 @end
 
@@ -26,11 +30,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
+    
     UIViewController* connectionControler = [self.storyboard instantiateViewControllerWithIdentifier:@"CommViewController"];
     self.connectionPopoverController = [[UIPopoverController alloc] initWithContentViewController:connectionControler];
     
     UIViewController* logController = [self.storyboard instantiateViewControllerWithIdentifier:@"LogViewController"];
     self.logPopoverController = [[UIPopoverController alloc] initWithContentViewController:logController];
+    
+    [self.lblCount.layer setCornerRadius:8.0f];
+    
+    [self connectionStatusChangedTo:Disconnected];
+    [self resetMessageCount];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,6 +75,56 @@
     {
         [self.connectionPopoverController dismissPopoverAnimated:NO];
         [self.logPopoverController presentPopoverFromBarButtonItem:self.logBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [self resetMessageCount];
     }
 }
+
+- (void) connectionStatusChangedTo:(PXGConnectionStatus)status
+{
+    switch(status)
+    {
+        case Lookup:
+            self.lblStatus.text = @"Lookup";
+            break;
+        case Disconnected:
+            self.lblStatus.text = @"Disconnected";
+            break;
+        case Connected:
+            self.lblStatus.text = @"Connected";
+            break;
+        case Controlled:
+            self.lblStatus.text = @"Controlled";
+            break;
+    }
+    
+    [self incrementMessageCountBy:1];
+}
+
+- (void)incrementMessageCountBy:(int)value
+{
+    _messageCount += value;
+    if (_messageCount < 99)
+        self.lblCount.text = [NSString stringWithFormat:@"%i", _messageCount];
+    else
+        self.lblCount.text = @"99";
+    [self.lblCount setHidden:NO];
+}
+
+- (void)resetMessageCount
+{
+    _messageCount = 0;
+    [self.lblCount setHidden:YES];
+}
+
+- (void)didReceiveLog:(NSString*) text
+{
+    [self incrementMessageCountBy:1];
+}
+
+- (void)didReceiveServerAnnouncement:(NSString*) message
+{
+    [self incrementMessageCountBy:1];
+}
+
+
 @end

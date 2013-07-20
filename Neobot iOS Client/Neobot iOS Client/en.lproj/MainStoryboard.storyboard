@@ -787,20 +787,45 @@
                                     <segue destination="4" kind="embed" id="aUT-gt-veJ"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xef-Aq-POs">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="yrp-ag-zb9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="171" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bB9-qf-afC">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="Duc-yd-ZWf"/>
+                                    <constraint firstAttribute="width" constant="18" id="dO6-Pj-I7N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.82698899872448983" green="0.080486598329352871" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bB9-qf-afC" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" constant="6" id="GSY-Sp-2fN"/>
+                            <constraint firstItem="Xef-Aq-POs" firstAttribute="leading" secondItem="627-r4-xgQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Md1-cn-jBd"/>
                             <constraint firstItem="WCX-JM-u24" firstAttribute="leading" secondItem="627-r4-xgQ" secondAttribute="leading" type="default" id="VPc-D0-QDS"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="top" secondItem="WCX-JM-u24" secondAttribute="bottom" type="default" id="dkz-iU-fNB"/>
                             <constraint firstItem="WCX-JM-u24" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" type="default" id="eMP-a8-CGx"/>
+                            <constraint firstItem="Xef-Aq-POs" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" constant="11" id="ees-tE-R5d"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="trailing" secondItem="627-r4-xgQ" secondAttribute="trailing" type="default" id="fyI-x0-qwH"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="bottom" secondItem="627-r4-xgQ" secondAttribute="bottom" type="default" id="ipq-5q-IfT"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="leading" secondItem="627-r4-xgQ" secondAttribute="leading" type="default" id="orp-JV-WLC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xef-Aq-POs" secondAttribute="trailing" constant="89" type="user" id="u2X-jF-BZG"/>
+                            <constraint firstAttribute="trailing" secondItem="bB9-qf-afC" secondAttribute="trailing" constant="10" id="uQL-kp-53Q"/>
                             <constraint firstItem="WCX-JM-u24" firstAttribute="trailing" secondItem="627-r4-xgQ" secondAttribute="trailing" type="default" id="vad-CA-zOK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="connectionBtn" destination="tZ9-7X-dJ4" id="gFV-mO-6Zn"/>
+                        <outlet property="lblCount" destination="bB9-qf-afC" id="AUj-tn-gbf"/>
+                        <outlet property="lblStatus" destination="Xef-Aq-POs" id="SKY-oA-xaF"/>
                         <outlet property="logBtn" destination="SAD-F3-wbx" id="wOg-4J-ODk"/>
                     </connections>
                 </viewController>
@@ -865,6 +890,7 @@
                 <relationship kind="outlet" name="btnConnectServer" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnPingServer" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnRobotPing" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblPingResult" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="simulationSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="txtAx12SerialPort" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtPort" candidateClass="UITextField"/>
@@ -884,6 +910,8 @@
                 <relationship kind="action" name="displayConnectionView:"/>
                 <relationship kind="action" name="displayLogView:"/>
                 <relationship kind="outlet" name="connectionBtn" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lblCount" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblStatus" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="logBtn" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
