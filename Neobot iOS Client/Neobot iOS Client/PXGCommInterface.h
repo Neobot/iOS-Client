@@ -94,5 +94,6 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)sendPingToServer;
 - (void)connectToRobotOnPort:(NSString*)robotPort withAx12port:(NSString*)ax12Port inSimulationMode:(BOOL)simulation;
 - (void)disconnectFromRobot;
+- (void)askSerialPorts;
 
 @end

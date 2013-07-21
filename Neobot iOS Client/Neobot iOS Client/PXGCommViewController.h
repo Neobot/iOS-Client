@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
+#import "PXGStringListViewController.h"
 
-@interface PXGCommViewController : UITableViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate>
+@interface PXGCommViewController : UITableViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStringViewListControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtServerAdress;
 @property (weak, nonatomic) IBOutlet UITextField *txtPort;
@@ -22,6 +23,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnAskRobotControl;
 @property (weak, nonatomic) IBOutlet UIButton *btnRobotPing;
 @property (weak, nonatomic) IBOutlet UISwitch *simulationSwitch;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellServerAdress;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellPort;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellConnect;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellPingServer;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellRobotSerialPort;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellAx12SerialPort;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellSimulation;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellAskControl;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellPingRobot;
 
 - (IBAction)connectToServer:(id)sender;
 - (IBAction)pingServer:(id)sender;

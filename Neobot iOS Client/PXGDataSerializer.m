@@ -32,6 +32,11 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     return self;
 }
 
+- (BOOL)atEnd
+{
+    return _pos >= [_data length] - 1;
+}
+
 - (BOOL) checkDataLength:(int)length atPos:(int)position
 {
     return [_data length] - position >= length;
@@ -168,7 +173,7 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     if (![self checkDataLength:length atPos:position])
         return nil;
     
-    const void* bytes = _data.bytes;
+    const void* bytes = _data.bytes + position;
     
     NSData* result = [NSData dataWithBytes:bytes length:length];
     return result;

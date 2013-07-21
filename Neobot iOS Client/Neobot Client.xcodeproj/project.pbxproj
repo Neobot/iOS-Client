@@ -38,6 +38,7 @@
 		94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */; };
 		94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D5B179AC9F70024A789 /* PXGLogViewController.m */; };
 		94CE6078179190E600D4EC6E /* Table2013.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CE6077179190E600D4EC6E /* Table2013.png */; };
+		94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,8 @@
 		94835D5A179AC9F70024A789 /* PXGLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGLogViewController.h; sourceTree = "<group>"; };
 		94835D5B179AC9F70024A789 /* PXGLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGLogViewController.m; sourceTree = "<group>"; };
 		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
+		94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGStringListViewController.h; sourceTree = "<group>"; };
+		94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStringListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,12 +201,14 @@
 			children = (
 				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
 				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
-				94835D51179ABB860024A789 /* PXGCommViewController.h */,
-				94835D52179ABB860024A789 /* PXGCommViewController.m */,
 				94835D54179ABDA20024A789 /* PXGMainToolBarViewController.h */,
 				94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */,
 				94835D5A179AC9F70024A789 /* PXGLogViewController.h */,
 				94835D5B179AC9F70024A789 /* PXGLogViewController.m */,
+				94835D51179ABB860024A789 /* PXGCommViewController.h */,
+				94835D52179ABB860024A789 /* PXGCommViewController.m */,
+				94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */,
+				94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */,
 				94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */,
 				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
+				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

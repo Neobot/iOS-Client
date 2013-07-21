@@ -14,6 +14,7 @@
 
 - (id)initWithData:(NSMutableData*) data;
 + (void)setDefaultEndianness:(CFByteOrder)endianness;
+- (BOOL)atEnd;
 
 - (void) addInt8:(uint8_t) value;
 - (uint8_t) takeInt8;

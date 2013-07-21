@@ -166,7 +166,22 @@
             for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
                 if ([serverDelegate respondsToSelector:@selector(didReceiveServerAnnouncement:)])
                     [serverDelegate didReceiveServerAnnouncement:message];
+            break;
 
+        }
+        case SERIAL_PORTS:
+        {
+            NSMutableArray* array = [NSMutableArray array];
+            while (![serializer atEnd])
+            {
+                NSString* port = [serializer takeString];
+                [array addObject:port];
+            }
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                if ([serverDelegate respondsToSelector:@selector(didReceiveSerialPortsInfo:)])
+                    [serverDelegate didReceiveSerialPortsInfo:array];
+
+            break;
         }
             
         //BOTH
@@ -231,6 +246,11 @@
 - (void)disconnectFromRobot
 {
     [_protocol writeMessage:nil forInstruction:DISCONNECT];
+}
+
+- (void)askSerialPorts
+{
+    [_protocol writeMessage:nil forInstruction:ASK_SERIAL_PORTS];
 }
 
 

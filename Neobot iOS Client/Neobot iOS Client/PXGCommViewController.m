@@ -10,6 +10,10 @@
 #import "PXGInstructions.h"
 
 @interface PXGCommViewController ()
+{
+    NSArray* _availableSerialPorts;
+    UITextField* _editedTextField;
+}
 
 @end
 
@@ -19,7 +23,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        _editedTextField = nil;
     }
     return self;
 }
@@ -28,9 +32,15 @@
 {
     [super viewDidLoad];
     
+    [self.btnPingServer setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [self.btnAskRobotControl setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [self.btnRobotPing setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
     [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];
+    
+    _availableSerialPorts = nil;
     [self connectionStatusChangedTo:Disconnected];
 }
 
@@ -40,46 +50,73 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    PXGConnectionStatus status = [[PXGCommInterface sharedInstance] connectionStatus];
+    
+    if ([identifier isEqualToString:@"serverAdressSegue"])
+    {
+        return status == Disconnected;
+    }
+    else if ([identifier isEqualToString:@"serverPortSegue"])
+    {
+        return status == Disconnected;
+    }
+    else if ([identifier isEqualToString:@"robotSerialSegue"])
+    {
+        return status == Connected;
+    }
+    else if ([identifier isEqualToString:@"ax12SerialSegue"])
+    {
+        return status == Connected;
+    }
+    
+    return NO;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    PXGStringListViewController* controller = (PXGStringListViewController*)segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"serverAdressSegue"])
+    {
+        _editedTextField = self.txtServerAdress;
+        //controller.txtCustomValue.keyboardType = UIKeyboardTypeDecimalPad;
+    }
+    else if ([segue.identifier isEqualToString:@"serverPortSegue"])
+    {
+        _editedTextField = self.txtPort;
+        //controller.txtCustomValue.keyboardType = UIKeyboardTypePhonePad;
+    }
+    else if ([segue.identifier isEqualToString:@"robotSerialSegue"])
+    {
+        _editedTextField = self.txtRobotSerialPort;
+        controller.propositions = _availableSerialPorts;
+        //controller.txtCustomValue.keyboardType = UIKeyboardTypeASCIICapable;
+    }
+    else if ([segue.identifier isEqualToString:@"ax12SerialSegue"])
+    {
+        _editedTextField = self.txtAx12SerialPort;
+        controller.propositions = _availableSerialPorts;
+        //controller.txtCustomValue.keyboardType = UIKeyboardTypeASCIICapable;
+    }
+    
+    controller.delegate = self;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void) didSelectString:(NSString*)string
 {
+    _editedTextField.text = string;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) setSelectionForCell:(UITableViewCell*)cell withControl:(UIControl*)control
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    cell.selectionStyle = control.enabled == YES ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
-*/
+
+- (void) setIndicatorForCell:(UITableViewCell*)cell withControl:(UIControl*)control
+{
+    cell.accessoryType = control.enabled == YES ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+}
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
@@ -122,6 +159,8 @@
             self.btnAskRobotControl.enabled = YES;
             self.btnRobotPing.enabled = NO;
             self.simulationSwitch.enabled = YES;
+            
+            [[PXGCommInterface sharedInstance] askSerialPorts];
             break;
         case Controlled:
             self.txtServerAdress.enabled = NO;
@@ -135,7 +174,23 @@
             self.btnRobotPing.enabled = YES;
             self.simulationSwitch.enabled = NO;
             break;
-    }
+    };
+    
+    [self setSelectionForCell:self.cellServerAdress withControl:self.txtServerAdress];
+    [self setSelectionForCell:self.cellPort withControl:self.txtPort];
+    [self setSelectionForCell:self.cellConnect withControl:self.btnConnectServer];
+    [self setSelectionForCell:self.cellPingServer withControl:self.btnPingServer];
+    [self setSelectionForCell:self.cellRobotSerialPort withControl:self.txtRobotSerialPort];
+    [self setSelectionForCell:self.cellAx12SerialPort withControl:self.txtAx12SerialPort];
+    [self setSelectionForCell:self.cellSimulation withControl:self.simulationSwitch];
+    [self setSelectionForCell:self.cellAskControl withControl:self.btnAskRobotControl];
+    [self setSelectionForCell:self.cellPingRobot withControl:self.btnRobotPing];
+    
+    [self setIndicatorForCell:self.cellServerAdress withControl:self.txtServerAdress];
+    [self setIndicatorForCell:self.cellPort withControl:self.txtPort];
+    [self setIndicatorForCell:self.cellRobotSerialPort withControl:self.txtRobotSerialPort];
+    [self setIndicatorForCell:self.cellAx12SerialPort withControl:self.txtAx12SerialPort];
+    
 }
 
 
@@ -185,6 +240,11 @@
     {
         self.lblPingResult.text = @"ok";
     }
+}
+
+- (void)didReceiveSerialPortsInfo:(NSArray*)serialports
+{
+    _availableSerialPorts = serialports;
 }
 
 @end
