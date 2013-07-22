@@ -21,6 +21,7 @@
     {
         self.recentlyUsed = nil;
         self.propositions = nil;
+        self.customValue = @"";
     }
     return self;
 }
@@ -28,12 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +57,15 @@
     *propositionSection = hasRecentSection ? 0 : -1;
     if (hasPropositionSection)
         ++(*propositionSection);
+}
+
+- (void)dismissWithValue:(NSString*)value
+{
+    if ([self.delegate respondsToSelector:@selector(didSelectString:)])
+    {
+        [self.delegate didSelectString:value];
+    }
+    [((UINavigationController*)[self parentViewController])popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -106,7 +110,7 @@
     [self getSectionIdForEditSection:&editSection andForRecentSection:&recentSection andForPropositionSection:&propositionSection forTableView:tableView];
     
     if (section == editSection)
-        return @"New value";
+        return @"Curent value";
     
     else if (section == recentSection)
         return @"Recently used";
@@ -132,6 +136,9 @@
     if (indexPath.section == editSection)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:editableCellIdentifier forIndexPath:indexPath];
+        UITextView* textView = (UITextView*)[cell viewWithTag:1];
+        textView.text = self.customValue;
+        [textView becomeFirstResponder];
     }
     
     else if (indexPath.section == recentSection)
@@ -153,22 +160,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.delegate respondsToSelector:@selector(didSelectString:)])
-    {
-        [self.delegate didSelectString:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
-    }
-    [((UINavigationController*)[self parentViewController])popViewControllerAnimated:YES];
+    [self dismissWithValue:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
 }
 
 - (IBAction)customValueSelected:(UITextField *)sender
 {
     if ([sender.text length] > 0)
     {
-        if ([self.delegate respondsToSelector:@selector(didSelectString:)])
-        {
-            [self.delegate didSelectString:sender.text];
-        }
-        [((UINavigationController*)[self parentViewController])popViewControllerAnimated:YES];
+        [self dismissWithValue:sender.text];
     }
+}
+
+- (IBAction)customValueChanged:(UITextField *)sender
+{
+    self.customValue = sender.text;
+}
+
+- (IBAction)donePressed:(id)sender
+{
+    [self dismissWithValue:_customValue];
 }
 @end

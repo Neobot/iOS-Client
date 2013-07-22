@@ -395,7 +395,7 @@
                                     <rect key="frame" x="10" y="0.0" width="380" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Value" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kcf-eZ-lFe">
+                                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Value" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kcf-eZ-lFe">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="9nY-fx-OPS"/>
                                                 <constraint firstAttribute="width" constant="340" id="GJk-Z2-C9t"/>
@@ -403,6 +403,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                             <connections>
+                                                <action selector="customValueChanged:" destination="FQF-uT-WEn" eventType="editingChanged" id="6IH-dI-mQc"/>
                                                 <action selector="customValueSelected:" destination="FQF-uT-WEn" eventType="editingDidEndOnExit" id="5PY-FD-v3W"/>
                                             </connections>
                                         </textField>
@@ -420,7 +421,16 @@
                             <outlet property="delegate" destination="FQF-uT-WEn" id="QZm-Wu-1wl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="t7L-zU-hyr"/>
+                    <navigationItem key="navigationItem" id="t7L-zU-hyr">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="AX9-5K-wyf">
+                            <connections>
+                                <action selector="donePressed:" destination="FQF-uT-WEn" id="4mP-AH-tdc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnDone" destination="AX9-5K-wyf" id="6nF-4N-TiG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmG-ue-awB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -961,6 +971,21 @@
             </objects>
             <point key="canvasLocation" x="-2042" y="-2990"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="XyT-9V-EFr">
+            <objects>
+                <viewController id="W5e-h9-AsQ" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="mIG-wZ-jGz">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VQG-pj-XpC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4327" y="-4082"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Android.png" width="30" height="30"/>
@@ -1025,8 +1050,10 @@
         <class className="PXGStringListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGStringListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="customValueChanged:" candidateClass="UITextField"/>
                 <relationship kind="action" name="customValueSelected:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtCustomValue" candidateClass="UITextField"/>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="outlet" name="btnDone" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
     </classes>

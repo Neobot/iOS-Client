@@ -118,7 +118,11 @@
     }
     
     NSArray* recentValues = [[NSUserDefaults standardUserDefaults] arrayForKey:_editedRecentUserDefaultKey];
-    controller.recentlyUsed = recentValues;
+    NSMutableArray* displayedRecentValues = [NSMutableArray arrayWithArray:recentValues];
+    if ([displayedRecentValues count] > 0)
+        [displayedRecentValues removeObjectAtIndex:0];
+    controller.recentlyUsed = displayedRecentValues;
+    controller.customValue = _editedTextField.text;
     
     controller.delegate = self;
 }
