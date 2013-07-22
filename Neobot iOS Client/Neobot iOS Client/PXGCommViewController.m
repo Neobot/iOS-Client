@@ -13,6 +13,7 @@
 {
     NSArray* _availableSerialPorts;
     UITextField* _editedTextField;
+    NSString* _editedRecentUserDefaultKey;
 }
 
 @end
@@ -42,12 +43,24 @@
     
     _availableSerialPorts = nil;
     [self connectionStatusChangedTo:Disconnected];
+    
+    [self setDefaultValueForTextField:self.txtServerAdress withKey:@"RecentIpAdress"];
+    [self setDefaultValueForTextField:self.txtPort withKey:@"RecentPorts"];
+    [self setDefaultValueForTextField:self.txtRobotSerialPort withKey:@"RecentRobotSerials"];
+    [self setDefaultValueForTextField:self.txtAx12SerialPort withKey:@"RecentAx12Serials"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) setDefaultValueForTextField:(UITextField*)textField withKey:(NSString*)key
+{
+    NSArray* recentValuesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:key];
+    if ([recentValuesArray count] > 0)
+        textField.text = [recentValuesArray objectAtIndex:0];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -80,25 +93,32 @@
     if ([segue.identifier isEqualToString:@"serverAdressSegue"])
     {
         _editedTextField = self.txtServerAdress;
+        _editedRecentUserDefaultKey = @"RecentIpAdress";
         //controller.txtCustomValue.keyboardType = UIKeyboardTypeDecimalPad;
     }
     else if ([segue.identifier isEqualToString:@"serverPortSegue"])
     {
         _editedTextField = self.txtPort;
+        _editedRecentUserDefaultKey = @"RecentPorts";
         //controller.txtCustomValue.keyboardType = UIKeyboardTypePhonePad;
     }
     else if ([segue.identifier isEqualToString:@"robotSerialSegue"])
     {
         _editedTextField = self.txtRobotSerialPort;
+        _editedRecentUserDefaultKey = @"RecentRobotSerials";
         controller.propositions = _availableSerialPorts;
         //controller.txtCustomValue.keyboardType = UIKeyboardTypeASCIICapable;
     }
     else if ([segue.identifier isEqualToString:@"ax12SerialSegue"])
     {
         _editedTextField = self.txtAx12SerialPort;
+        _editedRecentUserDefaultKey = @"RecentAx12Serials";
         controller.propositions = _availableSerialPorts;
         //controller.txtCustomValue.keyboardType = UIKeyboardTypeASCIICapable;
     }
+    
+    NSArray* recentValues = [[NSUserDefaults standardUserDefaults] arrayForKey:_editedRecentUserDefaultKey];
+    controller.recentlyUsed = recentValues;
     
     controller.delegate = self;
 }
@@ -106,6 +126,17 @@
 - (void) didSelectString:(NSString*)string
 {
     _editedTextField.text = string;
+    
+    NSArray* recentValues = [[NSUserDefaults standardUserDefaults] arrayForKey:_editedRecentUserDefaultKey];
+    NSMutableArray* newRecentsValues = [NSMutableArray arrayWithArray:recentValues];
+    if ([newRecentsValues containsObject:string])
+        [newRecentsValues removeObject:string];
+    
+    [newRecentsValues insertObject:string atIndex:0];
+    if ([newRecentsValues count] > 5)
+        [newRecentsValues removeLastObject];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:newRecentsValues forKey:_editedRecentUserDefaultKey];
 }
 
 - (void) setSelectionForCell:(UITableViewCell*)cell withControl:(UIControl*)control
