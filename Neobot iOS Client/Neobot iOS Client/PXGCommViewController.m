@@ -14,6 +14,12 @@
     NSArray* _availableSerialPorts;
     UITextField* _editedTextField;
     NSString* _editedRecentUserDefaultKey;
+    
+    NSTimer* _serverPingTimer;
+    NSTimer* _robotPingTimer;
+    
+    NSDate* _serverPingStartedDate;
+    NSDate* _robotPingStartedDate;
 }
 
 @end
@@ -25,6 +31,8 @@
     self = [super initWithStyle:style];
     if (self) {
         _editedTextField = nil;
+        _serverPingTimer = nil;
+        _robotPingTimer = nil;
     }
     return self;
 }
@@ -56,6 +64,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Edition
 - (void) setDefaultValueForTextField:(UITextField*)textField withKey:(NSString*)key
 {
     NSArray* recentValuesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:key];
@@ -229,6 +238,85 @@
 }
 
 
+#pragma mark Ping
+- (IBAction)pingServer:(id)sender
+{
+     [[PXGCommInterface sharedInstance] sendPingToServer];
+    _serverPingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(didReceivedServerPingTimeout) userInfo:nil repeats:NO];
+    _serverPingStartedDate = [NSDate date];
+}
+
+- (void)didReceiveNetworkNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result
+{
+    if (instruction == PING_SERVER && _serverPingTimer)
+    {
+        [_serverPingTimer invalidate];
+        _serverPingTimer = nil;
+        NSTimeInterval duration = abs([_serverPingStartedDate timeIntervalSinceNow]);
+        self.lblServerPing.text = [NSString stringWithFormat:@"%fms", duration];
+        [self.tableView reloadData];
+
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayServerPingTimeout:) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)didReceivedServerPingTimeout:(NSTimer*)timer
+{
+    self.lblServerPing.text = @"timeout...";
+    _serverPingTimer = nil;
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayServerPingTimeout:) userInfo:nil repeats:NO];
+}
+
+- (void)didReceivedDisplayServerPingTimeout:(NSTimer*)timer
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{self.lblServerPing.alpha = 0.0;}
+                     completion:^(BOOL finished) {self.lblServerPing.text = @"";self.lblServerPing.alpha = 1;}];
+}
+
+- (IBAction)pingRobot:(id)sender
+{
+    [[PXGCommInterface sharedInstance] sendPingToRobot];
+    _robotPingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(didReceivedRobotPingTimeout:) userInfo:nil repeats:NO];
+    _robotPingStartedDate = [NSDate date];
+}
+
+- (void)didReceivedRobotPingTimeout:(NSTimer*)timer
+{
+    self.lblRobotPing.text = @"timeout...";
+    _robotPingTimer = nil;
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayRobotPingTimeout:) userInfo:nil repeats:NO];
+}
+
+
+- (void)didReceiveNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result
+{
+    if (instruction == PING && _robotPingTimer)
+    {
+        [_robotPingTimer invalidate];
+        _robotPingTimer = nil;
+        NSTimeInterval duration = abs([_robotPingStartedDate timeIntervalSinceNow]);
+        self.lblRobotPing.text = [NSString stringWithFormat:@"%fms", duration];
+        
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayRobotPingTimeout:) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)didReceivedDisplayRobotPingTimeout:(NSTimer*)timer
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{self.lblRobotPing.alpha = 0.0;}
+                     completion:^(BOOL finished) {self.lblRobotPing.text = @"";self.lblRobotPing.alpha = 1;}];
+}
+
+#pragma mark Connection
+- (void)didReceiveSerialPortsInfo:(NSArray*)serialports
+{
+    _availableSerialPorts = serialports;
+}
+
 - (IBAction)connectToServer:(id)sender
 {
     if ([[PXGCommInterface sharedInstance] connectionStatus] == Disconnected)
@@ -240,11 +328,6 @@
         [[PXGCommInterface sharedInstance] disconnectFromServer];
 }
 
-- (IBAction)pingServer:(id)sender
-{
-     [[PXGCommInterface sharedInstance] sendPingToServer];
-}
-
 - (IBAction)askRobotControl:(id)sender
 {
     if ([[PXGCommInterface sharedInstance] connectionStatus] == Connected)
@@ -253,33 +336,6 @@
     }
     else if ([[PXGCommInterface sharedInstance] connectionStatus] == Controlled)
         [[PXGCommInterface sharedInstance] disconnectFromRobot];
-}
-
-- (IBAction)pingRobot:(id)sender
-{
-    [[PXGCommInterface sharedInstance] sendPingToRobot];
-}
-
-
-- (void)didReceiveNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result
-{
-    if (instruction == PING)
-    {
-       
-    }
-}
-
-- (void)didReceiveNetworkNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result
-{
-    if (instruction == PING_SERVER)
-    {
-        self.lblPingResult.text = @"ok";
-    }
-}
-
-- (void)didReceiveSerialPortsInfo:(NSArray*)serialports
-{
-    _availableSerialPorts = serialports;
 }
 
 @end

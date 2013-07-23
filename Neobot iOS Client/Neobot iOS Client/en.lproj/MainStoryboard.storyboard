@@ -574,24 +574,24 @@
                                                         <action selector="pingServer:" destination="8y5-GQ-Dwb" eventType="touchUpInside" id="b1H-Ea-ujU"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jI4-3E-Bhg">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qtg-Gp-n0I">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="54" id="cUT-XM-cbt"/>
-                                                        <constraint firstAttribute="height" constant="21" id="tGq-mn-mx4"/>
+                                                        <constraint firstAttribute="height" constant="21" id="DmQ-yJ-bz3"/>
+                                                        <constraint firstAttribute="width" constant="136" id="pcN-Py-hqn"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="S8S-wi-Dsd" firstAttribute="bottom" secondItem="U9F-4w-Bns" secondAttribute="bottom" type="default" id="Bmn-WU-62I"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qtg-Gp-n0I" secondAttribute="trailing" constant="30" id="Ejs-9P-anJ"/>
                                             <constraint firstItem="S8S-wi-Dsd" firstAttribute="centerX" secondItem="U9F-4w-Bns" secondAttribute="centerX" type="default" id="Ezz-De-RqP"/>
-                                            <constraint firstItem="jI4-3E-Bhg" firstAttribute="top" secondItem="U9F-4w-Bns" secondAttribute="top" constant="11" id="OaL-cg-baC"/>
-                                            <constraint firstItem="S8S-wi-Dsd" firstAttribute="centerY" secondItem="U9F-4w-Bns" secondAttribute="centerY" type="default" id="Rcg-Io-a8h"/>
+                                            <constraint firstItem="Qtg-Gp-n0I" firstAttribute="top" secondItem="U9F-4w-Bns" secondAttribute="top" constant="17" id="JXe-zI-vLE"/>
                                             <constraint firstItem="S8S-wi-Dsd" firstAttribute="top" secondItem="U9F-4w-Bns" secondAttribute="top" type="default" id="Vqo-Xc-ies"/>
-                                            <constraint firstAttribute="trailing" secondItem="jI4-3E-Bhg" secondAttribute="trailing" constant="30" id="W3c-CQ-bKt"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -746,13 +746,24 @@
                                                         <action selector="pingRobot:" destination="8y5-GQ-Dwb" eventType="touchUpInside" id="0GM-zL-mUf"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NM-fB-9G7">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="fJh-62-yvh"/>
+                                                        <constraint firstAttribute="width" constant="132" id="sqM-ZQ-2Fx"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="OvG-9x-U6p" firstAttribute="top" secondItem="0Yf-TT-JIK" secondAttribute="top" type="default" id="Itx-gb-D2w"/>
-                                            <constraint firstItem="OvG-9x-U6p" firstAttribute="centerY" secondItem="0Yf-TT-JIK" secondAttribute="centerY" type="default" id="Nyi-MV-1Rj"/>
+                                            <constraint firstItem="OvG-9x-U6p" firstAttribute="bottom" secondItem="0Yf-TT-JIK" secondAttribute="bottom" type="default" id="MDx-xL-X1p"/>
+                                            <constraint firstAttribute="trailing" secondItem="8NM-fB-9G7" secondAttribute="trailing" constant="30" id="Wfj-FM-bx0"/>
                                             <constraint firstItem="OvG-9x-U6p" firstAttribute="centerX" secondItem="0Yf-TT-JIK" secondAttribute="centerX" type="default" id="ZTj-38-ARA"/>
+                                            <constraint firstItem="8NM-fB-9G7" firstAttribute="top" secondItem="0Yf-TT-JIK" secondAttribute="top" constant="18" id="zSB-UR-sj0"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -779,7 +790,8 @@
                         <outlet property="cellRobotSerialPort" destination="rq6-mX-YHM" id="4P0-Lk-Kmv"/>
                         <outlet property="cellServerAdress" destination="ylc-CM-bTW" id="5se-dd-zZY"/>
                         <outlet property="cellSimulation" destination="lPs-E3-xTN" id="PPL-7b-sjb"/>
-                        <outlet property="lblPingResult" destination="jI4-3E-Bhg" id="ZcD-0O-sla"/>
+                        <outlet property="lblRobotPing" destination="8NM-fB-9G7" id="E4W-3y-Vzw"/>
+                        <outlet property="lblServerPing" destination="Qtg-Gp-n0I" id="Y9V-qc-VeR"/>
                         <outlet property="simulationSwitch" destination="GaE-GM-fyk" id="EGf-lq-wUl"/>
                         <outlet property="txtAx12SerialPort" destination="fnB-OB-R1t" id="gkS-Fc-NjY"/>
                         <outlet property="txtPort" destination="cFt-kR-jIm" id="EFZ-fD-2uf"/>
@@ -1022,7 +1034,8 @@
                 <relationship kind="outlet" name="cellRobotSerialPort" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cellServerAdress" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cellSimulation" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="lblPingResult" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblRobotPing" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblServerPing" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="simulationSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="txtAx12SerialPort" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtPort" candidateClass="UITextField"/>
