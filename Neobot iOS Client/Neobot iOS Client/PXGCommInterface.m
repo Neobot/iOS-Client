@@ -190,11 +190,18 @@
             uint8_t inst = [serializer takeInt8];
             BOOL result = YES;
             [serializer takeBool:&result];
-            if (inst < 180)
+            
+            if (inst == CONNECT && result)
+                [self changeConnectionStatusTo:Controlled];
+            else if (inst == DISCONNECT && result)
+                [self changeConnectionStatusTo:Connected];
+
+            
+            if (inst < 180 || inst > 250)
             {
                 for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                    if ([robotDelegate respondsToSelector:@selector(didReceiveNoticeOfReceiptForInstrction:withResult:)])
-                        [robotDelegate didReceiveNoticeOfReceiptForInstrction:inst withResult:result];
+                    if ([robotDelegate respondsToSelector:@selector(didReceiveNoticeOfReceiptForInstruction:withResult:)])
+                        [robotDelegate didReceiveNoticeOfReceiptForInstruction:inst withResult:result];
             }
             else
             {

@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (BOOL)didReceiveInitDone;
 - (BOOL)didReceiveStartSignalInMirrorMode:(BOOL)mirrored;
 - (BOOL)didReceivePing;
-- (void)didReceiveNoticeOfReceiptForInstrction:(uint8_t)instruction withResult:(BOOL)result;
+- (void)didReceiveNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result;
 - (void)didReceiveOpponentPositionX:(int16_t)x  Y:(int16_t)y;
 - (BOOL)shouldRestartStrategy;
 - (void)shouldQuit;

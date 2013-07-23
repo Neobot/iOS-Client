@@ -201,6 +201,7 @@
             self.txtRobotSerialPort.enabled = YES;
             self.txtAx12SerialPort.enabled = YES;
             self.btnAskRobotControl.enabled = YES;
+            [self.btnAskRobotControl setTitle:@"Ask Control" forState:UIControlStateNormal];
             self.btnRobotPing.enabled = NO;
             self.simulationSwitch.enabled = YES;
             
@@ -215,6 +216,7 @@
             self.txtRobotSerialPort.enabled = NO;
             self.txtAx12SerialPort.enabled = NO;
             self.btnAskRobotControl.enabled = YES;
+            [self.btnAskRobotControl setTitle:@"Release Control" forState:UIControlStateNormal];
             self.btnRobotPing.enabled = YES;
             self.simulationSwitch.enabled = NO;
             break;
@@ -242,8 +244,9 @@
 - (IBAction)pingServer:(id)sender
 {
      [[PXGCommInterface sharedInstance] sendPingToServer];
-    _serverPingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(didReceivedServerPingTimeout) userInfo:nil repeats:NO];
+    _serverPingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(didReceivedServerPingTimeout:) userInfo:nil repeats:NO];
     _serverPingStartedDate = [NSDate date];
+    self.btnPingServer.enabled = NO;
 }
 
 - (void)didReceiveNetworkNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result
@@ -253,8 +256,9 @@
         [_serverPingTimer invalidate];
         _serverPingTimer = nil;
         NSTimeInterval duration = abs([_serverPingStartedDate timeIntervalSinceNow]);
-        self.lblServerPing.text = [NSString stringWithFormat:@"%fms", duration];
+        self.lblServerPing.text = [NSString stringWithFormat:@"%fs", duration];
         [self.tableView reloadData];
+        self.btnPingServer.enabled = YES;
 
         [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayServerPingTimeout:) userInfo:nil repeats:NO];
     }
@@ -264,6 +268,7 @@
 {
     self.lblServerPing.text = @"timeout...";
     _serverPingTimer = nil;
+    self.btnPingServer.enabled = YES;
     
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayServerPingTimeout:) userInfo:nil repeats:NO];
 }
@@ -280,12 +285,14 @@
     [[PXGCommInterface sharedInstance] sendPingToRobot];
     _robotPingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(didReceivedRobotPingTimeout:) userInfo:nil repeats:NO];
     _robotPingStartedDate = [NSDate date];
+    self.btnRobotPing.enabled = NO;
 }
 
 - (void)didReceivedRobotPingTimeout:(NSTimer*)timer
 {
     self.lblRobotPing.text = @"timeout...";
     _robotPingTimer = nil;
+    self.btnRobotPing.enabled = YES;
     
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayRobotPingTimeout:) userInfo:nil repeats:NO];
 }
@@ -298,7 +305,8 @@
         [_robotPingTimer invalidate];
         _robotPingTimer = nil;
         NSTimeInterval duration = abs([_robotPingStartedDate timeIntervalSinceNow]);
-        self.lblRobotPing.text = [NSString stringWithFormat:@"%fms", duration];
+        self.lblRobotPing.text = [NSString stringWithFormat:@"%fs", duration];
+        self.btnRobotPing.enabled = YES;
         
         [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(didReceivedDisplayRobotPingTimeout:) userInfo:nil repeats:NO];
     }

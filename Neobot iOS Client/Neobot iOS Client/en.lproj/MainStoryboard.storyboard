@@ -751,7 +751,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="fJh-62-yvh"/>
                                                         <constraint firstAttribute="width" constant="132" id="sqM-ZQ-2Fx"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
