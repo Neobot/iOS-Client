@@ -42,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9405E88917A04A9300B718B3 /* PXGParametersKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXGParametersKeys.h; sourceTree = "<group>"; };
 		9425D37D1791565000C6E883 /* Neobot Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neobot Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9425D3801791565000C6E883 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9425D3821791565000C6E883 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,6 +146,7 @@
 				94835D57179ABDAE0024A789 /* View Controllers */,
 				9425D38F1791565000C6E883 /* PXGAppDelegate.h */,
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
+				9405E88917A04A9300B718B3 /* PXGParametersKeys.h */,
 				9425D3981791565000C6E883 /* MainStoryboard.storyboard */,
 				9425D3871791565000C6E883 /* Supporting Files */,
 			);

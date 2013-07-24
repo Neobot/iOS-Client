@@ -8,6 +8,7 @@
 
 #import "PXGCommViewController.h"
 #import "PXGInstructions.h"
+#import "PXGParametersKeys.h"
 
 @interface PXGCommViewController ()
 {
@@ -52,16 +53,27 @@
     _availableSerialPorts = nil;
     [self connectionStatusChangedTo:Disconnected];
     
-    [self setDefaultValueForTextField:self.txtServerAdress withKey:@"RecentIpAdress"];
-    [self setDefaultValueForTextField:self.txtPort withKey:@"RecentPorts"];
-    [self setDefaultValueForTextField:self.txtRobotSerialPort withKey:@"RecentRobotSerials"];
-    [self setDefaultValueForTextField:self.txtAx12SerialPort withKey:@"RecentAx12Serials"];
+    [self setDefaultValueForTextField:self.txtServerAdress withKey:RECENT_IP_ADRESSES_KEY];
+    [self setDefaultValueForTextField:self.txtPort withKey:RECENT_PORT_NUMBERS_KEY];
+    [self setDefaultValueForTextField:self.txtRobotSerialPort withKey:RECENT_ROBOT_SERIALPORTS_KEY];
+    [self setDefaultValueForTextField:self.txtAx12SerialPort withKey:RECENT_AX12_SERIALPORTS_KEY];
+    [self.simulationSwitch setOn:[[[NSUserDefaults standardUserDefaults] valueForKey:SIMULATION_KEY] boolValue]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:[UIApplication sharedApplication]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)applicationWillResignActive:(NSNotification*)notification
+{
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:[self.simulationSwitch isOn] ] forKey:SIMULATION_KEY];
 }
 
 #pragma mark Edition
@@ -102,26 +114,26 @@
     if ([segue.identifier isEqualToString:@"serverAdressSegue"])
     {
         _editedTextField = self.txtServerAdress;
-        _editedRecentUserDefaultKey = @"RecentIpAdress";
+        _editedRecentUserDefaultKey = RECENT_IP_ADRESSES_KEY;
         //controller.txtCustomValue.keyboardType = UIKeyboardTypeDecimalPad;
     }
     else if ([segue.identifier isEqualToString:@"serverPortSegue"])
     {
         _editedTextField = self.txtPort;
-        _editedRecentUserDefaultKey = @"RecentPorts";
+        _editedRecentUserDefaultKey = RECENT_PORT_NUMBERS_KEY;
         //controller.txtCustomValue.keyboardType = UIKeyboardTypePhonePad;
     }
     else if ([segue.identifier isEqualToString:@"robotSerialSegue"])
     {
         _editedTextField = self.txtRobotSerialPort;
-        _editedRecentUserDefaultKey = @"RecentRobotSerials";
+        _editedRecentUserDefaultKey = RECENT_ROBOT_SERIALPORTS_KEY;
         controller.propositions = _availableSerialPorts;
         //controller.txtCustomValue.keyboardType = UIKeyboardTypeASCIICapable;
     }
     else if ([segue.identifier isEqualToString:@"ax12SerialSegue"])
     {
         _editedTextField = self.txtAx12SerialPort;
-        _editedRecentUserDefaultKey = @"RecentAx12Serials";
+        _editedRecentUserDefaultKey = RECENT_AX12_SERIALPORTS_KEY;
         controller.propositions = _availableSerialPorts;
         //controller.txtCustomValue.keyboardType = UIKeyboardTypeASCIICapable;
     }
