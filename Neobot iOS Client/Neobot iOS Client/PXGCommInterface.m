@@ -118,13 +118,26 @@
         //ROBOT
         case COORD:
         {
-            uint16_t x = [serializer takeInt16];
-            uint16_t y = [serializer takeInt16];
-            uint16_t theta = [serializer takeInt16];
+            int16_t x = [serializer takeInt16];
+            int16_t y = [serializer takeInt16];
+            int16_t theta = [serializer takeInt16];
             uint8_t dir = [serializer takeInt8];
+            double angle = (double)theta/ANGLE_FACTOR;
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
                  if ([robotDelegate respondsToSelector:@selector(didReceiveRobotPositionX:Y:angle:direction:)])
-                     [robotDelegate didReceiveRobotPositionX:x Y:y angle:(double)theta/ANGLE_FACTOR direction:dir];
+                     [robotDelegate didReceiveRobotPositionX:x Y:y angle:angle direction:dir];
+            
+            break;
+        }
+        case OBJECTIVE:
+        {
+            int16_t x = [serializer takeInt16];
+            int16_t y = [serializer takeInt16];
+            int16_t theta = [serializer takeInt16];
+            double angle = (double)theta/ANGLE_FACTOR;
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                if ([robotDelegate respondsToSelector:@selector(didReceiveRobotPositionX:Y:angle:direction:)])
+                    [robotDelegate didReceiveRobotObjectiveX:x Y:y angle:angle];
             
             break;
         }
