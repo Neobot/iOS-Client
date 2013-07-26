@@ -89,11 +89,17 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 #pragma mark Send to robot instructions
 - (void)sendPingToRobot;
 - (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
+- (void)sendFlush;
 
 #pragma mark Send to server instructions
 - (void)sendPingToServer;
 - (void)connectToRobotOnPort:(NSString*)robotPort withAx12port:(NSString*)ax12Port inSimulationMode:(BOOL)simulation;
 - (void)disconnectFromRobot;
+- (void)startStrategy:(int)startegyNum withMirrorMode:(BOOL)mirrorMode;
+- (void)stopStrategy;
+
+- (void)askStrategyStatus;
 - (void)askSerialPorts;
+- (void)askStrategies;
 
 @end

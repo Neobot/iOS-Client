@@ -12,14 +12,17 @@
                         <rect key="frame" x="0.0" y="44" width="768" height="867"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" image="Table2013.png" translatesAutoresizingMaskIntoConstraints="NO" id="JMo-es-Dj2">
-                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </imageView>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DM-Zo-miq">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="mjW-dG-fu2" kind="embed" id="D2Q-Lg-tpS"/>
+                                </connections>
+                            </containerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okk-X0-nLh">
                                 <items>
                                     <barButtonItem width="79" style="plain" systemItem="fixedSpace" id="Zuh-By-0Kp"/>
                                     <barButtonItem style="plain" id="W5M-fD-Amh">
-                                        <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="x=3000 y=2000 t=180" borderStyle="roundedRect" minimumFontSize="17" id="LK8-qH-oHa">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="LK8-qH-oHa">
                                             <rect key="frame" x="91" y="7" width="152" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -42,7 +45,11 @@
                                             </segue>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Flush" id="ATe-Yc-AU3"/>
+                                    <barButtonItem title="Flush" id="ATe-Yc-AU3">
+                                        <connections>
+                                            <action selector="flush:" destination="nKo-Jd-myK" id="dgg-ZZ-98z"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
@@ -54,8 +61,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Strategy: Happy Birthday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyJ-JK-Wz4">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Strategy: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyJ-JK-Wz4">
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="205" id="V8n-Zd-09B"/>
                                     <constraint firstAttribute="height" constant="21" type="user" id="WWR-qz-RNz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -84,31 +92,36 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="65U-lU-dGJ" kind="popover" identifier="StrategySelectionSegue" popoverAnchorView="zSv-CV-PW7" id="U5J-wn-IQq">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4DM-Zo-miq" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="40" type="user" id="3fS-mT-XAd"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="top" secondItem="XyJ-JK-Wz4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3wu-7X-zDt"/>
-                            <constraint firstItem="okk-X0-nLh" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="default" id="BPa-bH-Ic8"/>
-                            <constraint firstItem="okk-X0-nLh" firstAttribute="trailing" secondItem="JMo-es-Dj2" secondAttribute="trailing" type="default" id="FVd-9k-fen"/>
-                            <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="EGA-Kg-nAe" secondAttribute="centerX" type="default" id="HTM-fd-HqU"/>
+                            <constraint firstItem="okk-X0-nLh" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="user" id="BPa-bH-Ic8"/>
                             <constraint firstItem="a19-WL-3XC" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LFy-Fg-2ah"/>
-                            <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="XyJ-JK-Wz4" secondAttribute="centerX" type="default" id="MT6-Y9-an8"/>
-                            <constraint firstItem="JMo-es-Dj2" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="default" id="PVE-mu-1vK"/>
+                            <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="XyJ-JK-Wz4" secondAttribute="centerX" type="user" id="MT6-Y9-an8"/>
                             <constraint firstItem="a19-WL-3XC" firstAttribute="centerY" secondItem="gAL-Kg-Fvi" secondAttribute="centerY" type="default" id="T3v-cJ-WZS"/>
-                            <constraint firstItem="okk-X0-nLh" firstAttribute="bottom" secondItem="JMo-es-Dj2" secondAttribute="top" type="default" id="UgH-l7-kdp"/>
                             <constraint firstItem="XyJ-JK-Wz4" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="76" type="user" id="UwY-5t-Dnz"/>
-                            <constraint firstItem="JMo-es-Dj2" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="40" type="user" id="Vq0-yV-fDP"/>
+                            <constraint firstItem="4DM-Zo-miq" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="default" id="WJQ-cV-Ucu"/>
                             <constraint firstItem="gAL-Kg-Fvi" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="258" id="Xmb-3H-KhQ"/>
-                            <constraint firstItem="XyJ-JK-Wz4" firstAttribute="centerX" secondItem="okk-X0-nLh" secondAttribute="centerX" type="default" id="bwr-YQ-fvx"/>
+                            <constraint firstItem="XyJ-JK-Wz4" firstAttribute="centerX" secondItem="okk-X0-nLh" secondAttribute="centerX" type="user" id="bwr-YQ-fvx"/>
+                            <constraint firstAttribute="bottom" secondItem="4DM-Zo-miq" secondAttribute="bottom" constant="50" id="cMd-uF-fm3"/>
                             <constraint firstItem="gAL-Kg-Fvi" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="5" id="jeq-ff-Vdk"/>
-                            <constraint firstAttribute="bottom" secondItem="JMo-es-Dj2" secondAttribute="bottom" constant="50" type="user" id="xFW-9z-0Cc"/>
+                            <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="EGA-Kg-nAe" secondAttribute="centerX" type="user" id="oXg-Wm-h2J"/>
+                            <constraint firstItem="4DM-Zo-miq" firstAttribute="trailing" secondItem="EGA-Kg-nAe" secondAttribute="trailing" type="default" id="qrs-qH-RPN"/>
+                            <constraint firstItem="okk-X0-nLh" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="-4" type="user" id="wsF-sH-mwT"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Remote" image="Games.png" id="HVD-yl-RWr"/>
                     <connections>
                         <outlet property="btnFlush" destination="ATe-Yc-AU3" id="ziI-3j-zHA"/>
-                        <outlet property="btnStartStrategy" destination="zSv-CV-PW7" id="keD-6t-7vF"/>
+                        <outlet property="btnStartStrategy" destination="zSv-CV-PW7" id="1fZ-mY-y22"/>
                         <outlet property="btnTeleport" destination="yDO-v8-gOi" id="d6S-Vh-GR3"/>
                         <outlet property="btnTrajectory" destination="kWf-uK-UDo" id="h3q-zM-yQx"/>
                         <outlet property="lblStrategy" destination="XyJ-JK-Wz4" id="lI3-Pi-GQi"/>
@@ -656,7 +669,7 @@
                 <tabBarController id="4" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -857,6 +870,37 @@
             </objects>
             <point key="canvasLocation" x="-668" y="-6773"/>
         </scene>
+        <!--Strategy Selection View Controller-->
+        <scene sceneID="v3K-Qc-iql">
+            <objects>
+                <tableViewController modalPresentationStyle="pageSheet" id="65U-lU-dGJ" customClass="PXGStrategySelectionViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zFr-r1-5qr">
+                        <rect key="frame" x="0.0" y="20" width="540" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultCell" id="y4P-Hh-kku">
+                                <rect key="frame" x="0.0" y="22" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="65U-lU-dGJ" id="6Re-lU-f5u"/>
+                            <outlet property="delegate" destination="65U-lU-dGJ" id="xei-a2-Sq2"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PGL-sb-oai" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2482" y="-7005"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="kuW-YO-QLz">
             <objects>
@@ -888,6 +932,32 @@
             </objects>
             <point key="canvasLocation" x="-535" y="-5297"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="RQs-2Y-C3b">
+            <objects>
+                <viewController id="mjW-dG-fu2" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bSr-cn-58J">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="777"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" image="Table2013.png" translatesAutoresizingMaskIntoConstraints="NO" id="kzP-hg-FsV">
+                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kzP-hg-FsV" firstAttribute="bottom" secondItem="bSr-cn-58J" secondAttribute="bottom" type="default" id="1eh-o6-UCi"/>
+                            <constraint firstItem="kzP-hg-FsV" firstAttribute="trailing" secondItem="bSr-cn-58J" secondAttribute="trailing" type="default" id="Kwu-JI-KZN"/>
+                            <constraint firstItem="kzP-hg-FsV" firstAttribute="leading" secondItem="bSr-cn-58J" secondAttribute="leading" type="default" id="aRT-MA-9MZ"/>
+                            <constraint firstItem="kzP-hg-FsV" firstAttribute="top" secondItem="bSr-cn-58J" secondAttribute="top" type="default" id="gFH-6P-Hgk"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8mf-jB-Q3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1493" y="-5861"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Android.png" width="30" height="30"/>
@@ -900,6 +970,82 @@
         <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="sensor.png" width="30" height="30"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PXGCommViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGCommViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="askRobotControl:"/>
+                <relationship kind="action" name="connectToServer:"/>
+                <relationship kind="action" name="pingRobot:"/>
+                <relationship kind="action" name="pingServer:"/>
+                <relationship kind="outlet" name="btnAskRobotControl" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnConnectServer" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnPingServer" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnRobotPing" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cellAskControl" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellAx12SerialPort" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellConnect" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellPingRobot" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellPingServer" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellPort" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellRobotSerialPort" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellServerAdress" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellSimulation" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="lblRobotPing" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblServerPing" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="simulationSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="txtAx12SerialPort" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtPort" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtRobotSerialPort" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtServerAdress" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="PXGLogViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGLogViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="PXGMainToolBarViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGMainToolBarViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="displayConnectionView:"/>
+                <relationship kind="action" name="displayLogView:"/>
+                <relationship kind="outlet" name="connectionBtn" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lblCount" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblStatus" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="logBtn" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PXGRemoteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGRemoteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="flush:"/>
+                <relationship kind="outlet" name="btnFlush" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="btnStartStrategy" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnTeleport" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="btnTrajectory" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lblStrategy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtObjective" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtPosition" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="PXGStrategySelectionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGStrategySelectionViewController.h"/>
+        </class>
+        <class className="PXGStringListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGStringListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="customValueChanged:" candidateClass="UITextField"/>
+                <relationship kind="action" name="customValueSelected:" candidateClass="UITextField"/>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="outlet" name="btnDone" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

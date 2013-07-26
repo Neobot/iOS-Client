@@ -50,6 +50,9 @@
 - (void)registerConnectedViewDelegate:(id<PXGConnectedViewDelegate>)connectedViewDelegate
 {
     [_connectedViewDelegates addObject:connectedViewDelegate];
+    for (id<PXGConnectedViewDelegate> viewDelegate in _connectedViewDelegates)
+        if ([viewDelegate respondsToSelector:@selector(connectionStatusChangedTo:)])
+            [viewDelegate connectionStatusChangedTo:self.connectionStatus];
 }
 
 - (void)unregisterConnectedViewDelegate:(id<PXGConnectedViewDelegate>)connectedViewDelegate
@@ -103,6 +106,8 @@
 - (void) protocolConnected
 {
     [self changeConnectionStatusTo:Connected];
+    [[PXGCommInterface sharedInstance] askStrategies];
+    [[PXGCommInterface sharedInstance] askSerialPorts];
 }
 
 - (void) protocolDisconnectedWithError:(NSError *)error
@@ -156,12 +161,14 @@
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
                  if ([robotDelegate respondsToSelector:@selector(didReceiveArrivedToObjectiveStatus)])
                      [robotDelegate didReceiveArrivedToObjectiveStatus];
+            break;
         }
         case IS_BLOCKED:
         {
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
                  if ([robotDelegate respondsToSelector:@selector(didReceiveBlockedStatus)])
                      [robotDelegate didReceiveBlockedStatus];
+            break;
         }
         case LOG:
         {
@@ -169,6 +176,7 @@
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
                 if ([robotDelegate respondsToSelector:@selector(didReceiveLog:)])
                     [robotDelegate didReceiveLog:logText];
+            break;
         }
             
             
@@ -196,6 +204,25 @@
 
             break;
         }
+        case STRATEGY_STATUS:
+        {
+            uint8_t stratNum = [serializer takeInt8];
+            BOOL isRunning = NO;
+            [serializer takeBool:&isRunning];
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                if ([serverDelegate respondsToSelector:@selector(didReceiveStatus:forStrategy:)])
+                    [serverDelegate didReceiveStatus:isRunning forStrategy:stratNum];
+            break;
+        }
+        case SEND_STRATEGIES:
+        {
+            NSString* completeStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSArray* strategiesArray = [completeStr componentsSeparatedByString:@";;"];
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                if ([serverDelegate respondsToSelector:@selector(didReceiveStrategyNames:)])
+                    [serverDelegate didReceiveStrategyNames:strategiesArray];
+            break;
+        }
             
         //BOTH
         case AR:
@@ -205,7 +232,10 @@
             [serializer takeBool:&result];
             
             if (inst == CONNECT && result)
+            {
                 [self changeConnectionStatusTo:Controlled];
+                [self askStrategyStatus];
+            }
             else if (inst == DISCONNECT && result)
                 [self changeConnectionStatusTo:Connected];
 
@@ -222,6 +252,7 @@
                     if ([serverDelegate respondsToSelector:@selector(didReceiveNetworkNoticeOfReceiptForInstruction:withResult:)])
                         [serverDelegate didReceiveNetworkNoticeOfReceiptForInstruction:inst withResult:result];
             }
+            break;
         }
         default:
             break;
@@ -244,6 +275,11 @@
     [serializer addInt16:(uint16_t)theta * ANGLE_FACTOR];
     
     [_protocol writeMessage:messageData forInstruction:SET_POS];
+}
+
+- (void)sendFlush
+{
+    [_protocol writeMessage:nil forInstruction:FLUSH];
 }
 
 - (void)sendPingToServer
@@ -271,6 +307,32 @@
 - (void)askSerialPorts
 {
     [_protocol writeMessage:nil forInstruction:ASK_SERIAL_PORTS];
+}
+
+- (void)askStrategies
+{
+    [_protocol writeMessage:nil forInstruction:ASK_STRATEGIES];
+}
+
+- (void)askStrategyStatus;
+{
+    [_protocol writeMessage:nil forInstruction:ASK_STRATEGY_STATUS];
+}
+
+- (void)startStrategy:(int)startegyNum withMirrorMode:(BOOL)mirrorMode
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:startegyNum];
+    [serializer addBool:mirrorMode];
+    
+    [_protocol writeMessage:messageData forInstruction:START_STRATEGY];
+}
+
+- (void)stopStrategy
+{
+    [_protocol writeMessage:nil forInstruction:STOP_STRATEGY];
 }
 
 

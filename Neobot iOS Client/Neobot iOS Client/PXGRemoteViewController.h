@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
+#import "PXGStrategySelectionViewController.h"
 
-@interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate>
+@interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStrategySelectionViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *btnStartStrategy;
 @property (weak, nonatomic) IBOutlet UILabel *lblStrategy;
@@ -20,5 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *txtPosition;
 @property (weak, nonatomic) IBOutlet UITextField *txtObjective;
+
+- (IBAction)flush:(id)sender;
 
 @end

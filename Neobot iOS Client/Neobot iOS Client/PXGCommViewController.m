@@ -51,7 +51,6 @@
     [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];
     
     _availableSerialPorts = nil;
-    [self connectionStatusChangedTo:Disconnected];
     
     [self setDefaultValueForTextField:self.txtServerAdress withKey:RECENT_IP_ADRESSES_KEY];
     [self setDefaultValueForTextField:self.txtPort withKey:RECENT_PORT_NUMBERS_KEY];
@@ -216,8 +215,6 @@
             [self.btnAskRobotControl setTitle:@"Ask Control" forState:UIControlStateNormal];
             self.btnRobotPing.enabled = NO;
             self.simulationSwitch.enabled = YES;
-            
-            [[PXGCommInterface sharedInstance] askSerialPorts];
             break;
         case Controlled:
             self.txtServerAdress.enabled = NO;
