@@ -7,12 +7,16 @@
 //
 
 #import "PXGRemoteViewController.h"
+#import "PXGParametersKeys.h"
+#import "PXGTools.h"
 
 @interface PXGRemoteViewController ()
 {
     NSArray* _strategyNames;
     int _currentStrategy;
     BOOL _currentStrategyIsRunning;
+    
+    __weak UIPopoverController* _currentTeleportPopoverController;
 }
 
 @end
@@ -22,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _currentTeleportPopoverController = nil;
     
     _strategyNames = nil;
     _currentStrategy = -1;
@@ -65,6 +71,12 @@
     self.btnTrajectory.enabled = robotInteractioEnabled;
 }
 
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    if (_currentTeleportPopoverController == popoverController)
+        _currentTeleportPopoverController = nil;
+}
+
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if ([identifier isEqualToString:@"StrategySelectionSegue"])
@@ -73,6 +85,17 @@
             [[PXGCommInterface sharedInstance] stopStrategy];
         
         return !_currentStrategyIsRunning;
+    }
+    else if ([identifier isEqualToString:@"TeleportPopoverSegue"])
+    {
+        if (_currentTeleportPopoverController)
+        {
+            [_currentTeleportPopoverController dismissPopoverAnimated:YES];
+            _currentTeleportPopoverController = nil;
+            return NO;
+        }
+        else
+            return YES;
     }
     
     return YES;
@@ -89,6 +112,30 @@
         controller.delegate = self;
         controller.parentPopOverController = popoverSegue.popoverController;
     }
+    else if ([segue.identifier isEqualToString:@"TeleportPopoverSegue"])
+    {
+        UIStoryboardPopoverSegue* popoverSegue = (UIStoryboardPopoverSegue*)segue;
+        UINavigationController* navController = (UINavigationController*)segue.destinationViewController;
+        PXGTeleportViewController* teleportController = (PXGTeleportViewController*)navController.topViewController;
+        teleportController.parentPopOverController = popoverSegue.popoverController;
+        _currentTeleportPopoverController = popoverSegue.popoverController;
+        popoverSegue.popoverController.delegate = self;
+        teleportController.delegate = self;
+        
+        NSArray* values = [[NSUserDefaults standardUserDefaults] arrayForKey:TELEPORT_POSITIONS_KEY];
+        //if ([values count] == 0)
+        {
+            NSMutableArray* defaultValues = [NSMutableArray array];
+            [defaultValues addObject:pxgEncodePointData(0, 0, 0)];
+            [defaultValues addObject:pxgEncodePointData(0, 0, M_PI_2)];
+            [defaultValues addObject:pxgEncodePointData(250, 250, M_PI_2)];
+            [defaultValues addObject:pxgEncodePointData(250, 2750, -M_PI_2)];
+            values = defaultValues;
+            [[NSUserDefaults standardUserDefaults] setValue:defaultValues forKey:TELEPORT_POSITIONS_KEY];
+        }
+        
+        teleportController.positions = values;
+    }
 }
 
 - (IBAction)flush:(id)sender
@@ -98,14 +145,14 @@
 
 - (void)didReceiveRobotPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta direction:(uint8_t)direction
 {
-    int td = theta * 180.0 / 3.14116;
+    int td = pxgRadiansToDegrees(theta);
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
     self.txtPosition.text = text;
 }
 
 - (void)didReceiveRobotObjectiveX:(int16_t)x Y:(int16_t)y angle:(double)theta
 {
-    int td = theta * 180.0 / M_PI;
+    int td = pxgRadiansToDegrees(theta);
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
     self.txtObjective.text = text;
 }
@@ -151,6 +198,17 @@
     {
         [[PXGCommInterface sharedInstance] startStrategy:strategyNum withMirrorMode:NO];
     }
+}
+
+- (void) teleportPositionSelected:(NSDictionary*)position among:(NSArray*)positions
+{
+    int x, y;
+    double theta;
+    pxgDecodePointData(position, &x, &y, &theta);
+    
+    [[PXGCommInterface sharedInstance] sendTeleportRobotInX:x Y:y angle:theta];
+    [[NSUserDefaults standardUserDefaults] setValue:positions forKey:TELEPORT_POSITIONS_KEY];
+    _currentTeleportPopoverController = nil;
 }
 
 

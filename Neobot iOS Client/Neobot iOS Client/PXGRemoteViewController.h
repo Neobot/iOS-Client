@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
 #import "PXGStrategySelectionViewController.h"
+#import "PXGTeleportViewController.h"
 
-@interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStrategySelectionViewControllerDelegate>
+@interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStrategySelectionViewControllerDelegate, PXGTeleportSelectionViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *btnStartStrategy;
 @property (weak, nonatomic) IBOutlet UILabel *lblStrategy;

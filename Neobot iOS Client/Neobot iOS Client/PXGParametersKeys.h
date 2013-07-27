@@ -15,4 +15,6 @@
 #define RECENT_AX12_SERIALPORTS_KEY @"RecentAx12Serials"
 #define SIMULATION_KEY @"SimulationToggle"
 
+#define TELEPORT_POSITIONS_KEY @"TeleportPositions"
+
 #endif

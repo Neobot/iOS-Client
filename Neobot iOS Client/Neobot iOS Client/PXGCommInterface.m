@@ -272,7 +272,7 @@
     
     [serializer addInt16:x];
     [serializer addInt16:y];
-    [serializer addInt16:(uint16_t)theta * ANGLE_FACTOR];
+    [serializer addInt16:(uint16_t)(theta * ANGLE_FACTOR)];
     
     [_protocol writeMessage:messageData forInstruction:SET_POS];
 }

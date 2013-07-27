@@ -75,10 +75,10 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     switch(self.endianness)
     {
         case CFByteOrderLittleEndian:
-            value = CFSwapInt32HostToLittle(value);
+            value = CFSwapInt16HostToLittle(value);
             break;
         case CFByteOrderBigEndian:
-            value = CFSwapInt32HostToBig(value);
+            value = CFSwapInt16HostToBig(value);
             break;
     }
     
