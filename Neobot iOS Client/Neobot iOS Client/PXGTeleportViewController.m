@@ -35,6 +35,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"NewPointSegue"])
+    {
+        PXGCreatePointViewController* controller = (PXGCreatePointViewController*)segue.destinationViewController;
+        controller.delegate = self;
+    }
+}
+
+- (void) newPointCreatedOnX:(int)x andY:(int)y andTheta:(double)theta
+{
+    NSMutableArray* newPositions = [NSMutableArray arrayWithArray:self.positions];
+    [newPositions addObject:pxgEncodePointData(x, y, theta)];
+    
+    self.positions = newPositions;
+    [self.tableView reloadData];
+}
+
+- (IBAction)editPositions:(id)sender
+{
+    if (!self.tableView.editing)
+    {
+        self.btnEdit.style = UIBarButtonItemStyleDone;
+        self.btnEdit.title = @"Done";
+        [self.tableView setEditing:YES animated:YES];
+    }
+    else
+    {
+        self.btnEdit.style = UIBarButtonItemStyleBordered;
+        self.btnEdit.title = @"Edit";
+        [self.tableView setEditing:NO animated:YES];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -88,6 +122,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the row from the data source
+         NSMutableArray* newPositions = [NSMutableArray arrayWithArray:self.positions];
+        [newPositions removeObjectAtIndex:indexPath.row];
+        self.positions = newPositions;
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }    
 }

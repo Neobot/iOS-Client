@@ -827,44 +827,155 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="XAF-4K-CZL" kind="push" id="0vq-6D-jxp"/>
+                                    <segue destination="ewp-xt-XHm" kind="push" identifier="NewPointSegue" id="dgU-bQ-gdZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Teleport" id="xPl-pF-ig3"/>
+                    <navigationItem key="navigationItem" title="Teleport" id="xPl-pF-ig3">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="wrV-1r-9tw">
+                            <connections>
+                                <action selector="editPositions:" destination="elU-5k-oF9" id="PxR-pM-CDo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="btnEdit" destination="wrV-1r-9tw" id="QWT-fF-ngN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCg-11-nuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-874" y="-6794"/>
         </scene>
-        <!--View Controller - New point-->
-        <scene sceneID="bhF-z5-D4I">
+        <!--Create Point View Controller - New point-->
+        <scene sceneID="srO-fc-10h">
             <objects>
-                <viewController id="XAF-4K-CZL" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DtI-Wh-iOO">
+                <tableViewController id="ewp-xt-XHm" customClass="PXGCreatePointViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FQu-FS-CWN">
                         <rect key="frame" x="0.0" y="64" width="540" height="556"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18W-Oj-Dl6"/>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="18W-Oj-Dl6" firstAttribute="top" secondItem="DtI-Wh-iOO" secondAttribute="top" type="default" id="1cc-bR-oDW"/>
-                            <constraint firstItem="18W-Oj-Dl6" firstAttribute="trailing" secondItem="DtI-Wh-iOO" secondAttribute="trailing" type="default" id="nPj-Ol-j1t"/>
-                            <constraint firstItem="18W-Oj-Dl6" firstAttribute="leading" secondItem="DtI-Wh-iOO" secondAttribute="leading" type="default" id="qvp-tT-K7X"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="New point" id="9FM-gO-5wv">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="p4A-Rd-uN4"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="1R8-lW-1yg">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Wvo-Eo-ftW">
+                                        <rect key="frame" x="0.0" y="30" width="540" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="31" y="1" width="478" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="X =" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUK-D6-bzy">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="x value in mm" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hbE-qk-4ac">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="pkq-E2-vF2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="HUK-D6-bzy" firstAttribute="centerY" secondItem="Wvo-Eo-ftW" secondAttribute="centerY" type="default" id="acU-9f-ycy"/>
+                                            <constraint firstItem="hbE-qk-4ac" firstAttribute="leading" secondItem="Wvo-Eo-ftW" secondAttribute="leading" constant="133" type="user" id="iub-7A-egW"/>
+                                            <constraint firstItem="HUK-D6-bzy" firstAttribute="leading" secondItem="Wvo-Eo-ftW" secondAttribute="leading" constant="51" id="mDa-sy-q1U"/>
+                                            <constraint firstAttribute="trailing" secondItem="hbE-qk-4ac" secondAttribute="trailing" constant="51" type="user" id="qyk-dP-ARp"/>
+                                            <constraint firstItem="hbE-qk-4ac" firstAttribute="baseline" secondItem="HUK-D6-bzy" secondAttribute="baseline" type="default" id="wdL-1L-NOJ"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0jY-cG-DjD">
+                                        <rect key="frame" x="0.0" y="75" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="31" y="0.0" width="478" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Y =" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1P-Qf-kiU">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="y value in mm" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yGG-aq-5FG">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="R0O-aC-age"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="yGG-aq-5FG" secondAttribute="trailing" constant="51" type="user" id="2mF-8R-2BH"/>
+                                            <constraint firstItem="y1P-Qf-kiU" firstAttribute="top" secondItem="0jY-cG-DjD" secondAttribute="top" constant="11" id="Stv-8z-pxg"/>
+                                            <constraint firstItem="yGG-aq-5FG" firstAttribute="centerY" secondItem="0jY-cG-DjD" secondAttribute="centerY" type="default" id="eEK-7C-NQi"/>
+                                            <constraint firstItem="yGG-aq-5FG" firstAttribute="leading" secondItem="0jY-cG-DjD" secondAttribute="leading" constant="133" type="user" id="wGj-EQ-m0l"/>
+                                            <constraint firstItem="y1P-Qf-kiU" firstAttribute="leading" secondItem="0jY-cG-DjD" secondAttribute="leading" constant="51" id="xl7-pp-9zf"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PpE-O5-E8c">
+                                        <rect key="frame" x="0.0" y="119" width="540" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="31" y="0.0" width="478" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Theta =" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wf-ml-xe6">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="angle in degrees" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VQc-VI-r7e">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="4Bs-3v-SWV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="VQc-VI-r7e" firstAttribute="leading" secondItem="PpE-O5-E8c" secondAttribute="leading" constant="133" type="user" id="Mau-08-Qny"/>
+                                            <constraint firstAttribute="trailing" secondItem="VQc-VI-r7e" secondAttribute="trailing" constant="51" type="user" id="hXg-gv-Rdi"/>
+                                            <constraint firstItem="VQc-VI-r7e" firstAttribute="baseline" secondItem="1wf-ml-xe6" secondAttribute="baseline" type="default" id="uEl-4C-jZM"/>
+                                            <constraint firstItem="VQc-VI-r7e" firstAttribute="top" secondItem="PpE-O5-E8c" secondAttribute="top" constant="8" id="vnZ-W4-lLg"/>
+                                            <constraint firstItem="1wf-ml-xe6" firstAttribute="leading" secondItem="PpE-O5-E8c" secondAttribute="leading" constant="51" id="wpH-oz-m34"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="ewp-xt-XHm" id="tgv-UV-YUO"/>
+                            <outlet property="delegate" destination="ewp-xt-XHm" id="2oj-Xs-6MB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New point" id="O61-nX-I1o">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="lri-nC-mXT">
+                            <connections>
+                                <action selector="pointCreationDone:" destination="ewp-xt-XHm" id="U8p-cR-wTX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E7G-8i-kgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
+                    <connections>
+                        <outlet property="txtThetaValue" destination="VQc-VI-r7e" id="8Ut-p2-apD"/>
+                        <outlet property="txtXValue" destination="hbE-qk-4ac" id="QvG-ZK-6Br"/>
+                        <outlet property="txtYValue" destination="yGG-aq-5FG" id="Jus-ww-DAu"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="va0-FG-iwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-80" y="-6808"/>
+            <point key="canvasLocation" x="-192" y="-6947"/>
         </scene>
         <!--Strategy Selection View Controller-->
         <scene sceneID="v3K-Qc-iql">
@@ -999,6 +1110,15 @@
                 <relationship kind="outlet" name="txtServerAdress" candidateClass="UITextField"/>
             </relationships>
         </class>
+        <class className="PXGCreatePointViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGCreatePointViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pointCreationDone:"/>
+                <relationship kind="outlet" name="txtThetaValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtXValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtYValue" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="PXGLogViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGLogViewController.h"/>
             <relationships>
@@ -1043,6 +1163,10 @@
         </class>
         <class className="PXGTeleportViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGTeleportViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editPositions:"/>
+                <relationship kind="outlet" name="btnEdit" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

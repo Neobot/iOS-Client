@@ -123,7 +123,7 @@
         teleportController.delegate = self;
         
         NSArray* values = [[NSUserDefaults standardUserDefaults] arrayForKey:TELEPORT_POSITIONS_KEY];
-        //if ([values count] == 0)
+        if ([values count] == 0)
         {
             NSMutableArray* defaultValues = [NSMutableArray array];
             [defaultValues addObject:pxgEncodePointData(0, 0, 0)];
