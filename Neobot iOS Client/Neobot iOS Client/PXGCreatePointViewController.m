@@ -27,13 +27,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	[self.txtXValue becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)nextEditionAfterX:(id)sender
+{
+    [self.txtYValue becomeFirstResponder];
+}
+
+- (IBAction)nextEditionAfterY:(id)sender
+{
+    [self.txtThetaValue becomeFirstResponder];
 }
 
 - (IBAction)pointCreationDone:(id)sender

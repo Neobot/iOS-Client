@@ -10,7 +10,8 @@
 #import "PXGCreatePointViewController.h"
 
 @protocol PXGTeleportSelectionViewControllerDelegate <NSObject>
-- (void) teleportPositionSelected:(NSDictionary*)position among:(NSArray*)positions;
+- (void) teleportPositionSelected:(NSDictionary*)position;
+- (void) availableTeleportPositionsChanged:(NSArray*)positions;
 @end
 
 @interface PXGTeleportViewController : UITableViewController <PXGCreatePointViewControllerDelegate>

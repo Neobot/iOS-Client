@@ -32,6 +32,8 @@
     [super viewDidLoad];
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
+    [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
+    [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];
     
     UIViewController* connectionControler = [self.storyboard instantiateViewControllerWithIdentifier:@"CommViewController"];
     self.connectionPopoverController = [[UIPopoverController alloc] initWithContentViewController:connectionControler];
@@ -96,8 +98,6 @@
             self.lblStatus.text = @"Controlled";
             break;
     }
-    
-    [self incrementMessageCountBy:1];
 }
 
 - (void)incrementMessageCountBy:(int)value

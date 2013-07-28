@@ -34,25 +34,6 @@
     self.textView.text = [NSString stringWithFormat:@"%@%@: \"%@\"\n", currentText, speaker, message];
 }
 
-- (void) connectionStatusChangedTo:(PXGConnectionStatus)status
-{
-    switch(status)
-    {
-        case Lookup:
-            [self logMessage:@"Lookup..." from:@"Client"];
-            break;
-        case Disconnected:
-            [self logMessage:@"Disconnected" from:@"Client"];
-            break;
-        case Connected:
-            [self logMessage:@"Connected" from:@"Client"];
-            break;
-        case Controlled:
-            [self logMessage:@"Controlled" from:@"Client"];
-            break;
-    }
-}
-
 - (void)didReceiveLog:(NSString*) text
 {
     [self logMessage:text from:@"Robot"];

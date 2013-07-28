@@ -854,7 +854,7 @@
         <scene sceneID="srO-fc-10h">
             <objects>
                 <tableViewController id="ewp-xt-XHm" customClass="PXGCreatePointViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FQu-FS-CWN">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FQu-FS-CWN">
                         <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -878,15 +878,19 @@
                                                         <constraint firstAttribute="height" constant="30" id="pkq-E2-vF2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="nextEditionAfterX:" destination="ewp-xt-XHm" eventType="editingDidEndOnExit" id="d2V-nH-ymx"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="HUK-D6-bzy" firstAttribute="centerY" secondItem="Wvo-Eo-ftW" secondAttribute="centerY" type="default" id="acU-9f-ycy"/>
+                                            <constraint firstItem="hbE-qk-4ac" firstAttribute="top" secondItem="Wvo-Eo-ftW" secondAttribute="top" constant="9" id="0pk-cX-YQd"/>
                                             <constraint firstItem="hbE-qk-4ac" firstAttribute="leading" secondItem="Wvo-Eo-ftW" secondAttribute="leading" constant="133" type="user" id="iub-7A-egW"/>
                                             <constraint firstItem="HUK-D6-bzy" firstAttribute="leading" secondItem="Wvo-Eo-ftW" secondAttribute="leading" constant="51" id="mDa-sy-q1U"/>
+                                            <constraint firstItem="HUK-D6-bzy" firstAttribute="top" secondItem="Wvo-Eo-ftW" secondAttribute="top" constant="13" id="n1x-F5-PTy"/>
                                             <constraint firstAttribute="trailing" secondItem="hbE-qk-4ac" secondAttribute="trailing" constant="51" type="user" id="qyk-dP-ARp"/>
                                             <constraint firstItem="hbE-qk-4ac" firstAttribute="baseline" secondItem="HUK-D6-bzy" secondAttribute="baseline" type="default" id="wdL-1L-NOJ"/>
                                         </constraints>
@@ -908,7 +912,10 @@
                                                         <constraint firstAttribute="height" constant="30" id="R0O-aC-age"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="nextEditionAfterY:" destination="ewp-xt-XHm" eventType="editingDidEndOnExit" id="QMm-0i-qax"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -938,7 +945,10 @@
                                                         <constraint firstAttribute="height" constant="30" id="4Bs-3v-SWV"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="pointCreationDone:" destination="ewp-xt-XHm" eventType="editingDidEndOnExit" id="iAD-ps-SRr"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1113,6 +1123,8 @@
         <class className="PXGCreatePointViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGCreatePointViewController.h"/>
             <relationships>
+                <relationship kind="action" name="nextEditionAfterX:"/>
+                <relationship kind="action" name="nextEditionAfterY:"/>
                 <relationship kind="action" name="pointCreationDone:"/>
                 <relationship kind="outlet" name="txtThetaValue" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtXValue" candidateClass="UITextField"/>

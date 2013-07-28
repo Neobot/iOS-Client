@@ -51,6 +51,9 @@
     
     self.positions = newPositions;
     [self.tableView reloadData];
+    
+    if ([self.delegate respondsToSelector:@selector(availableTeleportPositionsChanged:)])
+        [self.delegate availableTeleportPositionsChanged:self.positions];
 }
 
 - (IBAction)editPositions:(id)sender
@@ -127,6 +130,9 @@
         self.positions = newPositions;
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        if ([self.delegate respondsToSelector:@selector(availableTeleportPositionsChanged:)])
+            [self.delegate availableTeleportPositionsChanged:self.positions];
     }    
 }
 
@@ -136,8 +142,8 @@
 {
     if (indexPath.section == 0)
     {
-        if ([self.delegate respondsToSelector:@selector(teleportPositionSelected:among:)])
-            [self.delegate teleportPositionSelected:[self.positions objectAtIndex:indexPath.row] among:self.positions];
+        if ([self.delegate respondsToSelector:@selector(teleportPositionSelected:)])
+            [self.delegate teleportPositionSelected:[self.positions objectAtIndex:indexPath.row]];
         
         [self.parentPopOverController dismissPopoverAnimated:YES];
     }

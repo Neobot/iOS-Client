@@ -200,15 +200,19 @@
     }
 }
 
-- (void) teleportPositionSelected:(NSDictionary*)position among:(NSArray*)positions
+- (void) teleportPositionSelected:(NSDictionary*)position
 {
     int x, y;
     double theta;
     pxgDecodePointData(position, &x, &y, &theta);
     
     [[PXGCommInterface sharedInstance] sendTeleportRobotInX:x Y:y angle:theta];
-    [[NSUserDefaults standardUserDefaults] setValue:positions forKey:TELEPORT_POSITIONS_KEY];
     _currentTeleportPopoverController = nil;
+}
+
+- (void) availableTeleportPositionsChanged:(NSArray*)positions
+{
+    [[NSUserDefaults standardUserDefaults] setValue:positions forKey:TELEPORT_POSITIONS_KEY];
 }
 
 

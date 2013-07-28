@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtThetaValue;
 
 @property (strong, nonatomic) id<PXGCreatePointViewControllerDelegate> delegate;
+- (IBAction)nextEditionAfterX:(id)sender;
+- (IBAction)nextEditionAfterY:(id)sender;
 
 - (IBAction)pointCreationDone:(id)sender;
 
