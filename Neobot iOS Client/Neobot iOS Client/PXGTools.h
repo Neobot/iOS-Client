@@ -14,6 +14,10 @@
 
 NSDictionary* pxgEncodePointData(int x, int y, double theta);
 void pxgDecodePointData(NSDictionary* dictionnary, int* x, int* y, double* theta);
+
+NSDictionary* pxgEncodeTrajectoryData(NSString* name, NSArray* pointsData);
+void pxgDecodeTrajectoryData(NSDictionary* dictionnary, NSString** name, NSArray** pointsData);
+
 double pxgRadiansToDegrees(double radian);
 double pxgDegreesToRadians(double degrees);
 

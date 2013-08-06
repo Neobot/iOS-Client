@@ -16,5 +16,6 @@
 #define SIMULATION_KEY @"SimulationToggle"
 
 #define TELEPORT_POSITIONS_KEY @"TeleportPositions"
+#define DEFINED_TRAJECTORIES_KEY @"Trajectories"
 
 #endif

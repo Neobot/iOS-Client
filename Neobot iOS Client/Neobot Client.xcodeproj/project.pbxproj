@@ -43,6 +43,8 @@
 		94AC01F617A41D55005A47F3 /* PXGCreatePointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */; };
 		94CE6078179190E600D4EC6E /* Table2013.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CE6077179190E600D4EC6E /* Table2013.png */; };
 		94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */; };
+		94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */; };
+		94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +103,10 @@
 		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
 		94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGStringListViewController.h; sourceTree = "<group>"; };
 		94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStringListViewController.m; sourceTree = "<group>"; };
+		94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTrajectoriesViewController.h; sourceTree = "<group>"; };
+		94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGTrajectoriesViewController.m; sourceTree = "<group>"; };
+		94F30F0617AACAA900E1805D /* PXGTrajectoryEditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTrajectoryEditionViewController.h; sourceTree = "<group>"; };
+		94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGTrajectoryEditionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +254,10 @@
 				94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */,
 				94AC01F417A41D54005A47F3 /* PXGCreatePointViewController.h */,
 				94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */,
+				94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */,
+				94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */,
+				94F30F0617AACAA900E1805D /* PXGTrajectoryEditionViewController.h */,
+				94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */,
 			);
 			name = "Sub View Controllers";
 			sourceTree = "<group>";
@@ -345,6 +355,8 @@
 				94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */,
 				94AC01F317A41139005A47F3 /* PXGTools.c in Sources */,
 				94AC01F617A41D55005A47F3 /* PXGCreatePointViewController.m in Sources */,
+				94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */,
+				94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,8 @@
 
 @interface PXGCreatePointViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet NSDictionary *pointData;
+
 @property (weak, nonatomic) IBOutlet UITextField *txtXValue;
 @property (weak, nonatomic) IBOutlet UITextField *txtYValue;
 @property (weak, nonatomic) IBOutlet UITextField *txtThetaValue;

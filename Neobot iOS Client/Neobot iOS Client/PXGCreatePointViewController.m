@@ -19,7 +19,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.pointData = nil;
     }
     return self;
 }
@@ -27,6 +27,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (self.pointData != nil)
+    {
+        int x, y;
+        double theta;
+        pxgDecodePointData(self.pointData, &x, &y, &theta);
+        self.txtXValue.text = [NSString stringWithFormat:@"%d", x];
+        self.txtYValue.text = [NSString stringWithFormat:@"%d", y];
+        
+        double thetaD = pxgRadiansToDegrees(theta);
+        if (round(thetaD) == thetaD)
+            self.txtThetaValue.text = [NSString stringWithFormat:@"%d", (int)thetaD];
+        else
+            self.txtThetaValue.text = [NSString stringWithFormat:@"%f", thetaD];
+            
+
+    }
+    
 	[self.txtXValue becomeFirstResponder];
 }
 
@@ -52,7 +70,7 @@
     {
         int x = [self.txtXValue.text intValue];
         int y = [self.txtYValue.text intValue];
-        double theta = pxgDegreesToRadians([self.txtThetaValue.text intValue]);
+        double theta = pxgDegreesToRadians([self.txtThetaValue.text doubleValue]);
         
         [self.delegate newPointCreatedOnX:x andY:y andTheta:theta];
     }

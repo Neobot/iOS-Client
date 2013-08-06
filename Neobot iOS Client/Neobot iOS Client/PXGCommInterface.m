@@ -282,6 +282,22 @@
     [_protocol writeMessage:nil forInstruction:FLUSH];
 }
 
+- (void)sendRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta withTrajectoryType:(PXGTrajectoryType)type withAsservType:(PXGAsservType)asservType withSpeed:(uint8_t)speed isStopPoint:(BOOL)isStopPoint
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt16:x];
+    [serializer addInt16:y];
+    [serializer addInt16:(uint16_t)(theta * ANGLE_FACTOR)];
+    [serializer addInt8:type];
+    [serializer addInt8:asservType];
+    [serializer addInt8:speed];
+    [serializer addBool:isStopPoint];
+    
+    [_protocol writeMessage:messageData forInstruction:DEST_ADD];
+}
+
 - (void)sendPingToServer
 {
     [_protocol writeMessage:nil forInstruction:PING_SERVER];

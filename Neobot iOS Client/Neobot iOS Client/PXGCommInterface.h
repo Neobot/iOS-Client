@@ -17,6 +17,32 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
     Controlled
 };
 
+typedef NS_ENUM(NSInteger, PXGAsservType)
+{
+    TURN_THEN_MOVE = 0,
+    TURN_AND_MOVE = 1,
+    TURN_ONLY = 2,
+    MOVE_ONLY = 3
+};
+
+typedef NS_ENUM(NSInteger, PXGTrajectoryType)
+{
+    NONE = 0,
+    AVANT_XY = 1,
+    ARRIERE_XY = 2,
+    TOURNE_VERS_XY = 3,
+    TOURNE_VERS_XY_AR = 4,
+    TOURNE_RADIAN = 5,
+    AVANCE_MM = 6,  //X
+    ROTATE_TO_ABSOLUTE_ANGLE = 7,
+    CIRC_AVANT = 8,
+    CIRC_AR = 9,
+    BEZIER_AV = 10,
+    BEZIER_AR = 11,
+    RECALAGE = 12,
+    AUTO = 13
+};
+
 #pragma mark Robot delegate
 @protocol PXGRobotInterfaceDelegate <NSObject>
 @optional
@@ -90,6 +116,7 @@ typedef NS_ENUM(NSInteger, PXGConnectionStatus)
 - (void)sendPingToRobot;
 - (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
 - (void)sendFlush;
+- (void)sendRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta withTrajectoryType:(PXGTrajectoryType)type withAsservType:(PXGAsservType)type withSpeed:(uint8_t)speed isStopPoint:(BOOL)isStopPoint;
 
 #pragma mark Send to server instructions
 - (void)sendPingToServer;
