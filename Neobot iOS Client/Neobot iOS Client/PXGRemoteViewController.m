@@ -16,8 +16,8 @@
     int _currentStrategy;
     BOOL _currentStrategyIsRunning;
     
-    __weak UIPopoverController* _currentTeleportPopoverController;
-    __weak UIPopoverController* _currentTrajectoryPopoverController;
+    UIPopoverController* _currentTeleportPopoverController;
+    UIPopoverController* _currentTrajectoryPopoverController;
 }
 
 @end
@@ -72,14 +72,6 @@
     self.btnTrajectory.enabled = robotInteractioEnabled;
 }
 
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    if (_currentTeleportPopoverController == popoverController)
-        _currentTeleportPopoverController = nil;
-    else if (_currentTrajectoryPopoverController == popoverController)
-        _currentTrajectoryPopoverController = nil;
-}
-
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if ([identifier isEqualToString:@"StrategySelectionSegue"])
@@ -91,10 +83,15 @@
     }
     else if ([identifier isEqualToString:@"TeleportPopoverSegue"])
     {
+        if (_currentTrajectoryPopoverController && _currentTrajectoryPopoverController.isPopoverVisible)
+            [_currentTrajectoryPopoverController dismissPopoverAnimated:NO];
+        
         if (_currentTeleportPopoverController)
         {
-            [_currentTeleportPopoverController dismissPopoverAnimated:YES];
-            _currentTeleportPopoverController = nil;
+            if (_currentTeleportPopoverController.isPopoverVisible)
+                [_currentTeleportPopoverController dismissPopoverAnimated:YES];
+            else
+                [_currentTeleportPopoverController presentPopoverFromBarButtonItem:self.btnTeleport permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             return NO;
         }
         else
@@ -102,10 +99,16 @@
     }
     else if ([identifier isEqualToString:@"TrajetoriesPopoverSegue"])
     {
+        if (_currentTeleportPopoverController && _currentTeleportPopoverController.isPopoverVisible)
+            [_currentTeleportPopoverController dismissPopoverAnimated:NO];
+        
         if (_currentTrajectoryPopoverController)
         {
-            [_currentTrajectoryPopoverController dismissPopoverAnimated:YES];
-            _currentTrajectoryPopoverController = nil;
+            if (_currentTrajectoryPopoverController.isPopoverVisible)
+                [_currentTrajectoryPopoverController dismissPopoverAnimated:YES];
+            else
+                [_currentTrajectoryPopoverController presentPopoverFromBarButtonItem:self.btnTrajectory permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
             return NO;
         }
         else
@@ -133,7 +136,6 @@
         PXGTeleportViewController* teleportController = (PXGTeleportViewController*)navController.topViewController;
         teleportController.parentPopOverController = popoverSegue.popoverController;
         _currentTeleportPopoverController = popoverSegue.popoverController;
-        popoverSegue.popoverController.delegate = self;
         teleportController.delegate = self;
         
         NSArray* values = [[NSUserDefaults standardUserDefaults] arrayForKey:TELEPORT_POSITIONS_KEY];
@@ -157,11 +159,10 @@
         PXGTrajectoriesViewController* trajController = (PXGTrajectoriesViewController*)navController.topViewController;
         trajController.parentPopOverController = popoverSegue.popoverController;
         _currentTrajectoryPopoverController = popoverSegue.popoverController;
-        popoverSegue.popoverController.delegate = self;
         trajController.delegate = self;
         
         NSArray* trajectortiesData = [[NSUserDefaults standardUserDefaults] arrayForKey:DEFINED_TRAJECTORIES_KEY];
-        trajController.trajectories = trajectortiesData;
+        trajController.trajectories = [NSMutableArray arrayWithArray:trajectortiesData];
     }
 }
 
@@ -234,7 +235,6 @@
     pxgDecodePointData(position, &x, &y, &theta);
     
     [[PXGCommInterface sharedInstance] sendTeleportRobotInX:x Y:y angle:theta];
-    _currentTeleportPopoverController = nil;
 }
 
 - (void) availableTeleportPositionsChanged:(NSArray*)positions
@@ -243,16 +243,12 @@
 }
 
 
-- (void) trajectorySelected:(NSDictionary*)trajectory
-{
-    NSString* name;
-    NSArray* points;
-    pxgDecodeTrajectoryData(trajectory, &name, &points);
-    
-    int nbPoints = [points count];
+- (void) sendTrajectory:(NSArray*)trajectoryPoints
+{   
+    int nbPoints = [trajectoryPoints count];
     
     int curentPointIndex = 0;
-    for (NSDictionary* pointData in points)
+    for (NSDictionary* pointData in trajectoryPoints)
     {
         ++curentPointIndex;
         
@@ -273,7 +269,6 @@
 - (void) availableTrajectoriesChanged:(NSArray*)trajectories
 {
     [[NSUserDefaults standardUserDefaults] setValue:trajectories forKey:DEFINED_TRAJECTORIES_KEY];
-
 }
 
 @end

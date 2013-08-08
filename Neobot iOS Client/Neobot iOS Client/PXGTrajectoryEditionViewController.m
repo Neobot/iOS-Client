@@ -12,6 +12,7 @@
 @interface PXGTrajectoryEditionViewController ()
 {
     int _editedPointIndex;
+    UITableViewCell* _sendActionCell;
 }
 
 @end
@@ -28,9 +29,6 @@
 
 - (void)viewDidLoad
 {
-    _editedPointIndex = -1;
-    self.trajectoryPoints = [NSMutableArray array];
-
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -103,7 +101,8 @@
         case PXGTrajectoryNameSection:
         {
             cell = [tableView dequeueReusableCellWithIdentifier:txtCellIdentifier forIndexPath:indexPath];
-            UITextField* txt = (UITextField*)[cell viewWithTag:0];
+            UITextField* txt = (UITextField*)[cell viewWithTag:1];
+            txt.delegate = self;
             txt.text = self.trajectoryName;
             break;
         }
@@ -130,9 +129,12 @@
             cell = [tableView dequeueReusableCellWithIdentifier:actionCellIdentifier forIndexPath:indexPath];
             if ([self.trajectoryPoints count] == 0)
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            else
+                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
             if (indexPath.row == 0)
                 cell.textLabel.text = NSLocalizedString(@"Send", nil);
+            
             break;
         }
     }
@@ -168,6 +170,9 @@
         [self.trajectoryPoints removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        if ([self.delegate respondsToSelector:@selector(trajectoryPointsChanged:)])
+            [self.delegate trajectoryPointsChanged:self.trajectoryPoints];
     }
 }
 
@@ -175,6 +180,9 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     [self.trajectoryPoints exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
+    
+    if ([self.delegate respondsToSelector:@selector(trajectoryPointsChanged:)])
+        [self.delegate trajectoryPointsChanged:self.trajectoryPoints];
 }
 
 
@@ -188,13 +196,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (indexPath.section == PXGTrajectoryActionsSection)
+    {
+        if (indexPath.row == 0)
+        {
+            //send
+            if ([self.delegate respondsToSelector:@selector(sendTrajectory:)])
+                [self.delegate sendTrajectory:self.trajectoryPoints];
+        }
+        
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setSelected:NO animated:YES];
+    }
 }
 
 - (void) newPointCreatedOnX:(int)x andY:(int)y andTheta:(double)theta
@@ -210,7 +223,17 @@
         [self.trajectoryPoints replaceObjectAtIndex:_editedPointIndex withObject:pointData];
     }
     
+    if ([self.delegate respondsToSelector:@selector(trajectoryPointsChanged:)])
+        [self.delegate trajectoryPointsChanged:self.trajectoryPoints];
+
+    
     [self.tableView reloadData];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(trajectoryNameChanged:)])
+        [self.delegate trajectoryNameChanged:textField.text];
 }
 
 @end

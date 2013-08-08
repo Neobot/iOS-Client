@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGTrajectoryEditionViewController.h"
 
 @protocol PXGTrajectoriesViewControllerDelegate <NSObject>
-- (void) trajectorySelected:(NSDictionary*)trajectory;
+- (void) sendTrajectory:(NSArray*)trajectoryPoints;
 - (void) availableTrajectoriesChanged:(NSArray*)trajectories;
 @end
 
-@interface PXGTrajectoriesViewController : UITableViewController
+@interface PXGTrajectoriesViewController : UITableViewController <PXGTrajectoryEditionViewControllerDelegate>
 
-@property (strong, nonatomic) NSArray* trajectories;
+@property (strong, nonatomic) NSMutableArray* trajectories;
 @property (strong, nonatomic) id<PXGTrajectoriesViewControllerDelegate> delegate;
 @property (strong, nonatomic) UIPopoverController* parentPopOverController;
 

@@ -110,9 +110,9 @@
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="top" secondItem="XyJ-JK-Wz4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3wu-7X-zDt"/>
                             <constraint firstItem="okk-X0-nLh" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="user" id="BPa-bH-Ic8"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="44" type="user" id="E41-LD-QOf"/>
-                            <constraint firstItem="a19-WL-3XC" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LFy-Fg-2ah"/>
                             <constraint firstItem="a19-WL-3XC" firstAttribute="centerY" secondItem="okk-X0-nLh" secondAttribute="centerY" type="user" id="LHA-AD-yM9"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="XyJ-JK-Wz4" secondAttribute="centerX" type="user" id="MT6-Y9-an8"/>
+                            <constraint firstItem="gAL-Kg-Fvi" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="259" id="O5Z-ov-bdh"/>
                             <constraint firstItem="XyJ-JK-Wz4" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="76" type="user" id="UwY-5t-Dnz"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="default" id="WJQ-cV-Ucu"/>
                             <constraint firstItem="okk-X0-nLh" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" type="user" id="YyT-uH-rJ5"/>
@@ -121,7 +121,7 @@
                             <constraint firstItem="a19-WL-3XC" firstAttribute="centerY" secondItem="gAL-Kg-Fvi" secondAttribute="centerY" type="user" id="fCH-32-Cl3"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="EGA-Kg-nAe" secondAttribute="centerX" type="user" id="oXg-Wm-h2J"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="trailing" secondItem="EGA-Kg-nAe" secondAttribute="trailing" type="default" id="qrs-qH-RPN"/>
-                            <constraint firstItem="gAL-Kg-Fvi" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="257" id="sAm-VG-5XV"/>
+                            <constraint firstItem="a19-WL-3XC" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="18" id="sO6-Jl-Iz5"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Remote" image="Games.png" id="HVD-yl-RWr"/>
@@ -1127,7 +1127,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="dpk-HJ-UEN" kind="push" id="pLy-qv-dUj"/>
+                                    <segue destination="dpk-HJ-UEN" kind="push" identifier="EditTrajectorySegue" id="pLy-qv-dUj"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewValue" textLabel="EaE-PQ-VVA" style="IBUITableViewCellStyleDefault" id="Kyr-l2-fCA">
@@ -1147,7 +1147,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="dpk-HJ-UEN" kind="push" id="lzR-dP-H5n"/>
+                                    <segue destination="dpk-HJ-UEN" kind="push" identifier="NewTrajectorySegue" id="lzR-dP-H5n"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1235,13 +1235,17 @@
                                     <rect key="frame" x="31" y="0.0" width="478" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Trajectory Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-4V-4uZ">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-4V-4uZ">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="93" id="wqW-yR-6Ih"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWf-we-lbp">
                                             <constraints>
+                                                <constraint firstAttribute="width" constant="407" id="iro-II-Xc2"/>
                                                 <constraint firstAttribute="height" constant="30" id="wD7-el-e1k"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1253,8 +1257,6 @@
                                 <constraints>
                                     <constraint firstItem="G8d-4V-4uZ" firstAttribute="leading" secondItem="TiB-jg-bxC" secondAttribute="leading" constant="20" type="user" id="26c-Og-zZu"/>
                                     <constraint firstItem="G8d-4V-4uZ" firstAttribute="centerY" secondItem="TiB-jg-bxC" secondAttribute="centerY" type="default" id="IuV-2C-nAf"/>
-                                    <constraint firstItem="NWf-we-lbp" firstAttribute="leading" secondItem="G8d-4V-4uZ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Tte-3I-ZmX"/>
-                                    <constraint firstItem="NWf-we-lbp" firstAttribute="leading" secondItem="TiB-jg-bxC" secondAttribute="leading" constant="174" type="user" id="o0y-V9-cKM"/>
                                     <constraint firstAttribute="trailing" secondItem="NWf-we-lbp" secondAttribute="trailing" constant="20" type="user" id="ugV-OV-hIy"/>
                                     <constraint firstItem="NWf-we-lbp" firstAttribute="centerY" secondItem="TiB-jg-bxC" secondAttribute="centerY" type="default" id="y3p-kx-7wo"/>
                                 </constraints>
@@ -1285,6 +1287,9 @@
         <image name="sensor.png" width="30" height="30"/>
     </resources>
     <classes>
+        <class className="NSDictionary" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSDictionary.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -1323,6 +1328,7 @@
                 <relationship kind="action" name="nextEditionAfterX:"/>
                 <relationship kind="action" name="nextEditionAfterY:"/>
                 <relationship kind="action" name="pointCreationDone:"/>
+                <relationship kind="outlet" name="pointData" candidateClass="NSDictionary"/>
                 <relationship kind="outlet" name="txtThetaValue" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtXValue" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtYValue" candidateClass="UITextField"/>
@@ -1390,7 +1396,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pLy-qv-dUj"/>
+        <segue reference="lzR-dP-H5n"/>
         <segue reference="lO7-PU-doR"/>
         <segue reference="Yxg-Gq-WCw"/>
     </inferredMetricsTieBreakers>

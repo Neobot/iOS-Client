@@ -10,6 +10,9 @@
 #import "PXGTools.h"
 
 @interface PXGTrajectoriesViewController ()
+{
+    int _currentEditedIndex;
+}
 
 @end
 
@@ -41,6 +44,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    PXGTrajectoryEditionViewController* controller = (PXGTrajectoryEditionViewController*)segue.destinationViewController;
+    controller.delegate = self;
+    
+    if ([segue.identifier isEqualToString:@"EditTrajectorySegue"])
+    {
+        _currentEditedIndex = [self.tableView indexPathForSelectedRow].row;
+        NSDictionary* trajectoryData = [self.trajectories objectAtIndex:_currentEditedIndex];
+        
+        NSString* name;
+        NSArray* points;
+        pxgDecodeTrajectoryData(trajectoryData, &name, &points);
+
+        controller.trajectoryName = name;
+        controller.trajectoryPoints = [NSMutableArray arrayWithArray:points];
+    }
+    else if ([segue.identifier isEqualToString:@"NewTrajectorySegue"])
+    {
+        _currentEditedIndex = -1;
+        
+        controller.trajectoryName = NSLocalizedString(@"Trajectory", nil);
+        controller.trajectoryPoints = [NSMutableArray array];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -68,7 +97,6 @@
         NSDictionary* trData = [self.trajectories objectAtIndex:indexPath.row];
         NSString* name;
         NSArray* points;
-        
         pxgDecodeTrajectoryData(trData, &name, &points);
         
         cell.textLabel.text = name;
@@ -95,15 +123,68 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the row from the data source
-        NSMutableArray* newTrajectories = [NSMutableArray arrayWithArray:self.trajectories];
-        [newTrajectories removeObjectAtIndex:indexPath.row];
-        self.trajectories = newTrajectories;
+        [self.trajectories removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         if ([self.delegate respondsToSelector:@selector(availableTrajectoriesChanged:)])
             [self.delegate availableTrajectoriesChanged:self.trajectories];
     }
+}
+
+#pragma mark Trajectory edition delegate
+- (void) sendTrajectory:(NSArray*)trajectoryPoints
+{
+    if ([self.delegate respondsToSelector:@selector(sendTrajectory:)])
+        [self.delegate sendTrajectory:trajectoryPoints];
+}
+
+- (void) trajectoryNameChanged:(NSString*)name
+{
+    if (_currentEditedIndex >= 0)
+    {
+        NSDictionary* trajectoryData = [self.trajectories objectAtIndex:_currentEditedIndex];
+        NSString* oldName;
+        NSArray* points;
+        pxgDecodeTrajectoryData(trajectoryData, &oldName, &points);
+        
+        [self.trajectories replaceObjectAtIndex:_currentEditedIndex withObject:pxgEncodeTrajectoryData(name, points)];
+    }
+    else
+    {
+        NSDictionary* newTrajectoryData = pxgEncodeTrajectoryData(name, [NSArray array]);
+        [self.trajectories addObject:newTrajectoryData];
+        _currentEditedIndex = self.trajectories.count - 1;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(availableTrajectoriesChanged:)])
+        [self.delegate availableTrajectoriesChanged:self.trajectories];
+    
+    [self.tableView reloadData];
+}
+
+- (void) trajectoryPointsChanged:(NSArray*)trajectoryPoints
+{
+    if (_currentEditedIndex >= 0)
+    {
+        NSDictionary* trajectoryData = [self.trajectories objectAtIndex:_currentEditedIndex];
+        NSString* name;
+        NSArray* oldPoints;
+        pxgDecodeTrajectoryData(trajectoryData, &name, &oldPoints);
+        
+        [self.trajectories replaceObjectAtIndex:_currentEditedIndex withObject:pxgEncodeTrajectoryData(name, trajectoryPoints)];
+    }
+    else
+    {
+        NSDictionary* newTrajectoryData = pxgEncodeTrajectoryData(NSLocalizedString(@"Trajectory", nil), trajectoryPoints);
+        [self.trajectories addObject:newTrajectoryData];
+        _currentEditedIndex = self.trajectories.count - 1;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(availableTrajectoriesChanged:)])
+        [self.delegate availableTrajectoriesChanged:self.trajectories];
+    
+    [self.tableView reloadData];
 }
 
 @end
