@@ -132,7 +132,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             if (indexPath.row == 0)
-                cell.textLabel.text = @"Send";
+                cell.textLabel.text = NSLocalizedString(@"Send", nil);
             break;
         }
     }
@@ -147,7 +147,7 @@
     {
         case PXGTrajectoryPointsSection:
             if ([self.trajectoryPoints count] > 0)
-                return @"Trajectory Content";
+                return NSLocalizedString(@"Trajectory Content", nil);
     }
     
     return @"";

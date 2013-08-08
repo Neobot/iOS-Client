@@ -36,12 +36,12 @@
 
 - (void)didReceiveLog:(NSString*) text
 {
-    [self logMessage:text from:@"Robot"];
+    [self logMessage:text from:NSLocalizedString(@"Robot", nil)];
 }
 
 - (void)didReceiveServerAnnouncement:(NSString*) message
 {
-    [self logMessage:message from:@"Server"];
+    [self logMessage:message from:NSLocalizedString(@"Server", nil)];
 }
 
 @end

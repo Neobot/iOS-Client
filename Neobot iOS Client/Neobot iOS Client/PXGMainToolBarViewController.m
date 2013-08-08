@@ -86,16 +86,16 @@
     switch(status)
     {
         case Lookup:
-            self.lblStatus.text = @"Lookup";
+            self.lblStatus.text = NSLocalizedString(@"Lookup", nil);
             break;
         case Disconnected:
-            self.lblStatus.text = @"Disconnected";
+            self.lblStatus.text = NSLocalizedString(@"Disconnected", nil);
             break;
         case Connected:
-            self.lblStatus.text = @"Connected";
+            self.lblStatus.text = NSLocalizedString(@"Connected", nil);
             break;
         case Controlled:
-            self.lblStatus.text = @"Controlled";
+            self.lblStatus.text = NSLocalizedString(@"Controlled", nil);
             break;
     }
 }

@@ -193,7 +193,7 @@
             self.txtServerAdress.enabled = YES;
             self.txtPort.enabled = YES;
             self.btnConnectServer.enabled = YES;
-            [self.btnConnectServer setTitle:@"Connect" forState:UIControlStateNormal];
+            [self.btnConnectServer setTitle:NSLocalizedString(@"Connect", nil) forState:UIControlStateNormal];
             self.btnPingServer.enabled = NO;
             
             self.txtRobotSerialPort.enabled = NO;
@@ -206,13 +206,13 @@
             self.txtServerAdress.enabled = NO;
             self.txtPort.enabled = NO;
             self.btnConnectServer.enabled = YES;
-            [self.btnConnectServer setTitle:@"Disconnect" forState:UIControlStateNormal];
+            [self.btnConnectServer setTitle:NSLocalizedString(@"Disconnect", nil) forState:UIControlStateNormal];
             self.btnPingServer.enabled = YES;
             
             self.txtRobotSerialPort.enabled = YES;
             self.txtAx12SerialPort.enabled = YES;
             self.btnAskRobotControl.enabled = YES;
-            [self.btnAskRobotControl setTitle:@"Ask Control" forState:UIControlStateNormal];
+            [self.btnAskRobotControl setTitle:NSLocalizedString(@"Ask Control", nil) forState:UIControlStateNormal];
             self.btnRobotPing.enabled = NO;
             self.simulationSwitch.enabled = YES;
             break;
@@ -225,7 +225,7 @@
             self.txtRobotSerialPort.enabled = NO;
             self.txtAx12SerialPort.enabled = NO;
             self.btnAskRobotControl.enabled = YES;
-            [self.btnAskRobotControl setTitle:@"Release Control" forState:UIControlStateNormal];
+            [self.btnAskRobotControl setTitle:NSLocalizedString(@"Release Control", nil) forState:UIControlStateNormal];
             self.btnRobotPing.enabled = YES;
             self.simulationSwitch.enabled = NO;
             break;
@@ -275,7 +275,7 @@
 
 - (void)didReceivedServerPingTimeout:(NSTimer*)timer
 {
-    self.lblServerPing.text = @"timeout...";
+    self.lblServerPing.text = NSLocalizedString(@"timeout...", nil);
     _serverPingTimer = nil;
     self.btnPingServer.enabled = YES;
     
@@ -299,7 +299,7 @@
 
 - (void)didReceivedRobotPingTimeout:(NSTimer*)timer
 {
-    self.lblRobotPing.text = @"timeout...";
+    self.lblRobotPing.text = NSLocalizedString(@"timeout...", nil);
     _robotPingTimer = nil;
     self.btnRobotPing.enabled = YES;
     
