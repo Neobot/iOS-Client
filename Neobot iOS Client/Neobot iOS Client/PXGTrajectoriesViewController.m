@@ -70,6 +70,22 @@
     }
 }
 
+- (IBAction)onEdit:(id)sender
+{
+    if (!self.tableView.editing)
+    {
+        self.btnEdit.style = UIBarButtonItemStyleDone;
+        self.btnEdit.title = NSLocalizedString(@"Done", nil);
+        [self.tableView setEditing:YES animated:YES];
+    }
+    else
+    {
+        self.btnEdit.style = UIBarButtonItemStyleBordered;
+        self.btnEdit.title = NSLocalizedString(@"Edit", nil);
+        [self.tableView setEditing:NO animated:YES];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

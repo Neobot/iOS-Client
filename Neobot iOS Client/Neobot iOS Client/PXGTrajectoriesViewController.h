@@ -19,5 +19,8 @@
 @property (strong, nonatomic) NSMutableArray* trajectories;
 @property (strong, nonatomic) id<PXGTrajectoriesViewControllerDelegate> delegate;
 @property (strong, nonatomic) UIPopoverController* parentPopOverController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
+
+- (IBAction)onEdit:(id)sender;
 
 @end

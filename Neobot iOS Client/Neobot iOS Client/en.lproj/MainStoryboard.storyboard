@@ -1154,10 +1154,17 @@
                         <sections/>
                     </tableView>
                     <navigationItem key="navigationItem" title="Trajectories" id="9zW-B6-W45">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="ivz-S0-ftM"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="ivz-S0-ftM">
+                            <connections>
+                                <action selector="onEdit:" destination="CU6-Mi-I1O" id="fGc-TD-Xkt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="btnEdit" destination="ivz-S0-ftM" id="ccr-r2-GdT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPp-ED-bf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1265,10 +1272,17 @@
                         <sections/>
                     </tableView>
                     <navigationItem key="navigationItem" title="Trajectories" id="MNn-If-8Bv">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="wqe-3Y-WZd"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="wqe-3Y-WZd">
+                            <connections>
+                                <action selector="onEdit:" destination="dpk-HJ-UEN" id="Tuf-E6-haK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="btnEdit" destination="wqe-3Y-WZd" id="3tc-9y-b8k"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CdI-GZ-FCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1286,110 +1300,6 @@
         <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="sensor.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="NSDictionary" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSDictionary.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PXGCommViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGCommViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="askRobotControl:"/>
-                <relationship kind="action" name="connectToServer:"/>
-                <relationship kind="action" name="pingRobot:"/>
-                <relationship kind="action" name="pingServer:"/>
-                <relationship kind="outlet" name="btnAskRobotControl" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnConnectServer" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnPingServer" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnRobotPing" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cellAskControl" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellAx12SerialPort" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellConnect" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellPingRobot" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellPingServer" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellPort" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellRobotSerialPort" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellServerAdress" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellSimulation" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="lblRobotPing" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblServerPing" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="simulationSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="txtAx12SerialPort" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtPort" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtRobotSerialPort" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtServerAdress" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="PXGCreatePointViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGCreatePointViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="nextEditionAfterX:"/>
-                <relationship kind="action" name="nextEditionAfterY:"/>
-                <relationship kind="action" name="pointCreationDone:"/>
-                <relationship kind="outlet" name="pointData" candidateClass="NSDictionary"/>
-                <relationship kind="outlet" name="txtThetaValue" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtXValue" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtYValue" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="PXGLogViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGLogViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="PXGMainToolBarViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGMainToolBarViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="displayConnectionView:"/>
-                <relationship kind="action" name="displayLogView:"/>
-                <relationship kind="outlet" name="connectionBtn" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="lblCount" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStatus" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="logBtn" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="PXGRemoteViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGRemoteViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="flush:"/>
-                <relationship kind="outlet" name="btnFlush" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btnStartStrategy" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTeleport" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btnTrajectory" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="lblStrategy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="txtObjective" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtPosition" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="PXGStrategySelectionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGStrategySelectionViewController.h"/>
-        </class>
-        <class className="PXGStringListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGStringListViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="customValueChanged:" candidateClass="UITextField"/>
-                <relationship kind="action" name="customValueSelected:" candidateClass="UITextField"/>
-                <relationship kind="action" name="donePressed:"/>
-                <relationship kind="outlet" name="btnDone" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="PXGTeleportViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGTeleportViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="editPositions:"/>
-                <relationship kind="outlet" name="btnEdit" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="PXGTrajectoriesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGTrajectoriesViewController.h"/>
-        </class>
-        <class className="PXGTrajectoryEditionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGTrajectoryEditionViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
