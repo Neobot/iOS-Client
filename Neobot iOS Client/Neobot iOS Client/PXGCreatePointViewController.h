@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtYValue;
 @property (weak, nonatomic) IBOutlet UITextField *txtThetaValue;
 
-@property (strong, nonatomic) id<PXGCreatePointViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<PXGCreatePointViewControllerDelegate> delegate;
 - (IBAction)nextEditionAfterX:(id)sender;
 - (IBAction)nextEditionAfterY:(id)sender;
 

@@ -247,6 +247,8 @@
 {   
     int nbPoints = [trajectoryPoints count];
     
+    [_currentTrajectoryPopoverController dismissPopoverAnimated:YES];
+    
     int curentPointIndex = 0;
     for (NSDictionary* pointData in trajectoryPoints)
     {

@@ -15,7 +15,7 @@
 @interface PXGStrategySelectionViewController : UITableViewController
 
 @property (strong, nonatomic) NSArray* strategyNames;
-@property (strong, nonatomic) id<PXGStrategySelectionViewControllerDelegate> delegate;
-@property (strong, nonatomic) UIPopoverController* parentPopOverController;
+@property (weak, nonatomic) id<PXGStrategySelectionViewControllerDelegate> delegate;
+@property (weak, nonatomic) UIPopoverController* parentPopOverController;
 
 @end

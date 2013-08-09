@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSArray* recentlyUsed;
 @property (strong, nonatomic) NSArray* propositions;
 @property (strong, nonatomic) NSString* customValue;
-@property (strong, nonatomic) id<PXGStringViewListControllerDelegate> delegate;
+@property (weak, nonatomic) id<PXGStringViewListControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnDone;
 
 - (IBAction)customValueSelected:(UITextField *)sender;

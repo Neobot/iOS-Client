@@ -82,7 +82,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-        return [_positions count];
+        return [self.positions count];
     
     return 1;
 }
@@ -96,7 +96,7 @@
         static NSString *CellIdentifier = @"Cell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
-        NSDictionary* pointData = [_positions objectAtIndex:indexPath.row];
+        NSDictionary* pointData = [self.positions objectAtIndex:indexPath.row];
         int x;
         int y;
         double theta;

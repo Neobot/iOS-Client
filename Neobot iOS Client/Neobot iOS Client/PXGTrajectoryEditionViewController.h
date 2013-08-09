@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, PXGTrajectoryEditionViewSections)
 @property (strong, nonatomic) NSString* trajectoryName;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 
-@property (strong, nonatomic) id<PXGTrajectoryEditionViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<PXGTrajectoryEditionViewControllerDelegate> delegate;
 - (IBAction)onEdit:(id)sender;
 
 @end

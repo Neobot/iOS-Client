@@ -17,8 +17,8 @@
 @interface PXGTeleportViewController : UITableViewController <PXGCreatePointViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray* positions;
-@property (strong, nonatomic) id<PXGTeleportSelectionViewControllerDelegate> delegate;
-@property (strong, nonatomic) UIPopoverController* parentPopOverController;
+@property (weak, nonatomic) id<PXGTeleportSelectionViewControllerDelegate> delegate;
+@property (weak, nonatomic) UIPopoverController* parentPopOverController;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 - (IBAction)editPositions:(id)sender;
