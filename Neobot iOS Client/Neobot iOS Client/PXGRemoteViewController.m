@@ -164,6 +164,10 @@
         NSArray* trajectortiesData = [[NSUserDefaults standardUserDefaults] arrayForKey:DEFINED_TRAJECTORIES_KEY];
         trajController.trajectories = [NSMutableArray arrayWithArray:trajectortiesData];
     }
+    else if ([segue.identifier isEqualToString:@"MapSegue"])
+    {
+        self.mapController = (PXGMapViewController*)segue.destinationViewController;
+    }
 }
 
 - (IBAction)flush:(id)sender
@@ -176,6 +180,8 @@
     int td = pxgRadiansToDegrees(theta);
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
     self.txtPosition.text = text;
+    
+    self.mapController.robotPosition = CGPointMake(x, y);
 }
 
 - (void)didReceiveRobotObjectiveX:(int16_t)x Y:(int16_t)y angle:(double)theta

@@ -11,8 +11,11 @@
 #import "PXGStrategySelectionViewController.h"
 #import "PXGTeleportViewController.h"
 #import "PXGTrajectoriesViewController.h"
+#import "PXGMapViewController.h"
 
 @interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStrategySelectionViewControllerDelegate, PXGTeleportSelectionViewControllerDelegate, PXGTrajectoriesViewControllerDelegate, UIPopoverControllerDelegate>
+
+@property (weak, nonatomic) PXGMapViewController* mapController;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnStartStrategy;
 @property (weak, nonatomic) IBOutlet UILabel *lblStrategy;
