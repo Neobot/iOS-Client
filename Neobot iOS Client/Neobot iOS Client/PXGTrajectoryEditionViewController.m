@@ -127,12 +127,12 @@
             cell = [tableView dequeueReusableCellWithIdentifier:pointCellIdentifier forIndexPath:indexPath];
             
             NSDictionary* pointData = [self.trajectoryPoints objectAtIndex:indexPath.row];
-            int x;
-            int y;
+            double x;
+            double y;
             double theta;
             pxgDecodePointData(pointData, &x, &y, &theta);
             
-            cell.textLabel.text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, (int)pxgRadiansToDegrees(theta)];
+            cell.textLabel.text = [NSString stringWithFormat:@"x=%d y=%d t=%d", (int)x, (int)y, (int)pxgRadiansToDegrees(theta)];
             break;
         }
         case PXGTrajectoryAddPointSection:

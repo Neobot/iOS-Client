@@ -30,6 +30,8 @@
 		9425D3C117915AEF00C6E883 /* sensor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3B917915AEF00C6E883 /* sensor.png */; };
 		9425D3C217915AEF00C6E883 /* Task Manager.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3BA17915AEF00C6E883 /* Task Manager.png */; };
 		9425D3C317915AEF00C6E883 /* Toolbar - Playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */; };
+		942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE5D17B9461C00EFF044 /* PXGRPoint.m */; };
+		942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE6017B9473200EFF044 /* PXGMapObject.m */; };
 		9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433FE361795B0E70092A43B /* PXGCommProtocol.m */; };
 		9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433FE3A1795BB4F0092A43B /* GCDAsyncSocket.m */; };
 		9433FE3F1795BD0A0092A43B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE3E1795BD0A0092A43B /* Security.framework */; };
@@ -80,6 +82,10 @@
 		9425D3B917915AEF00C6E883 /* sensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sensor.png; sourceTree = "<group>"; };
 		9425D3BA17915AEF00C6E883 /* Task Manager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Task Manager.png"; sourceTree = "<group>"; };
 		9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toolbar - Playlist.png"; sourceTree = "<group>"; };
+		942BBE5C17B9461C00EFF044 /* PXGRPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGRPoint.h; sourceTree = "<group>"; };
+		942BBE5D17B9461C00EFF044 /* PXGRPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGRPoint.m; sourceTree = "<group>"; };
+		942BBE5F17B9473200EFF044 /* PXGMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapObject.h; sourceTree = "<group>"; };
+		942BBE6017B9473200EFF044 /* PXGMapObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMapObject.m; sourceTree = "<group>"; };
 		9433FE351795B0E70092A43B /* PXGCommProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXGCommProtocol.h; path = ../PXGCommProtocol.h; sourceTree = "<group>"; };
 		9433FE361795B0E70092A43B /* PXGCommProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGCommProtocol.m; path = ../PXGCommProtocol.m; sourceTree = "<group>"; };
 		9433FE391795BB4F0092A43B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -168,10 +174,10 @@
 				94E5C5DB1791FE5100333FD5 /* TCP */,
 				94835D57179ABDAE0024A789 /* Main View Controllers */,
 				94F30F0217A52E1D00E1805D /* Sub View Controllers */,
+				942BBE6217B94AF000EFF044 /* Map */,
+				942BBE6317B94B1600EFF044 /* General */,
 				9425D38F1791565000C6E883 /* PXGAppDelegate.h */,
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
-				94AC01F117A40CBA005A47F3 /* PXGTools.h */,
-				94AC01F217A41139005A47F3 /* PXGTools.c */,
 				9405E88917A04A9300B718B3 /* PXGParametersKeys.h */,
 				9425D3981791565000C6E883 /* MainStoryboard.storyboard */,
 				9425D3871791565000C6E883 /* Supporting Files */,
@@ -194,6 +200,28 @@
 				9425D3961791565000C6E883 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		942BBE6217B94AF000EFF044 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				942BBE5F17B9473200EFF044 /* PXGMapObject.h */,
+				942BBE6017B9473200EFF044 /* PXGMapObject.m */,
+				942049AB17B7C5EF00B9E5AC /* PXGMapViewController.h */,
+				942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		942BBE6317B94B1600EFF044 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				94AC01F117A40CBA005A47F3 /* PXGTools.h */,
+				94AC01F217A41139005A47F3 /* PXGTools.c */,
+				942BBE5C17B9461C00EFF044 /* PXGRPoint.h */,
+				942BBE5D17B9461C00EFF044 /* PXGRPoint.m */,
+			);
+			name = General;
 			sourceTree = "<group>";
 		};
 		9433FE2F1792AED10092A43B /* Tab Images */ = {
@@ -236,8 +264,6 @@
 				94835D52179ABB860024A789 /* PXGCommViewController.m */,
 				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
 				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
-				942049AB17B7C5EF00B9E5AC /* PXGMapViewController.h */,
-				942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */,
 			);
 			name = "Main View Controllers";
 			sourceTree = "<group>";
@@ -367,6 +393,8 @@
 				94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */,
 				94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */,
 				942049AD17B7C5F000B9E5AC /* PXGMapViewController.m in Sources */,
+				942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */,
+				942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

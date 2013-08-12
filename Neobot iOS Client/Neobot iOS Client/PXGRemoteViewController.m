@@ -181,7 +181,7 @@
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
     self.txtPosition.text = text;
     
-    self.mapController.robotPosition = CGPointMake(x, y);
+    [self.mapController setRobotPositionAtX:x Y:y theta:theta];
 }
 
 - (void)didReceiveRobotObjectiveX:(int16_t)x Y:(int16_t)y angle:(double)theta
@@ -236,7 +236,7 @@
 
 - (void) teleportPositionSelected:(NSDictionary*)position
 {
-    int x, y;
+    double x, y;
     double theta;
     pxgDecodePointData(position, &x, &y, &theta);
     
@@ -260,7 +260,7 @@
     {
         ++curentPointIndex;
         
-        int x, y;
+        double x, y;
         double theta;
         pxgDecodePointData(pointData, &x, &y, &theta);
         

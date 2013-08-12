@@ -30,11 +30,11 @@
     
     if (self.pointData != nil)
     {
-        int x, y;
+        double x, y;
         double theta;
         pxgDecodePointData(self.pointData, &x, &y, &theta);
-        self.txtXValue.text = [NSString stringWithFormat:@"%d", x];
-        self.txtYValue.text = [NSString stringWithFormat:@"%d", y];
+        self.txtXValue.text = [NSString stringWithFormat:@"%d", (int)x];
+        self.txtYValue.text = [NSString stringWithFormat:@"%d", (int)y];
         
         double thetaD = pxgRadiansToDegrees(theta);
         if (round(thetaD) == thetaD)

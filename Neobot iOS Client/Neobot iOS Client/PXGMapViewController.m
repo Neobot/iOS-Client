@@ -10,7 +10,11 @@
 
 @interface PXGMapViewController ()
 
+@property (strong, nonatomic) NSMutableArray* objectViews;
+@property (strong, nonatomic) NSMutableArray* objects;
+
 @end
+
 
 @implementation PXGMapViewController
 
@@ -19,7 +23,9 @@
     self = [super initWithCoder:decoder];
     if (self) {
         self.tableSize = CGSizeMake(2000, 3000);
-        self.robotRadius = 350/2;
+        self.robot = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:350/2 andImage:@"Neobot.png"];
+        self.objects = [NSMutableArray array];
+        self.objectViews = [NSMutableArray array];
     }
     return self;
 }
@@ -30,26 +36,21 @@
     [super viewDidLoad];
 
     UIImage* tableImage = [UIImage imageNamed:@"Table2013.png"];
-    self.table = [[UIImageView alloc] initWithImage:tableImage];
-    self.table.contentMode = UIViewContentModeScaleAspectFit;
-    self.table.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    _scene = [[UIImageView alloc] initWithImage:tableImage];
+    self.scene.contentMode = UIViewContentModeScaleAspectFit;
+    self.scene.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
     
-    [self.view addSubview:self.table];
+    [self.view addSubview:self.scene];
     
-    UIImage* robotImage = [UIImage imageNamed:@"Neobot.png"];
-    self.robot = [[UIImageView alloc] initWithImage:robotImage];
-    self.robot.contentMode = UIViewContentModeScaleAspectFit;
-    [self.table addSubview:self.robot];
-    self.robot.center = self.view.center;
-    self.robot.center = CGPointMake(-1000, -1000);
-
+    //The robot must be always the first object
+    [self addMapObject:self.robot];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 
-    [self doTableLayout];
+    [self updateSceneLayout];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,12 +59,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)doTableLayout
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    double imageRatio = self.table.image.size.width / self.table.image.size.height;
+    [self updateSceneLayout];
+}
+
+- (void)updateSceneLayout
+{
+    double imageRatio = self.scene.image.size.width / self.scene.image.size.height;
     double viewRatio = self.view.bounds.size.width / self.view.bounds.size.height;
     
-    CGRect tableBounds = self.table.bounds;
+    CGRect tableBounds = self.scene.bounds;
     if (viewRatio < imageRatio)
     {
         tableBounds.size.width = self.view.bounds.size.width;
@@ -75,49 +81,94 @@
         tableBounds.size.width = tableBounds.size.height * imageRatio;
     }
     
-    self.table.bounds = tableBounds;
-    self.table.center = self.view.center;
+    self.scene.bounds = tableBounds;
+    self.scene.center = self.view.center;
     
-    CGPoint r = [self mapPointFromRobotToTable:CGPointMake(self.robotRadius, self.robotRadius)];
-    CGRect robotBounds = self.robot.bounds;
-    robotBounds.size.width = r.x * 2;
-    robotBounds.size.height = r.x * 2;
-    self.robot.bounds = robotBounds;
-    
-    [self updateRobotPosition];
+    [self updateAllObjects];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (CGPoint)mapPointFromRobotToScene:(PXGRPoint*)robotPoint
 {
-    [self doTableLayout];
-}
-
-- (CGPoint)mapPointFromRobotToTable:(CGPoint)point
-{
-    CGFloat x = (self.table.bounds.size.width * point.y) / self.tableSize.height;
-    CGFloat y = (self.table.bounds.size.height * point.x) / self.tableSize.width;
+    CGFloat x = (self.scene.bounds.size.width * robotPoint.y) / self.tableSize.height;
+    CGFloat y = (self.scene.bounds.size.height * robotPoint.x) / self.tableSize.width;
     
     return CGPointMake(x, y);
 }
 
-- (CGPoint)mapPointFromTableToRobot:(CGPoint)point
+- (PXGRPoint*)mapPointFromSceneToRobot:(CGPoint)point
 {
-    CGFloat x = (self.tableSize.width * point.y) / self.table.bounds.size.height;
-    CGFloat y = (self.tableSize.height * point.x) / self.table.bounds.size.width;
+    CGFloat x = (self.tableSize.width * point.y) / self.scene.bounds.size.height;
+    CGFloat y = (self.tableSize.height * point.x) / self.scene.bounds.size.width;
     
-    return CGPointMake(x, y);
+    return [[PXGRPoint alloc] initWithX:x y:y theta:0.0];
 }
 
-- (void)setRobotPosition:(CGPoint)robotPosition;
+- (void)addMapObject:(PXGMapObject*)object
 {
-    _robotPosition = robotPosition;
-    [self updateRobotPosition];
+    [self.objects addObject:object];
+    
+    UIImage* image = [UIImage imageNamed:object.imageName];
+    UIImageView* view = [[UIImageView alloc] initWithImage:image];
+    view.contentMode = UIViewContentModeScaleAspectFit;
+    view.center = CGPointMake(-1000, -1000); //Move it outside the scene
+    
+    [self updateViewBounds:view fromObject:object];
+    [self updateViewPosition:view fromObject:object];
+        
+    [self.scene addSubview:view];
+    [self.objectViews addObject:view];
 }
 
-- (void)updateRobotPosition
+- (void)removeMapObject:(PXGMapObject*)object
 {
-    CGPoint pos = [self mapPointFromRobotToTable:self.robotPosition];
-    self.robot.center = pos;
+    NSUInteger index = [self.objects indexOfObject:object];
+    if (index != NSNotFound)
+    {
+        [self.objects removeObjectAtIndex:index];
+        [self.objectViews removeObjectAtIndex:index];
+    }
+}
+
+- (void)updateViewPosition:(UIView*)view fromObject:(PXGMapObject*)object
+{
+    CGPoint scenePos = [self mapPointFromRobotToScene:object.position];
+    view.center = scenePos;
+    
+    view.transform = CGAffineTransformMakeRotation(M_PI/2 - object.position.theta);
+}
+
+- (void)updateViewBounds:(UIView*)view fromObject:(PXGMapObject*)object
+{
+    double sceneRadius = (self.scene.bounds.size.height * object.radius) / self.tableSize.width;
+    CGRect viewBounds = view.bounds;
+    viewBounds.size.width = sceneRadius * 2;
+    viewBounds.size.height = sceneRadius * 2;
+    view.bounds = viewBounds;
+}
+
+- (void)updateAllObjects
+{
+    int index = 0;
+    for (PXGMapObject* object in self.objects)
+    {
+        UIView* view = [self.objectViews objectAtIndex:index];
+        
+        [self updateViewBounds:view fromObject:object];
+        [self updateViewPosition:view fromObject:object];
+
+        ++index;
+    }
+}
+
+- (void)setRobotPositionAtX:(double)x Y:(double)y theta:(double)theta
+{
+    PXGRPoint* robotPosition = self.robot.position;
+    robotPosition.x = x;
+    robotPosition.y = y;
+    robotPosition.theta = theta;
+    
+    //The robot is always the first object
+    [self updateViewPosition:[self.objectViews objectAtIndex:0] fromObject:self.robot];
 }
 
 @end

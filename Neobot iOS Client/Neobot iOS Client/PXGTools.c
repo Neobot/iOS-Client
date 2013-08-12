@@ -8,15 +8,15 @@
 
 #include "PXGTools.h"
 
-NSDictionary* pxgEncodePointData(int x, int y, double theta)
+NSDictionary* pxgEncodePointData(double x, double y, double theta)
 {
-    return @{@"x": [NSNumber numberWithInt:x], @"y" : [NSNumber numberWithInt:y], @"theta" : [NSNumber numberWithDouble:theta]};
+    return @{@"x": [NSNumber numberWithDouble:x], @"y" : [NSNumber numberWithDouble:x], @"theta" : [NSNumber numberWithDouble:theta]};
 }
 
-void pxgDecodePointData(NSDictionary* dictionnary, int* x, int* y, double* theta)
+void pxgDecodePointData(NSDictionary* dictionnary, double* x, double* y, double* theta)
 {
-    *x = [[dictionnary objectForKey:@"x"] intValue];
-    *y = [[dictionnary objectForKey:@"y"] intValue];
+    *x = [[dictionnary objectForKey:@"x"] doubleValue];
+    *y = [[dictionnary objectForKey:@"y"] doubleValue];
     *theta = [[dictionnary objectForKey:@"theta"] doubleValue];
 }
 

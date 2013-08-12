@@ -7,20 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGMapObject.h"
 
 @interface PXGMapViewController : UIViewController
 
-@property (strong, nonatomic) UIImageView* table;
-@property (strong, nonatomic) UIImageView* robot;
-
+@property (readonly, strong, nonatomic) UIImageView* scene;
+@property (strong, nonatomic) PXGMapObject* robot;
 @property (nonatomic) CGSize tableSize;
-@property (nonatomic) float robotRadius;
+
+
+
 
 @property (nonatomic) CGPoint robotPosition;
-- (void)setRobotPosition:(CGPoint)robotPosition;
+- (void)setRobotPositionAtX:(double)x Y:(double)y theta:(double)theta;
 
-- (CGPoint)mapPointFromRobotToTable:(CGPoint)point;
-- (CGPoint)mapPointFromTableToRobot:(CGPoint)point;
-- (void)doTableLayout;
+- (CGPoint)mapPointFromRobotToScene:(PXGRPoint*)robotPoint;
+- (PXGRPoint*)mapPointFromSceneToRobot:(CGPoint)point;
+
+- (void)addMapObject:(PXGMapObject*)object;
+- (void)removeMapObject:(PXGMapObject*)object;
+
+- (void)updateSceneLayout;
+- (void)updateAllObjects;
 
 @end

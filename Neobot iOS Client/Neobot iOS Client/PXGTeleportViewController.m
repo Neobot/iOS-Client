@@ -97,12 +97,12 @@
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
         NSDictionary* pointData = [self.positions objectAtIndex:indexPath.row];
-        int x;
-        int y;
+        double x;
+        double y;
         double theta;
         pxgDecodePointData(pointData, &x, &y, &theta);
         
-        NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, (int)pxgRadiansToDegrees(theta)];
+        NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", (int)x, (int)y, (int)pxgRadiansToDegrees(theta)];
         cell.textLabel.text = text;
         
     }
