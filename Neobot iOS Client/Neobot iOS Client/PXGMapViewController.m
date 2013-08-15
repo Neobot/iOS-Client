@@ -6,12 +6,18 @@
 //  Copyright (c) 2013 Pixelgames. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "PXGMapViewController.h"
 
 @interface PXGMapViewController ()
 
 @property (strong, nonatomic) NSMutableArray* objectViews;
 @property (strong, nonatomic) NSMutableArray* objects;
+
+@property (strong, nonatomic) CALayer* trajectoryLayer;
+
+@property (strong, nonatomic) NSMutableArray* trajectory;
+
 
 @end
 
@@ -24,6 +30,7 @@
     if (self) {
         self.tableSize = CGSizeMake(2000, 3000);
         self.robot = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:350/2 andImage:@"Neobot.png"];
+        self.target = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:100 andImage:@"target.png"];
         self.objects = [NSMutableArray array];
         self.objectViews = [NSMutableArray array];
     }
@@ -43,7 +50,16 @@
     [self.view addSubview:self.scene];
     
     //The robot must be always the first object
+    [self addMapObject:self.target];
     [self addMapObject:self.robot];
+    
+    self.trajectoryLayer = [[CALayer alloc] init];
+    self.trajectoryLayer.delegate = self;
+    self.trajectoryLayer.bounds = self.scene.bounds;
+    self.trajectoryLayer.position = self.scene.layer.position;
+    [self.scene.layer insertSublayer:self.trajectoryLayer atIndex:0];
+    
+    [self.trajectoryLayer setNeedsDisplay];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -168,7 +184,68 @@
     robotPosition.theta = theta;
     
     //The robot is always the first object
-    [self updateViewPosition:[self.objectViews objectAtIndex:0] fromObject:self.robot];
+    [self updateViewPosition:[self.objectViews objectAtIndex:1] fromObject:self.robot];
+}
+
+- (void)setObjectivePositionAtX:(double)x Y:(double)y theta:(double)theta
+{
+    PXGRPoint* targetPosition = self.target.position;
+    targetPosition.x = x;
+    targetPosition.y = y;
+    
+    //The target is always the second object
+    [self updateViewPosition:[self.objectViews objectAtIndex:0] fromObject:self.target];
+}
+
+- (void)addTrajectoryPoint:(PXGRPoint*)point andRedraw:(BOOL)redraw
+{
+    if (self.trajectory == nil)
+        self.trajectory = [NSMutableArray array];
+    
+    [self.trajectory addObject:point];
+    
+    if (redraw)
+        [self.trajectoryLayer setNeedsDisplay];
+}
+
+- (void)clearTrajectory
+{
+    [self.trajectory removeAllObjects];
+}
+
+- (void)redrawTrajectory
+{
+    [self.trajectoryLayer setNeedsDisplay];
+}
+
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
+{
+    if (self.trajectory == nil || self.trajectory.count < 2)
+        return;
+    
+    BOOL isFirst = YES;
+
+    CGContextBeginPath(ctx);
+    
+    CGContextSetLineWidth(ctx, 10);
+    CGContextSetLineJoin(ctx, kCGLineJoinRound);
+    CGContextSetStrokeColorWithColor(ctx,[UIColor redColor].CGColor);
+    
+    CGPoint firstPoint = [self mapPointFromRobotToScene:[self.trajectory objectAtIndex:0]];
+    CGContextMoveToPoint(ctx, firstPoint.x, firstPoint.y);
+    
+    for (PXGRPoint* pt in self.trajectory)
+    {
+        if (!isFirst)
+        {
+            CGPoint scenePoint = [self mapPointFromRobotToScene:pt];
+            CGContextAddLineToPoint(ctx, scenePoint.x, scenePoint.y);
+        }
+        
+        isFirst = NO;
+    }
+    
+    CGContextStrokePath(ctx);
 }
 
 @end

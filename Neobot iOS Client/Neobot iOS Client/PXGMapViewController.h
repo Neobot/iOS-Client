@@ -12,14 +12,13 @@
 @interface PXGMapViewController : UIViewController
 
 @property (readonly, strong, nonatomic) UIImageView* scene;
-@property (strong, nonatomic) PXGMapObject* robot;
 @property (nonatomic) CGSize tableSize;
 
+@property (strong, nonatomic) PXGMapObject* robot;
+@property (strong, nonatomic) PXGMapObject* target;
 
-
-
-@property (nonatomic) CGPoint robotPosition;
 - (void)setRobotPositionAtX:(double)x Y:(double)y theta:(double)theta;
+- (void)setObjectivePositionAtX:(double)x Y:(double)y theta:(double)theta;
 
 - (CGPoint)mapPointFromRobotToScene:(PXGRPoint*)robotPoint;
 - (PXGRPoint*)mapPointFromSceneToRobot:(CGPoint)point;
@@ -29,5 +28,9 @@
 
 - (void)updateSceneLayout;
 - (void)updateAllObjects;
+
+- (void)addTrajectoryPoint:(PXGRPoint*)point andRedraw:(BOOL)redraw;
+- (void)clearTrajectory;
+- (void)redrawTrajectory;
 
 @end

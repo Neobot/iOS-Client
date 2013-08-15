@@ -32,6 +32,8 @@
 		9425D3C317915AEF00C6E883 /* Toolbar - Playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */; };
 		942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE5D17B9461C00EFF044 /* PXGRPoint.m */; };
 		942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE6017B9473200EFF044 /* PXGMapObject.m */; };
+		942BBE6517BBE1A100EFF044 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BBE6417BBE1A100EFF044 /* QuartzCore.framework */; };
+		942BBE6717BCD83300EFF044 /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = 942BBE6617BCD83300EFF044 /* target.png */; };
 		9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433FE361795B0E70092A43B /* PXGCommProtocol.m */; };
 		9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433FE3A1795BB4F0092A43B /* GCDAsyncSocket.m */; };
 		9433FE3F1795BD0A0092A43B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE3E1795BD0A0092A43B /* Security.framework */; };
@@ -86,6 +88,8 @@
 		942BBE5D17B9461C00EFF044 /* PXGRPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGRPoint.m; sourceTree = "<group>"; };
 		942BBE5F17B9473200EFF044 /* PXGMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapObject.h; sourceTree = "<group>"; };
 		942BBE6017B9473200EFF044 /* PXGMapObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMapObject.m; sourceTree = "<group>"; };
+		942BBE6417BBE1A100EFF044 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		942BBE6617BCD83300EFF044 /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = target.png; path = ../../../../../../../Desktop/target.png; sourceTree = "<group>"; };
 		9433FE351795B0E70092A43B /* PXGCommProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXGCommProtocol.h; path = ../PXGCommProtocol.h; sourceTree = "<group>"; };
 		9433FE361795B0E70092A43B /* PXGCommProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGCommProtocol.m; path = ../PXGCommProtocol.m; sourceTree = "<group>"; };
 		9433FE391795BB4F0092A43B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942BBE6517BBE1A100EFF044 /* QuartzCore.framework in Frameworks */,
 				9425D3811791565000C6E883 /* UIKit.framework in Frameworks */,
 				9425D3831791565000C6E883 /* Foundation.framework in Frameworks */,
 				9425D3851791565000C6E883 /* CoreGraphics.framework in Frameworks */,
@@ -158,6 +163,7 @@
 		9425D37F1791565000C6E883 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				942BBE6417BBE1A100EFF044 /* QuartzCore.framework */,
 				9433FE3E1795BD0A0092A43B /* Security.framework */,
 				9433FE401795BD720092A43B /* CFNetwork.framework */,
 				9425D3821791565000C6E883 /* Foundation.framework */,
@@ -191,6 +197,7 @@
 				9433FE2F1792AED10092A43B /* Tab Images */,
 				94CE6077179190E600D4EC6E /* Table2013.png */,
 				942049AE17B7D47100B9E5AC /* Neobot.png */,
+				942BBE6617BCD83300EFF044 /* target.png */,
 				9425D3881791565000C6E883 /* Neobot Client-Info.plist */,
 				9425D3891791565000C6E883 /* InfoPlist.strings */,
 				9425D38C1791565000C6E883 /* main.m */,
@@ -365,6 +372,7 @@
 				9425D3C317915AEF00C6E883 /* Toolbar - Playlist.png in Resources */,
 				94CE6078179190E600D4EC6E /* Table2013.png in Resources */,
 				942049AF17B7D47100B9E5AC /* Neobot.png in Resources */,
+				942BBE6717BCD83300EFF044 /* target.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

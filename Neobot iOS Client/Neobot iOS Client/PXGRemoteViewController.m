@@ -189,6 +189,8 @@
     int td = pxgRadiansToDegrees(theta);
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
     self.txtObjective.text = text;
+    
+    [self.mapController setObjectivePositionAtX:x Y:y theta:theta];
 }
 
 - (void)didReceiveStrategyNames:(NSArray*)names
@@ -256,8 +258,14 @@
     [_currentTrajectoryPopoverController dismissPopoverAnimated:YES];
     
     int curentPointIndex = 0;
+    
+    [self.mapController clearTrajectory];
+    [self.mapController addTrajectoryPoint:self.mapController.robot.position andRedraw:NO];
     for (NSDictionary* pointData in trajectoryPoints)
     {
+        PXGRPoint* point = [[PXGRPoint alloc] initWithDictionary:pointData];
+        [self.mapController addTrajectoryPoint:point andRedraw:NO];
+        
         ++curentPointIndex;
         
         double x, y;
@@ -269,9 +277,11 @@
                                                   angle:theta
                                      withTrajectoryType:AUTO
                                          withAsservType:TURN_THEN_MOVE
-                                              withSpeed:50
+                                              withSpeed:100
                                             isStopPoint:(curentPointIndex == nbPoints)];
     }
+    
+    [self.mapController redrawTrajectory];
 }
 
 - (void) availableTrajectoriesChanged:(NSArray*)trajectories
