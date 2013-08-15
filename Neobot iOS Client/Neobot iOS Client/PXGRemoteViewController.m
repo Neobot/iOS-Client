@@ -42,6 +42,10 @@
     [self doLayoutForOrientation:app.statusBarOrientation];
     
     [self updateCurrentStrategyGui];
+    
+    int speed = [[[NSUserDefaults standardUserDefaults] valueForKey:TRAJECTORY_SPEED] intValue];
+    self.speedSlider.value = speed;
+    self.lblSpeedValue.text = [NSString stringWithFormat:@"%i%%", speed];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +64,9 @@
     BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
     self.btnStartStrategy.hidden = !isPortrait;
     self.lblStrategy.hidden = !isPortrait;
+    self.speedSlider.hidden = !isPortrait;
+    self.lblSpeedTitle.hidden = !isPortrait;
+    self.lblSpeedValue.hidden = !isPortrait;
 }
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
@@ -70,6 +77,7 @@
     self.btnTeleport.enabled = robotInteractioEnabled;
     self.btnFlush.enabled = robotInteractioEnabled;
     self.btnTrajectory.enabled = robotInteractioEnabled;
+    self.speedSlider.enabled = robotInteractioEnabled;
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -175,6 +183,13 @@
     [[PXGCommInterface sharedInstance] sendFlush];
 }
 
+- (IBAction)speedSliderChanged:(UISlider *)sender
+{
+    int speed = sender.value;
+    self.lblSpeedValue.text = [NSString stringWithFormat:@"%i%%", speed];
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:speed]  forKey:TRAJECTORY_SPEED];
+}
+
 - (void)didReceiveRobotPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta direction:(uint8_t)direction
 {
     int td = pxgRadiansToDegrees(theta);
@@ -258,6 +273,7 @@
     [_currentTrajectoryPopoverController dismissPopoverAnimated:YES];
     
     int curentPointIndex = 0;
+    int speed = self.speedSlider.value;
     
     [self.mapController clearTrajectory];
     [self.mapController addTrajectoryPoint:self.mapController.robot.position andRedraw:NO];
@@ -277,7 +293,7 @@
                                                   angle:theta
                                      withTrajectoryType:AUTO
                                          withAsservType:TURN_THEN_MOVE
-                                              withSpeed:100
+                                              withSpeed:speed
                                             isStopPoint:(curentPointIndex == nbPoints)];
     }
     

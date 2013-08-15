@@ -27,6 +27,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPosition;
 @property (weak, nonatomic) IBOutlet UITextField *txtObjective;
 
+@property (weak, nonatomic) IBOutlet UISlider *speedSlider;
+@property (weak, nonatomic) IBOutlet UILabel *lblSpeedTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblSpeedValue;
+
 - (IBAction)flush:(id)sender;
+- (IBAction)speedSliderChanged:(UISlider *)sender;
+
 
 @end

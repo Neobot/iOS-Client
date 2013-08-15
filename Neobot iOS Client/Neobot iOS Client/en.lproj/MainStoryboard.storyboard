@@ -104,21 +104,51 @@
                                     </segue>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="l7B-EU-iAx">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="309" id="0wO-MK-pVC"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="speedSliderChanged:" destination="nKo-Jd-myK" eventType="valueChanged" id="hvM-pk-EwU"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3n-50-bCo">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="58" id="kow-Z2-rKM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="50%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKQ-P4-Par">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="WBw-DG-hCO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="l7B-EU-iAx" secondAttribute="bottom" constant="110" type="user" id="0wb-vF-afv"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="top" secondItem="XyJ-JK-Wz4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3wu-7X-zDt"/>
+                            <constraint firstItem="l7B-EU-iAx" firstAttribute="top" secondItem="v3n-50-bCo" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="6NP-Cp-NJa"/>
+                            <constraint firstItem="gAL-Kg-Fvi" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="259" id="83D-KP-p5m"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="trailing" secondItem="okk-X0-nLh" secondAttribute="trailing" type="default" id="9JG-Im-2Lj"/>
                             <constraint firstItem="okk-X0-nLh" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="user" id="BPa-bH-Ic8"/>
                             <constraint firstItem="a19-WL-3XC" firstAttribute="centerY" secondItem="okk-X0-nLh" secondAttribute="centerY" type="user" id="LHA-AD-yM9"/>
+                            <constraint firstItem="v3n-50-bCo" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="324" id="LvH-Yr-XGN"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="XyJ-JK-Wz4" secondAttribute="centerX" type="user" id="MT6-Y9-an8"/>
-                            <constraint firstItem="gAL-Kg-Fvi" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="259" id="O5Z-ov-bdh"/>
                             <constraint firstItem="XyJ-JK-Wz4" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="76" type="user" id="UwY-5t-Dnz"/>
+                            <constraint firstItem="VKQ-P4-Par" firstAttribute="leading" secondItem="v3n-50-bCo" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="VI8-kn-vIj"/>
                             <constraint firstItem="okk-X0-nLh" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" type="user" id="YyT-uH-rJ5"/>
                             <constraint firstItem="XyJ-JK-Wz4" firstAttribute="centerX" secondItem="okk-X0-nLh" secondAttribute="centerX" type="user" id="bwr-YQ-fvx"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" type="user" id="ccY-t8-xAU"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" constant="44" type="user" id="dpT-mn-TDR"/>
+                            <constraint firstItem="VKQ-P4-Par" firstAttribute="baseline" secondItem="v3n-50-bCo" secondAttribute="baseline" type="default" id="dz0-MW-5Hg"/>
                             <constraint firstItem="a19-WL-3XC" firstAttribute="centerY" secondItem="gAL-Kg-Fvi" secondAttribute="centerY" type="user" id="fCH-32-Cl3"/>
+                            <constraint firstItem="l7B-EU-iAx" firstAttribute="centerX" secondItem="zSv-CV-PW7" secondAttribute="centerX" type="default" id="gK9-ON-7Kq"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="EGA-Kg-nAe" secondAttribute="centerX" type="user" id="oXg-Wm-h2J"/>
                             <constraint firstItem="a19-WL-3XC" firstAttribute="leading" secondItem="EGA-Kg-nAe" secondAttribute="leading" constant="18" id="sO6-Jl-Iz5"/>
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="bottom" secondItem="EGA-Kg-nAe" secondAttribute="bottom" constant="-50" type="user" id="zk7-KI-mt7"/>
@@ -131,7 +161,10 @@
                         <outlet property="btnStartStrategy" destination="zSv-CV-PW7" id="1fZ-mY-y22"/>
                         <outlet property="btnTeleport" destination="yDO-v8-gOi" id="d6S-Vh-GR3"/>
                         <outlet property="btnTrajectory" destination="kWf-uK-UDo" id="h3q-zM-yQx"/>
+                        <outlet property="lblSpeedTitle" destination="v3n-50-bCo" id="KnU-Iz-aZX"/>
+                        <outlet property="lblSpeedValue" destination="VKQ-P4-Par" id="Aru-Of-msu"/>
                         <outlet property="lblStrategy" destination="XyJ-JK-Wz4" id="lI3-Pi-GQi"/>
+                        <outlet property="speedSlider" destination="l7B-EU-iAx" id="l12-Zg-q9Z"/>
                         <outlet property="txtObjective" destination="tDF-rK-QnI" id="ilm-A9-dAE"/>
                         <outlet property="txtPosition" destination="LK8-qH-oHa" id="sju-Ct-3yZ"/>
                     </connections>
@@ -1290,6 +1323,9 @@
         <image name="sensor.png" width="30" height="30"/>
     </resources>
     <classes>
+        <class className="NSDictionary" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSDictionary.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -1358,11 +1394,15 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGRemoteViewController.h"/>
             <relationships>
                 <relationship kind="action" name="flush:"/>
+                <relationship kind="action" name="speedSliderChanged:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="btnFlush" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btnStartStrategy" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnTeleport" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btnTrajectory" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lblSpeedTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblSpeedValue" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblStrategy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="speedSlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="txtObjective" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtPosition" candidateClass="UITextField"/>
             </relationships>
