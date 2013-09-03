@@ -46,6 +46,7 @@
     _scene = [[UIImageView alloc] initWithImage:tableImage];
     self.scene.contentMode = UIViewContentModeScaleAspectFit;
     self.scene.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    self.scene.userInteractionEnabled = YES;
     
     [self.view addSubview:self.scene];
     
@@ -60,6 +61,10 @@
     [self.scene.layer insertSublayer:self.trajectoryLayer atIndex:0];
     
     [self.trajectoryLayer setNeedsDisplay];
+    
+    UIPanGestureRecognizer* panRecognizer=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    [panRecognizer setMinimumNumberOfTouches:1];
+    [self.scene addGestureRecognizer:panRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -211,6 +216,7 @@
 - (void)clearTrajectory
 {
     [self.trajectory removeAllObjects];
+    [self redrawTrajectory];
 }
 
 - (void)redrawTrajectory
@@ -246,6 +252,29 @@
     }
     
     CGContextStrokePath(ctx);
+}
+
+-(void)panGesture:(UIPanGestureRecognizer*)panRecognizer
+{
+    if ([panRecognizer state] == UIGestureRecognizerStateBegan)
+    {
+        CGPoint pos = [panRecognizer locationInView:self.scene];
+        PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
+        
+        [self addTrajectoryPoint:p andRedraw:YES];
+
+    }
+    else if ([panRecognizer state] == UIGestureRecognizerStateChanged)
+    {
+        CGPoint pos = [panRecognizer locationInView:self.scene];
+        PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
+        
+        [self addTrajectoryPoint:p andRedraw:YES];
+    }
+    else if ([panRecognizer state] == UIGestureRecognizerStateEnded)
+    {
+        [self clearTrajectory];
+    }
 }
 
 @end
