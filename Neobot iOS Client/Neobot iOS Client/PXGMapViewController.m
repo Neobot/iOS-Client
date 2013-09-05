@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "PXGMapViewController.h"
+#import "PXGTools.h"
 
 @interface PXGMapViewController ()
 
@@ -16,7 +17,7 @@
 
 @property (strong, nonatomic) CALayer* trajectoryLayer;
 
-@property (strong, nonatomic) NSMutableArray* trajectory;
+@property (strong, nonatomic) NSMutableArray* drawedPath;
 
 
 @end
@@ -204,10 +205,10 @@
 
 - (void)addTrajectoryPoint:(PXGRPoint*)point andRedraw:(BOOL)redraw
 {
-    if (self.trajectory == nil)
-        self.trajectory = [NSMutableArray array];
+    if (self.drawedPath == nil)
+        self.drawedPath = [NSMutableArray array];
     
-    [self.trajectory addObject:point];
+    [self.drawedPath addObject:point];
     
     if (redraw)
         [self.trajectoryLayer setNeedsDisplay];
@@ -215,7 +216,7 @@
 
 - (void)clearTrajectory
 {
-    [self.trajectory removeAllObjects];
+    [self.drawedPath removeAllObjects];
     [self redrawTrajectory];
 }
 
@@ -226,7 +227,7 @@
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
 {
-    if (self.trajectory == nil || self.trajectory.count < 2)
+    if (self.drawedPath == nil || self.drawedPath.count < 2)
         return;
     
     BOOL isFirst = YES;
@@ -237,10 +238,10 @@
     CGContextSetLineJoin(ctx, kCGLineJoinRound);
     CGContextSetStrokeColorWithColor(ctx,[UIColor redColor].CGColor);
     
-    CGPoint firstPoint = [self mapPointFromRobotToScene:[self.trajectory objectAtIndex:0]];
+    CGPoint firstPoint = [self mapPointFromRobotToScene:[self.drawedPath objectAtIndex:0]];
     CGContextMoveToPoint(ctx, firstPoint.x, firstPoint.y);
     
-    for (PXGRPoint* pt in self.trajectory)
+    for (PXGRPoint* pt in self.drawedPath)
     {
         if (!isFirst)
         {
@@ -252,6 +253,25 @@
     }
     
     CGContextStrokePath(ctx);
+    
+    int radius = 5;
+    CGContextSetFillColorWithColor(ctx,[UIColor grayColor].CGColor);
+    CGContextSetStrokeColorWithColor(ctx,[UIColor darkGrayColor].CGColor);
+    CGContextSetLineWidth(ctx, 2);
+    
+    for (PXGRPoint* pt in self.drawedPath)
+    {
+        CGPoint scenePoint = [self mapPointFromRobotToScene:pt];
+        CGContextBeginPath(ctx);
+        
+        CGContextAddEllipseInRect(ctx, CGRectMake(scenePoint.x - radius, scenePoint.y - radius, radius * 2, radius * 2));
+        CGContextFillPath(ctx);
+        
+        CGContextBeginPath(ctx);
+        CGContextAddEllipseInRect(ctx, CGRectMake(scenePoint.x - radius, scenePoint.y - radius, radius * 2, radius * 2));
+        CGContextStrokePath(ctx);
+    }
+    
 }
 
 -(void)panGesture:(UIPanGestureRecognizer*)panRecognizer
@@ -269,7 +289,33 @@
         CGPoint pos = [panRecognizer locationInView:self.scene];
         PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
         
+        int count = [self.drawedPath count];
+        
+        if (count >= 3)
+        {
+            PXGRPoint* pm1  = [self.drawedPath objectAtIndex: count - 2];
+            PXGRPoint* pm2  = [self.drawedPath objectAtIndex: count - 3];
+
+        
+            double a12 = atan2(pm1.x - pm2.x, pm1.y - pm2.y);
+            double a01 = atan2(p.x - pm1.x, p.y - pm1.y);
+        
+            double dif = a01 - a12;
+            double ad = pxgRadiansToDegrees(fabs(dif));
+            
+            double lastSegmentLength = fabs(p.x - pm1.x + p.y - pm1.y);
+            double val = fabs(sin(dif) * lastSegmentLength);
+            //NSLog([NSString stringWithFormat:@"%f, %f, l=%f", val, ad, lastSegmentLength]);
+            
+            if (lastSegmentLength < 30.0 || (val <= 20.0))
+            {
+                [self.drawedPath removeLastObject];
+            }
+        }
+        
+        
         [self addTrajectoryPoint:p andRedraw:YES];
+        
     }
     else if ([panRecognizer state] == UIGestureRecognizerStateEnded)
     {
