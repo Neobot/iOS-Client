@@ -29,8 +29,6 @@
 - (void)updateSceneLayout;
 - (void)updateAllObjects;
 
-- (void)addTrajectoryPoint:(PXGRPoint*)point andRedraw:(BOOL)redraw;
-- (void)clearTrajectory;
-- (void)redrawTrajectory;
+- (PXGMapObject*)findObjectAtPosition:(CGPoint)point;
 
 @end

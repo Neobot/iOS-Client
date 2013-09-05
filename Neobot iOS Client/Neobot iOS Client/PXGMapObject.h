@@ -16,6 +16,12 @@
 @property (strong, nonatomic) PXGRPoint* position;
 @property (nonatomic)         double     radius;
 
-@property (strong, nonatomic) NSString* imageName;
+@property (nonatomic)         BOOL       selectable;
+@property (nonatomic)         BOOL       selected;
+
+@property (strong, nonatomic, readonly)  UIImageView*    view;
+
+@property (strong, nonatomic) NSString*  imageName;
+@property (strong, nonatomic) NSString*  selectedImageName;
 
 @end

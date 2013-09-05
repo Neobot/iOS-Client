@@ -43,6 +43,7 @@
 		94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */; };
 		94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D5B179AC9F70024A789 /* PXGLogViewController.m */; };
 		9488274717D3AEB40055C206 /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = 9488274617D3AEB40055C206 /* target.png */; };
+		9488274917D8FB400055C206 /* NeobotSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9488274817D8FB400055C206 /* NeobotSelected.png */; };
 		94AC01ED17A2E863005A47F3 /* PXGStrategySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01EC17A2E863005A47F3 /* PXGStrategySelectionViewController.m */; };
 		94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */; };
 		94AC01F317A41139005A47F3 /* PXGTools.c in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F217A41139005A47F3 /* PXGTools.c */; };
@@ -107,6 +108,7 @@
 		94835D5A179AC9F70024A789 /* PXGLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGLogViewController.h; sourceTree = "<group>"; };
 		94835D5B179AC9F70024A789 /* PXGLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGLogViewController.m; sourceTree = "<group>"; };
 		9488274617D3AEB40055C206 /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target.png; sourceTree = "<group>"; };
+		9488274817D8FB400055C206 /* NeobotSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NeobotSelected.png; sourceTree = "<group>"; };
 		94AC01EB17A2E863005A47F3 /* PXGStrategySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXGStrategySelectionViewController.h; path = ../PXGStrategySelectionViewController.h; sourceTree = "<group>"; };
 		94AC01EC17A2E863005A47F3 /* PXGStrategySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXGStrategySelectionViewController.m; path = ../PXGStrategySelectionViewController.m; sourceTree = "<group>"; };
 		94AC01EE17A4060B005A47F3 /* PXGTeleportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTeleportViewController.h; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				9433FE2F1792AED10092A43B /* Tab Images */,
 				94CE6077179190E600D4EC6E /* Table2013.png */,
 				942049AE17B7D47100B9E5AC /* Neobot.png */,
+				9488274817D8FB400055C206 /* NeobotSelected.png */,
 				9488274617D3AEB40055C206 /* target.png */,
 				9425D3881791565000C6E883 /* Neobot Client-Info.plist */,
 				9425D3891791565000C6E883 /* InfoPlist.strings */,
@@ -373,6 +376,7 @@
 				94CE6078179190E600D4EC6E /* Table2013.png in Resources */,
 				942049AF17B7D47100B9E5AC /* Neobot.png in Resources */,
 				9488274717D3AEB40055C206 /* target.png in Resources */,
+				9488274917D8FB400055C206 /* NeobotSelected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

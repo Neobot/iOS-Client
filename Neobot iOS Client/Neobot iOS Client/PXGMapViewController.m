@@ -12,8 +12,8 @@
 
 @interface PXGMapViewController ()
 
-@property (strong, nonatomic) NSMutableArray* objectViews;
 @property (strong, nonatomic) NSMutableArray* objects;
+@property (weak, nonatomic) PXGMapObject* selectedObject;
 
 @property (strong, nonatomic) CALayer* trajectoryLayer;
 
@@ -31,9 +31,10 @@
     if (self) {
         self.tableSize = CGSizeMake(2000, 3000);
         self.robot = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:350/2 andImage:@"Neobot.png"];
+        self.robot.selectable = YES;
+        self.robot.selectedImageName = @"NeobotSelected.png";
         self.target = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:100 andImage:@"target.png"];
         self.objects = [NSMutableArray array];
-        self.objectViews = [NSMutableArray array];
     }
     return self;
 }
@@ -51,7 +52,6 @@
     
     [self.view addSubview:self.scene];
     
-    //The robot must be always the first object
     [self addMapObject:self.target];
     [self addMapObject:self.robot];
     
@@ -66,6 +66,10 @@
     UIPanGestureRecognizer* panRecognizer=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     [panRecognizer setMinimumNumberOfTouches:1];
     [self.scene addGestureRecognizer:panRecognizer];
+    
+    UITapGestureRecognizer* tapSelectionRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSelectionGesture:)];
+    [tapSelectionRecognizer setNumberOfTapsRequired:1];
+    [self.scene addGestureRecognizer:tapSelectionRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -129,16 +133,13 @@
 {
     [self.objects addObject:object];
     
-    UIImage* image = [UIImage imageNamed:object.imageName];
-    UIImageView* view = [[UIImageView alloc] initWithImage:image];
-    view.contentMode = UIViewContentModeScaleAspectFit;
-    view.center = CGPointMake(-1000, -1000); //Move it outside the scene
+    UIImageView* view = object.view;
+    self.view.center = CGPointMake(-1000, -1000); //Move it outside the scene
     
     [self updateViewBounds:view fromObject:object];
     [self updateViewPosition:view fromObject:object];
         
     [self.scene addSubview:view];
-    [self.objectViews addObject:view];
 }
 
 - (void)removeMapObject:(PXGMapObject*)object
@@ -147,7 +148,6 @@
     if (index != NSNotFound)
     {
         [self.objects removeObjectAtIndex:index];
-        [self.objectViews removeObjectAtIndex:index];
     }
 }
 
@@ -173,7 +173,7 @@
     int index = 0;
     for (PXGMapObject* object in self.objects)
     {
-        UIView* view = [self.objectViews objectAtIndex:index];
+        UIView* view = object.view;
         
         [self updateViewBounds:view fromObject:object];
         [self updateViewPosition:view fromObject:object];
@@ -190,7 +190,7 @@
     robotPosition.theta = theta;
     
     //The robot is always the first object
-    [self updateViewPosition:[self.objectViews objectAtIndex:1] fromObject:self.robot];
+    [self updateViewPosition:self.robot.view fromObject:self.robot];
 }
 
 - (void)setObjectivePositionAtX:(double)x Y:(double)y theta:(double)theta
@@ -200,7 +200,7 @@
     targetPosition.y = y;
     
     //The target is always the second object
-    [self updateViewPosition:[self.objectViews objectAtIndex:0] fromObject:self.target];
+    [self updateViewPosition:self.target.view fromObject:self.target];
 }
 
 - (void)addTrajectoryPoint:(PXGRPoint*)point andRedraw:(BOOL)redraw
@@ -321,6 +321,37 @@
     {
         [self clearTrajectory];
     }
+}
+
+-(void)tapSelectionGesture:(UITapGestureRecognizer*)recognizer
+{
+    CGPoint pos = [recognizer locationInView:self.scene];
+    
+    
+    PXGMapObject* obj = [self findObjectAtPosition:pos];
+    if (obj != nil && [obj selectable])
+    {
+        [obj setSelected: YES];
+        self.selectedObject = obj;
+    }
+    else
+    {
+        [self.selectedObject setSelected:NO];
+        self.selectedObject = nil;
+    }
+}
+
+- (PXGMapObject*)findObjectAtPosition:(CGPoint)point
+{
+    UIView* hitView = [self.scene hitTest:point withEvent:nil];
+
+    for (PXGMapObject* obj in self.objects)
+    {
+        if (obj.view == hitView)
+            return obj;
+    }
+    
+    return nil;
 }
 
 @end
