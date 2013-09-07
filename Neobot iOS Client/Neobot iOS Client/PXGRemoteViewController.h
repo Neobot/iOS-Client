@@ -13,7 +13,7 @@
 #import "PXGTrajectoriesViewController.h"
 #import "PXGMapViewController.h"
 
-@interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStrategySelectionViewControllerDelegate, PXGTeleportSelectionViewControllerDelegate, PXGTrajectoriesViewControllerDelegate, UIPopoverControllerDelegate>
+@interface PXGRemoteViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStrategySelectionViewControllerDelegate, PXGTeleportSelectionViewControllerDelegate, PXGTrajectoriesViewControllerDelegate, PXGMapViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (weak, nonatomic) PXGMapViewController* mapController;
 

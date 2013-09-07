@@ -19,4 +19,6 @@
 #define DEFINED_TRAJECTORIES_KEY @"Trajectories"
 #define TRAJECTORY_SPEED @"TrajectorySpeed"
 
+#define FOLLOW_THE_FINGER @"FollowFinger"
+
 #endif

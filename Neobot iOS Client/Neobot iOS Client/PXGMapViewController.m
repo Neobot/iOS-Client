@@ -11,6 +11,9 @@
 #import "PXGTools.h"
 
 @interface PXGMapViewController ()
+{
+    BOOL _panEnabled;
+}
 
 @property (strong, nonatomic) NSMutableArray* objects;
 @property (weak, nonatomic) PXGMapObject* selectedObject;
@@ -35,6 +38,7 @@
         self.robot.selectedImageName = @"NeobotSelected.png";
         self.target = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:100 andImage:@"target.png"];
         self.objects = [NSMutableArray array];
+        _panEnabled = YES;
     }
     return self;
 }
@@ -276,15 +280,25 @@
 
 -(void)panGesture:(UIPanGestureRecognizer*)panRecognizer
 {
-    if ([panRecognizer state] == UIGestureRecognizerStateBegan)
+    if (_panEnabled && [panRecognizer state] == UIGestureRecognizerStateBegan)
     {
         CGPoint pos = [panRecognizer locationInView:self.scene];
-        PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
-        
-        [self addTrajectoryPoint:p andRedraw:YES];
+            
+        PXGMapObject* obj = [self findObjectAtPosition:pos];
+        if (obj == self.robot)
+        {
+            self.robot.selected = YES;
+            self.selectedObject = self.robot;
+            
+            PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
+            [self addTrajectoryPoint:self.robot.position andRedraw:NO];
+            [self addTrajectoryPoint:p andRedraw:YES];
+        }
+        else
+            _panEnabled = NO;
 
     }
-    else if ([panRecognizer state] == UIGestureRecognizerStateChanged)
+    else if (_panEnabled && [panRecognizer state] == UIGestureRecognizerStateChanged)
     {
         CGPoint pos = [panRecognizer locationInView:self.scene];
         PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
@@ -301,11 +315,9 @@
             double a01 = atan2(p.x - pm1.x, p.y - pm1.y);
         
             double dif = a01 - a12;
-            double ad = pxgRadiansToDegrees(fabs(dif));
             
             double lastSegmentLength = fabs(p.x - pm1.x + p.y - pm1.y);
             double val = fabs(sin(dif) * lastSegmentLength);
-            //NSLog([NSString stringWithFormat:@"%f, %f, l=%f", val, ad, lastSegmentLength]);
             
             if (lastSegmentLength < 30.0 || (val <= 20.0))
             {
@@ -319,7 +331,11 @@
     }
     else if ([panRecognizer state] == UIGestureRecognizerStateEnded)
     {
+        self.robot.selected = false;
+        self.selectedObject = nil;
+        [self.delegate sendMapTrajectory:self.drawedPath];
         [self clearTrajectory];
+        _panEnabled = YES;
     }
 }
 
@@ -329,13 +345,28 @@
     
     
     PXGMapObject* obj = [self findObjectAtPosition:pos];
-    if (obj != nil && [obj selectable])
+    
+    if (obj == self.robot)
+    {
+        [obj setSelected: !obj.selected];
+        if (obj.selected)
+            self.selectedObject = obj;
+        else
+            self.selectedObject = nil;
+    }
+    else if (obj != nil && [obj selectable])
     {
         [obj setSelected: YES];
         self.selectedObject = obj;
     }
     else
     {
+        if (self.robot.selected)
+        {
+            PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
+            [self.delegate sendMapPoint:p];
+        }
+
         [self.selectedObject setSelected:NO];
         self.selectedObject = nil;
     }

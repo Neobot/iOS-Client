@@ -175,6 +175,7 @@
     else if ([segue.identifier isEqualToString:@"MapSegue"])
     {
         self.mapController = (PXGMapViewController*)segue.destinationViewController;
+        self.mapController.delegate = self;
     }
 }
 
@@ -275,13 +276,8 @@
     int curentPointIndex = 0;
     int speed = self.speedSlider.value;
     
-    [self.mapController clearTrajectory];
-    [self.mapController addTrajectoryPoint:self.mapController.robot.position andRedraw:NO];
     for (NSDictionary* pointData in trajectoryPoints)
-    {
-        PXGRPoint* point = [[PXGRPoint alloc] initWithDictionary:pointData];
-        [self.mapController addTrajectoryPoint:point andRedraw:NO];
-        
+    { 
         ++curentPointIndex;
         
         double x, y;
@@ -296,13 +292,47 @@
                                               withSpeed:speed
                                             isStopPoint:(curentPointIndex == nbPoints)];
     }
-    
-    [self.mapController redrawTrajectory];
 }
 
 - (void) availableTrajectoriesChanged:(NSArray*)trajectories
 {
     [[NSUserDefaults standardUserDefaults] setValue:trajectories forKey:DEFINED_TRAJECTORIES_KEY];
+}
+
+- (void) sendMapPoint:(PXGRPoint*)point
+{
+    int speed = self.speedSlider.value;
+
+    [[PXGCommInterface sharedInstance] sendRobotInX:point.x
+        Y:point.y
+        angle:point.theta
+        withTrajectoryType:AUTO
+        withAsservType:TURN_THEN_MOVE
+        withSpeed:speed
+        isStopPoint:YES];
+    
+}
+
+- (void) sendMapTrajectory:(NSArray*)trajectoryPoints
+{
+    int nbPoints = [trajectoryPoints count];
+    
+    int curentPointIndex = 0;
+    int speed = self.speedSlider.value;
+    
+    for (PXGRPoint* point in trajectoryPoints)
+    {
+        ++curentPointIndex;
+        
+        [[PXGCommInterface sharedInstance] sendRobotInX:point.x
+                                                      Y:point.y
+                                                  angle:point.theta
+                                     withTrajectoryType:AUTO
+                                         withAsservType:TURN_THEN_MOVE
+                                              withSpeed:speed
+                                            isStopPoint:(curentPointIndex == nbPoints)];
+    }
+
 }
 
 @end
