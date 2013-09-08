@@ -651,6 +651,112 @@
             </objects>
             <point key="canvasLocation" x="-5326" y="-4179"/>
         </scene>
+        <!--Options View Controller - Preferences-->
+        <scene sceneID="WzX-jc-sYE">
+            <objects>
+                <tableViewController id="mjr-Gf-wta" customClass="PXGOptionsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0eZ-50-HzO">
+                        <rect key="frame" x="0.0" y="64" width="540" height="556"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Map" footerTitle="If this option is enabled, the robot will start to follow the trajectory after a short delay." id="Ddt-We-lrr">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="roD-oR-7Me">
+                                        <rect key="frame" x="0.0" y="54" width="540" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="31" y="1" width="478" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Follow the finger" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jn-cy-V86">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZW-Na-ZIV">
+                                                    <connections>
+                                                        <action selector="followFingerChanged:" destination="mjr-Gf-wta" eventType="valueChanged" id="g0j-sW-aDt"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="NZW-Na-ZIV" firstAttribute="centerY" secondItem="roD-oR-7Me" secondAttribute="centerY" type="default" id="ICg-a9-HIi"/>
+                                            <constraint firstItem="NZW-Na-ZIV" firstAttribute="centerY" secondItem="6Jn-cy-V86" secondAttribute="centerY" type="default" id="aRg-hR-0lJ"/>
+                                            <constraint firstItem="6Jn-cy-V86" firstAttribute="leading" secondItem="roD-oR-7Me" secondAttribute="leading" constant="40" id="eO1-fc-v9S"/>
+                                            <constraint firstAttribute="trailing" secondItem="NZW-Na-ZIV" secondAttribute="trailing" constant="51" id="rPh-R9-aM8"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iYZ-2i-PAz">
+                                        <rect key="frame" x="0.0" y="99" width="540" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="31" y="0.0" width="478" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Delay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vc8-Mq-vWo">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="9999 ms" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cM-wl-NCP">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <slider contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="300" minValue="100" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="1ax-vI-yPO">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="199" id="nvY-fd-xdy"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="followFingerDelayChanged:" destination="mjr-Gf-wta" eventType="valueChanged" id="wTC-8t-LF2"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="6cM-wl-NCP" firstAttribute="leading" secondItem="1ax-vI-yPO" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="4Vd-Bh-hDd"/>
+                                            <constraint firstItem="Vc8-Mq-vWo" firstAttribute="leading" secondItem="iYZ-2i-PAz" secondAttribute="leading" constant="42" id="UPL-HS-9IZ"/>
+                                            <constraint firstItem="1ax-vI-yPO" firstAttribute="top" secondItem="6cM-wl-NCP" secondAttribute="top" type="default" id="WGZ-2B-r9O"/>
+                                            <constraint firstItem="1ax-vI-yPO" firstAttribute="leading" secondItem="iYZ-2i-PAz" secondAttribute="leading" constant="216" id="g1d-eM-BU4"/>
+                                            <constraint firstItem="6cM-wl-NCP" firstAttribute="baseline" secondItem="Vc8-Mq-vWo" secondAttribute="baseline" type="default" id="wGg-UJ-nYi"/>
+                                            <constraint firstItem="1ax-vI-yPO" firstAttribute="centerY" secondItem="iYZ-2i-PAz" secondAttribute="centerY" type="default" id="zWC-Cx-WHG"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Preferences" id="jvh-Sj-2jE"/>
+                    <connections>
+                        <outlet property="followFingerDelaySlider" destination="1ax-vI-yPO" id="c1a-h5-Nfp"/>
+                        <outlet property="followFingerSwitch" destination="NZW-Na-ZIV" id="mPe-1a-Fpm"/>
+                        <outlet property="lblFollowFingerDelay" destination="6cM-wl-NCP" id="wBg-il-Xr4"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d75-AG-neP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5452" y="-5468"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NQA-J1-NEe">
+            <objects>
+                <navigationController storyboardIdentifier="OptionsViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hhm-7K-RHd" sceneMemberID="viewController">
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qe9-Ew-9ku">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mjr-Gf-wta" kind="relationship" relationship="rootViewController" id="hgC-eT-O62"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BN7-0E-Gau" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6228" y="-5468"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ays-7y-swd">
             <objects>
@@ -749,6 +855,12 @@
                                             <action selector="displayLogView:" destination="H60-qm-fuG" id="bMz-Lj-pwO"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem enabled="NO" title=" |" style="plain" id="rDN-qW-Fnc"/>
+                                    <barButtonItem image="Tools.png" style="plain" id="QaQ-vX-7qB">
+                                        <connections>
+                                            <action selector="displayOptionsView:" destination="H60-qm-fuG" id="VSb-vv-neL"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Zh-jB-toh">
@@ -778,17 +890,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bB9-qf-afC" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" constant="6" id="GSY-Sp-2fN"/>
+                            <constraint firstItem="bB9-qf-afC" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" constant="6" id="M9w-c5-Jy2"/>
                             <constraint firstItem="Xef-Aq-POs" firstAttribute="leading" secondItem="627-r4-xgQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Md1-cn-jBd"/>
                             <constraint firstItem="WCX-JM-u24" firstAttribute="leading" secondItem="627-r4-xgQ" secondAttribute="leading" type="default" id="VPc-D0-QDS"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="top" secondItem="WCX-JM-u24" secondAttribute="bottom" type="default" id="dkz-iU-fNB"/>
                             <constraint firstItem="WCX-JM-u24" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" type="default" id="eMP-a8-CGx"/>
                             <constraint firstItem="Xef-Aq-POs" firstAttribute="top" secondItem="627-r4-xgQ" secondAttribute="top" constant="11" id="ees-tE-R5d"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="trailing" secondItem="627-r4-xgQ" secondAttribute="trailing" type="default" id="fyI-x0-qwH"/>
+                            <constraint firstAttribute="trailing" secondItem="bB9-qf-afC" secondAttribute="trailing" constant="73" id="iV0-f7-m5a"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="bottom" secondItem="627-r4-xgQ" secondAttribute="bottom" type="default" id="ipq-5q-IfT"/>
                             <constraint firstItem="7Zh-jB-toh" firstAttribute="leading" secondItem="627-r4-xgQ" secondAttribute="leading" type="default" id="orp-JV-WLC"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xef-Aq-POs" secondAttribute="trailing" constant="89" type="user" id="u2X-jF-BZG"/>
-                            <constraint firstAttribute="trailing" secondItem="bB9-qf-afC" secondAttribute="trailing" constant="10" id="uQL-kp-53Q"/>
                             <constraint firstItem="WCX-JM-u24" firstAttribute="trailing" secondItem="627-r4-xgQ" secondAttribute="trailing" type="default" id="vad-CA-zOK"/>
                         </constraints>
                     </view>
@@ -797,6 +909,7 @@
                         <outlet property="lblCount" destination="bB9-qf-afC" id="AUj-tn-gbf"/>
                         <outlet property="lblStatus" destination="Xef-Aq-POs" id="SKY-oA-xaF"/>
                         <outlet property="logBtn" destination="SAD-F3-wbx" id="wOg-4J-ODk"/>
+                        <outlet property="optionsBtn" destination="QaQ-vX-7qB" id="EwV-Ru-k3o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAT-An-rFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1320,12 +1433,10 @@
         <image name="Network.png" width="30" height="30"/>
         <image name="Task Manager.png" width="30" height="30"/>
         <image name="Toolbar - Playlist.png" width="30" height="30"/>
+        <image name="Tools.png" width="32" height="32"/>
         <image name="sensor.png" width="30" height="30"/>
     </resources>
     <classes>
-        <class className="NSDictionary" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSDictionary.h"/>
-        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -1381,14 +1492,26 @@
             <relationships>
                 <relationship kind="action" name="displayConnectionView:"/>
                 <relationship kind="action" name="displayLogView:"/>
+                <relationship kind="action" name="displayOptionsView:"/>
                 <relationship kind="outlet" name="connectionBtn" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="lblCount" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblStatus" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="logBtn" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="optionsBtn" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="PXGMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGMapViewController.h"/>
+        </class>
+        <class className="PXGOptionsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGOptionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="followFingerChanged:" candidateClass="UISwitch"/>
+                <relationship kind="action" name="followFingerDelayChanged:"/>
+                <relationship kind="outlet" name="followFingerDelaySlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="followFingerSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="lblFollowFingerDelay" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="PXGRemoteViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGRemoteViewController.h"/>

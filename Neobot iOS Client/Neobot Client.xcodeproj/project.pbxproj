@@ -44,6 +44,8 @@
 		94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D5B179AC9F70024A789 /* PXGLogViewController.m */; };
 		9488274717D3AEB40055C206 /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = 9488274617D3AEB40055C206 /* target.png */; };
 		9488274917D8FB400055C206 /* NeobotSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9488274817D8FB400055C206 /* NeobotSelected.png */; };
+		94A423A617DCB8F700D2E36B /* Tools.png in Resources */ = {isa = PBXBuildFile; fileRef = 94A423A517DCB8F700D2E36B /* Tools.png */; };
+		94A423A917DCC14100D2E36B /* PXGOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A423A817DCC14100D2E36B /* PXGOptionsViewController.m */; };
 		94AC01ED17A2E863005A47F3 /* PXGStrategySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01EC17A2E863005A47F3 /* PXGStrategySelectionViewController.m */; };
 		94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */; };
 		94AC01F317A41139005A47F3 /* PXGTools.c in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F217A41139005A47F3 /* PXGTools.c */; };
@@ -109,6 +111,9 @@
 		94835D5B179AC9F70024A789 /* PXGLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGLogViewController.m; sourceTree = "<group>"; };
 		9488274617D3AEB40055C206 /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target.png; sourceTree = "<group>"; };
 		9488274817D8FB400055C206 /* NeobotSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NeobotSelected.png; sourceTree = "<group>"; };
+		94A423A517DCB8F700D2E36B /* Tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tools.png; sourceTree = "<group>"; };
+		94A423A717DCC14000D2E36B /* PXGOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGOptionsViewController.h; sourceTree = "<group>"; };
+		94A423A817DCC14100D2E36B /* PXGOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGOptionsViewController.m; sourceTree = "<group>"; };
 		94AC01EB17A2E863005A47F3 /* PXGStrategySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGStrategySelectionViewController.h; sourceTree = "<group>"; };
 		94AC01EC17A2E863005A47F3 /* PXGStrategySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStrategySelectionViewController.m; sourceTree = "<group>"; };
 		94AC01EE17A4060B005A47F3 /* PXGTeleportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTeleportViewController.h; sourceTree = "<group>"; };
@@ -237,6 +242,7 @@
 		9433FE2F1792AED10092A43B /* Tab Images */ = {
 			isa = PBXGroup;
 			children = (
+				94A423A517DCB8F700D2E36B /* Tools.png */,
 				9425D3B417915AEF00C6E883 /* Android.png */,
 				9425D3B517915AEF00C6E883 /* File Transfer - Upload.png */,
 				9425D3B617915AEF00C6E883 /* Games.png */,
@@ -268,6 +274,8 @@
 			children = (
 				94835D54179ABDA20024A789 /* PXGMainToolBarViewController.h */,
 				94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */,
+				94A423A717DCC14000D2E36B /* PXGOptionsViewController.h */,
+				94A423A817DCC14100D2E36B /* PXGOptionsViewController.m */,
 				94835D5A179AC9F70024A789 /* PXGLogViewController.h */,
 				94835D5B179AC9F70024A789 /* PXGLogViewController.m */,
 				94835D51179ABB860024A789 /* PXGCommViewController.h */,
@@ -377,6 +385,7 @@
 				942049AF17B7D47100B9E5AC /* Neobot.png in Resources */,
 				9488274717D3AEB40055C206 /* target.png in Resources */,
 				9488274917D8FB400055C206 /* NeobotSelected.png in Resources */,
+				94A423A617DCB8F700D2E36B /* Tools.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +416,7 @@
 				942049AD17B7C5F000B9E5AC /* PXGMapViewController.m in Sources */,
 				942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */,
 				942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */,
+				94A423A917DCC14100D2E36B /* PXGOptionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

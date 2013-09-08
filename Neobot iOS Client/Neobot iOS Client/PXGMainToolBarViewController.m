@@ -8,28 +8,31 @@
 
 #import "PXGMainToolBarViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "PXGParametersKeys.h"
 
 @interface PXGMainToolBarViewController ()
 {
     int _messageCount;
 }
 
+@property (weak, nonatomic) UIPopoverController* currentPopoverController;
+
 @end
 
 @implementation PXGMainToolBarViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //init options default values
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:FOLLOW_THE_FINGER] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FOLLOW_THE_FINGER];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:FOLLOW_THE_FINGER_DELAY] == nil)
+        [[NSUserDefaults standardUserDefaults] setDouble:0.3 forKey:FOLLOW_THE_FINGER_DELAY];
+    
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
@@ -37,9 +40,16 @@
     
     UIViewController* connectionControler = [self.storyboard instantiateViewControllerWithIdentifier:@"CommViewController"];
     self.connectionPopoverController = [[UIPopoverController alloc] initWithContentViewController:connectionControler];
+    self.connectionPopoverController.delegate = self;
     
     UIViewController* logController = [self.storyboard instantiateViewControllerWithIdentifier:@"LogViewController"];
     self.logPopoverController = [[UIPopoverController alloc] initWithContentViewController:logController];
+    self.logPopoverController.delegate = self;
+    
+    UIViewController* optionsController = [self.storyboard instantiateViewControllerWithIdentifier:@"OptionsViewController"];
+    self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsController];
+    self.optionsPopoverController.delegate = self;
+
     
     [self.lblCount.layer setCornerRadius:8.0f];
     
@@ -58,32 +68,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (IBAction)displayConnectionView:(id)sender
+- (void)displayPopover:(UIPopoverController*)controller onButton:(UIBarButtonItem*)button
 {
-    if (self.connectionPopoverController.popoverVisible)
+    if (self.currentPopoverController == controller)
     {
-        [self.connectionPopoverController dismissPopoverAnimated:YES];
+        [controller dismissPopoverAnimated:YES];
+        self.currentPopoverController = nil;
     }
     else
     {
-        [self.logPopoverController dismissPopoverAnimated:NO];
-        [self.connectionPopoverController presentPopoverFromBarButtonItem:self.connectionBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [self.currentPopoverController dismissPopoverAnimated:NO];
+        self.currentPopoverController = controller;
+        
+        [controller presentPopoverFromBarButtonItem:button permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.currentPopoverController = nil;
+}
+
+- (IBAction)displayConnectionView:(id)sender
+{
+    [self displayPopover:self.connectionPopoverController onButton:self.connectionBtn];
 }
 
 - (IBAction)displayLogView:(id)sender
 {
+    [self displayPopover:self.logPopoverController onButton:self.logBtn];
     if (self.logPopoverController.popoverVisible)
     {
-        [self.logPopoverController dismissPopoverAnimated:YES];
-    }
-    else
-    {
-        [self.connectionPopoverController dismissPopoverAnimated:NO];
-        [self.logPopoverController presentPopoverFromBarButtonItem:self.logBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         [self resetMessageCount];
     }
+}
+
+- (IBAction)displayOptionsView:(id)sender
+{
+    [self displayPopover:self.optionsPopoverController onButton:self.optionsBtn];
 }
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status

@@ -32,9 +32,6 @@
 {
     self = [super initWithCoder:decoder];
     if (self) {
-        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:FOLLOW_THE_FINGER];
-        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithDouble:0.3] forKey:FOLLOW_THE_FINGER_DELAY];
-        
         self.tableSize = CGSizeMake(2000, 3000);
         self.robot = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:350/2 andImage:@"Neobot.png"];
         self.robot.selectable = YES;
@@ -349,9 +346,9 @@
                 self.trajectoryToSend = [NSMutableArray array];
             }
             
-            if ([[[NSUserDefaults standardUserDefaults] valueForKey:FOLLOW_THE_FINGER] boolValue])
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:FOLLOW_THE_FINGER])
             {
-                NSTimeInterval delay = [[[NSUserDefaults standardUserDefaults] valueForKey:FOLLOW_THE_FINGER_DELAY] doubleValue];
+                NSTimeInterval delay = [[NSUserDefaults standardUserDefaults] doubleForKey:FOLLOW_THE_FINGER_DELAY];
                 _followFingerPanTimer = [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(followFingerPanTimerFired:) userInfo:nil repeats:YES];
             }
         }
@@ -410,8 +407,11 @@
 
 -(void)followFingerPanTimerFired:(NSTimer*)timer
 {
-    [self.delegate sendMapTrajectory:self.trajectoryToSend];
-    [self.trajectoryToSend removeAllObjects];
+    if ([self.trajectoryToSend count] > 0)
+    {
+        [self.delegate sendMapTrajectory:self.trajectoryToSend];
+        [self.trajectoryToSend removeAllObjects];
+    }
 }
 
 -(void)tapSelectionGesture:(UITapGestureRecognizer*)recognizer
