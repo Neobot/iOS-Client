@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic, readonly) PXGMapObject* selectedObject;
 
+@property (nonatomic) BOOL robotControlEnabled;
 @property (weak, nonatomic) id<PXGMapViewControllerDelegate> delegate;
 
 - (void)setRobotPositionAtX:(double)x Y:(double)y theta:(double)theta;

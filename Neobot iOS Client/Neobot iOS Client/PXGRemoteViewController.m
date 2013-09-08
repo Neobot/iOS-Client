@@ -78,6 +78,7 @@
     self.btnFlush.enabled = robotInteractioEnabled;
     self.btnTrajectory.enabled = robotInteractioEnabled;
     self.speedSlider.enabled = robotInteractioEnabled;
+    self.mapController.robotControlEnabled = robotInteractioEnabled;
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender

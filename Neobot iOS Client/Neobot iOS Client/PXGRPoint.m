@@ -36,6 +36,11 @@
     return [[PXGRPoint alloc] initWithX:-1000 y:-1000 theta:0];
 }
 
++ (PXGRPoint*)rpointFromRPoint:(PXGRPoint*)point
+{
+    return [[PXGRPoint alloc] initWithX:point.x y:point.y theta:point.theta];
+}
+
 - (NSDictionary*)encodeToDictionary
 {
     return pxgEncodePointData(self.x, self.y, self.theta);

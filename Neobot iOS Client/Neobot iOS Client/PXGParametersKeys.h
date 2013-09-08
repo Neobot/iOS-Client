@@ -20,5 +20,6 @@
 #define TRAJECTORY_SPEED @"TrajectorySpeed"
 
 #define FOLLOW_THE_FINGER @"FollowFinger"
+#define FOLLOW_THE_FINGER_DELAY @"FollowFingerDelay"
 
 #endif

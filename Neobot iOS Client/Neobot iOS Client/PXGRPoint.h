@@ -14,6 +14,7 @@
 - (id)initWithDictionary:(NSDictionary*)dictionnary;
 
 + (PXGRPoint*)rpointAtUnknownPosition;
++ (PXGRPoint*)rpointFromRPoint:(PXGRPoint*)point;
 
 - (NSDictionary*)encodeToDictionary;
 

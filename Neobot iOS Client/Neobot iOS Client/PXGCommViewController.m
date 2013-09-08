@@ -199,6 +199,7 @@
             self.txtRobotSerialPort.enabled = NO;
             self.txtAx12SerialPort.enabled = NO;
             self.btnAskRobotControl.enabled = NO;
+            [self.btnAskRobotControl setTitle:NSLocalizedString(@"Ask Control", nil) forState:UIControlStateNormal];
             self.btnRobotPing.enabled = NO;
             self.simulationSwitch.enabled = NO;
             break;
@@ -219,7 +220,7 @@
         case Controlled:
             self.txtServerAdress.enabled = NO;
             self.txtPort.enabled = NO;
-            self.btnConnectServer.enabled = NO;
+            self.btnConnectServer.enabled = YES;
             self.btnPingServer.enabled = YES;
             
             self.txtRobotSerialPort.enabled = NO;

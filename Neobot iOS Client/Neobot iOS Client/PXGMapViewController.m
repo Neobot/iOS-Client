@@ -9,16 +9,19 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PXGMapViewController.h"
 #import "PXGTools.h"
+#import "PXGParametersKeys.h"
 
 @interface PXGMapViewController ()
 {
     BOOL _panEnabled;
+    NSTimer* _followFingerPanTimer;
 }
 
 @property (strong, nonatomic) NSMutableArray* objects;
 
 @property (strong, nonatomic) CALayer* trajectoryLayer;
 @property (strong, nonatomic) NSMutableArray* trajectory;
+@property (strong, nonatomic) NSMutableArray* trajectoryToSend;
 
 @end
 
@@ -29,12 +32,16 @@
 {
     self = [super initWithCoder:decoder];
     if (self) {
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:FOLLOW_THE_FINGER];
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithDouble:0.3] forKey:FOLLOW_THE_FINGER_DELAY];
+        
         self.tableSize = CGSizeMake(2000, 3000);
         self.robot = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:350/2 andImage:@"Neobot.png"];
         self.robot.selectable = YES;
         self.robot.selectedImageName = @"NeobotSelected.png";
         self.target = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:100 andImage:@"target.png"];
         self.objects = [NSMutableArray array];
+        self.robotControlEnabled = NO;
         _panEnabled = YES;
     }
     return self;
@@ -321,18 +328,32 @@
 
 -(void)panGesture:(UIPanGestureRecognizer*)panRecognizer
 {
+    if (!self.robotControlEnabled)
+        return;
+    
+    CGPoint pos = [panRecognizer locationInView:self.scene];
+    
     if (_panEnabled && [panRecognizer state] == UIGestureRecognizerStateBegan)
     {
-        CGPoint pos = [panRecognizer locationInView:self.scene];
-            
         PXGMapObject* obj = [self findObjectInSceneAtPosition:pos];
         if (obj == self.robot)
         {
             [self setSelectedObject:self.robot];
             
             PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
-            [self addTrajectoryPoint:self.robot.position andRedraw:NO];
+            [self addTrajectoryPoint:[PXGRPoint rpointFromRPoint:self.robot.position] andRedraw:NO];
             [self addTrajectoryPoint:p andRedraw:YES];
+            
+            if (self.trajectoryToSend == nil)
+            {
+                self.trajectoryToSend = [NSMutableArray array];
+            }
+            
+            if ([[[NSUserDefaults standardUserDefaults] valueForKey:FOLLOW_THE_FINGER] boolValue])
+            {
+                NSTimeInterval delay = [[[NSUserDefaults standardUserDefaults] valueForKey:FOLLOW_THE_FINGER_DELAY] doubleValue];
+                _followFingerPanTimer = [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(followFingerPanTimerFired:) userInfo:nil repeats:YES];
+            }
         }
         else
             _panEnabled = NO;
@@ -340,7 +361,6 @@
     }
     else if (_panEnabled && [panRecognizer state] == UIGestureRecognizerStateChanged)
     {
-        CGPoint pos = [panRecognizer locationInView:self.scene];
         PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
         
         int count = [self.trajectory count];
@@ -363,6 +383,10 @@
             {
                 [self.trajectory removeLastObject];
             }
+            else
+            {
+                [self.trajectoryToSend addObject:p];
+            }
         }
         
         
@@ -373,14 +397,28 @@
     {
         [self clearSelection]; //The robot is always selected at this point
         
-        [self.delegate sendMapTrajectory:self.trajectory];
+        PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
+        [self.trajectoryToSend addObject:p];
+        
+        [_followFingerPanTimer invalidate];
+        [self.delegate sendMapTrajectory:self.trajectoryToSend];
+        [self.trajectoryToSend removeAllObjects];
         [self clearTrajectory];
         _panEnabled = YES;
     }
 }
 
+-(void)followFingerPanTimerFired:(NSTimer*)timer
+{
+    [self.delegate sendMapTrajectory:self.trajectoryToSend];
+    [self.trajectoryToSend removeAllObjects];
+}
+
 -(void)tapSelectionGesture:(UITapGestureRecognizer*)recognizer
 {
+    if (!self.robotControlEnabled)
+        return;
+    
     CGPoint pos = [recognizer locationInView:self.scene];
     
     
