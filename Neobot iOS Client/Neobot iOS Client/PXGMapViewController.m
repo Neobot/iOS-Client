@@ -16,12 +16,9 @@
 }
 
 @property (strong, nonatomic) NSMutableArray* objects;
-@property (weak, nonatomic) PXGMapObject* selectedObject;
 
 @property (strong, nonatomic) CALayer* trajectoryLayer;
-
-@property (strong, nonatomic) NSMutableArray* drawedPath;
-
+@property (strong, nonatomic) NSMutableArray* trajectory;
 
 @end
 
@@ -89,6 +86,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Scene management
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [self updateSceneLayout];
@@ -132,6 +131,8 @@
     
     return [[PXGRPoint alloc] initWithX:x y:y theta:0.0];
 }
+
+#pragma mark General objects management
 
 - (void)addMapObject:(PXGMapObject*)object
 {
@@ -186,6 +187,42 @@
     }
 }
 
+- (PXGMapObject*)findObjectInSceneAtPosition:(CGPoint)point
+{
+    UIView* hitView = [self.scene hitTest:point withEvent:nil];
+    
+    for (PXGMapObject* obj in self.objects)
+    {
+        if (obj.view == hitView)
+            return obj;
+    }
+    
+    return nil;
+}
+
+- (void)setSelectedObject:(PXGMapObject*)object
+{
+    if (object == nil)
+    {
+        [self clearSelection];
+    }
+    else if ([object selectable])
+    {
+        [self.selectedObject setSelected:NO];
+        
+        [object setSelected: YES];
+        _selectedObject = object;
+    }
+}
+
+- (void)clearSelection
+{
+    [_selectedObject setSelected:NO];
+    _selectedObject = nil;
+}
+
+#pragma mark Robot/Target objects management
+
 - (void)setRobotPositionAtX:(double)x Y:(double)y theta:(double)theta
 {
     PXGRPoint* robotPosition = self.robot.position;
@@ -207,12 +244,14 @@
     [self updateViewPosition:self.target.view fromObject:self.target];
 }
 
+#pragma mark Trajectory drawing
+
 - (void)addTrajectoryPoint:(PXGRPoint*)point andRedraw:(BOOL)redraw
 {
-    if (self.drawedPath == nil)
-        self.drawedPath = [NSMutableArray array];
+    if (self.trajectory == nil)
+        self.trajectory = [NSMutableArray array];
     
-    [self.drawedPath addObject:point];
+    [self.trajectory addObject:point];
     
     if (redraw)
         [self.trajectoryLayer setNeedsDisplay];
@@ -220,7 +259,7 @@
 
 - (void)clearTrajectory
 {
-    [self.drawedPath removeAllObjects];
+    [self.trajectory removeAllObjects];
     [self redrawTrajectory];
 }
 
@@ -231,7 +270,7 @@
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
 {
-    if (self.drawedPath == nil || self.drawedPath.count < 2)
+    if (self.trajectory == nil || self.trajectory.count < 2)
         return;
     
     BOOL isFirst = YES;
@@ -242,10 +281,10 @@
     CGContextSetLineJoin(ctx, kCGLineJoinRound);
     CGContextSetStrokeColorWithColor(ctx,[UIColor redColor].CGColor);
     
-    CGPoint firstPoint = [self mapPointFromRobotToScene:[self.drawedPath objectAtIndex:0]];
+    CGPoint firstPoint = [self mapPointFromRobotToScene:[self.trajectory objectAtIndex:0]];
     CGContextMoveToPoint(ctx, firstPoint.x, firstPoint.y);
     
-    for (PXGRPoint* pt in self.drawedPath)
+    for (PXGRPoint* pt in self.trajectory)
     {
         if (!isFirst)
         {
@@ -263,7 +302,7 @@
     CGContextSetStrokeColorWithColor(ctx,[UIColor darkGrayColor].CGColor);
     CGContextSetLineWidth(ctx, 2);
     
-    for (PXGRPoint* pt in self.drawedPath)
+    for (PXGRPoint* pt in self.trajectory)
     {
         CGPoint scenePoint = [self mapPointFromRobotToScene:pt];
         CGContextBeginPath(ctx);
@@ -278,17 +317,18 @@
     
 }
 
+#pragma mark Gestures
+
 -(void)panGesture:(UIPanGestureRecognizer*)panRecognizer
 {
     if (_panEnabled && [panRecognizer state] == UIGestureRecognizerStateBegan)
     {
         CGPoint pos = [panRecognizer locationInView:self.scene];
             
-        PXGMapObject* obj = [self findObjectAtPosition:pos];
+        PXGMapObject* obj = [self findObjectInSceneAtPosition:pos];
         if (obj == self.robot)
         {
-            self.robot.selected = YES;
-            self.selectedObject = self.robot;
+            [self setSelectedObject:self.robot];
             
             PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
             [self addTrajectoryPoint:self.robot.position andRedraw:NO];
@@ -303,12 +343,12 @@
         CGPoint pos = [panRecognizer locationInView:self.scene];
         PXGRPoint* p = [self mapPointFromSceneToRobot:pos];
         
-        int count = [self.drawedPath count];
+        int count = [self.trajectory count];
         
         if (count >= 3)
         {
-            PXGRPoint* pm1  = [self.drawedPath objectAtIndex: count - 2];
-            PXGRPoint* pm2  = [self.drawedPath objectAtIndex: count - 3];
+            PXGRPoint* pm1  = [self.trajectory objectAtIndex: count - 2];
+            PXGRPoint* pm2  = [self.trajectory objectAtIndex: count - 3];
 
         
             double a12 = atan2(pm1.x - pm2.x, pm1.y - pm2.y);
@@ -321,7 +361,7 @@
             
             if (lastSegmentLength < 30.0 || (val <= 20.0))
             {
-                [self.drawedPath removeLastObject];
+                [self.trajectory removeLastObject];
             }
         }
         
@@ -331,9 +371,9 @@
     }
     else if ([panRecognizer state] == UIGestureRecognizerStateEnded)
     {
-        self.robot.selected = false;
-        self.selectedObject = nil;
-        [self.delegate sendMapTrajectory:self.drawedPath];
+        [self clearSelection]; //The robot is always selected at this point
+        
+        [self.delegate sendMapTrajectory:self.trajectory];
         [self clearTrajectory];
         _panEnabled = YES;
     }
@@ -344,20 +384,18 @@
     CGPoint pos = [recognizer locationInView:self.scene];
     
     
-    PXGMapObject* obj = [self findObjectAtPosition:pos];
+    PXGMapObject* obj = [self findObjectInSceneAtPosition:pos];
     
     if (obj == self.robot)
     {
-        [obj setSelected: !obj.selected];
         if (obj.selected)
-            self.selectedObject = obj;
+            [self clearSelection];
         else
-            self.selectedObject = nil;
+            [self setSelectedObject:self.robot];
     }
-    else if (obj != nil && [obj selectable])
+    else if (obj != nil)
     {
-        [obj setSelected: YES];
-        self.selectedObject = obj;
+        [self setSelectedObject:obj];
     }
     else
     {
@@ -367,22 +405,8 @@
             [self.delegate sendMapPoint:p];
         }
 
-        [self.selectedObject setSelected:NO];
-        self.selectedObject = nil;
+        [self clearSelection];
     }
-}
-
-- (PXGMapObject*)findObjectAtPosition:(CGPoint)point
-{
-    UIView* hitView = [self.scene hitTest:point withEvent:nil];
-
-    for (PXGMapObject* obj in self.objects)
-    {
-        if (obj.view == hitView)
-            return obj;
-    }
-    
-    return nil;
 }
 
 @end

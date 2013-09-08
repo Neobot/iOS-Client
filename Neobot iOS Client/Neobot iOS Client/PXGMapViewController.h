@@ -22,6 +22,8 @@
 @property (strong, nonatomic) PXGMapObject* robot;
 @property (strong, nonatomic) PXGMapObject* target;
 
+@property (weak, nonatomic, readonly) PXGMapObject* selectedObject;
+
 @property (weak, nonatomic) id<PXGMapViewControllerDelegate> delegate;
 
 - (void)setRobotPositionAtX:(double)x Y:(double)y theta:(double)theta;
@@ -36,6 +38,9 @@
 - (void)updateSceneLayout;
 - (void)updateAllObjects;
 
-- (PXGMapObject*)findObjectAtPosition:(CGPoint)point;
+- (PXGMapObject*)findObjectInSceneAtPosition:(CGPoint)point;
+
+- (void)setSelectedObject:(PXGMapObject*)object;
+- (void)clearSelection;
 
 @end
