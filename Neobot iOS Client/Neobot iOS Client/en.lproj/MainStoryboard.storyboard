@@ -1437,6 +1437,9 @@
         <image name="sensor.png" width="30" height="30"/>
     </resources>
     <classes>
+        <class className="NSDictionary" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSDictionary.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -1507,7 +1510,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PXGOptionsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="followFingerChanged:" candidateClass="UISwitch"/>
-                <relationship kind="action" name="followFingerDelayChanged:"/>
+                <relationship kind="action" name="followFingerDelayChanged:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="followFingerDelaySlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="followFingerSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="lblFollowFingerDelay" candidateClass="UILabel"/>

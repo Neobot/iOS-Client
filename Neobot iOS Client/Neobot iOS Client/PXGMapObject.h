@@ -19,9 +19,12 @@
 @property (nonatomic)         BOOL       selectable;
 @property (nonatomic)         BOOL       selected;
 
-@property (strong, nonatomic, readonly)  UIImageView*    view;
+@property (strong, nonatomic, readonly)  UIView*    view;
 
 @property (strong, nonatomic) NSString*  imageName;
 @property (strong, nonatomic) NSString*  selectedImageName;
+
+
+- (void)nextStep;
 
 @end

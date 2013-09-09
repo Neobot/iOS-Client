@@ -15,6 +15,7 @@
 {
     BOOL _panEnabled;
     NSTimer* _followFingerPanTimer;
+    NSTimer* _sceneUpdateTimer;
 }
 
 @property (strong, nonatomic) NSMutableArray* objects;
@@ -40,6 +41,8 @@
         self.objects = [NSMutableArray array];
         self.robotControlEnabled = NO;
         _panEnabled = YES;
+        
+        _sceneUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateScene:) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -136,13 +139,21 @@
     return [[PXGRPoint alloc] initWithX:x y:y theta:0.0];
 }
 
+-(void)updateScene:(NSTimer*)timer
+{
+    for (PXGMapObject* object in self.objects)
+    {
+        [object nextStep];
+    }
+}
+
 #pragma mark General objects management
 
 - (void)addMapObject:(PXGMapObject*)object
 {
     [self.objects addObject:object];
     
-    UIImageView* view = object.view;
+    UIView* view = object.view;
     self.view.center = CGPointMake(-1000, -1000); //Move it outside the scene
     
     [self updateViewBounds:view fromObject:object];
