@@ -23,8 +23,9 @@
 
 @property (strong, nonatomic) NSString*  imageName;
 @property (strong, nonatomic) NSString*  selectedImageName;
+@property (nonatomic)         double       selectionAnimationSpeed; //radian/s
 
-
-- (void)nextStep;
+- (void)setBounds:(CGRect)bounds;
+- (void)updateAnimationAtTimeStamp:(CFTimeInterval)timestamp;
 
 @end

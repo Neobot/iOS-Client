@@ -15,6 +15,7 @@
 {
     BOOL _panEnabled;
     NSTimer* _followFingerPanTimer;
+    CADisplayLink* _displayLink;
     NSTimer* _sceneUpdateTimer;
 }
 
@@ -41,8 +42,6 @@
         self.objects = [NSMutableArray array];
         self.robotControlEnabled = NO;
         _panEnabled = YES;
-        
-        _sceneUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateScene:) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -78,6 +77,9 @@
     UITapGestureRecognizer* tapSelectionRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSelectionGesture:)];
     [tapSelectionRecognizer setNumberOfTapsRequired:1];
     [self.scene addGestureRecognizer:tapSelectionRecognizer];
+    
+    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateSceneAnimations)];
+    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -139,11 +141,11 @@
     return [[PXGRPoint alloc] initWithX:x y:y theta:0.0];
 }
 
--(void)updateScene:(NSTimer*)timer
+-(void)updateSceneAnimations
 {
     for (PXGMapObject* object in self.objects)
     {
-        [object nextStep];
+        [object updateAnimationAtTimeStamp:[_displayLink timestamp]];
     }
 }
 
@@ -156,8 +158,8 @@
     UIView* view = object.view;
     self.view.center = CGPointMake(-1000, -1000); //Move it outside the scene
     
-    [self updateViewBounds:view fromObject:object];
-    [self updateViewPosition:view fromObject:object];
+    [self updateBoundsOfObject:object];
+    [self updatePositionOfObject:object];
         
     [self.scene addSubview:view];
 }
@@ -171,32 +173,29 @@
     }
 }
 
-- (void)updateViewPosition:(UIView*)view fromObject:(PXGMapObject*)object
+- (void)updatePositionOfObject:(PXGMapObject*)object
 {
     CGPoint scenePos = [self mapPointFromRobotToScene:object.position];
-    view.center = scenePos;
-    
-    view.transform = CGAffineTransformMakeRotation(M_PI/2 - object.position.theta);
+    object.view.center = scenePos;
+    object.view.transform = CGAffineTransformMakeRotation(M_PI/2 - object.position.theta);
 }
 
-- (void)updateViewBounds:(UIView*)view fromObject:(PXGMapObject*)object
+- (void)updateBoundsOfObject:(PXGMapObject*)object
 {
     double sceneRadius = (self.scene.bounds.size.height * object.radius) / self.tableSize.width;
-    CGRect viewBounds = view.bounds;
+    CGRect viewBounds = object.view.bounds;
     viewBounds.size.width = sceneRadius * 2;
     viewBounds.size.height = sceneRadius * 2;
-    view.bounds = viewBounds;
+    [object setBounds:viewBounds];
 }
 
 - (void)updateAllObjects
 {
     int index = 0;
     for (PXGMapObject* object in self.objects)
-    {
-        UIView* view = object.view;
-        
-        [self updateViewBounds:view fromObject:object];
-        [self updateViewPosition:view fromObject:object];
+    {       
+        [self updatePositionOfObject:object];
+        [self updateBoundsOfObject:object];
 
         ++index;
     }
@@ -246,7 +245,7 @@
     robotPosition.theta = theta;
     
     //The robot is always the first object
-    [self updateViewPosition:self.robot.view fromObject:self.robot];
+    [self updatePositionOfObject:self.robot];
 }
 
 - (void)setObjectivePositionAtX:(double)x Y:(double)y theta:(double)theta
@@ -256,7 +255,7 @@
     targetPosition.y = y;
     
     //The target is always the second object
-    [self updateViewPosition:self.target.view fromObject:self.target];
+    [self updatePositionOfObject:self.target];
 }
 
 #pragma mark Trajectory drawing

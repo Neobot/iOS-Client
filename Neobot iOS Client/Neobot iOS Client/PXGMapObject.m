@@ -8,12 +8,13 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "PXGMapObject.h"
+#import "PXGTools.h"
 
 @interface PXGMapObject ()
 {
-    int _nbStep;
-    int _currentStep;
     double _selectionAngleByStep;
+    CFTimeInterval _previousTimeStamp;
+    double _selectionAngle;
 }
 
 @property (strong, nonatomic) UIImageView* imageView;
@@ -28,9 +29,7 @@
 {
     if ((self = [super init]))
 	{
-        _nbStep = 50;
-        _selectionAngleByStep = 2.0 * M_PI / (double)_nbStep;
-        
+        self.selectionAnimationSpeed = 0.3*2.0*M_PI;
 		self.position = position;
         self.radius = radius;
         self.imageName = imageName;
@@ -46,7 +45,6 @@
         UIImage* image = [UIImage imageNamed:self.imageName];
 
         self.imageView = [[UIImageView alloc] initWithImage:image];
-        self.imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.bounds = self.view.bounds;
         self.imageView.center = self.view.center;
@@ -60,6 +58,13 @@
 	}
     
     return self;
+}
+
+- (void)setBounds:(CGRect)bounds
+{
+    self.view.bounds = bounds;
+    self.imageView.bounds = bounds;
+    //self.selectionLayer.bounds = bounds;
 }
 
 - (void)setSelected:(BOOL)selected
@@ -77,8 +82,8 @@
             [self.imageView setImage:image];
         }
         
-        //_currentStep = 0;
         _selected = selected;
+        _previousTimeStamp = 0;
         [self.selectionLayer setNeedsDisplay];
     }
 }
@@ -106,18 +111,23 @@
     }
 }
 
-- (void)nextStep
+- (void)updateAnimationAtTimeStamp:(CFTimeInterval)timestamp;
 {
     if (self.selected)
     {
-        ++_currentStep;
-        if (_currentStep >= _nbStep)
+        
+        if (_previousTimeStamp > 0)
         {
-            _currentStep = 0;
+            NSTimeInterval diffTime = timestamp - _previousTimeStamp;
+        
+            double angleDiff = self.selectionAnimationSpeed * diffTime;
+            _selectionAngle += angleDiff;
+            if (_selectionAngle > M_PI * 2.0)
+                _selectionAngle -= M_PI * 2.0;
+            [self.selectionLayer setAffineTransform:CGAffineTransformMakeRotation(_selectionAngle)];
         }
-    
-    
-        [self.selectionLayer setAffineTransform:CGAffineTransformMakeRotation(_selectionAngleByStep * (double)_currentStep)];
+        
+        _previousTimeStamp = timestamp;
     }
 }
 
