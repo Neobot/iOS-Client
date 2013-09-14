@@ -39,22 +39,20 @@
         self.selected = NO;
         
         _view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        //self.view.contentMode = UIViewContentModeScaleAspectFit;
+        self.view.contentMode = UIViewContentModeScaleAspectFit;
         self.view.userInteractionEnabled = YES;
         
         UIImage* image = [UIImage imageNamed:self.imageName];
 
         self.imageView = [[UIImageView alloc] initWithImage:image];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        self.imageView.bounds = self.view.bounds;
-        self.imageView.center = self.view.center;
         [self.view addSubview:self.imageView];
         
         self.selectionLayer = [[CALayer alloc] init];
-        self.selectionLayer.bounds = self.view.bounds;
-        self.selectionLayer.position = self.view.layer.position;
         self.selectionLayer.delegate = self;
         [self.view.layer insertSublayer:self.selectionLayer below:self.imageView.layer];
+        
+        [self setBounds:self.view.bounds];
 	}
     
     return self;
@@ -64,7 +62,9 @@
 {
     self.view.bounds = bounds;
     self.imageView.bounds = bounds;
-    //self.selectionLayer.bounds = bounds;
+    self.imageView.center = CGPointMake(bounds.size.width/2.0, bounds.size.height/2.0);
+    self.selectionLayer.bounds = bounds;
+    self.selectionLayer.position = self.imageView.layer.position;
 }
 
 - (void)setSelected:(BOOL)selected
