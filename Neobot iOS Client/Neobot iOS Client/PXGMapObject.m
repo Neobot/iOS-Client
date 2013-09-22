@@ -12,9 +12,7 @@
 
 @interface PXGMapObject ()
 {
-    double _selectionAngleByStep;
     CFTimeInterval _previousTimeStamp;
-    double _selectionAngle;
 }
 
 @property (strong, nonatomic) UIImageView* imageView;
@@ -30,6 +28,8 @@
     if ((self = [super init]))
 	{
         self.selectionAnimationSpeed = 0.3*2.0*M_PI;
+        self.selectionAnimationColor = [UIColor redColor];
+        
 		self.position = position;
         self.radius = radius;
         self.imageName = imageName;
@@ -92,7 +92,7 @@
 {
     if (self.selected)
     {
-        CGContextSetStrokeColorWithColor(ctx,[UIColor redColor].CGColor);
+        CGContextSetStrokeColorWithColor(ctx, self.selectionAnimationColor.CGColor);
         CGContextSetLineWidth(ctx, 5);
         CGContextSetLineJoin(ctx, kCGLineJoinRound);
         CGFloat dashLengths[2] = {10, 10};
@@ -113,18 +113,15 @@
 
 - (void)updateAnimationAtTimeStamp:(CFTimeInterval)timestamp;
 {
-    if (self.selected)
+    if (self.selected && self.animatedSelection)
     {
-        
         if (_previousTimeStamp > 0)
         {
             NSTimeInterval diffTime = timestamp - _previousTimeStamp;
-        
             double angleDiff = self.selectionAnimationSpeed * diffTime;
-            _selectionAngle += angleDiff;
-            if (_selectionAngle > M_PI * 2.0)
-                _selectionAngle -= M_PI * 2.0;
-            [self.selectionLayer setAffineTransform:CGAffineTransformMakeRotation(_selectionAngle)];
+            
+            CGAffineTransform t = self.selectionLayer.affineTransform;
+            [self.selectionLayer setAffineTransform:CGAffineTransformRotate(t, angleDiff)];
         }
         
         _previousTimeStamp = timestamp;

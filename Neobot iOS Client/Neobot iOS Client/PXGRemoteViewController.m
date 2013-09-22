@@ -46,6 +46,9 @@
     int speed = [[[NSUserDefaults standardUserDefaults] valueForKey:TRAJECTORY_SPEED] intValue];
     self.speedSlider.value = speed;
     self.lblSpeedValue.text = [NSString stringWithFormat:@"%i%%", speed];
+    
+    self.lblPosition.text = @"Unknown";
+    self.lblObjective.text = @"Unknown";
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,6 +82,12 @@
     self.btnTrajectory.enabled = robotInteractioEnabled;
     self.speedSlider.enabled = robotInteractioEnabled;
     self.mapController.robotControlEnabled = robotInteractioEnabled;
+    
+    if (!robotInteractioEnabled)
+    {
+        self.lblPosition.text = @"Unknown";
+        self.lblObjective.text = @"Unknown";
+    }
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -100,7 +109,7 @@
             if (_currentTeleportPopoverController.isPopoverVisible)
                 [_currentTeleportPopoverController dismissPopoverAnimated:YES];
             else
-                [_currentTeleportPopoverController presentPopoverFromBarButtonItem:self.btnTeleport permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                [_currentTeleportPopoverController presentPopoverFromRect:self.btnTeleport.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             return NO;
         }
         else
@@ -116,7 +125,7 @@
             if (_currentTrajectoryPopoverController.isPopoverVisible)
                 [_currentTrajectoryPopoverController dismissPopoverAnimated:YES];
             else
-                [_currentTrajectoryPopoverController presentPopoverFromBarButtonItem:self.btnTrajectory permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                 [_currentTrajectoryPopoverController presentPopoverFromRect:self.btnTrajectory.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             
             return NO;
         }
@@ -196,7 +205,7 @@
 {
     int td = pxgRadiansToDegrees(theta);
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
-    self.txtPosition.text = text;
+    self.lblPosition.text = text;
     
     [self.mapController setRobotPositionAtX:x Y:y theta:theta];
 }
@@ -205,7 +214,7 @@
 {
     int td = pxgRadiansToDegrees(theta);
     NSString* text = [NSString stringWithFormat:@"x=%d y=%d t=%d", x, y, td];
-    self.txtObjective.text = text;
+    self.lblObjective.text = text;
     
     [self.mapController setObjectivePositionAtX:x Y:y theta:theta];
 }

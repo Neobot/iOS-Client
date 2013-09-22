@@ -20,12 +20,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnStartStrategy;
 @property (weak, nonatomic) IBOutlet UILabel *lblStrategy;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnTrajectory;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnTeleport;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFlush;
+@property (weak, nonatomic) IBOutlet UIButton *btnTrajectory;
+@property (weak, nonatomic) IBOutlet UIButton *btnTeleport;
+@property (weak, nonatomic) IBOutlet UIButton *btnFlush;
 
-@property (weak, nonatomic) IBOutlet UITextField *txtPosition;
-@property (weak, nonatomic) IBOutlet UITextField *txtObjective;
+@property (weak, nonatomic) IBOutlet UILabel *lblPosition;
+@property (weak, nonatomic) IBOutlet UILabel *lblObjective;
 
 @property (weak, nonatomic) IBOutlet UISlider *speedSlider;
 @property (weak, nonatomic) IBOutlet UILabel *lblSpeedTitle;

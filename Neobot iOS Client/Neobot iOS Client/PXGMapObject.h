@@ -16,14 +16,16 @@
 @property (strong, nonatomic) PXGRPoint* position;
 @property (nonatomic)         double     radius;
 
-@property (nonatomic)         BOOL       selectable;
-@property (nonatomic)         BOOL       selected;
-
 @property (strong, nonatomic, readonly)  UIView*    view;
 
 @property (strong, nonatomic) NSString*  imageName;
+
+@property (nonatomic)         BOOL       selectable;
+@property (nonatomic)         BOOL       selected;
+@property (nonatomic)         BOOL       animatedSelection;
 @property (strong, nonatomic) NSString*  selectedImageName;
-@property (nonatomic)         double       selectionAnimationSpeed; //radian/s
+@property (nonatomic)         double     selectionAnimationSpeed; //radian/s
+@property (strong, nonatomic) UIColor*   selectionAnimationColor;
 
 - (void)setBounds:(CGRect)bounds;
 - (void)updateAnimationAtTimeStamp:(CFTimeInterval)timestamp;

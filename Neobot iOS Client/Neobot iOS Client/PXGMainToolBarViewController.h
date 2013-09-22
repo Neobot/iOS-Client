@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
 
-@interface PXGMainToolBarViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, UIPopoverControllerDelegate>
+@interface PXGMainToolBarViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, UIPopoverControllerDelegate, UIToolbarDelegate>
 
 - (IBAction)displayConnectionView:(id)sender;
 - (IBAction)displayLogView:(id)sender;
@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblStatus;
 @property (weak, nonatomic) IBOutlet UILabel *lblCount;
 
+@property (weak, nonatomic) IBOutlet UIToolbar *mainToolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *connectionBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *optionsBtn;

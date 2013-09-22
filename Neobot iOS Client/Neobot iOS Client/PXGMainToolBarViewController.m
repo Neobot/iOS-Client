@@ -50,13 +50,9 @@
     self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsController];
     self.optionsPopoverController.delegate = self;
 
+    self.mainToolBar.delegate = self;
     
     [self.lblCount.layer setCornerRadius:8.0f];
-    
-    UIColor* lblCountColor = [UIColor colorWithRed:0.83 green:0.08 blue:0.0 alpha:1.0];
-    [self.lblCount setTextColor:lblCountColor];
-    [self.lblCount.layer setBorderColor:lblCountColor.CGColor];
-    self.lblCount.layer.borderWidth = 2;
     
     [self connectionStatusChangedTo:Disconnected];
     [self resetMessageCount];
@@ -66,6 +62,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
 }
 
 - (void)displayPopover:(UIPopoverController*)controller onButton:(UIBarButtonItem*)button
