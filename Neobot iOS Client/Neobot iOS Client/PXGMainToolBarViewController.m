@@ -28,10 +28,24 @@
     
     //init options default values
     if ([[NSUserDefaults standardUserDefaults] objectForKey:FOLLOW_THE_FINGER] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FOLLOW_THE_FINGER];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FOLLOW_THE_FINGER];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:FOLLOW_THE_FINGER_DELAY] == nil)
-        [[NSUserDefaults standardUserDefaults] setDouble:0.3 forKey:FOLLOW_THE_FINGER_DELAY];
+        [[NSUserDefaults standardUserDefaults] setDouble:0.5 forKey:FOLLOW_THE_FINGER_DELAY];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_PORT_NUMBERS_KEY] == nil)
+        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@15042] forKey:RECENT_PORT_NUMBERS_KEY];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_ROBOT_SERIALPORTS_KEY] == nil)
+          [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"/dev/ttyS3"] forKey:RECENT_ROBOT_SERIALPORTS_KEY];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_AX12_SERIALPORTS_KEY] == nil)
+        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"/dev/ttyS2"] forKey:RECENT_AX12_SERIALPORTS_KEY];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:TRAJECTORY_SPEED] == nil)
+        [[NSUserDefaults standardUserDefaults] setDouble:100 forKey:TRAJECTORY_SPEED];
+    
+
     
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];

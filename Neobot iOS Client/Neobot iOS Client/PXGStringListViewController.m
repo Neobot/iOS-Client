@@ -110,7 +110,7 @@
     [self getSectionIdForEditSection:&editSection andForRecentSection:&recentSection andForPropositionSection:&propositionSection forTableView:tableView];
     
     if (section == editSection)
-        return @"Curent value";
+        return @"New value";
     
     else if (section == recentSection)
         return @"Recently used";

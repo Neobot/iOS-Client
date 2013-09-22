@@ -38,6 +38,7 @@
         self.robot = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:350/2 andImage:@"Neobot.png"];
         self.robot.selectable = YES;
         self.robot.selectedImageName = @"NeobotSelected.png";
+        self.robot.animatedSelection = YES;
         self.target = [[PXGMapObject alloc] initWithPosition:[PXGRPoint rpointAtUnknownPosition] radius:100 andImage:@"target.png"];
         self.objects = [NSMutableArray array];
         self.robotControlEnabled = NO;
@@ -392,7 +393,7 @@
             }
             else
             {
-                [self.trajectoryToSend addObject:p];
+                [self.trajectoryToSend addObject:[self.trajectory lastObject]];
             }
         }
         

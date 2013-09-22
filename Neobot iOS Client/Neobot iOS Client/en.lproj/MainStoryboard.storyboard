@@ -247,33 +247,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdT-qO-97Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4730" y="-1865"/>
-        </scene>
-        <!--View Controller - Parameters-->
-        <scene sceneID="tPB-vU-198">
-            <objects>
-                <viewController id="cYt-LD-UJ9" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kv7-fZ-PpY"/>
-                        <viewControllerLayoutGuide type="bottom" id="Z1D-xt-7oZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dyJ-cR-3AB">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="955"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" enabled="NO" title="Parameters" image="File Transfer - Upload.png" id="hd5-5U-xeX"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Lo-it-Hfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3426" y="-1769"/>
+            <point key="canvasLocation" x="-3226" y="-1785"/>
         </scene>
         <!--String List View Controller-->
         <scene sceneID="E3t-ZN-DcL">
             <objects>
                 <tableViewController id="FQF-uT-WEn" customClass="PXGStringListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0yi-Kv-0Ag">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="762"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -333,12 +314,12 @@
             </objects>
             <point key="canvasLocation" x="-4785" y="-4155"/>
         </scene>
-        <!--Comm View Controller-->
+        <!--Comm View Controller - Connection-->
         <scene sceneID="xUo-gc-td2">
             <objects>
                 <tableViewController autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8y5-GQ-Dwb" customClass="PXGCommViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tTb-AM-gGJ">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="762"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -679,7 +660,7 @@
                             <outlet property="delegate" destination="8y5-GQ-Dwb" id="oFe-52-D6M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bkn-wL-6Ub"/>
+                    <navigationItem key="navigationItem" title="Connection" id="bkn-wL-6Ub"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="btnAskRobotControl" destination="QWT-xT-IWa" id="c3Q-Td-roA"/>
@@ -820,13 +801,15 @@
         <!--Navigation Controller-->
         <scene sceneID="Ays-7y-swd">
             <objects>
-                <navigationController storyboardIdentifier="CommViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fd2-vz-0D2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CommViewController" definesPresentationContext="YES" modalPresentationStyle="pageSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fd2-vz-0D2" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="av5-nt-YzU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="av5-nt-YzU">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nmO-HL-mhv">
-                        <rect key="frame" x="0.0" y="960" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -892,7 +875,6 @@
                         <segue destination="CIm-wt-BGV" kind="relationship" relationship="viewControllers" id="vvt-o7-Fpc"/>
                         <segue destination="6ac-eB-3vB" kind="relationship" relationship="viewControllers" id="fcn-PW-Sgq"/>
                         <segue destination="gcV-ET-ADg" kind="relationship" relationship="viewControllers" id="pqu-xo-Ftj"/>
-                        <segue destination="cYt-LD-UJ9" kind="relationship" relationship="viewControllers" id="GhX-1l-TDt"/>
                         <segue destination="agc-c2-amO" kind="relationship" relationship="viewControllers" id="oF9-jv-i9x"/>
                     </connections>
                 </tabBarController>
@@ -944,7 +926,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xef-Aq-POs">
                                 <rect key="frame" x="20" y="36" width="126" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="171" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bB9-qf-afC">
@@ -985,7 +967,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAT-An-rFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5186" y="-3219"/>
+            <point key="canvasLocation" x="-5148" y="-3217"/>
         </scene>
         <!--View Controller - Odometry-->
         <scene sceneID="vKe-T1-o1q">
@@ -1019,7 +1001,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sensors" image="sensor.png" id="dwj-VR-4Eg"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="Sensors" image="sensor.png" id="dwj-VR-4Eg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vco-jf-hOA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1311,8 +1293,13 @@
                 <navigationController definesPresentationContext="YES" modalPresentationStyle="pageSheet" id="flg-Bt-doR" sceneMemberID="viewController">
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t7E-u0-VIy">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="bID-bj-Ndf">
+                        <rect key="frame" x="0.0" y="960" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="CU6-Mi-I1O" kind="relationship" relationship="rootViewController" id="VEG-fM-aig"/>
                     </connections>
@@ -1514,7 +1501,6 @@
     </scenes>
     <resources>
         <image name="Android.png" width="30" height="30"/>
-        <image name="File Transfer - Upload.png" width="30" height="30"/>
         <image name="Games.png" width="30" height="30"/>
         <image name="Library.png" width="30" height="30"/>
         <image name="Network.png" width="30" height="30"/>
