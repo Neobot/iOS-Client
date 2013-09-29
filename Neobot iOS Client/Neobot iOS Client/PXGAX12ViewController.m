@@ -35,7 +35,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)valueChanged:(PXGStickControlView *)sender
+- (void)addAx12WithId:(int)ax12Id
 {
+   
 }
+
 @end

@@ -10,6 +10,7 @@
 #import "PXGStickControlView.h"
 
 @interface PXGAX12ViewController : UIViewController
-- (IBAction)valueChanged:(PXGStickControlView *)sender;
+
+- (void)addAx12WithId:(int)ax12Id;
 
 @end
