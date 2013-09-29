@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="sQv-fq-hg2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EGA-Kg-nAe">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="955"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="906"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DM-Zo-miq">
-                                <rect key="frame" x="0.0" y="31" width="769" height="874"/>
+                                <rect key="frame" x="0.0" y="31" width="769" height="875"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="mjW-dG-fu2" kind="embed" identifier="MapSegue" id="D2Q-Lg-tpS"/>
@@ -179,7 +179,7 @@
                             <constraint firstItem="l7B-EU-iAx" firstAttribute="top" secondItem="VKQ-P4-Par" secondAttribute="bottom" constant="8" symbolic="YES" id="IcZ-WI-RYq"/>
                             <constraint firstItem="taV-59-Xi4" firstAttribute="top" secondItem="EGA-Kg-nAe" secondAttribute="top" id="JZo-3C-WE1"/>
                             <constraint firstAttribute="trailing" secondItem="4DM-Zo-miq" secondAttribute="trailing" constant="-1" id="LEo-f4-Lo7"/>
-                            <constraint firstItem="sQv-fq-hg2" firstAttribute="top" secondItem="4DM-Zo-miq" secondAttribute="bottom" constant="1" id="LaA-Bb-LTg"/>
+                            <constraint firstItem="sQv-fq-hg2" firstAttribute="top" secondItem="4DM-Zo-miq" secondAttribute="bottom" id="LaA-Bb-LTg"/>
                             <constraint firstItem="VKQ-P4-Par" firstAttribute="baseline" secondItem="v3n-50-bCo" secondAttribute="baseline" id="Z0u-1Q-aSa"/>
                             <constraint firstItem="zSv-CV-PW7" firstAttribute="centerX" secondItem="taV-59-Xi4" secondAttribute="centerX" id="ZhU-Vh-9qI"/>
                             <constraint firstItem="VKQ-P4-Par" firstAttribute="leading" secondItem="v3n-50-bCo" secondAttribute="trailing" constant="8" symbolic="YES" id="bd5-wb-wi7"/>
@@ -193,6 +193,7 @@
                             <constraint firstItem="4DM-Zo-miq" firstAttribute="top" secondItem="taV-59-Xi4" secondAttribute="bottom" id="zN0-TC-mgI"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Remote" image="Games.png" id="HVD-yl-RWr"/>
                     <connections>
                         <outlet property="btnFlush" destination="Ri5-By-Hhl" id="8OC-JS-CAB"/>
@@ -214,7 +215,7 @@
         <!--View Controller-->
         <scene sceneID="jCV-hf-KF2">
             <objects>
-                <viewController id="3XC-M3-qeE" sceneMemberID="viewController">
+                <viewController id="3XC-M3-qeE" customClass="PXGAX12ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dfk-nh-fV3"/>
                         <viewControllerLayoutGuide type="bottom" id="5nn-CZ-tFe"/>
@@ -334,6 +335,16 @@
                                     <constraint firstAttribute="centerY" secondItem="MSC-Pk-GcL" secondAttribute="centerY" id="hgr-Ne-kZU"/>
                                     <constraint firstItem="peI-xr-swJ" firstAttribute="baseline" secondItem="MSC-Pk-GcL" secondAttribute="baseline" id="pKL-lb-4kv"/>
                                 </constraints>
+                            </view>
+                            <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hn3-2g-9iw" customClass="PXGStickControlView">
+                                <rect key="frame" x="57" y="208" width="114" height="183"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                </accessibility>
+                                <connections>
+                                    <action selector="valueChanged:" destination="3XC-M3-qeE" eventType="valueChanged" id="LUI-hG-DN4"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -1449,7 +1460,7 @@
                         <viewControllerLayoutGuide type="bottom" id="vgv-hl-IHc"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bSr-cn-58J">
-                        <rect key="frame" x="0.0" y="0.0" width="769" height="874"/>
+                        <rect key="frame" x="0.0" y="0.0" width="769" height="875"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.89992016419999998" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1677,7 +1688,6 @@
         <image name="Library.png" width="30" height="30"/>
         <image name="Network.png" width="30" height="30"/>
         <image name="Task Manager.png" width="30" height="30"/>
-        <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="Tools.png" width="32" height="32"/>
         <image name="sensor.png" width="30" height="30"/>
