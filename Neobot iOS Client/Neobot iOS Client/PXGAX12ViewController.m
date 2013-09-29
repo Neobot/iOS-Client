@@ -37,6 +37,5 @@
 
 - (IBAction)valueChanged:(PXGStickControlView *)sender
 {
-    NSLog([NSString stringWithFormat:@"%f", sender.value]);
 }
 @end

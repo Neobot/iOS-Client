@@ -190,16 +190,10 @@
 			isa = PBXGroup;
 			children = (
 				94835D4717999D8F0024A789 /* Comm */,
-				94E5C5DB1791FE5100333FD5 /* TCP */,
-				94835D57179ABDAE0024A789 /* Main View Controllers */,
-				94F30F0217A52E1D00E1805D /* Sub View Controllers */,
-				942BBE6217B94AF000EFF044 /* Map */,
+				94835D57179ABDAE0024A789 /* View Controllers */,
 				942BBE6317B94B1600EFF044 /* General */,
 				9425D38F1791565000C6E883 /* PXGAppDelegate.h */,
 				9425D3901791565000C6E883 /* PXGAppDelegate.m */,
-				9405E88917A04A9300B718B3 /* PXGParametersKeys.h */,
-				94344DF217F6F889006ABBCD /* PXGStickControlView.h */,
-				94344DF317F6F889006ABBCD /* PXGStickControlView.m */,
 				9425D3981791565000C6E883 /* MainStoryboard.storyboard */,
 				9425D3871791565000C6E883 /* Supporting Files */,
 			);
@@ -225,6 +219,66 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9428504617F84F3500230DD2 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				94835D51179ABB860024A789 /* PXGCommViewController.h */,
+				94835D52179ABB860024A789 /* PXGCommViewController.m */,
+				94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */,
+				94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */,
+			);
+			name = Connection;
+			sourceTree = "<group>";
+		};
+		9428504717F84F4B00230DD2 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				94835D5A179AC9F70024A789 /* PXGLogViewController.h */,
+				94835D5B179AC9F70024A789 /* PXGLogViewController.m */,
+			);
+			name = Log;
+			sourceTree = "<group>";
+		};
+		9428504817F84F5500230DD2 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				94A423A717DCC14000D2E36B /* PXGOptionsViewController.h */,
+				94A423A817DCC14100D2E36B /* PXGOptionsViewController.m */,
+			);
+			name = Options;
+			sourceTree = "<group>";
+		};
+		9428504917F84F6300230DD2 /* Remote Control */ = {
+			isa = PBXGroup;
+			children = (
+				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
+				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
+				94AC01EB17A2E863005A47F3 /* PXGStrategySelectionViewController.h */,
+				94AC01EC17A2E863005A47F3 /* PXGStrategySelectionViewController.m */,
+				94AC01EE17A4060B005A47F3 /* PXGTeleportViewController.h */,
+				94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */,
+				94AC01F417A41D54005A47F3 /* PXGCreatePointViewController.h */,
+				94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */,
+				94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */,
+				94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */,
+				94F30F0617AACAA900E1805D /* PXGTrajectoryEditionViewController.h */,
+				94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */,
+				942BBE6217B94AF000EFF044 /* Map */,
+			);
+			name = "Remote Control";
+			sourceTree = "<group>";
+		};
+		9428504A17F84F8900230DD2 /* AX-12 */ = {
+			isa = PBXGroup;
+			children = (
+				94344DF517F701FB006ABBCD /* PXGAX12ViewController.h */,
+				94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */,
+				94344DF217F6F889006ABBCD /* PXGStickControlView.h */,
+				94344DF317F6F889006ABBCD /* PXGStickControlView.m */,
+			);
+			name = "AX-12";
+			sourceTree = "<group>";
+		};
 		942BBE6217B94AF000EFF044 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +293,7 @@
 		942BBE6317B94B1600EFF044 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				9405E88917A04A9300B718B3 /* PXGParametersKeys.h */,
 				94AC01F117A40CBA005A47F3 /* PXGTools.h */,
 				94AC01F217A41139005A47F3 /* PXGTools.c */,
 				942BBE5C17B9461C00EFF044 /* PXGRPoint.h */,
@@ -266,6 +321,7 @@
 		94835D4717999D8F0024A789 /* Comm */ = {
 			isa = PBXGroup;
 			children = (
+				94E5C5DB1791FE5100333FD5 /* TCP */,
 				94835D43179849BE0024A789 /* PXGCommInterface.h */,
 				94835D44179849BE0024A789 /* PXGCommInterface.m */,
 				94835D461798593D0024A789 /* PXGInstructions.h */,
@@ -277,23 +333,18 @@
 			name = Comm;
 			sourceTree = "<group>";
 		};
-		94835D57179ABDAE0024A789 /* Main View Controllers */ = {
+		94835D57179ABDAE0024A789 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				94835D54179ABDA20024A789 /* PXGMainToolBarViewController.h */,
 				94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */,
-				94A423A717DCC14000D2E36B /* PXGOptionsViewController.h */,
-				94A423A817DCC14100D2E36B /* PXGOptionsViewController.m */,
-				94835D5A179AC9F70024A789 /* PXGLogViewController.h */,
-				94835D5B179AC9F70024A789 /* PXGLogViewController.m */,
-				94835D51179ABB860024A789 /* PXGCommViewController.h */,
-				94835D52179ABB860024A789 /* PXGCommViewController.m */,
-				9425D39B1791565000C6E883 /* PXGRemoteViewController.h */,
-				9425D39C1791565000C6E883 /* PXGRemoteViewController.m */,
-				94344DF517F701FB006ABBCD /* PXGAX12ViewController.h */,
-				94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */,
+				9428504617F84F3500230DD2 /* Connection */,
+				9428504717F84F4B00230DD2 /* Log */,
+				9428504817F84F5500230DD2 /* Options */,
+				9428504917F84F6300230DD2 /* Remote Control */,
+				9428504A17F84F8900230DD2 /* AX-12 */,
 			);
-			name = "Main View Controllers";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		94E5C5DB1791FE5100333FD5 /* TCP */ = {
@@ -303,25 +354,6 @@
 				9433FE3A1795BB4F0092A43B /* GCDAsyncSocket.m */,
 			);
 			name = TCP;
-			sourceTree = "<group>";
-		};
-		94F30F0217A52E1D00E1805D /* Sub View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */,
-				94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */,
-				94AC01EB17A2E863005A47F3 /* PXGStrategySelectionViewController.h */,
-				94AC01EC17A2E863005A47F3 /* PXGStrategySelectionViewController.m */,
-				94AC01EE17A4060B005A47F3 /* PXGTeleportViewController.h */,
-				94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */,
-				94AC01F417A41D54005A47F3 /* PXGCreatePointViewController.h */,
-				94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */,
-				94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */,
-				94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */,
-				94F30F0617AACAA900E1805D /* PXGTrajectoryEditionViewController.h */,
-				94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */,
-			);
-			name = "Sub View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
