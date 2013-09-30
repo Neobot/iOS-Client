@@ -7,6 +7,8 @@
 //
 
 #import "PXGAX12CollectionViewController.h"
+#import "PXGAX12CollectionCell.h"
+#import "PXGAX12Data.h"
 
 @interface PXGAX12CollectionViewController ()
 
@@ -26,7 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    self.ax12 = @[[PXGAX12Data ax12WithId:2], [PXGAX12Data ax12WithId:42], [PXGAX12Data ax12WithId:1],
+                  [PXGAX12Data ax12WithId:4], [PXGAX12Data ax12WithId:25], [PXGAX12Data ax12WithId:7]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,18 +41,22 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 6;
+    return self.ax12.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell* cell;
-    
     static NSString *txtCellIdentifier = @"AX12Cell";
-    cell = [collectionView dequeueReusableCellWithReuseIdentifier:txtCellIdentifier forIndexPath:indexPath];
+    
+    PXGAX12CollectionCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:txtCellIdentifier forIndexPath:indexPath];
     [cell.layer setCornerRadius:8.0f];
     //[cell.layer setBorderWidth:3];
     //[cell.layer setBorderColor:[UIColor grayColor].CGColor];
+    
+    PXGAX12Data* data = [self.ax12 objectAtIndex:indexPath.row];
+    [cell setId:data.ax12ID];
+    [cell setPosition:data.position];
+    [cell.switchLocked setOn:data.locked];
     
     return cell;
 }

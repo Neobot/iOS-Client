@@ -10,4 +10,6 @@
 
 @interface PXGAX12CollectionViewController : UICollectionViewController
 
+@property (strong, nonatomic) NSArray* ax12;
+
 @end

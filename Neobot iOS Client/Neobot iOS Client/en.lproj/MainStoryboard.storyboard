@@ -389,7 +389,7 @@
                             <inset key="sectionInset" minX="80" minY="20" maxX="80" maxY="40"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AX12Cell" id="S9U-lk-yJw">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AX12Cell" id="S9U-lk-yJw" customClass="PXGAX12CollectionCell">
                                 <rect key="frame" x="80" y="20" width="150" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -402,6 +402,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="47" id="ZrH-qP-EXF"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="speedChanged:" destination="S9U-lk-yJw" eventType="valueChanged" id="DHx-sv-ogG"/>
+                                            </connections>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARR-bC-fD5">
                                             <rect key="frame" x="47" y="0.0" width="103" height="250"/>
@@ -417,6 +420,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FfP-Mr-Bq5">
                                                     <rect key="frame" x="27" y="211" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="lockedStatusChanged:" destination="S9U-lk-yJw" eventType="valueChanged" id="Ixg-LN-Yxw"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-ng-gdi">
                                                     <rect key="frame" x="23" y="188" width="57" height="21"/>
@@ -435,6 +441,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="positionChanged:" destination="S9U-lk-yJw" eventType="editingDidEnd" id="ZSP-Bj-nzd"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxG-hq-6td">
                                                     <rect key="frame" x="27" y="114" width="50" height="21"/>
@@ -482,6 +491,13 @@
                                     <constraint firstAttribute="trailing" secondItem="ARR-bC-fD5" secondAttribute="trailing" id="pNb-qg-evO"/>
                                 </constraints>
                                 <size key="customSize" width="150" height="250"/>
+                                <connections>
+                                    <outlet property="lblID" destination="unD-5x-ghg" id="KOp-E3-5m6"/>
+                                    <outlet property="lblSpeed" destination="c6S-mS-qxe" id="2di-2h-3kS"/>
+                                    <outlet property="stick" destination="iDL-Hs-3dF" id="TXr-Xf-Odp"/>
+                                    <outlet property="switchLocked" destination="FfP-Mr-Bq5" id="E1c-40-Vhu"/>
+                                    <outlet property="txtPosition" destination="MH6-Ya-cfF" id="j6g-e6-QzF"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

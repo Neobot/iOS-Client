@@ -31,6 +31,8 @@
 		9425D3C217915AEF00C6E883 /* Task Manager.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3BA17915AEF00C6E883 /* Task Manager.png */; };
 		9425D3C317915AEF00C6E883 /* Toolbar - Playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */; };
 		9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */; };
+		9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */; };
+		9428505617F9E78A00230DD2 /* PXGAX12Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428505517F9E78A00230DD2 /* PXGAX12Data.m */; };
 		942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE5D17B9461C00EFF044 /* PXGRPoint.m */; };
 		942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE6017B9473200EFF044 /* PXGMapObject.m */; };
 		942BBE6517BBE1A100EFF044 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BBE6417BBE1A100EFF044 /* QuartzCore.framework */; };
@@ -92,6 +94,10 @@
 		9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toolbar - Playlist.png"; sourceTree = "<group>"; };
 		9428504E17F8599600230DD2 /* PXGAX12CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12CollectionViewController.h; sourceTree = "<group>"; };
 		9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12CollectionViewController.m; sourceTree = "<group>"; };
+		9428505117F9E5D600230DD2 /* PXGAX12CollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12CollectionCell.h; sourceTree = "<group>"; };
+		9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12CollectionCell.m; sourceTree = "<group>"; };
+		9428505417F9E78A00230DD2 /* PXGAX12Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12Data.h; sourceTree = "<group>"; };
+		9428505517F9E78A00230DD2 /* PXGAX12Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12Data.m; sourceTree = "<group>"; };
 		942BBE5C17B9461C00EFF044 /* PXGRPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGRPoint.h; sourceTree = "<group>"; };
 		942BBE5D17B9461C00EFF044 /* PXGRPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGRPoint.m; sourceTree = "<group>"; };
 		942BBE5F17B9473200EFF044 /* PXGMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapObject.h; sourceTree = "<group>"; };
@@ -280,6 +286,10 @@
 				94344DF317F6F889006ABBCD /* PXGStickControlView.m */,
 				9428504E17F8599600230DD2 /* PXGAX12CollectionViewController.h */,
 				9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */,
+				9428505117F9E5D600230DD2 /* PXGAX12CollectionCell.h */,
+				9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */,
+				9428505417F9E78A00230DD2 /* PXGAX12Data.h */,
+				9428505517F9E78A00230DD2 /* PXGAX12Data.m */,
 			);
 			name = "AX-12";
 			sourceTree = "<group>";
@@ -448,6 +458,7 @@
 				9425D39D1791565000C6E883 /* PXGRemoteViewController.m in Sources */,
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,
 				9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */,
+				9428505617F9E78A00230DD2 /* PXGAX12Data.m in Sources */,
 				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
 				9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */,
 				94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */,
@@ -456,6 +467,7 @@
 				94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */,
 				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
+				9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */,
 				94AC01ED17A2E863005A47F3 /* PXGStrategySelectionViewController.m in Sources */,
 				94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */,
 				94AC01F317A41139005A47F3 /* PXGTools.c in Sources */,
