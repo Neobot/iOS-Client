@@ -33,6 +33,7 @@
 		9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */; };
 		9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */; };
 		9428505617F9E78A00230DD2 /* PXGAX12Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428505517F9E78A00230DD2 /* PXGAX12Data.m */; };
+		9428505817FDB63000230DD2 /* Table2014.png in Resources */ = {isa = PBXBuildFile; fileRef = 9428505717FDB63000230DD2 /* Table2014.png */; };
 		942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE5D17B9461C00EFF044 /* PXGRPoint.m */; };
 		942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE6017B9473200EFF044 /* PXGMapObject.m */; };
 		942BBE6517BBE1A100EFF044 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BBE6417BBE1A100EFF044 /* QuartzCore.framework */; };
@@ -55,7 +56,6 @@
 		94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */; };
 		94AC01F317A41139005A47F3 /* PXGTools.c in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F217A41139005A47F3 /* PXGTools.c */; };
 		94AC01F617A41D55005A47F3 /* PXGCreatePointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */; };
-		94CE6078179190E600D4EC6E /* Table2013.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CE6077179190E600D4EC6E /* Table2013.png */; };
 		94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */; };
 		94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */; };
 		94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */; };
@@ -98,6 +98,7 @@
 		9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12CollectionCell.m; sourceTree = "<group>"; };
 		9428505417F9E78A00230DD2 /* PXGAX12Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12Data.h; sourceTree = "<group>"; };
 		9428505517F9E78A00230DD2 /* PXGAX12Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12Data.m; sourceTree = "<group>"; };
+		9428505717FDB63000230DD2 /* Table2014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2014.png; sourceTree = "<group>"; };
 		942BBE5C17B9461C00EFF044 /* PXGRPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGRPoint.h; sourceTree = "<group>"; };
 		942BBE5D17B9461C00EFF044 /* PXGRPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGRPoint.m; sourceTree = "<group>"; };
 		942BBE5F17B9473200EFF044 /* PXGMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapObject.h; sourceTree = "<group>"; };
@@ -137,7 +138,6 @@
 		94AC01F217A41139005A47F3 /* PXGTools.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc.preprocessed; fileEncoding = 4; path = PXGTools.c; sourceTree = "<group>"; };
 		94AC01F417A41D54005A47F3 /* PXGCreatePointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCreatePointViewController.h; sourceTree = "<group>"; };
 		94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCreatePointViewController.m; sourceTree = "<group>"; };
-		94CE6077179190E600D4EC6E /* Table2013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2013.png; sourceTree = "<group>"; };
 		94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGStringListViewController.h; sourceTree = "<group>"; };
 		94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStringListViewController.m; sourceTree = "<group>"; };
 		94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTrajectoriesViewController.h; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				9433FE2F1792AED10092A43B /* Tab Images */,
-				94CE6077179190E600D4EC6E /* Table2013.png */,
+				9428505717FDB63000230DD2 /* Table2014.png */,
 				942049AE17B7D47100B9E5AC /* Neobot.png */,
 				9488274817D8FB400055C206 /* NeobotSelected.png */,
 				9488274617D3AEB40055C206 /* target.png */,
@@ -433,12 +433,12 @@
 				9425D3BC17915AEF00C6E883 /* Android.png in Resources */,
 				9425D3BD17915AEF00C6E883 /* File Transfer - Upload.png in Resources */,
 				9425D3BE17915AEF00C6E883 /* Games.png in Resources */,
+				9428505817FDB63000230DD2 /* Table2014.png in Resources */,
 				9425D3BF17915AEF00C6E883 /* Library.png in Resources */,
 				9425D3C017915AEF00C6E883 /* Network.png in Resources */,
 				9425D3C117915AEF00C6E883 /* sensor.png in Resources */,
 				9425D3C217915AEF00C6E883 /* Task Manager.png in Resources */,
 				9425D3C317915AEF00C6E883 /* Toolbar - Playlist.png in Resources */,
-				94CE6078179190E600D4EC6E /* Table2013.png in Resources */,
 				942049AF17B7D47100B9E5AC /* Neobot.png in Resources */,
 				9488274717D3AEB40055C206 /* target.png in Resources */,
 				9488274917D8FB400055C206 /* NeobotSelected.png in Resources */,
