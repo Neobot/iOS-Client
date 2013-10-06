@@ -77,7 +77,9 @@
 
 - (void)moveAx12:(int)ax12ID fromRow:(int)fromRow toRow:(int)toRow
 {
-    [self.ax12List exchangeObjectAtIndex:fromRow withObjectAtIndex:toRow];
+    PXGAX12Data* data = [self.ax12List objectAtIndex:fromRow];
+    [self.ax12List removeObjectAtIndex:fromRow];
+    [self.ax12List insertObject:data atIndex:toRow];
     
     NSIndexPath* fromIndexPath = [NSIndexPath indexPathForRow:fromRow inSection:0];
     NSIndexPath* toIndexPath = [NSIndexPath indexPathForRow:toRow inSection:0];

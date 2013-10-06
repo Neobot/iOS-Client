@@ -91,15 +91,31 @@
     } 
 }
 
-// Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     int movedID = [[self.ax12IdList objectAtIndex:fromIndexPath.row] intValue];
-    [self.ax12IdList exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
+    
+    id obj = [self.ax12IdList objectAtIndex:fromIndexPath.row];
+    [self.ax12IdList removeObjectAtIndex:fromIndexPath.row];
+    [self.ax12IdList insertObject:obj atIndex:toIndexPath.row];
     
     if ([self.delegate respondsToSelector:@selector(ax12:movedFromRow:toRow:)])
         [self.delegate ax12:movedID movedFromRow:fromIndexPath.row toRow:toIndexPath.row];
 
+}
+
+//Restrict move to original section
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    if (sourceIndexPath.section != proposedDestinationIndexPath.section) {
+        NSInteger row = 0;
+        if (sourceIndexPath.section < proposedDestinationIndexPath.section) {
+            row = [tableView numberOfRowsInSection:sourceIndexPath.section] - 1;
+        }
+        return [NSIndexPath indexPathForRow:row inSection:sourceIndexPath.section];
+    }
+    
+    return proposedDestinationIndexPath;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath

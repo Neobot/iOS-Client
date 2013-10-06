@@ -195,7 +195,9 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    [self.trajectoryPoints exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
+    id obj = [self.trajectoryPoints objectAtIndex:fromIndexPath.row];
+    [self.trajectoryPoints removeObjectAtIndex:fromIndexPath.row];
+    [self.trajectoryPoints insertObject:obj atIndex:toIndexPath.row];
     
     if ([self.delegate respondsToSelector:@selector(trajectoryPointsChanged:)])
         [self.delegate trajectoryPointsChanged:self.trajectoryPoints];
