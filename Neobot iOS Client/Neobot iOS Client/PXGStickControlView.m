@@ -131,13 +131,13 @@
 - (double)cursorYPositionFromValue:(double)value
 {
     double diffFromCenter = value * _length / 100.0;
-    return self.bounds.size.width / 2.0 - diffFromCenter;
+    return self.bounds.size.width / 2.0 + diffFromCenter;
 }
 
 - (double)valueFromCursorYPosition:(double)pos
 {
     double diffFromCenter = self.bounds.size.width / 2.0 - pos;
-    return 100.0 * diffFromCenter / _length;
+    return -100.0 * diffFromCenter / _length;
 }
 
 - (void)drawRect:(CGRect)rect

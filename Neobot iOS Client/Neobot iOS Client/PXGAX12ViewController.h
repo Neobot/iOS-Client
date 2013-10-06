@@ -11,6 +11,12 @@
 
 @interface PXGAX12ViewController : UIViewController
 
-- (void)addAx12WithId:(int)ax12Id;
+@property (weak, nonatomic) IBOutlet UISlider *sliderSpeed;
+@property (weak, nonatomic) IBOutlet UILabel *lblSpeed;
+@property (weak, nonatomic) IBOutlet UISlider *sliderTorque;
+@property (weak, nonatomic) IBOutlet UILabel *lblTorque;
+
+- (IBAction)speedChanged;
+- (IBAction)torqueChanged;
 
 @end

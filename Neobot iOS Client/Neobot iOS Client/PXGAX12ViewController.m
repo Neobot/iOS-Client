@@ -8,6 +8,7 @@
 
 #import "PXGAX12ViewController.h"
 #import "PXGStickControlView.h"
+#import "PXGParametersKeys.h"
 
 @interface PXGAX12ViewController ()
 
@@ -15,18 +16,16 @@
 
 @implementation PXGAX12ViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.sliderSpeed.value = [[NSUserDefaults standardUserDefaults] floatForKey:AX12_MAX_SPEED];
+    self.sliderTorque.value = [[NSUserDefaults standardUserDefaults] floatForKey:AX12_MAX_TORQUE];
+    [self speedChanged];
+    [self torqueChanged];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,9 +34,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)addAx12WithId:(int)ax12Id
+- (IBAction)speedChanged
 {
-   
+    int speed = self.sliderSpeed.value;
+    self.lblSpeed.text = [NSString stringWithFormat:@"%i%%", speed];
+    [[NSUserDefaults standardUserDefaults] setFloat:self.sliderSpeed.value forKey:AX12_MAX_SPEED];
+}
+
+- (IBAction)torqueChanged
+{
+    int torque = self.sliderTorque.value;
+    self.lblTorque.text = [NSString stringWithFormat:@"%i%%", torque];
+    [[NSUserDefaults standardUserDefaults] setFloat:self.sliderTorque.value forKey:AX12_MAX_TORQUE];
 }
 
 @end

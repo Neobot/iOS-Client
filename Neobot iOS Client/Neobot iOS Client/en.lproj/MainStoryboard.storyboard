@@ -245,6 +245,9 @@
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ieP-M0-bSx">
                                         <rect key="frame" x="92" y="0.0" width="269" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="speedChanged" destination="3XC-M3-qeE" eventType="valueChanged" id="EBc-4K-AIP"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC0-p2-cFy">
                                         <rect key="frame" x="0.0" y="0.0" width="86" height="33"/>
@@ -256,7 +259,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbt-BY-Vq0">
-                                        <rect key="frame" x="208" y="41" width="37" height="21"/>
+                                        <rect key="frame" x="208" y="37" width="37" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
@@ -268,7 +271,7 @@
                                     <constraint firstItem="SC0-p2-cFy" firstAttribute="height" secondItem="ieP-M0-bSx" secondAttribute="height" id="7xK-57-XIm"/>
                                     <constraint firstItem="SC0-p2-cFy" firstAttribute="leading" secondItem="Lz0-L7-jQx" secondAttribute="leading" id="Y1D-I1-nMA"/>
                                     <constraint firstAttribute="height" constant="66" id="hKD-PE-dcG"/>
-                                    <constraint firstItem="sbt-BY-Vq0" firstAttribute="top" secondItem="ieP-M0-bSx" secondAttribute="bottom" constant="8" id="mp4-JN-qyE"/>
+                                    <constraint firstItem="sbt-BY-Vq0" firstAttribute="top" secondItem="ieP-M0-bSx" secondAttribute="bottom" constant="4" id="mp4-JN-qyE"/>
                                     <constraint firstItem="SC0-p2-cFy" firstAttribute="top" secondItem="Lz0-L7-jQx" secondAttribute="top" id="ncR-7i-Wau"/>
                                     <constraint firstItem="ieP-M0-bSx" firstAttribute="leading" secondItem="SC0-p2-cFy" secondAttribute="trailing" constant="8" id="s0T-oK-3Uy"/>
                                     <constraint firstItem="ieP-M0-bSx" firstAttribute="centerX" secondItem="sbt-BY-Vq0" secondAttribute="centerX" id="tVM-f3-P3L"/>
@@ -281,6 +284,9 @@
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="KcE-LG-nwF">
                                         <rect key="frame" x="94" y="0.0" width="267" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="torqueChanged" destination="3XC-M3-qeE" eventType="valueChanged" id="iwm-bJ-UPY"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max torque" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kw-ll-n9e">
                                         <rect key="frame" x="0.0" y="6" width="88" height="21"/>
@@ -292,7 +298,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBJ-fC-dOb">
-                                        <rect key="frame" x="209" y="41" width="37" height="21"/>
+                                        <rect key="frame" x="209" y="37" width="37" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
@@ -300,7 +306,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="KcE-LG-nwF" firstAttribute="leading" secondItem="8kw-ll-n9e" secondAttribute="trailing" constant="8" id="2xN-d3-iDi"/>
-                                    <constraint firstItem="IBJ-fC-dOb" firstAttribute="top" secondItem="KcE-LG-nwF" secondAttribute="bottom" constant="8" id="4HY-tM-7R2"/>
+                                    <constraint firstItem="IBJ-fC-dOb" firstAttribute="top" secondItem="KcE-LG-nwF" secondAttribute="bottom" constant="4" id="4HY-tM-7R2"/>
                                     <constraint firstAttribute="trailing" secondItem="KcE-LG-nwF" secondAttribute="trailing" id="IVJ-k7-duA"/>
                                     <constraint firstItem="8kw-ll-n9e" firstAttribute="top" secondItem="Xvy-HR-cCs" secondAttribute="top" constant="6" id="Pn9-zR-9Fx"/>
                                     <constraint firstItem="KcE-LG-nwF" firstAttribute="centerY" secondItem="8kw-ll-n9e" secondAttribute="centerY" id="apt-PV-abp"/>
@@ -369,6 +375,12 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="lblSpeed" destination="sbt-BY-Vq0" id="aQ7-oE-byA"/>
+                        <outlet property="lblTorque" destination="IBJ-fC-dOb" id="ykf-4e-skc"/>
+                        <outlet property="sliderSpeed" destination="ieP-M0-bSx" id="rc6-vQ-7J8"/>
+                        <outlet property="sliderTorque" destination="KcE-LG-nwF" id="DFy-dJ-I0t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="deU-WD-TIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1251,7 +1263,7 @@
                                 <rect key="frame" x="0.0" y="69" width="768" height="955"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="4" kind="embed" id="aUT-gt-veJ"/>
+                                    <segue destination="4" kind="embed" identifier="tabSegue" id="aUT-gt-veJ"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xef-Aq-POs">
@@ -1818,7 +1830,6 @@
         <image name="Library.png" width="30" height="30"/>
         <image name="Network.png" width="30" height="30"/>
         <image name="Task Manager.png" width="30" height="30"/>
-        <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="Tools.png" width="32" height="32"/>
         <image name="sensor.png" width="30" height="30"/>

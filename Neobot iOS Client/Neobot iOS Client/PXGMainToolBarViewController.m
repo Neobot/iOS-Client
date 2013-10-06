@@ -37,7 +37,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@15042] forKey:RECENT_PORT_NUMBERS_KEY];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_ROBOT_SERIALPORTS_KEY] == nil)
-          [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"/dev/ttyS3"] forKey:RECENT_ROBOT_SERIALPORTS_KEY];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"/dev/ttyS3"] forKey:RECENT_ROBOT_SERIALPORTS_KEY];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_AX12_SERIALPORTS_KEY] == nil)
         [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"/dev/ttyS2"] forKey:RECENT_AX12_SERIALPORTS_KEY];
@@ -45,7 +45,11 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:TRAJECTORY_SPEED] == nil)
         [[NSUserDefaults standardUserDefaults] setDouble:100 forKey:TRAJECTORY_SPEED];
     
-
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:AX12_MAX_SPEED] == nil)
+        [[NSUserDefaults standardUserDefaults] setFloat:50 forKey:AX12_MAX_SPEED];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:AX12_MAX_TORQUE] == nil)
+        [[NSUserDefaults standardUserDefaults] setFloat:50 forKey:AX12_MAX_TORQUE];
     
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
@@ -70,12 +74,35 @@
     
     [self connectionStatusChangedTo:Disconnected];
     [self resetMessageCount];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:[UIApplication sharedApplication]];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:CURRENT_TAB] != nil)
+        self.tabBarController.selectedIndex = [[NSUserDefaults standardUserDefaults] integerForKey:CURRENT_TAB];
+
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.tabBarController.selectedIndex forKey:CURRENT_TAB];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"tabSegue"])
+    {
+        self.tabBarController = (UITabBarController*)segue.destinationViewController;
+    }
 }
 
 - (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar

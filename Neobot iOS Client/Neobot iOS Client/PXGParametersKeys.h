@@ -9,6 +9,8 @@
 #ifndef Neobot_Client_PXGParametersKeys_h
 #define Neobot_Client_PXGParametersKeys_h
 
+#define CURRENT_TAB @"CurrentTab"
+
 #define RECENT_IP_ADRESSES_KEY @"RecentIpAdress"
 #define RECENT_PORT_NUMBERS_KEY @"RecentPorts"
 #define RECENT_ROBOT_SERIALPORTS_KEY @"RecentRobotSerials"
@@ -21,5 +23,8 @@
 
 #define FOLLOW_THE_FINGER @"FollowFinger"
 #define FOLLOW_THE_FINGER_DELAY @"FollowFingerDelay"
+
+#define AX12_MAX_SPEED @"AX12MaxSpeed"
+#define AX12_MAX_TORQUE @"AX12MaxTorque"
 
 #endif
