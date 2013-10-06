@@ -26,15 +26,38 @@
     [self speedChanged];
     [self torqueChanged];
     
-    self.ax12CollectionController.ax12List = [NSMutableArray array];;
+    self.ax12CollectionController.ax12List = [NSMutableArray array];
+    NSArray* list = [[NSUserDefaults standardUserDefaults] objectForKey:AX12_LIST];
+    for (NSDictionary* ax12Data in list)
+    {
+        PXGAX12Data* ax12 = [[PXGAX12Data alloc] initWithDictionary:ax12Data];
+        [self.ax12CollectionController.ax12List addObject:ax12];
+    }
+    
     //self.ax12CollectionController.delegate = self;
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:[UIApplication sharedApplication]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    NSMutableArray* list = [NSMutableArray array];
+    for (PXGAX12Data* ax12 in self.ax12CollectionController.ax12List)
+    {
+        NSDictionary* data = [ax12 encodeToDictionary];
+        [list addObject:data];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:list forKey:AX12_LIST];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
