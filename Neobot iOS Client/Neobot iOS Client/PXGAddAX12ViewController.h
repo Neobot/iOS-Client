@@ -16,7 +16,9 @@
 @interface PXGAddAX12ViewController : UIViewController
 
 - (IBAction)done:(id)sender;
+
 @property (weak, nonatomic) id<PXGAddAX12ViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (strong, nonatomic) NSArray* alreadyUsedIds;
 
 @end

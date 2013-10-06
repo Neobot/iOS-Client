@@ -10,14 +10,18 @@
 
 @interface PXGAddAX12ViewController ()
 
+@property (strong, nonatomic) NSMutableArray* idList;
+
 @end
+
 
 @implementation PXGAddAX12ViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	self.idList = [NSMutableArray array];
+    [self updateIdList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,10 +30,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setAlreadyUsedIds:(NSArray*)ids
+{
+    _alreadyUsedIds = ids;
+    [self updateIdList];
+}
+
+- (void)updateIdList
+{
+    [self.idList removeAllObjects];
+    for (int i = 1; i <= 99; ++i)
+    {
+        NSNumber* num = [NSNumber numberWithInt:i];
+        if (![self.alreadyUsedIds containsObject:num])
+        {
+            [self.idList addObject:num];
+        }
+    }
+}
+
 - (IBAction)done:(id)sender
 {
+    int selectedNum = [[self.idList objectAtIndex:[self.pickerView selectedRowInComponent:0]] intValue];
     if ([self.delegate respondsToSelector:@selector(ax12Added:)])
-        [self.delegate ax12Added:[self.pickerView selectedRowInComponent:0] + 1];
+        [self.delegate ax12Added:selectedNum];
+    
     [((UINavigationController*)[self parentViewController])popViewControllerAnimated:YES];
 }
 
@@ -41,12 +66,12 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 99;
+    return self.idList.count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"%i", row + 1];
+    return [NSString stringWithFormat:@"%i", [[self.idList objectAtIndex:row] intValue]];
 }
 
 @end

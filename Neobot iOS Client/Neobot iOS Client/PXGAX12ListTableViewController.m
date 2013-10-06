@@ -139,6 +139,7 @@
     {
         PXGAddAX12ViewController* controller = (PXGAddAX12ViewController*)segue.destinationViewController;
         controller.delegate = self;
+        controller.alreadyUsedIds = self.ax12IdList;
     }
 }
 
