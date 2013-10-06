@@ -60,6 +60,8 @@
 		94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */; };
 		94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */; };
 		94FFA09418016171009AA63C /* AX-12.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FFA09318016171009AA63C /* AX-12.png */; };
+		94FFA09718018BD0009AA63C /* PXGAX12ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */; };
+		94FFA09A180191EF009AA63C /* PXGAddAX12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +148,10 @@
 		94F30F0617AACAA900E1805D /* PXGTrajectoryEditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTrajectoryEditionViewController.h; sourceTree = "<group>"; };
 		94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGTrajectoryEditionViewController.m; sourceTree = "<group>"; };
 		94FFA09318016171009AA63C /* AX-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AX-12.png"; sourceTree = "<group>"; };
+		94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12ListTableViewController.h; sourceTree = "<group>"; };
+		94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12ListTableViewController.m; sourceTree = "<group>"; };
+		94FFA098180191EF009AA63C /* PXGAddAX12ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAddAX12ViewController.h; sourceTree = "<group>"; };
+		94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAddAX12ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +299,10 @@
 				9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */,
 				9428505417F9E78A00230DD2 /* PXGAX12Data.h */,
 				9428505517F9E78A00230DD2 /* PXGAX12Data.m */,
+				94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */,
+				94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */,
+				94FFA098180191EF009AA63C /* PXGAddAX12ViewController.h */,
+				94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */,
 			);
 			name = "AX-12";
 			sourceTree = "<group>";
@@ -466,8 +476,10 @@
 				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
 				9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */,
 				94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */,
+				94FFA09718018BD0009AA63C /* PXGAX12ListTableViewController.m in Sources */,
 				94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */,
 				94344DF717F701FB006ABBCD /* PXGAX12ViewController.m in Sources */,
+				94FFA09A180191EF009AA63C /* PXGAddAX12ViewController.m in Sources */,
 				94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */,
 				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,

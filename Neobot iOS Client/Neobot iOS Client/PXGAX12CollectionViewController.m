@@ -28,9 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.ax12 = @[[PXGAX12Data ax12WithId:2], [PXGAX12Data ax12WithId:42], [PXGAX12Data ax12WithId:1],
-                  [PXGAX12Data ax12WithId:4], [PXGAX12Data ax12WithId:25], [PXGAX12Data ax12WithId:7]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +38,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.ax12.count;
+    return self.ax12List.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -53,12 +50,39 @@
     [cell.layer setBorderWidth:3];
     [cell.layer setBorderColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1].CGColor];
     
-    PXGAX12Data* data = [self.ax12 objectAtIndex:indexPath.row];
+    PXGAX12Data* data = [self.ax12List objectAtIndex:indexPath.row];
     [cell setId:data.ax12ID];
     [cell setPosition:data.position];
     [cell.switchLocked setOn:data.locked];
     
     return cell;
+}
+
+- (void)insertAx12:(int)ax12ID atRow:(int)row
+{
+    PXGAX12Data* data = [PXGAX12Data ax12WithId:ax12ID];
+    [self.ax12List insertObject:data atIndex:row];
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.collectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+}
+
+- (void)removeAx12:(int)ax12ID atRow:(int)row
+{
+    [self.ax12List removeObjectAtIndex:row];
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.collectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+}
+
+- (void)moveAx12:(int)ax12ID fromRow:(int)fromRow toRow:(int)toRow
+{
+    [self.ax12List exchangeObjectAtIndex:fromRow withObjectAtIndex:toRow];
+    
+    NSIndexPath* fromIndexPath = [NSIndexPath indexPathForRow:fromRow inSection:0];
+    NSIndexPath* toIndexPath = [NSIndexPath indexPathForRow:toRow inSection:0];
+    
+    [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 }
 
 @end

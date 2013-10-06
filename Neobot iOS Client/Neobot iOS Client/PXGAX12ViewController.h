@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGStickControlView.h"
+#import "PXGAX12CollectionViewController.h"
+#import "PXGAX12ListTableViewController.h"
 
-@interface PXGAX12ViewController : UIViewController
 
+@interface PXGAX12ViewController : UIViewController <PXGAX12ListTableViewControllerDelegate>
+
+@property (weak, nonatomic) PXGAX12CollectionViewController* ax12CollectionController;
 @property (weak, nonatomic) IBOutlet UISlider *sliderSpeed;
 @property (weak, nonatomic) IBOutlet UILabel *lblSpeed;
 @property (weak, nonatomic) IBOutlet UISlider *sliderTorque;

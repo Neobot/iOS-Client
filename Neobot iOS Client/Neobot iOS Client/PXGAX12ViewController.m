@@ -25,6 +25,9 @@
     self.sliderTorque.value = [[NSUserDefaults standardUserDefaults] floatForKey:AX12_MAX_TORQUE];
     [self speedChanged];
     [self torqueChanged];
+    
+    self.ax12CollectionController.ax12List = [NSMutableArray array];;
+    //self.ax12CollectionController.delegate = self;
 
 }
 
@@ -32,6 +35,41 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ax12CollectionSegue"])
+    {
+        self.ax12CollectionController = (PXGAX12CollectionViewController*)segue.destinationViewController;
+        
+    }
+    else if ([segue.identifier isEqualToString:@"ax12ListSegue"])
+    {
+        UINavigationController* navController = (UINavigationController*)segue.destinationViewController;
+        PXGAX12ListTableViewController* controller = (PXGAX12ListTableViewController*)navController.topViewController;
+        controller.delegate = self;
+        controller.ax12IdList = [NSMutableArray array];
+        for (PXGAX12Data* ax12 in self.self.ax12CollectionController.ax12List)
+        {
+            [controller.ax12IdList addObject:[NSNumber numberWithInt:ax12.ax12ID]];
+        }
+    }
+}
+
+- (void) ax12:(int)ax12ID addedAtRow:(int)row
+{
+    [self.ax12CollectionController insertAx12:ax12ID atRow:row];
+}
+
+- (void) ax12:(int)ax12ID removedAtRow:(int)row
+{
+    [self.ax12CollectionController removeAx12:ax12ID atRow:row];
+}
+
+- (void) ax12:(int)ax12ID movedFromRow:(int)fromRow toRow:(int)toRow
+{
+    [self.ax12CollectionController moveAx12:ax12ID fromRow:fromRow toRow:toRow];
 }
 
 - (IBAction)speedChanged
