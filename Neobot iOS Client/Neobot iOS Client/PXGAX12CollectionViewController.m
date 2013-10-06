@@ -49,9 +49,9 @@
     static NSString *txtCellIdentifier = @"AX12Cell";
     
     PXGAX12CollectionCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:txtCellIdentifier forIndexPath:indexPath];
-    [cell.layer setCornerRadius:8.0f];
-    //[cell.layer setBorderWidth:3];
-    //[cell.layer setBorderColor:[UIColor grayColor].CGColor];
+    //[cell.layer setCornerRadius:8.0f];
+    [cell.layer setBorderWidth:3];
+    [cell.layer setBorderColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1].CGColor];
     
     PXGAX12Data* data = [self.ax12 objectAtIndex:indexPath.row];
     [cell setId:data.ax12ID];

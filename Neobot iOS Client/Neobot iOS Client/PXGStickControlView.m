@@ -117,22 +117,26 @@
 {
     [super layoutSubviews];
     [self updateInternalLayoutValues];
+    
+    double prevValue = self.value;
+    _value = -1;
+    self.value = prevValue;
 }
 
 - (void)updateInternalLayoutValues
 {
-    _length = (self.bounds.size.height - 2.0 * self.width) / 2.0;
+    _length = (self.bounds.size.width - 2.0 * self.width) / 2.0;
 }
 
 - (double)cursorYPositionFromValue:(double)value
 {
     double diffFromCenter = value * _length / 100.0;
-    return self.bounds.size.height / 2.0 - diffFromCenter;
+    return self.bounds.size.width / 2.0 - diffFromCenter;
 }
 
 - (double)valueFromCursorYPosition:(double)pos
 {
-    double diffFromCenter = self.bounds.size.height / 2.0 - pos;
+    double diffFromCenter = self.bounds.size.width / 2.0 - pos;
     return 100.0 * diffFromCenter / _length;
 }
 
@@ -141,8 +145,8 @@
     _context = UIGraphicsGetCurrentContext();
     double w = self.width;
     double r = w/2.0;
-    double left = rect.origin.x + rect.size.width / 2.0 - r;
-    double right = left + w;
+    double top = rect.origin.y + rect.size.height / 2.0 - r;
+    double bottom = top + w;
     
     CGColorRef bColor = [UIColor colorWithRed:.72 green:.72 blue:.72 alpha:1.0].CGColor;
     
@@ -154,11 +158,12 @@
     
     CGContextSetFillColorWithColor(_context, bColor);
     
-    CGContextMoveToPoint(_context, left, rect.origin.y + w);
-    CGContextAddLineToPoint(_context, left, rect.origin.y + rect.size.height - w);
-    CGContextAddArc(_context, left + r, rect.origin.y + rect.size.height - w, r, -M_PI, 0, -1);
-    CGContextAddLineToPoint(_context, right, rect.origin.y + w);
-    CGContextAddArc(_context, left + r, rect.origin.y + w, r, 0, -M_PI, -1);
+    CGContextMoveToPoint(_context, rect.origin.x + w, top);
+    CGContextAddLineToPoint(_context, rect.origin.x + rect.size.width - w, top);
+    CGContextAddArc(_context, rect.origin.x + rect.size.width - w, top + r, r, -M_PI_2, M_PI_2, -1);
+    //CGContextMoveToPoint(_context, rect.origin.x + rect.size.width - w, top);
+    CGContextAddLineToPoint(_context, rect.origin.x + w, bottom);
+    CGContextAddArc(_context, rect.origin.x + w, top + r, r, -M_PI_2, M_PI_2, 1);
     
     CGContextFillPath(_context);
 
@@ -166,7 +171,7 @@
     double cursorPos = [self cursorYPositionFromValue:self.value];
     
     //tint
-    CGRect tintRect = CGRectMake(left, cursorPos, w, rect.size.height / 2 - cursorPos);
+    CGRect tintRect = CGRectMake(cursorPos, top, rect.size.width / 2 - cursorPos, w);
     CGContextBeginPath(_context);
     CGContextSetFillColorWithColor(_context, self.tintColor.CGColor);
     CGContextAddRect(_context, tintRect);
@@ -192,7 +197,7 @@
     _value = value;
     [self sendActionsForControlEvents: UIControlEventValueChanged];
     
-    CGPoint pos = CGPointMake(self.bounds.size.width / 2.0, [self cursorYPositionFromValue:value]);
+    CGPoint pos = CGPointMake([self cursorYPositionFromValue:value], self.bounds.size.height / 2.0);
     if (animation)
     {
         _touchEnabled = NO;
@@ -215,7 +220,7 @@
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint pos = [touch locationInView:self];
-    self.value = [self valueFromCursorYPosition:pos.y];
+    self.value = [self valueFromCursorYPosition:pos.x];
     
     return YES;
 }

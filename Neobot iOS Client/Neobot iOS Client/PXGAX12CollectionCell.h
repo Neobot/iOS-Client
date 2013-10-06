@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet PXGStickControlView *stick;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblID;
-@property (weak, nonatomic) IBOutlet UITextField *txtPosition;
+@property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblSpeed;
 @property (weak, nonatomic) IBOutlet UISwitch *switchLocked;
 
@@ -31,7 +31,6 @@
 - (void)setPosition:(double)position;
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender;
-- (IBAction)positionChanged:(UITextField *)sender;
 - (IBAction)lockedStatusChanged:(UISwitch *)sender;
 
 @end

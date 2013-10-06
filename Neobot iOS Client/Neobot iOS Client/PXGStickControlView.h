@@ -11,5 +11,6 @@
 @interface PXGStickControlView : UIControl
 
 @property (nonatomic) double value;
+@property (nonatomic) BOOL vertical;
 
 @end

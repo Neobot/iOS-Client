@@ -21,31 +21,26 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+       self.lblSpeed.text = @"0%";
     }
     return self;
 }
 
 - (void)setId:(int)ax12ID
 {
-    self.lblID.text = [NSString stringWithFormat:@"ID = %i", ax12ID];
+    self.lblID.text = [NSString stringWithFormat:@"N°%i", ax12ID];
     _id = ax12ID;
 }
 
 - (void)setPosition:(double)position
 {
-    self.txtPosition.text = [NSString stringWithFormat:@"%f", position];
+    self.lblPosition.text = [NSString stringWithFormat:@"%f°", position];
 }
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender
 {
     self.lblSpeed.text = [NSString stringWithFormat:@"%i%%", (int)sender.value];
     [self.delegate speedChanged:sender.value forAX12:_id];
-}
-
-- (IBAction)positionChanged:(UITextField *)sender
-{
-    [self.delegate positionChanged:[sender.text doubleValue] forAX12:_id];
 }
 
 - (IBAction)lockedStatusChanged:(UISwitch *)sender
