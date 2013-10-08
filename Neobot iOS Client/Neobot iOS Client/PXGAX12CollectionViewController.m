@@ -7,8 +7,8 @@
 //
 
 #import "PXGAX12CollectionViewController.h"
-#import "PXGAX12CollectionCell.h"
 #import "PXGAX12Data.h"
+#import "PXGSelectAngleViewController.h"
 
 @interface PXGAX12CollectionViewController ()
 
@@ -28,6 +28,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    PXGSelectAngleViewController* setPositionViewController = (PXGSelectAngleViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectAngleView"];
+    setPositionViewController.min = 0;
+    setPositionViewController.max = 300;
+    self.setPositionPopoverController = [[UIPopoverController alloc] initWithContentViewController:setPositionViewController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +59,9 @@
     [cell setId:data.ax12ID];
     [cell setPosition:data.position];
     [cell.switchLocked setOn:data.locked];
+    
+    cell.delegate = self;
+    cell.setPositionPopoverController = self.setPositionPopoverController;
     
     return cell;
 }
@@ -85,6 +93,32 @@
     NSIndexPath* toIndexPath = [NSIndexPath indexPathForRow:toRow inSection:0];
     
     [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+}
+
+-(PXGAX12Data*)getAX12DataForID:(int)ax12ID
+{
+    for (PXGAX12Data* data in self.ax12List)
+    {
+        if (data.ax12ID == ax12ID)
+            return data;
+    }
+    
+    return nil;
+}
+
+- (void)speedChanged:(double)speed forAX12:(int)ax12ID
+{
+    
+}
+
+- (void)lockStatusChanged:(BOOL)locked forAX12:(int)ax12ID
+{
+    [self getAX12DataForID:ax12ID].locked = locked;
+}
+
+- (void)positionChanged:(double)position forAX12:(int)ax12ID
+{
+    [self getAX12DataForID:ax12ID].position = position;
 }
 
 @end

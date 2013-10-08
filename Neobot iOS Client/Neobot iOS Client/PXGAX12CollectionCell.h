@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGStickControlView.h"
+#import "PXGSelectAngleViewController.h"
 
 @protocol PXGAX12CollectionCellProtocol <NSObject>
 
@@ -17,20 +18,24 @@
 
 @end
 
-@interface PXGAX12CollectionCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet PXGStickControlView *stick;
+@interface PXGAX12CollectionCell : UICollectionViewCell <PXGSelectAngleViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet PXGStickControlView *stick;
 @property (weak, nonatomic) IBOutlet UILabel *lblID;
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblSpeed;
 @property (weak, nonatomic) IBOutlet UISwitch *switchLocked;
+@property (weak, nonatomic) IBOutlet UIButton *btnSetPosition;
 
 @property (weak, nonatomic) id<PXGAX12CollectionCellProtocol> delegate;
+@property (weak, nonatomic) UIPopoverController* setPositionPopoverController;
+
 
 - (void)setId:(int)ax12ID;
 - (void)setPosition:(double)position;
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender;
 - (IBAction)lockedStatusChanged:(UISwitch *)sender;
+- (IBAction)onSetPosition:(id)sender;
 
 @end

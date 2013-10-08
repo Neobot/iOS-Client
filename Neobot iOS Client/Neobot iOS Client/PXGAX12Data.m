@@ -16,7 +16,7 @@
 	{
 		self.ax12ID = ax12ID;
         self.locked = NO;
-        self.position = 0.0;
+        self.position = 150.0;
 	}
     
     return self;

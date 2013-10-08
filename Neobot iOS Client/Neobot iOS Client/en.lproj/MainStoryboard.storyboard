@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="H60-qm-fuG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="H60-qm-fuG">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -590,6 +590,9 @@
                                             <state key="normal" title="set">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="onSetPosition:" destination="S9U-lk-yJw" eventType="touchUpInside" id="9Km-1t-Z85"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -622,6 +625,7 @@
                                 </constraints>
                                 <size key="customSize" width="230" height="230"/>
                                 <connections>
+                                    <outlet property="btnSetPosition" destination="qHO-Nj-SNs" id="gka-RU-oa6"/>
                                     <outlet property="lblID" destination="unD-5x-ghg" id="KOp-E3-5m6"/>
                                     <outlet property="lblPosition" destination="xgl-Qz-PQU" id="G2t-6o-IYa"/>
                                     <outlet property="lblSpeed" destination="c6S-mS-qxe" id="2di-2h-3kS"/>
@@ -639,6 +643,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBU-0C-oWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="888" y="-1812"/>
+        </scene>
+        <!--Select Angle View Controller-->
+        <scene sceneID="liU-oN-pkE">
+            <objects>
+                <viewController storyboardIdentifier="SelectAngleView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cOh-xa-w3u" customClass="PXGSelectAngleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AWb-Mj-NkR"/>
+                        <viewControllerLayoutGuide type="bottom" id="ckv-GK-qi5"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="Chp-iF-ald">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="290"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmW-Vh-v2Z">
+                                <rect key="frame" x="0.0" y="44" width="200" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cOh-xa-w3u" id="BQT-kq-owf"/>
+                                    <outlet property="delegate" destination="cOh-xa-w3u" id="K03-5F-xxE"/>
+                                </connections>
+                            </pickerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HM7-iV-sKA">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="m2k-mx-4aO">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="yvm-50-chS">
+                                            <connections>
+                                                <action selector="onDone:" destination="cOh-xa-w3u" id="mtQ-Gl-iOC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovM-bH-poL">
+                                <rect key="frame" x="16" y="260" width="168" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reset to central position">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onResetToCentralPosition:" destination="cOh-xa-w3u" eventType="touchUpInside" id="Z7d-ia-8kv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ovM-bH-poL" firstAttribute="centerX" secondItem="lmW-Vh-v2Z" secondAttribute="centerX" id="B0o-p9-fG2"/>
+                            <constraint firstItem="lmW-Vh-v2Z" firstAttribute="leading" secondItem="Chp-iF-ald" secondAttribute="leading" id="CzZ-SA-EHr"/>
+                            <constraint firstAttribute="bottom" secondItem="ovM-bH-poL" secondAttribute="bottom" id="H56-Rh-f8G"/>
+                            <constraint firstAttribute="centerX" secondItem="lmW-Vh-v2Z" secondAttribute="centerX" id="Mr5-HV-n6V"/>
+                            <constraint firstItem="HM7-iV-sKA" firstAttribute="leading" secondItem="Chp-iF-ald" secondAttribute="leading" id="OSB-Ak-Ayp"/>
+                            <constraint firstItem="HM7-iV-sKA" firstAttribute="top" secondItem="Chp-iF-ald" secondAttribute="top" id="cmE-tj-BEt"/>
+                            <constraint firstItem="HM7-iV-sKA" firstAttribute="centerX" secondItem="lmW-Vh-v2Z" secondAttribute="centerX" id="eqr-ae-0k8"/>
+                            <constraint firstItem="HM7-iV-sKA" firstAttribute="bottom" secondItem="lmW-Vh-v2Z" secondAttribute="top" id="hDL-Qt-N9e"/>
+                            <constraint firstAttribute="trailing" secondItem="lmW-Vh-v2Z" secondAttribute="trailing" id="jg7-Sj-36o"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="picker" destination="lmW-Vh-v2Z" id="SX2-h3-JGt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lUY-oo-Yvj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1702" y="-2062"/>
         </scene>
         <!--Table View Controller - Root View Controller-->
         <scene sceneID="4qX-tR-8uF">

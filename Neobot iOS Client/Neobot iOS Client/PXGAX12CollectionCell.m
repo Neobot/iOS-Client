@@ -7,6 +7,7 @@
 //
 
 #import "PXGAX12CollectionCell.h"
+#import "PXGSelectAngleViewController.h"
 
 @interface PXGAX12CollectionCell ()
 {
@@ -20,8 +21,10 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
        self.lblSpeed.text = @"0%";
+
     }
     return self;
 }
@@ -34,7 +37,7 @@
 
 - (void)setPosition:(double)position
 {
-    self.lblPosition.text = [NSString stringWithFormat:@"%f°", position];
+    self.lblPosition.text = [NSString stringWithFormat:@"%.2f°", position];
 }
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender
@@ -46,6 +49,33 @@
 - (IBAction)lockedStatusChanged:(UISwitch *)sender
 {
     [self.delegate lockStatusChanged:sender.isOn forAX12:_id];
+}
+
+- (IBAction)onSetPosition:(id)sender
+{
+    if (self.setPositionPopoverController.isPopoverVisible)
+    {
+        [self.setPositionPopoverController dismissPopoverAnimated:YES];
+    }
+    else
+    {
+        PXGSelectAngleViewController* angleSectionController = (PXGSelectAngleViewController*)self.setPositionPopoverController.contentViewController;
+        angleSectionController.delegate = self;
+        [angleSectionController setValue:[self.lblPosition.text doubleValue] animated:NO];
+        
+        [self.setPositionPopoverController presentPopoverFromRect:self.btnSetPosition.bounds
+                                                           inView:self.btnSetPosition
+                                         permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                         animated:YES];
+    }
+}
+
+- (void)angleSelected:(double)angle
+{
+    [self.delegate positionChanged:angle forAX12:_id];
+    [self setPosition:angle];
+    
+    [self.setPositionPopoverController dismissPopoverAnimated:YES];
 }
 
 @end

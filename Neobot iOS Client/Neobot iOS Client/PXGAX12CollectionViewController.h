@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGAX12CollectionCell.h"
 
-@interface PXGAX12CollectionViewController : UICollectionViewController
+@interface PXGAX12CollectionViewController : UICollectionViewController <PXGAX12CollectionCellProtocol>
 
+@property (strong, nonatomic) UIPopoverController* setPositionPopoverController;
 @property (strong, nonatomic) NSMutableArray* ax12List;
 
 - (void)insertAx12:(int)ax12ID atRow:(int)row;
