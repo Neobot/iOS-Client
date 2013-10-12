@@ -15,7 +15,7 @@
     if ((self = [super init]))
 	{
 		self.ax12ID = ax12ID;
-        self.locked = NO;
+        self.command = -1;
         self.position = 150.0;
 	}
     
@@ -26,11 +26,11 @@
 {
     int ax12ID = [[dictionnary objectForKey:@"id"] intValue];
     double position = [[dictionnary objectForKey:@"position"] doubleValue];
-    BOOL locked = [[dictionnary objectForKey:@"locked"] boolValue];
+    double command = [[dictionnary objectForKey:@"command"] boolValue];
     
     PXGAX12Data* ax12 = [self initWithId:ax12ID];
     ax12.position = position;
-    ax12.locked = locked;
+    ax12.command = command;
     
     return ax12;
 }
@@ -44,7 +44,7 @@
 {
     return @{@"id": [NSNumber numberWithInt:self.ax12ID],
              @"position": [NSNumber numberWithDouble:self.position],
-             @"locked": [NSNumber numberWithBool:self.locked]};
+             @"command": [NSNumber numberWithBool:self.command]};
 }
 
 @end

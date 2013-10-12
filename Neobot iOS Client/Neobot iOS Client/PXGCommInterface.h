@@ -43,6 +43,14 @@ typedef NS_ENUM(NSInteger, PXGTrajectoryType)
     AUTO = 13
 };
 
+struct Ax12Info
+{
+    uint8_t id;
+    float angle;
+    float speed;
+    float torque;
+};
+
 #pragma mark Robot delegate
 @protocol PXGRobotInterfaceDelegate <NSObject>
 @optional
@@ -128,5 +136,10 @@ typedef NS_ENUM(NSInteger, PXGTrajectoryType)
 - (void)askStrategyStatus;
 - (void)askSerialPorts;
 - (void)askStrategies;
+
+- (void)moveAX12:(int)nbOfAX12 of:(struct Ax12Info*)ax12InfoArray atSmoothedMaxSpeed:(float)maxSpeed;
+- (void)moveAX12:(int)nbOfAX12 of:(struct Ax12Info*)ax12InfoArray;
+- (void)askPositionsForAX12Ids:(NSArray*)ax12IDList;
+- (void)setAX12Ids:(NSArray*)ax12IDList lockedInfo:(NSArray*)lockedInfo;
 
 @end

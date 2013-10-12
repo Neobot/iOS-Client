@@ -34,12 +34,15 @@
         [self.ax12CollectionController.ax12List addObject:ax12];
     }
     
-    //self.ax12CollectionController.delegate = self;
+    self.ax12CollectionController.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillResignActive:)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:[UIApplication sharedApplication]];
+    
+    [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
+    [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,6 +61,16 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:list forKey:AX12_LIST];
+}
+
+- (void) connectionStatusChangedTo:(PXGConnectionStatus)status
+{
+    bool ax12Connected = status >= Connected;
+    self.btnRecord.enabled = ax12Connected;
+    self.btnLockAll.enabled = ax12Connected;
+    self.btnReleaseAll.enabled = ax12Connected;
+    self.sliderSpeed.enabled = ax12Connected;
+    self.sliderTorque.enabled = ax12Connected;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -107,6 +120,70 @@
     int torque = self.sliderTorque.value;
     self.lblTorque.text = [NSString stringWithFormat:@"%i%%", torque];
     [[NSUserDefaults standardUserDefaults] setFloat:self.sliderTorque.value forKey:AX12_MAX_TORQUE];
+}
+
+- (void)setAllAX12Locked:(BOOL)locked
+{
+    NSMutableArray* idArray = [NSMutableArray array];
+    NSMutableArray* lockedInfoArray = [NSMutableArray array];
+    
+    for (PXGAX12Data* ax12 in self.ax12CollectionController.ax12List)
+    {
+        [idArray addObject:[NSNumber numberWithInt:ax12.ax12ID]];
+        [lockedInfoArray addObject:[NSNumber numberWithBool:locked]];
+    }
+}
+
+- (IBAction)onLockAll:(id)sender
+{
+    [self setAllAX12Locked:YES];
+}
+
+- (IBAction)onReleaseAll:(id)sender
+{
+    [self setAllAX12Locked:NO];
+}
+
+- (void)speedChanged:(double)speed forAX12:(PXGAX12Data*)ax12
+{
+    struct Ax12Info info[1];
+    info[0].id = ax12.ax12ID;
+    //TODO
+    //info[0].angle = command;
+    //info[0].speed = self.sliderSpeed.value;
+    //info[0].torque = self.sliderTorque.value;
+    
+    [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
+}
+
+- (void)lockStatusChanged:(BOOL)locked forAX12:(PXGAX12Data*)ax12
+{
+    NSArray* idArray = @[[NSNumber numberWithInt:ax12.ax12ID]];
+    NSArray* lockedInfoArray = @[[NSNumber numberWithBool:locked]];
+    
+    [[PXGCommInterface sharedInstance] setAX12Ids:idArray lockedInfo:lockedInfoArray];
+}
+
+- (void)commandDefined:(double)command forAX12:(PXGAX12Data*)ax12
+{
+    struct Ax12Info info[1];
+    info[0].id = ax12.ax12ID;
+    info[0].angle = command;
+    info[0].speed = self.sliderSpeed.value;
+    info[0].torque = self.sliderTorque.value;
+    
+    [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
+}
+
+- (void)didReceivePositions:(NSArray*)positions forAx12:(NSArray*)ax12Ids
+{
+    int i = 0;
+    for (NSNumber* num in ax12Ids)
+    {
+        double position = [[positions objectAtIndex:i] floatValue];
+        [self.ax12CollectionController setPosition:position forAx12:[num intValue]];
+        ++i;
+    }
 }
 
 @end

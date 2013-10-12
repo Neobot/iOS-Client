@@ -19,6 +19,6 @@
 
 @property (nonatomic) int ax12ID;
 @property (nonatomic) double position;
-@property (nonatomic) BOOL locked;
+@property (nonatomic) double command;
 
 @end

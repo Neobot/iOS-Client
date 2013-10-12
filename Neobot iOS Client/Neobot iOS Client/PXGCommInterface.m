@@ -224,6 +224,27 @@
             break;
         }
             
+        case AX12_POSITIONS:
+        {
+            int nbAX12 = [serializer takeInt8];
+            
+            NSMutableArray* positions = [NSMutableArray array];
+            NSMutableArray* ids = [NSMutableArray array];
+            
+            for(int i = 0; i < nbAX12 && ![serializer atEnd]; ++i)
+            {
+                int ax12ID = [serializer takeInt8];
+                float position = [serializer takeFloat];
+                
+                [ids addObject:[NSNumber numberWithInt:ax12ID]];
+                [positions addObject:[NSNumber numberWithFloat:position]];
+            }
+            
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                if ([serverDelegate respondsToSelector:@selector(didReceivePositions:forAx12:)])
+                    [serverDelegate didReceivePositions:positions forAx12:ids];
+        }
+            
         //BOTH
         case AR:
         {
@@ -351,5 +372,63 @@
     [_protocol writeMessage:nil forInstruction:STOP_STRATEGY];
 }
 
+- (void)moveAX12:(int)nbOfAX12 of:(struct Ax12Info*)ax12InfoArray atSmoothedMaxSpeed:(float)maxSpeed
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addFloat:maxSpeed];
+    [serializer addInt8:nbOfAX12];
+    for(int i = 0; i < nbOfAX12; ++i)
+    {
+        struct Ax12Info info = ax12InfoArray[i];
+        [serializer addInt8:info.id];
+        [serializer addFloat:info.angle];
+        [serializer addFloat:info.speed];
+        [serializer addFloat:info.torque];
+    }
+    
+    [_protocol writeMessage:messageData forInstruction:MOVE_AX12];
+}
+
+- (void)moveAX12:(int)nbOfAX12 of:(struct Ax12Info*)ax12InfoArray
+{
+    [self moveAX12:nbOfAX12 of:ax12InfoArray atSmoothedMaxSpeed:-1];
+}
+
+- (void)askPositionsForAX12Ids:(NSArray*)ax12IDList
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:[ax12IDList count]];
+    for (NSNumber* num in ax12IDList)
+    {
+        [serializer addInt8:[num intValue]];
+    }
+
+    [_protocol writeMessage:messageData forInstruction:ASK_AX12_POSITIONS];
+}
+
+- (void)setAX12Ids:(NSArray*)ax12IDList lockedInfo:(NSArray*)lockedInfo
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:[ax12IDList count]];
+    
+    int i = 0;
+    for (NSNumber* num in ax12IDList)
+    {
+        BOOL locked = [[lockedInfo objectAtIndex:i] boolValue];
+        
+        [serializer addInt8:[num intValue]];
+        [serializer addBool:locked];
+        
+        ++i;
+    }
+    
+    [_protocol writeMessage:messageData forInstruction:LOCK_AX12];
+}
 
 @end

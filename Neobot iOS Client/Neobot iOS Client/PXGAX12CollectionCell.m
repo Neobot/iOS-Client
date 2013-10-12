@@ -46,11 +46,6 @@
     [self.delegate speedChanged:sender.value forAX12:_id];
 }
 
-- (IBAction)lockedStatusChanged:(UISwitch *)sender
-{
-    [self.delegate lockStatusChanged:sender.isOn forAX12:_id];
-}
-
 - (IBAction)onSetPosition:(id)sender
 {
     if (self.setPositionPopoverController.isPopoverVisible)
@@ -70,12 +65,21 @@
     }
 }
 
+- (IBAction)onLock:(id)sender
+{
+    [self.delegate lockStatusChanged:YES forAX12:_id];
+}
+
 - (void)angleSelected:(double)angle
 {
-    [self.delegate positionChanged:angle forAX12:_id];
+    [self.delegate commandDefined:angle forAX12:_id];
     [self setPosition:angle];
     
     [self.setPositionPopoverController dismissPopoverAnimated:YES];
 }
 
+- (IBAction)onUnlock:(id)sender
+{
+    [self.delegate lockStatusChanged:NO forAX12:_id];
+}
 @end

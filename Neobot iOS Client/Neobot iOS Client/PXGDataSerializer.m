@@ -139,7 +139,7 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     
 }
 
-- (uint32_t) readInt32At: (int) position
+- (uint32_t) readInt32At:(int)position
 {
     if (![self checkDataLength:4 atPos:position])
         return 0;
@@ -161,6 +161,28 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
     
     return value;
 }
+
+#pragma mark Float
+- (void) addFloat:(float)value
+{
+    uint32_t intValue = *((uint32_t*)&value);
+	[self addInt32:intValue];
+}
+
+- (float) takeFloat
+{
+    _pos += 4;
+    return [self readFloatAt:_pos - 4];
+}
+
+- (float) readFloatAt:(int)position
+{
+    uint32_t intValue = [self readInt32At:position];
+	float value = *((float*)&intValue);
+    
+	return value;
+}
+
 
 #pragma mark NSData
 - (void) addData:(NSData*) data

@@ -14,7 +14,7 @@
 
 - (void) speedChanged:(double)speed forAX12:(int)ax12ID;
 - (void) lockStatusChanged:(BOOL)locked forAX12:(int)ax12ID;
-- (void) positionChanged:(double)position forAX12:(int)ax12ID;
+- (void) commandDefined:(double)command forAX12:(int)ax12ID;
 
 @end
 
@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblID;
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblSpeed;
-@property (weak, nonatomic) IBOutlet UISwitch *switchLocked;
 @property (weak, nonatomic) IBOutlet UIButton *btnSetPosition;
 
 @property (weak, nonatomic) id<PXGAX12CollectionCellProtocol> delegate;
@@ -35,7 +34,8 @@
 - (void)setPosition:(double)position;
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender;
-- (IBAction)lockedStatusChanged:(UISwitch *)sender;
 - (IBAction)onSetPosition:(id)sender;
+- (IBAction)onLock:(id)sender;
+- (IBAction)onUnlock:(id)sender;
 
 @end
