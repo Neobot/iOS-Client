@@ -396,7 +396,7 @@
     [self moveAX12:nbOfAX12 of:ax12InfoArray atSmoothedMaxSpeed:-1];
 }
 
-- (void)askPositionsForAX12Ids:(NSArray*)ax12IDList
+- (void)askPositionsForAX12Ids:(NSArray*)ax12IDList  recursively:(BOOL)recursively
 {
     NSMutableData* messageData = [NSMutableData data];
     PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
@@ -406,6 +406,8 @@
     {
         [serializer addInt8:[num intValue]];
     }
+    
+    [serializer addBool:recursively];
 
     [_protocol writeMessage:messageData forInstruction:ASK_AX12_POSITIONS];
 }

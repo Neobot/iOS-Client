@@ -65,12 +65,15 @@
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
-    bool ax12Connected = status >= Connected;
+    bool ax12Connected = status >= Controlled;
     self.btnRecord.enabled = ax12Connected;
     self.btnLockAll.enabled = ax12Connected;
     self.btnReleaseAll.enabled = ax12Connected;
     self.sliderSpeed.enabled = ax12Connected;
     self.sliderTorque.enabled = ax12Connected;
+    
+    if (status == Controlled)
+        [self askAllAX12Positions];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -132,6 +135,20 @@
         [idArray addObject:[NSNumber numberWithInt:ax12.ax12ID]];
         [lockedInfoArray addObject:[NSNumber numberWithBool:locked]];
     }
+    
+    [[PXGCommInterface sharedInstance] setAX12Ids:idArray lockedInfo:lockedInfoArray];
+}
+
+- (void)askAllAX12Positions
+{
+    NSMutableArray* idArray = [NSMutableArray array];
+    
+    for (PXGAX12Data* ax12 in self.ax12CollectionController.ax12List)
+    {
+        [idArray addObject:[NSNumber numberWithInt:ax12.ax12ID]];
+    }
+    
+    [[PXGCommInterface sharedInstance] askPositionsForAX12Ids:idArray recursively:NO];
 }
 
 - (IBAction)onLockAll:(id)sender

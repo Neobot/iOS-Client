@@ -139,7 +139,7 @@ struct Ax12Info
 
 - (void)moveAX12:(int)nbOfAX12 of:(struct Ax12Info*)ax12InfoArray atSmoothedMaxSpeed:(float)maxSpeed;
 - (void)moveAX12:(int)nbOfAX12 of:(struct Ax12Info*)ax12InfoArray;
-- (void)askPositionsForAX12Ids:(NSArray*)ax12IDList;
+- (void)askPositionsForAX12Ids:(NSArray*)ax12IDList recursively:(BOOL)recursively;
 - (void)setAX12Ids:(NSArray*)ax12IDList lockedInfo:(NSArray*)lockedInfo;
 
 @end

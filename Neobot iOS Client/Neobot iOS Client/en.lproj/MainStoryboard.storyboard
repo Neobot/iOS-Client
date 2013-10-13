@@ -2043,7 +2043,6 @@
         <image name="Network.png" width="30" height="30"/>
         <image name="Task Manager.png" width="30" height="30"/>
         <image name="Toolbar - Playlist.png" width="30" height="30"/>
-        <image name="Toolbar - Playlist.png" width="30" height="30"/>
         <image name="Tools.png" width="32" height="32"/>
         <image name="sensor.png" width="30" height="30"/>
     </resources>

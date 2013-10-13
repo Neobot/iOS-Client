@@ -37,7 +37,10 @@
 
 - (void)setPosition:(double)position
 {
-    self.lblPosition.text = [NSString stringWithFormat:@"%.2f°", position];
+    if (position < 0)
+        self.lblPosition.text = [NSString stringWithFormat:@"Timeout"];
+    else
+        self.lblPosition.text = [NSString stringWithFormat:@"%.2f°", position];
 }
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender
