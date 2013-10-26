@@ -128,4 +128,12 @@
     [self.collectionView reloadData];
 }
 
+- (void)setAX12ControlEnabled:(BOOL)enabled
+{
+    for (PXGAX12CollectionCell* cell in self.collectionView.visibleCells)
+    {
+        cell.enabled = enabled;
+    }
+}
+
 @end

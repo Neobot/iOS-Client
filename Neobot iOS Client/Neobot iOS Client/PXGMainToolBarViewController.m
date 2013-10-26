@@ -34,7 +34,7 @@
         [[NSUserDefaults standardUserDefaults] setDouble:0.5 forKey:FOLLOW_THE_FINGER_DELAY];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_PORT_NUMBERS_KEY] == nil)
-        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@15042] forKey:RECENT_PORT_NUMBERS_KEY];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"15042"] forKey:RECENT_PORT_NUMBERS_KEY];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:RECENT_ROBOT_SERIALPORTS_KEY] == nil)
         [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:@"/dev/ttyS3"] forKey:RECENT_ROBOT_SERIALPORTS_KEY];

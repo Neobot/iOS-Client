@@ -25,9 +25,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblSpeed;
 @property (weak, nonatomic) IBOutlet UIButton *btnSetPosition;
+@property (weak, nonatomic) IBOutlet UIButton *btnLock;
+@property (weak, nonatomic) IBOutlet UIButton *btnUnlock;
 
 @property (weak, nonatomic) id<PXGAX12CollectionCellProtocol> delegate;
 @property (weak, nonatomic) UIPopoverController* setPositionPopoverController;
+
+@property (nonatomic) BOOL enabled;
 
 
 - (void)setId:(int)ax12ID;

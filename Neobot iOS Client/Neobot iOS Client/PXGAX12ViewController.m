@@ -63,6 +63,17 @@
     [[NSUserDefaults standardUserDefaults] setObject:list forKey:AX12_LIST];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self cancelRecursivePositionDemand];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([[PXGCommInterface sharedInstance] connectionStatus] == Controlled)
+        [self askAllAX12PositionsRecursively:YES];
+}
+
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
     bool ax12Connected = status >= Controlled;
@@ -73,7 +84,9 @@
     self.sliderTorque.enabled = ax12Connected;
     
     if (status == Controlled)
-        [self askAllAX12Positions];
+        [self askAllAX12PositionsRecursively:YES];
+    
+    [self.ax12CollectionController setAX12ControlEnabled:status == Controlled];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -99,11 +112,13 @@
 - (void) ax12:(int)ax12ID addedAtRow:(int)row
 {
     [self.ax12CollectionController insertAx12:ax12ID atRow:row];
+    [self askAllAX12PositionsRecursively:YES];
 }
 
 - (void) ax12:(int)ax12ID removedAtRow:(int)row
 {
     [self.ax12CollectionController removeAx12:ax12ID atRow:row];
+    [self askAllAX12PositionsRecursively:YES];
 }
 
 - (void) ax12:(int)ax12ID movedFromRow:(int)fromRow toRow:(int)toRow
@@ -139,7 +154,7 @@
     [[PXGCommInterface sharedInstance] setAX12Ids:idArray lockedInfo:lockedInfoArray];
 }
 
-- (void)askAllAX12Positions
+- (void)askAllAX12PositionsRecursively:(BOOL)recursive
 {
     NSMutableArray* idArray = [NSMutableArray array];
     
@@ -148,7 +163,12 @@
         [idArray addObject:[NSNumber numberWithInt:ax12.ax12ID]];
     }
     
-    [[PXGCommInterface sharedInstance] askPositionsForAX12Ids:idArray recursively:NO];
+    [[PXGCommInterface sharedInstance] askPositionsForAX12Ids:idArray recursively:recursive];
+}
+
+- (void)cancelRecursivePositionDemand
+{
+    [[PXGCommInterface sharedInstance] askPositionsForAX12Ids:[NSArray array] recursively:NO];
 }
 
 - (IBAction)onLockAll:(id)sender

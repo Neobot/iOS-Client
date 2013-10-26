@@ -30,4 +30,6 @@
 
 - (void)setPosition:(double)position forAx12:(int)ax12ID;
 
+- (void)setAX12ControlEnabled:(BOOL)enabled;
+
 @end

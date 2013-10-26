@@ -12,6 +12,7 @@
 @interface PXGAX12CollectionCell ()
 {
     int _id;
+    bool _isTimeout;
 }
 
 @end
@@ -24,6 +25,7 @@
     if (self)
     {
        self.lblSpeed.text = @"0%";
+        _isTimeout = false;
 
     }
     return self;
@@ -37,10 +39,13 @@
 
 - (void)setPosition:(double)position
 {
-    if (position < 0)
+    _isTimeout = position < 0;
+    if (_isTimeout)
         self.lblPosition.text = [NSString stringWithFormat:@"Timeout"];
     else
         self.lblPosition.text = [NSString stringWithFormat:@"%.2f°", position];
+    
+    [self refreshState];
 }
 
 - (IBAction)speedChanged:(PXGStickControlView *)sender
@@ -85,4 +90,20 @@
 {
     [self.delegate lockStatusChanged:NO forAX12:_id];
 }
+
+- (void)setEnabled:(BOOL)enabled
+{
+    _enabled = enabled;
+    [self refreshState];
+}
+
+- (void)refreshState
+{
+    BOOL enabled = self.enabled && !_isTimeout;
+    self.stick.enabled = enabled;
+    self.btnSetPosition.enabled = enabled;
+    self.btnLock.enabled = enabled;
+    self.btnUnlock.enabled = enabled;
+}
+
 @end
