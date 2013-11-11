@@ -19,11 +19,11 @@
 
 @interface PXGAX12MovementGroup : NSObject
 
-- (id)initWithName:(NSString*)name andIds:(NSArray*)ids;
+- (id)initWithName:(NSString*)name andIds:(NSMutableArray*)ids;
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSMutableArray* movements;
-@property (strong, nonatomic) NSArray* ids;
+@property (strong, nonatomic) NSMutableArray* ids;
 
 @end
 

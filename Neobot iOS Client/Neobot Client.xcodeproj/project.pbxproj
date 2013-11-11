@@ -48,6 +48,8 @@
 		9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */; };
 		9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C579183113E50064C7F5 /* PXGMovementsViewController.m */; };
 		9448C5821831190D0064C7F5 /* PXGGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */; };
+		9448C5881831606A0064C7F5 /* PXGGroupContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5871831606A0064C7F5 /* PXGGroupContentViewController.m */; };
+		9448C58B18316D3A0064C7F5 /* PXGMovementContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C58A18316D3A0064C7F5 /* PXGMovementContentTableViewController.m */; };
 		94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D411795D5B90024A789 /* PXGDataSerializer.m */; };
 		94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D44179849BE0024A789 /* PXGCommInterface.m */; };
 		94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D52179ABB860024A789 /* PXGCommViewController.m */; };
@@ -132,6 +134,10 @@
 		9448C579183113E50064C7F5 /* PXGMovementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMovementsViewController.m; sourceTree = "<group>"; };
 		9448C5801831190D0064C7F5 /* PXGGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGGroupTableViewController.h; sourceTree = "<group>"; };
 		9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGGroupTableViewController.m; sourceTree = "<group>"; };
+		9448C5861831606A0064C7F5 /* PXGGroupContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGGroupContentViewController.h; sourceTree = "<group>"; };
+		9448C5871831606A0064C7F5 /* PXGGroupContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGGroupContentViewController.m; sourceTree = "<group>"; };
+		9448C58918316D3A0064C7F5 /* PXGMovementContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMovementContentTableViewController.h; sourceTree = "<group>"; };
+		9448C58A18316D3A0064C7F5 /* PXGMovementContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMovementContentTableViewController.m; sourceTree = "<group>"; };
 		94835D401795D5B90024A789 /* PXGDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGDataSerializer.h; sourceTree = "<group>"; };
 		94835D411795D5B90024A789 /* PXGDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGDataSerializer.m; sourceTree = "<group>"; };
 		94835D43179849BE0024A789 /* PXGCommInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommInterface.h; sourceTree = "<group>"; };
@@ -304,6 +310,10 @@
 		9428504A17F84F8900230DD2 /* AX-12 */ = {
 			isa = PBXGroup;
 			children = (
+				94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */,
+				94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */,
+				94FFA098180191EF009AA63C /* PXGAddAX12ViewController.h */,
+				94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */,
 				9448C57B183114AA0064C7F5 /* Movements */,
 				9448C57C183114FC0064C7F5 /* AX-12 Control */,
 			);
@@ -358,6 +368,10 @@
 				9448C579183113E50064C7F5 /* PXGMovementsViewController.m */,
 				9448C5801831190D0064C7F5 /* PXGGroupTableViewController.h */,
 				9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */,
+				9448C5861831606A0064C7F5 /* PXGGroupContentViewController.h */,
+				9448C5871831606A0064C7F5 /* PXGGroupContentViewController.m */,
+				9448C58918316D3A0064C7F5 /* PXGMovementContentTableViewController.h */,
+				9448C58A18316D3A0064C7F5 /* PXGMovementContentTableViewController.m */,
 			);
 			name = Movements;
 			sourceTree = "<group>";
@@ -371,10 +385,6 @@
 				9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */,
 				94344DF517F701FB006ABBCD /* PXGAX12ViewController.h */,
 				94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */,
-				94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */,
-				94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */,
-				94FFA098180191EF009AA63C /* PXGAddAX12ViewController.h */,
-				94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */,
 				9428504E17F8599600230DD2 /* PXGAX12CollectionViewController.h */,
 				9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */,
 				9428505117F9E5D600230DD2 /* PXGAX12CollectionCell.h */,
@@ -508,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9448C58B18316D3A0064C7F5 /* PXGMovementContentTableViewController.m in Sources */,
 				9425D38D1791565000C6E883 /* main.m in Sources */,
 				9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */,
 				9425D3911791565000C6E883 /* PXGAppDelegate.m in Sources */,
@@ -526,6 +537,7 @@
 				943DF58D180332D800630316 /* PXGSelectAngleViewController.m in Sources */,
 				94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */,
 				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
+				9448C5881831606A0064C7F5 /* PXGGroupContentViewController.m in Sources */,
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
 				9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */,
 				9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */,

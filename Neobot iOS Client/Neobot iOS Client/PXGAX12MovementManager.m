@@ -101,7 +101,7 @@
 		else if ([lineType isEqualToString:@"P"])
 		{
             int tokenCount = tokens.count;
-			if ([[tokens lastObject] length] > 0)
+			if ([[tokens lastObject] length] == 0)
 				--tokenCount;
             
 			if (tokenCount >= 3)
@@ -132,7 +132,7 @@
 #pragma mark Group
 @implementation PXGAX12MovementGroup
 
-- (id)initWithName:(NSString*)name andIds:(NSArray*)ids
+- (id)initWithName:(NSString*)name andIds:(NSMutableArray*)ids
 {
     if ((self = [super init]))
 	{

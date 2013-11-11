@@ -40,6 +40,20 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"editGroupSegue"])
+    {
+        int currentEditedIndex = [self.tableView indexPathForSelectedRow].row;
+        PXGAX12MovementGroup* group = [self.groups objectAtIndex:currentEditedIndex];
+        
+        PXGGroupContentViewController* controller = (PXGGroupContentViewController*)segue.destinationViewController;
+        controller.name = group.name;
+        controller.ids = group.ids;
+        controller.movements = group.movements;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -116,7 +130,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the row from the data source
-        PXGAX12MovementGroup* removedGroup = [self.groups objectAtIndex:indexPath.row];
+        //PXGAX12MovementGroup* removedGroup = [self.groups objectAtIndex:indexPath.row];
         [self.groups removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -125,34 +139,6 @@
         //    [self.delegate ax12:removedID removedAtRow:indexPath.row];
     }
 }
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 - (IBAction)onEdit:(id)sender
 {
@@ -169,4 +155,5 @@
         [self.tableView setEditing:NO animated:YES];
     }
 }
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGGroupContentViewController.h"
 
 @interface PXGGroupTableViewController : UITableViewController
 
