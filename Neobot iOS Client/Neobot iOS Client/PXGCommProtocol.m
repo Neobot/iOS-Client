@@ -173,7 +173,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
         {
             uint8_t receivedChecksum = [serializer takeInt8];
             
-            NSMutableData* checksumData = [[NSMutableData alloc] initWithBytes:&_currentMessageLength length:1];
+            NSMutableData* checksumData = [[NSMutableData alloc] initWithBytes:&_currentMessageLength length:4];
             [checksumData appendBytes:&_currentMessageInstruction length:1];
             [checksumData appendData:_currentMessageData];
             uint8_t calculatedChecksum = [self calculateChecksum:checksumData];

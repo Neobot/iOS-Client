@@ -16,6 +16,7 @@
     if ((self = [super init]))
 	{
 		self.groups = [NSMutableArray array];
+        [self readFileContent:fileContent];
 	}
     
     return self;
@@ -68,7 +69,7 @@
         if ([line hasPrefix:@"#"])
             continue;
         
-        NSArray* tokens = [fileContent componentsSeparatedByString:@";"];
+        NSArray* tokens = [line componentsSeparatedByString:@";"];
         
         NSString* lineType = [tokens objectAtIndex:0];
         if ([lineType isEqualToString:@"G"])

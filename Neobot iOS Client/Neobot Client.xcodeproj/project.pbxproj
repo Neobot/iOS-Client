@@ -45,6 +45,9 @@
 		94344DF717F701FB006ABBCD /* PXGAX12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */; };
 		943DF58D180332D800630316 /* PXGSelectAngleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943DF58C180332D800630316 /* PXGSelectAngleViewController.m */; };
 		9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9440516C1826991C00E3671B /* PXGAX12MovementManager.m */; };
+		9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */; };
+		9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C579183113E50064C7F5 /* PXGMovementsViewController.m */; };
+		9448C5821831190D0064C7F5 /* PXGGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */; };
 		94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D411795D5B90024A789 /* PXGDataSerializer.m */; };
 		94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D44179849BE0024A789 /* PXGCommInterface.m */; };
 		94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D52179ABB860024A789 /* PXGCommViewController.m */; };
@@ -123,6 +126,12 @@
 		943DF58C180332D800630316 /* PXGSelectAngleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSelectAngleViewController.m; sourceTree = "<group>"; };
 		9440516B1826991C00E3671B /* PXGAX12MovementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12MovementManager.h; sourceTree = "<group>"; };
 		9440516C1826991C00E3671B /* PXGAX12MovementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12MovementManager.m; sourceTree = "<group>"; };
+		9448C5751831038D0064C7F5 /* PXGAX12SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12SplitViewController.h; sourceTree = "<group>"; };
+		9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12SplitViewController.m; sourceTree = "<group>"; };
+		9448C578183113E50064C7F5 /* PXGMovementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMovementsViewController.h; sourceTree = "<group>"; };
+		9448C579183113E50064C7F5 /* PXGMovementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMovementsViewController.m; sourceTree = "<group>"; };
+		9448C5801831190D0064C7F5 /* PXGGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGGroupTableViewController.h; sourceTree = "<group>"; };
+		9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGGroupTableViewController.m; sourceTree = "<group>"; };
 		94835D401795D5B90024A789 /* PXGDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGDataSerializer.h; sourceTree = "<group>"; };
 		94835D411795D5B90024A789 /* PXGDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGDataSerializer.m; sourceTree = "<group>"; };
 		94835D43179849BE0024A789 /* PXGCommInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommInterface.h; sourceTree = "<group>"; };
@@ -295,24 +304,8 @@
 		9428504A17F84F8900230DD2 /* AX-12 */ = {
 			isa = PBXGroup;
 			children = (
-				9428505417F9E78A00230DD2 /* PXGAX12Data.h */,
-				9428505517F9E78A00230DD2 /* PXGAX12Data.m */,
-				94344DF517F701FB006ABBCD /* PXGAX12ViewController.h */,
-				94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */,
-				94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */,
-				94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */,
-				94FFA098180191EF009AA63C /* PXGAddAX12ViewController.h */,
-				94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */,
-				9428504E17F8599600230DD2 /* PXGAX12CollectionViewController.h */,
-				9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */,
-				9428505117F9E5D600230DD2 /* PXGAX12CollectionCell.h */,
-				9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */,
-				94344DF217F6F889006ABBCD /* PXGStickControlView.h */,
-				94344DF317F6F889006ABBCD /* PXGStickControlView.m */,
-				943DF58B180332D800630316 /* PXGSelectAngleViewController.h */,
-				943DF58C180332D800630316 /* PXGSelectAngleViewController.m */,
-				9440516B1826991C00E3671B /* PXGAX12MovementManager.h */,
-				9440516C1826991C00E3671B /* PXGAX12MovementManager.m */,
+				9448C57B183114AA0064C7F5 /* Movements */,
+				9448C57C183114FC0064C7F5 /* AX-12 Control */,
 			);
 			name = "AX-12";
 			sourceTree = "<group>";
@@ -354,6 +347,44 @@
 				9425D3BB17915AEF00C6E883 /* Toolbar - Playlist.png */,
 			);
 			name = "Tab Images";
+			sourceTree = "<group>";
+		};
+		9448C57B183114AA0064C7F5 /* Movements */ = {
+			isa = PBXGroup;
+			children = (
+				9440516B1826991C00E3671B /* PXGAX12MovementManager.h */,
+				9440516C1826991C00E3671B /* PXGAX12MovementManager.m */,
+				9448C578183113E50064C7F5 /* PXGMovementsViewController.h */,
+				9448C579183113E50064C7F5 /* PXGMovementsViewController.m */,
+				9448C5801831190D0064C7F5 /* PXGGroupTableViewController.h */,
+				9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */,
+			);
+			name = Movements;
+			sourceTree = "<group>";
+		};
+		9448C57C183114FC0064C7F5 /* AX-12 Control */ = {
+			isa = PBXGroup;
+			children = (
+				9428505417F9E78A00230DD2 /* PXGAX12Data.h */,
+				9428505517F9E78A00230DD2 /* PXGAX12Data.m */,
+				9448C5751831038D0064C7F5 /* PXGAX12SplitViewController.h */,
+				9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */,
+				94344DF517F701FB006ABBCD /* PXGAX12ViewController.h */,
+				94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */,
+				94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */,
+				94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */,
+				94FFA098180191EF009AA63C /* PXGAddAX12ViewController.h */,
+				94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */,
+				9428504E17F8599600230DD2 /* PXGAX12CollectionViewController.h */,
+				9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */,
+				9428505117F9E5D600230DD2 /* PXGAX12CollectionCell.h */,
+				9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */,
+				94344DF217F6F889006ABBCD /* PXGStickControlView.h */,
+				94344DF317F6F889006ABBCD /* PXGStickControlView.m */,
+				943DF58B180332D800630316 /* PXGSelectAngleViewController.h */,
+				943DF58C180332D800630316 /* PXGSelectAngleViewController.m */,
+			);
+			name = "AX-12 Control";
 			sourceTree = "<group>";
 		};
 		94835D4717999D8F0024A789 /* Comm */ = {
@@ -478,7 +509,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9425D38D1791565000C6E883 /* main.m in Sources */,
+				9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */,
 				9425D3911791565000C6E883 /* PXGAppDelegate.m in Sources */,
+				9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */,
 				9425D39D1791565000C6E883 /* PXGRemoteViewController.m in Sources */,
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,
 				9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */,
@@ -496,6 +529,7 @@
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
 				9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */,
 				9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */,
+				9448C5821831190D0064C7F5 /* PXGGroupTableViewController.m in Sources */,
 				94AC01ED17A2E863005A47F3 /* PXGStrategySelectionViewController.m in Sources */,
 				94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */,
 				94AC01F317A41139005A47F3 /* PXGTools.c in Sources */,

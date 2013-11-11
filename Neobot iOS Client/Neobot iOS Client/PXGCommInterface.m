@@ -243,12 +243,14 @@
             for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
                 if ([serverDelegate respondsToSelector:@selector(didReceivePositions:forAx12:)])
                     [serverDelegate didReceivePositions:positions forAx12:ids];
+            break;
         }
         case AX12_MVT_FILE:
         {
             for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
                 if ([serverDelegate respondsToSelector:@selector(didReceiveAx12MovementsFileData:)])
                     [serverDelegate didReceiveAx12MovementsFileData:data];
+            break;
 
         }
             
@@ -447,7 +449,7 @@
 
 - (void)setAX12MovementFile:(NSData*)data
 {
-    [_protocol writeMessage:data forInstruction:ASK_AX12_MVT_FILE];
+    [_protocol writeMessage:data forInstruction:SET_AX12_MVT_FILE];
 }
 
 - (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit

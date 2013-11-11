@@ -223,9 +223,4 @@
     }
 }
 
-- (void)didReceiveAx12MovementsFileData:(NSData*)data
-{
-    
-}
-
 @end
