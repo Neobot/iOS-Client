@@ -142,4 +142,8 @@ struct Ax12Info
 - (void)askPositionsForAX12Ids:(NSArray*)ax12IDList recursively:(BOOL)recursively;
 - (void)setAX12Ids:(NSArray*)ax12IDList lockedInfo:(NSArray*)lockedInfo;
 
+- (void)askAX12Movements;
+- (void)setAX12MovementFile:(NSData*)data;
+- (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit;
+
 @end

@@ -244,6 +244,13 @@
                 if ([serverDelegate respondsToSelector:@selector(didReceivePositions:forAx12:)])
                     [serverDelegate didReceivePositions:positions forAx12:ids];
         }
+        case AX12_MVT_FILE:
+        {
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                if ([serverDelegate respondsToSelector:@selector(didReceiveAx12MovementsFileData:)])
+                    [serverDelegate didReceiveAx12MovementsFileData:data];
+
+        }
             
         //BOTH
         case AR:
@@ -432,5 +439,28 @@
     
     [_protocol writeMessage:messageData forInstruction:LOCK_AX12];
 }
+
+- (void)askAX12Movements
+{
+    [_protocol writeMessage:nil forInstruction:ASK_AX12_MVT_FILE];
+}
+
+- (void)setAX12MovementFile:(NSData*)data
+{
+    [_protocol writeMessage:data forInstruction:ASK_AX12_MVT_FILE];
+}
+
+- (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addString:groupName];
+    [serializer addString:movementName];
+    [serializer addFloat:speedLimit];
+    
+    [_protocol writeMessage:messageData forInstruction:RUN_AX12_MVT];
+}
+
 
 @end

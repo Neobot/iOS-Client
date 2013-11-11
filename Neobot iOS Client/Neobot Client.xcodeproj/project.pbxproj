@@ -44,6 +44,7 @@
 		94344DF417F6F889006ABBCD /* PXGStickControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94344DF317F6F889006ABBCD /* PXGStickControlView.m */; };
 		94344DF717F701FB006ABBCD /* PXGAX12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */; };
 		943DF58D180332D800630316 /* PXGSelectAngleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943DF58C180332D800630316 /* PXGSelectAngleViewController.m */; };
+		9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9440516C1826991C00E3671B /* PXGAX12MovementManager.m */; };
 		94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D411795D5B90024A789 /* PXGDataSerializer.m */; };
 		94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D44179849BE0024A789 /* PXGCommInterface.m */; };
 		94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94835D52179ABB860024A789 /* PXGCommViewController.m */; };
@@ -120,6 +121,8 @@
 		94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12ViewController.m; sourceTree = "<group>"; };
 		943DF58B180332D800630316 /* PXGSelectAngleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSelectAngleViewController.h; sourceTree = "<group>"; };
 		943DF58C180332D800630316 /* PXGSelectAngleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSelectAngleViewController.m; sourceTree = "<group>"; };
+		9440516B1826991C00E3671B /* PXGAX12MovementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12MovementManager.h; sourceTree = "<group>"; };
+		9440516C1826991C00E3671B /* PXGAX12MovementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12MovementManager.m; sourceTree = "<group>"; };
 		94835D401795D5B90024A789 /* PXGDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGDataSerializer.h; sourceTree = "<group>"; };
 		94835D411795D5B90024A789 /* PXGDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGDataSerializer.m; sourceTree = "<group>"; };
 		94835D43179849BE0024A789 /* PXGCommInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCommInterface.h; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 				94344DF317F6F889006ABBCD /* PXGStickControlView.m */,
 				943DF58B180332D800630316 /* PXGSelectAngleViewController.h */,
 				943DF58C180332D800630316 /* PXGSelectAngleViewController.m */,
+				9440516B1826991C00E3671B /* PXGAX12MovementManager.h */,
+				9440516C1826991C00E3671B /* PXGAX12MovementManager.m */,
 			);
 			name = "AX-12";
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
 				9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */,
+				9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */,
 				94AC01ED17A2E863005A47F3 /* PXGStrategySelectionViewController.m in Sources */,
 				94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */,
 				94AC01F317A41139005A47F3 /* PXGTools.c in Sources */,
