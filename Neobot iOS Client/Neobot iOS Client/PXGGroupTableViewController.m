@@ -10,6 +10,9 @@
 #import "PXGAX12MovementManager.h"
 
 @interface PXGGroupTableViewController ()
+{
+    int _editedRow;
+}
 
 @end
 
@@ -27,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _editedRow = -1;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -44,17 +48,64 @@
 {
     if ([segue.identifier isEqualToString:@"editGroupSegue"])
     {
-        int currentEditedIndex = [self.tableView indexPathForSelectedRow].row;
-        PXGAX12MovementGroup* group = [self.groups objectAtIndex:currentEditedIndex];
+        _editedRow = [self.tableView indexPathForSelectedRow].row;
+        PXGAX12MovementGroup* group = [self.groups objectAtIndex:_editedRow];
         
         PXGGroupContentViewController* controller = (PXGGroupContentViewController*)segue.destinationViewController;
         controller.name = group.name;
         controller.ids = group.ids;
         controller.movements = group.movements;
+        controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"newGroupSegue"])
+    {
+        PXGAskNameViewController* controller = (PXGAskNameViewController*)segue.destinationViewController;
+        [controller setObjectName:@"Group"];
+        controller.delegate = self;
     }
 }
 
+- (void)newNameSelected:(NSString*)name
+{
+    PXGAX12MovementGroup* group = [[PXGAX12MovementGroup alloc] initWithName:name andIds:[NSMutableArray array]];
+    [self.groups addObject:group];
+    [self.tableView reloadData];
+}
+
+- (void)groupNameChanged:(NSString*)name
+{
+    if (_editedRow >= 0)
+    {
+        PXGAX12MovementGroup* group = [self.groups objectAtIndex:_editedRow];
+        group.name = name;
+        
+        [self reloadCurrentRow];
+    }
+}
+
+- (void)groupMovementsChanged
+{
+    [self reloadCurrentRow];
+}
+
+- (void)groupIdsChanged
+{
+    [self reloadCurrentRow];
+}
+
 #pragma mark - Table view data source
+
+- (void) reloadCurrentRow
+{
+   if (_editedRow >= 0)
+       [self reloadGroupAtRow:_editedRow];
+}
+
+- (void)reloadGroupAtRow:(NSInteger)row
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -108,6 +159,7 @@
                 [detailedIdList appendFormat:@"%i", [num intValue]];
             }
             
+            [detailedIdList appendFormat:@"  -  %i movement(s)", group.movements.count];
             cell.detailTextLabel.text = detailedIdList;
             break;
         }

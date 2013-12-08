@@ -83,6 +83,16 @@
     return @"";
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == 1 && self.positions.count == 0)
+    {
+        return @"Record new positions from the right panel to create a movement.";
+    }
+    
+    return @"";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *nameCellIdentifier = @"name";
@@ -98,6 +108,7 @@
             cell = [tableView dequeueReusableCellWithIdentifier:nameCellIdentifier forIndexPath:indexPath];
             UITextField* txt = (UITextField*)[cell.contentView viewWithTag:1];
             txt.text = self.name;
+            [txt addTarget:self action:@selector(nameChanged:) forControlEvents:UIControlEventEditingDidEnd];
 
             break;
         }
@@ -124,6 +135,11 @@
     }
     
     return cell;
+}
+
+-(void)nameChanged:(UITextField*)textField
+{
+    [self.delegate movementNameChanged:textField.text];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

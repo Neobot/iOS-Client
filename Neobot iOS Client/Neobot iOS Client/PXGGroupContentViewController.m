@@ -10,6 +10,9 @@
 #import "PXGAX12MovementManager.h"
 
 @interface PXGGroupContentViewController ()
+{
+    int _editedRow;
+}
 
 @end
 
@@ -27,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _editedRow = -1;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,21 +52,64 @@
     {
         PXGAX12ListTableViewController* controller = (PXGAX12ListTableViewController*)segue.destinationViewController;
         controller.ax12IdList = self.ids;
+        controller.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"editMovementSegue"])
     {
-        int currentEditedIndex = [self.tableView indexPathForSelectedRow].row;
-        PXGAX12Movement* mvt = [self.movements objectAtIndex:currentEditedIndex];
+        _editedRow = [self.tableView indexPathForSelectedRow].row;
+        PXGAX12Movement* mvt = [self.movements objectAtIndex:_editedRow];
      
         PXGMovementContentTableViewController* controller = (PXGMovementContentTableViewController*)segue.destinationViewController;
         controller.name = mvt.name;
         controller.positions = mvt.positions;
         controller.ids = self.ids;
+        controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"newMovementSegue"])
+    {
+        PXGAskNameViewController* controller = (PXGAskNameViewController*)segue.destinationViewController;
+        controller.delegate = self;
+        [controller setObjectName:@"Movement"];
     }
 }
 
+- (void) newNameSelected:(NSString*)name
+{
+    PXGAX12Movement* mvt = [[PXGAX12Movement alloc] initWithName:name];
+    [self.movements addObject:mvt];
+    [self.tableView reloadData];
+    [self.delegate groupMovementsChanged];
+}
+
+- (void)movementNameChanged:(NSString*)name
+{
+    if (_editedRow >= 0)
+    {
+        PXGAX12Movement* mvt = [self.movements objectAtIndex:_editedRow];
+        mvt.name = name;
+        
+        [self reloadCurrentRow];
+    }
+}
+
+- (void)movementPositionsChanged
+{
+    [self reloadCurrentRow];
+}
 
 #pragma mark - Table view data source
+
+- (void) reloadCurrentRow
+{
+    if (_editedRow >= 0)
+        [self reloadMovementAtRow:_editedRow];
+}
+
+- (void)reloadMovementAtRow:(NSInteger)row
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -109,6 +156,7 @@
                 cell = [tableView dequeueReusableCellWithIdentifier:nameCellIdentifier forIndexPath:indexPath];
                 UITextField* txt = (UITextField*)[cell.contentView viewWithTag:1];
                 txt.text = self.name;
+                [txt addTarget:self action:@selector(nameChanged:) forControlEvents:UIControlEventEditingDidEnd];
             }
             else
             {
@@ -150,6 +198,10 @@
     return cell;
 }
 
+-(void)nameChanged:(UITextField*)textField
+{
+    [self.delegate groupNameChanged:textField.text];
+}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -167,8 +219,7 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        //if ([self.delegate respondsToSelector:@selector(ax12:removedAtRow:)])
-        //    [self.delegate ax12:removedID removedAtRow:indexPath.row];
+        [self.delegate groupMovementsChanged];
     }
 }
 
@@ -187,4 +238,23 @@
         [self.tableView setEditing:NO animated:YES];
     }
 }
+
+- (void) ax12:(int)ax12ID addedAtRow:(int)row
+{
+    [self.delegate groupIdsChanged];
+    [self.tableView reloadData];
+}
+
+- (void) ax12:(int)ax12ID removedAtRow:(int)row
+{
+    [self.delegate groupIdsChanged];
+    [self.tableView reloadData];
+}
+
+- (void) ax12:(int)ax12ID movedFromRow:(int)fromRow toRow:(int)toRow
+{
+    [self.delegate groupIdsChanged];
+    [self.tableView reloadData];
+}
+
 @end

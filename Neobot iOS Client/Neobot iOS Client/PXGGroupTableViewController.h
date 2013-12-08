@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGGroupContentViewController.h"
+#import "PXGAskNameViewController.h"
 
-@interface PXGGroupTableViewController : UITableViewController
+@interface PXGGroupTableViewController : UITableViewController <PXGAskNameViewControllerProtocol, PXGGroupContentViewControllerProtocol>
 
 @property (strong, nonatomic) NSMutableArray* groups;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;

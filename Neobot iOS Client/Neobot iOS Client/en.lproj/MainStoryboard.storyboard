@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="H60-qm-fuG">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Remote View Controller - Remote-->
@@ -779,6 +779,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="wAE-KG-7HL" kind="push" identifier="newGroupSegue" id="dTd-BU-LvZ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -800,6 +803,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPF-Nq-T8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-55" y="-3313"/>
+        </scene>
+        <!--Ask Name View Controller - New-->
+        <scene sceneID="BQ0-Gx-RZ7">
+            <objects>
+                <tableViewController id="wAE-KG-7HL" customClass="PXGAskNameViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="WXJ-nc-wa6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="760"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="MCn-vb-Rhe">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="6dE-xt-ynY">
+                                        <rect key="frame" x="0.0" y="79" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6dE-xt-ynY" id="myI-81-AMw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTu-M9-bsb">
+                                                    <rect key="frame" x="16" y="11" width="46" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New name" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pj5-KF-55N">
+                                                    <rect key="frame" x="70" y="7" width="230" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pj5-KF-55N" firstAttribute="leading" secondItem="jTu-M9-bsb" secondAttribute="trailing" constant="8" symbolic="YES" id="3aX-Xc-hGI"/>
+                                                <constraint firstAttribute="bottom" secondItem="pj5-KF-55N" secondAttribute="bottom" constant="6" id="9AC-J9-81e"/>
+                                                <constraint firstItem="pj5-KF-55N" firstAttribute="top" secondItem="myI-81-AMw" secondAttribute="top" constant="7" id="AtO-QL-mdC"/>
+                                                <constraint firstAttribute="trailing" secondItem="pj5-KF-55N" secondAttribute="trailing" constant="20" symbolic="YES" id="ajL-e9-0h7"/>
+                                                <constraint firstItem="jTu-M9-bsb" firstAttribute="leading" secondItem="myI-81-AMw" secondAttribute="leading" constant="16" id="ddy-h8-Zd5"/>
+                                                <constraint firstItem="jTu-M9-bsb" firstAttribute="centerY" secondItem="myI-81-AMw" secondAttribute="centerY" id="eIs-dR-1vF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="wAE-KG-7HL" id="yHl-xr-4OC"/>
+                            <outlet property="delegate" destination="wAE-KG-7HL" id="Nwn-Of-nIq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New" id="awQ-Mc-1ET">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="HKU-ET-4pl">
+                            <connections>
+                                <action selector="onDone:" destination="wAE-KG-7HL" id="RTi-d0-nCO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="txtName" destination="pj5-KF-55N" id="Jz4-fC-xdI"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NpK-NK-2jx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="612" y="-4241"/>
         </scene>
         <!--Group Content View Controller - Group-->
         <scene sceneID="tWe-ti-oPT">
@@ -903,6 +971,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="wAE-KG-7HL" kind="push" identifier="newMovementSegue" id="H3M-1e-HST"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -923,7 +994,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YR1-jU-n7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="-3313"/>
+            <point key="canvasLocation" x="390" y="-3313"/>
         </scene>
         <!--Movement Content Table View Controller - Movement-->
         <scene sceneID="NMJ-A2-RQa">
@@ -940,9 +1011,8 @@
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9TK-7d-kt8">
                                     <rect key="frame" x="145" y="7" width="30" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Run">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                    <state key="normal" title="Run"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -2381,6 +2451,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="KM3-Dh-bRh"/>
+        <segue reference="H3M-1e-HST"/>
         <segue reference="pLy-qv-dUj"/>
         <segue reference="lO7-PU-doR"/>
         <segue reference="puz-ht-Puq"/>

@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "PXGAX12ListTableViewController.h"
 #import "PXGMovementContentTableViewController.h"
+#import "PXGAskNameViewController.h"
 
-@interface PXGGroupContentViewController : UITableViewController
+@protocol PXGGroupContentViewControllerProtocol <NSObject>
+- (void)groupNameChanged:(NSString*)name;
+- (void)groupMovementsChanged;
+- (void)groupIdsChanged;
+@end
+
+@interface PXGGroupContentViewController : UITableViewController <PXGAX12ListTableViewControllerDelegate, PXGAskNameViewControllerProtocol, PXGMovementContentTableViewControllerProtocol>
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSMutableArray* movements;
 @property (strong, nonatomic) NSMutableArray* ids;
+@property (weak, nonatomic) id<PXGGroupContentViewControllerProtocol> delegate;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 - (IBAction)onEdit:(id)sender;
