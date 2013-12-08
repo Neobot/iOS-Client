@@ -13,8 +13,10 @@
 @interface PXGGroupTableViewController : UITableViewController <PXGAskNameViewControllerProtocol, PXGGroupContentViewControllerProtocol>
 
 @property (strong, nonatomic) NSMutableArray* groups;
+@property (nonatomic) BOOL enabled;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 
 - (IBAction)onEdit:(id)sender;
+- (void)setEnabled:(BOOL)enabled;
 
 @end

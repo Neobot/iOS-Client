@@ -47,6 +47,10 @@
     
     if (connected)
         [self reloadMovements:nil];
+    
+    [self.movementNavigationController popToRootViewControllerAnimated:YES];
+    PXGGroupTableViewController* groupController = (PXGGroupTableViewController*)self.movementNavigationController.topViewController;
+    [groupController setEnabled:connected];
 }
 
 - (void)didReceiveAx12MovementsFileData:(NSData*)data

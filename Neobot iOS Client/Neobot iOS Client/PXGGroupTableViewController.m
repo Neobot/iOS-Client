@@ -18,11 +18,13 @@
 
 @implementation PXGGroupTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        _enabled = YES;
     }
     return self;
 }
@@ -42,6 +44,23 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    if (enabled != _enabled)
+    {
+        _enabled = enabled;
+        self.tableView.allowsSelection = enabled;
+        self.btnEdit.enabled = enabled;
+        if (!enabled && self.tableView.isEditing)
+        {
+            [self.tableView setEditing:NO];
+        }
+        
+        if (!enabled)
+            [self.tableView reloadData];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -117,9 +136,9 @@
     switch (section)
     {
         case 0:
-            return self.groups.count;
+            return self.enabled ? self.groups.count : 0;
         case 1:
-            return 1;
+            return self.enabled ? 1 : 0;
     }
     
     return 0;
@@ -127,11 +146,19 @@
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 && self.groups.count > 0)
-        return @"Available groups";
+    if (self.enabled)
+    {
+        if (section == 0 && self.groups.count > 0)
+            return @"Available groups";
+    }
+    else if (section == 0)
+    {
+        return @"No data";
+    }
     
     return @"";
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
