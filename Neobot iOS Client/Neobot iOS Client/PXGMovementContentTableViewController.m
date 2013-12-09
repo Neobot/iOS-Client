@@ -10,7 +10,9 @@
 #import "PXGAX12MovementManager.h"
 
 @interface PXGMovementContentTableViewController ()
-
+{
+    int _editedRow;
+}
 @end
 
 @implementation PXGMovementContentTableViewController
@@ -27,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _editedRow = -1;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,6 +42,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)runUntilHere
+{
+    PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
+    //TODO
+
+}
+
+- (void)moveToPosition
+{
+    PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
+    //TODO
 }
 
 #pragma mark - Table view data source
@@ -193,6 +209,24 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
    return indexPath.section == 1;
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    _editedRow = indexPath.row;
+    
+    if (self.accessoryPopoverController == nil)
+    {
+        PXGPositionActionsViewController* contentController = (PXGPositionActionsViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"PositionActionController"];
+        contentController.delegate = self;
+        self.accessoryPopoverController = [[UIPopoverController alloc] initWithContentViewController:contentController];
+    }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self.accessoryPopoverController presentPopoverFromRect:cell.bounds
+                                                     inView:cell.contentView
+                                   permittedArrowDirections:UIPopoverArrowDirectionLeft
+                                                   animated:YES];
 }
 
 @end

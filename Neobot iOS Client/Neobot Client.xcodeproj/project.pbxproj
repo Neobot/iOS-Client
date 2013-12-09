@@ -67,6 +67,8 @@
 		94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */; };
 		94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */; };
 		94F533581854CC4200FD5F53 /* PXGAskNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F533571854CC4200FD5F53 /* PXGAskNameViewController.m */; };
+		94F5335B18565ADE00FD5F53 /* PXGPositionActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F5335A18565ADE00FD5F53 /* PXGPositionActionsViewController.m */; };
+		94F5335E18565DC000FD5F53 /* PXGMovementSinglePositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F5335D18565DC000FD5F53 /* PXGMovementSinglePositionViewController.m */; };
 		94FFA09418016171009AA63C /* AX-12.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FFA09318016171009AA63C /* AX-12.png */; };
 		94FFA09718018BD0009AA63C /* PXGAX12ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */; };
 		94FFA09A180191EF009AA63C /* PXGAddAX12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFA099180191EF009AA63C /* PXGAddAX12ViewController.m */; };
@@ -171,6 +173,10 @@
 		94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGTrajectoryEditionViewController.m; sourceTree = "<group>"; };
 		94F533561854CC4200FD5F53 /* PXGAskNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAskNameViewController.h; sourceTree = "<group>"; };
 		94F533571854CC4200FD5F53 /* PXGAskNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAskNameViewController.m; sourceTree = "<group>"; };
+		94F5335918565ADE00FD5F53 /* PXGPositionActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGPositionActionsViewController.h; sourceTree = "<group>"; };
+		94F5335A18565ADE00FD5F53 /* PXGPositionActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGPositionActionsViewController.m; sourceTree = "<group>"; };
+		94F5335C18565DC000FD5F53 /* PXGMovementSinglePositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMovementSinglePositionViewController.h; sourceTree = "<group>"; };
+		94F5335D18565DC000FD5F53 /* PXGMovementSinglePositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMovementSinglePositionViewController.m; sourceTree = "<group>"; };
 		94FFA09318016171009AA63C /* AX-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AX-12.png"; sourceTree = "<group>"; };
 		94FFA09518018BD0009AA63C /* PXGAX12ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12ListTableViewController.h; sourceTree = "<group>"; };
 		94FFA09618018BD0009AA63C /* PXGAX12ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12ListTableViewController.m; sourceTree = "<group>"; };
@@ -377,8 +383,12 @@
 				9448C5871831606A0064C7F5 /* PXGGroupContentViewController.m */,
 				9448C58918316D3A0064C7F5 /* PXGMovementContentTableViewController.h */,
 				9448C58A18316D3A0064C7F5 /* PXGMovementContentTableViewController.m */,
+				94F5335C18565DC000FD5F53 /* PXGMovementSinglePositionViewController.h */,
+				94F5335D18565DC000FD5F53 /* PXGMovementSinglePositionViewController.m */,
 				94F533561854CC4200FD5F53 /* PXGAskNameViewController.h */,
 				94F533571854CC4200FD5F53 /* PXGAskNameViewController.m */,
+				94F5335918565ADE00FD5F53 /* PXGPositionActionsViewController.h */,
+				94F5335A18565ADE00FD5F53 /* PXGPositionActionsViewController.m */,
 			);
 			name = Movements;
 			sourceTree = "<group>";
@@ -523,11 +533,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94F5335E18565DC000FD5F53 /* PXGMovementSinglePositionViewController.m in Sources */,
 				9448C58B18316D3A0064C7F5 /* PXGMovementContentTableViewController.m in Sources */,
 				9425D38D1791565000C6E883 /* main.m in Sources */,
 				9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */,
 				9425D3911791565000C6E883 /* PXGAppDelegate.m in Sources */,
 				9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */,
+				94F5335B18565ADE00FD5F53 /* PXGPositionActionsViewController.m in Sources */,
 				9425D39D1791565000C6E883 /* PXGRemoteViewController.m in Sources */,
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,
 				9433FE3B1795BB4F0092A43B /* GCDAsyncSocket.m in Sources */,

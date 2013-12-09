@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGPositionActionsViewController.h"
 
 @protocol PXGMovementContentTableViewControllerProtocol <NSObject>
 - (void)movementNameChanged:(NSString*)name;
 - (void)movementPositionsChanged;
 @end
 
-@interface PXGMovementContentTableViewController : UITableViewController
+@interface PXGMovementContentTableViewController : UITableViewController <PXGPositionActionsViewControllerProtocol>
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSMutableArray* positions;
 @property (strong, nonatomic) NSMutableArray* ids;
 @property (weak, nonatomic) id<PXGMovementContentTableViewControllerProtocol> delegate;
+
+@property (strong, nonatomic) UIPopoverController* accessoryPopoverController;
 
 @end
