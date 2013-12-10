@@ -66,6 +66,8 @@
 
 - (IBAction)saveMovements:(id)sender
 {
+    NSData* data = [[self.movementManager writeToString] dataUsingEncoding:NSASCIIStringEncoding];
+    [[PXGCommInterface sharedInstance] setAX12MovementFile:data];
 }
 
 - (IBAction)reloadMovements:(id)sender

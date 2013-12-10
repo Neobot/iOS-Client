@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
         [serializer addData:data];
     
     //checksum
-    NSMutableData* checksumData = [[NSMutableData alloc] initWithBytes:&messageLength length:1];
+    NSMutableData* checksumData = [[NSMutableData alloc] initWithBytes:&messageLength length:4];
     [checksumData appendBytes:&instruction length:1];
     if (data != nil)
         [checksumData appendData:data];
