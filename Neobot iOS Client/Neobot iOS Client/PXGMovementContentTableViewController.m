@@ -44,20 +44,59 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"editPositionSegue"])
+    {
+        _editedRow = [self.tableView indexPathForSelectedRow].row;
+        PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
+        
+        PXGMovementSinglePositionViewController* controller = (PXGMovementSinglePositionViewController*)segue.destinationViewController;
+        controller.speed = singlePos.speed;
+        controller.torque = singlePos.torque;
+        controller.ids = self.ids;
+        controller.positions = singlePos.ax12Positions;
+        controller.delegate = self;
+    }
+}
+
+-(void)positionChanged:(NSArray*)positions speed:(float)speed torque:(float)torque
+{
+    PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
+    singlePos.speed = speed;
+    singlePos.torque = torque;
+    singlePos.ax12Positions = positions;
+    
+    [self reloadCurrentRow];
+}
+
 - (void)runUntilHere
 {
     PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
     //TODO
-
+    [self.accessoryPopoverController dismissPopoverAnimated:YES];
 }
 
 - (void)moveToPosition
 {
     PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
     //TODO
+    [self.accessoryPopoverController dismissPopoverAnimated:YES];
 }
 
 #pragma mark - Table view data source
+
+- (void) reloadCurrentRow
+{
+    if (_editedRow >= 0)
+        [self reloadPositionAtRow:_editedRow];
+}
+
+- (void)reloadPositionAtRow:(NSInteger)row
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -79,7 +118,7 @@
 {
     if (section == 1 && self.positions.count > 0)
     {
-        NSMutableString* detailedIdList = [NSMutableString stringWithString:@"Position list (AX-12 "];
+        NSMutableString* detailedIdList = [NSMutableString stringWithString:@"Position list (IDs "];
         bool isFirst = true;
         for (NSNumber* num in self.ids)
         {
@@ -136,14 +175,21 @@
             NSMutableString* posText = [NSMutableString string];
             
             bool isFirst = true;
-            for (NSNumber* pos in singlePos.ax12Positions)
+            for(int i = 0; i < self.ids.count; ++i)
             {
+                float value = 0.0;
+                if (i < singlePos.ax12Positions.count)
+                {
+                    NSNumber* pos = [singlePos.ax12Positions objectAtIndex:i];
+                    value = [pos floatValue];
+                }
+                
                 if (!isFirst)
                     [posText appendString:@", "];
                 else
                     isFirst = false;
                 
-                [posText appendFormat:@"%i°", [pos intValue]];
+                [posText appendFormat:@"%i°", (int)value];
             }
             cell.textLabel.text = posText;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"speed: %.2f%%, torque: %.2f%%", singlePos.speed, singlePos.torque];

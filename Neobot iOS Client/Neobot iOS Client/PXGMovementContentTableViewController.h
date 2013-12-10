@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGPositionActionsViewController.h"
+#import "PXGMovementSinglePositionViewController.h"
 
 @protocol PXGMovementContentTableViewControllerProtocol <NSObject>
 - (void)movementNameChanged:(NSString*)name;
 - (void)movementPositionsChanged;
 @end
 
-@interface PXGMovementContentTableViewController : UITableViewController <PXGPositionActionsViewControllerProtocol>
+@interface PXGMovementContentTableViewController : UITableViewController <PXGPositionActionsViewControllerProtocol, PXGMovementSinglePositionViewControllerProtocol>
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSMutableArray* positions;

@@ -67,14 +67,19 @@
     
     UITextField* txt = (UITextField*)[cell.contentView viewWithTag:1];
     UILabel* lbl = (UILabel*)[cell.contentView viewWithTag:2];
+    UILabel* lblSuffix = (UILabel*)[cell.contentView viewWithTag:3];
     
     if (indexPath.section == 0)
     {
         int num = [[self.ids objectAtIndex:indexPath.row] intValue];
-        lbl.text = [NSString stringWithFormat:@"AX-12 N°%i", num];
+        lbl.text = [NSString stringWithFormat:@"N°%i", num];
         
-        float value = [[self.positions objectAtIndex:indexPath.row] floatValue];
-        txt.text = [NSString stringWithFormat:@"%02f", value];
+        float value = 0.0;
+        if (indexPath.row < self.positions.count)
+            value = [[self.positions objectAtIndex:indexPath.row] floatValue];
+        
+        txt.text = [NSString stringWithFormat:@"%.2f", value];
+        lblSuffix.text = @"°";
     }
     else if (indexPath.section == 1)
     {
@@ -90,10 +95,34 @@
             value = self.torque;
         }
         
-        txt.text = [NSString stringWithFormat:@"%02f", value];
+        txt.text = [NSString stringWithFormat:@"%.2f", value];
+        lblSuffix.text = @"%";
     }
     
     return cell;
 }
 
+- (NSString*)textValueForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    UITextField* txt = (UITextField*)[cell.contentView viewWithTag:1];
+    return txt.text;
+}
+
+- (IBAction)onDone:(id)sender
+{
+    float speed = [[self textValueForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] floatValue];
+    float torque = [[self textValueForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]] floatValue];
+    
+    NSMutableArray* positions = [NSMutableArray array];
+    int nbPositions = [self tableView:self.tableView numberOfRowsInSection:0];
+    for(int i = 0; i < nbPositions; ++i)
+    {
+        float pos = [[self textValueForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] floatValue];
+        [positions addObject:[NSNumber numberWithFloat:pos]];
+    }
+    
+    [self.delegate positionChanged:positions speed:speed torque:torque];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

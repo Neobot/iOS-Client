@@ -34,6 +34,8 @@
         {
             [out appendFormat:@"%i;", [ax12Id intValue]];
         }
+        
+        int nbAX12 = group.ids.count;
 		
         [out appendString:@"\n"];
         
@@ -43,12 +45,20 @@
             
             for (PXGAX12MovementSinglePosition* singlePos in mvt.positions)
 			{
+                
                 [out appendString:@"P;"];
-
-                for (NSNumber* pos in singlePos.ax12Positions)
-				{
-					[out appendFormat:@"%f;", [pos floatValue]];
-				}
+                
+                for(int i = 0; i < nbAX12; ++i)
+                {
+                    float value = 0.0;
+                    if (i < singlePos.ax12Positions.count)
+                    {
+                        NSNumber* pos = [singlePos.ax12Positions objectAtIndex:i];
+                        value = [pos floatValue];
+                    }
+                    
+                    [out appendFormat:@"%f;", value];
+                }
                 
                 [out appendFormat:@"%f;%f\n", singlePos.torque, singlePos.speed];
 			}

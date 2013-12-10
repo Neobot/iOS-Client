@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol  PXGMovementSinglePositionViewControllerProtocol <NSObject>
-- (void)movementNameChanged:(NSString*)name;
-- (void)movementPositionsChanged;
+-(void)positionChanged:(NSArray*)positions speed:(float)speed torque:(float)torque;
 @end
 
 @interface PXGMovementSinglePositionViewController : UITableViewController
@@ -21,5 +20,6 @@
 @property (strong, nonatomic) NSMutableArray* ids;
 
 @property (weak, nonatomic) id<PXGMovementSinglePositionViewControllerProtocol> delegate;
+- (IBAction)onDone:(id)sender;
 
 @end
