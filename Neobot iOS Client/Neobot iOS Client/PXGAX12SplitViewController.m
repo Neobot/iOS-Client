@@ -22,7 +22,7 @@
     [super viewDidLoad];
 
 	//PXGAX12ViewController* ax12Controller = [self.viewControllers objectAtIndex:1];
-    //PXGMovementsViewController* movementController = [self.viewControllers objectAtIndex:2];
+    //PXGMovementsViewController* movementController = [self.viewControllers objectAtIndex:0];
 }
 
 - (void)didReceiveMemoryWarning

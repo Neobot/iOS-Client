@@ -21,6 +21,8 @@
 {
     [super viewDidLoad];
     
+    self.splitViewController.delegate = self;
+    
     self.sliderSpeed.value = [[NSUserDefaults standardUserDefaults] floatForKey:AX12_MAX_SPEED];
     self.sliderTorque.value = [[NSUserDefaults standardUserDefaults] floatForKey:AX12_MAX_TORQUE];
     [self speedChanged];
@@ -43,6 +45,9 @@
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    [self doLayoutForOrientation:app.statusBarOrientation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +77,34 @@
 {
     if ([[PXGCommInterface sharedInstance] connectionStatus] == Controlled)
         [self askAllAX12PositionsRecursively:YES];
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
+{
+    self.btnShowMovements = barButtonItem;
+    self.movementPopoverController = pc;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)button
+{
+    self.btnShowMovements = nil;
+    self.movementPopoverController = nil;
+}
+
+- (IBAction)onShowMovements:(id)sender
+{
+    [self.movementPopoverController presentPopoverFromBarButtonItem:self.btnShowMovements permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self doLayoutForOrientation:toInterfaceOrientation];
+}
+
+- (void)doLayoutForOrientation:(UIInterfaceOrientation)orientation
+{
+    BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
+    self.movementToolBar.hidden = !isPortrait;
 }
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status

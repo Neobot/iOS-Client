@@ -221,7 +221,7 @@
                         <viewControllerLayoutGuide type="bottom" id="5nn-CZ-tFe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HwT-44-FOv">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="980"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsM-Ho-tvl">
@@ -361,23 +361,40 @@
                                     <segue destination="Ium-hz-zyv" kind="embed" identifier="ax12CollectionSegue" id="gfG-78-MMl"/>
                                 </connections>
                             </containerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-pQ-NRw">
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="InO-fr-OVj"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="&lt; Movements" id="6Rd-fJ-uq4">
+                                        <connections>
+                                            <action selector="onShowMovements:" destination="3XC-M3-qeE" id="Nfr-O6-6v5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="0.89880816610000003" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xvy-HR-cCs" firstAttribute="width" secondItem="Lz0-L7-jQx" secondAttribute="width" id="3lL-Io-MH3"/>
                             <constraint firstItem="g0Q-j1-FKZ" firstAttribute="leading" secondItem="HwT-44-FOv" secondAttribute="leading" constant="20" id="595-0w-vPo"/>
-                            <constraint firstAttribute="bottom" secondItem="g0Q-j1-FKZ" secondAttribute="bottom" constant="6" id="7yb-z0-Vdl"/>
+                            <constraint firstAttribute="bottom" secondItem="g0Q-j1-FKZ" secondAttribute="bottom" constant="11" id="7yb-z0-Vdl"/>
                             <constraint firstItem="gbw-9C-xcD" firstAttribute="top" secondItem="Tgk-nX-Qnp" secondAttribute="bottom" constant="8" id="Agx-Za-015"/>
                             <constraint firstAttribute="trailing" secondItem="Xvy-HR-cCs" secondAttribute="trailing" constant="20" symbolic="YES" id="BJK-qs-XdM"/>
                             <constraint firstItem="KsM-Ho-tvl" firstAttribute="top" secondItem="HwT-44-FOv" secondAttribute="top" constant="20" symbolic="YES" id="Bif-dT-hpm"/>
                             <constraint firstItem="Xvy-HR-cCs" firstAttribute="bottom" secondItem="Lz0-L7-jQx" secondAttribute="bottom" id="Blm-lu-iRO"/>
+                            <constraint firstItem="Chr-pQ-NRw" firstAttribute="leading" secondItem="Tgk-nX-Qnp" secondAttribute="leading" id="Ff3-iG-hlw"/>
                             <constraint firstItem="Tgk-nX-Qnp" firstAttribute="top" secondItem="dfk-nh-fV3" secondAttribute="bottom" constant="132" id="GHu-be-bjd"/>
                             <constraint firstAttribute="centerX" secondItem="KsM-Ho-tvl" secondAttribute="centerX" id="V39-tM-Lff"/>
                             <constraint firstItem="Xvy-HR-cCs" firstAttribute="leading" secondItem="Lz0-L7-jQx" secondAttribute="trailing" constant="10" id="W2B-wJ-424"/>
+                            <constraint firstItem="Chr-pQ-NRw" firstAttribute="top" secondItem="HwT-44-FOv" secondAttribute="top" id="b14-jk-zfR"/>
                             <constraint firstAttribute="centerX" secondItem="gbw-9C-xcD" secondAttribute="centerX" id="dU3-nO-17J"/>
                             <constraint firstItem="Xvy-HR-cCs" firstAttribute="top" secondItem="KsM-Ho-tvl" secondAttribute="bottom" constant="8" symbolic="YES" id="eEl-ae-S0H"/>
                             <constraint firstItem="Xvy-HR-cCs" firstAttribute="height" secondItem="Lz0-L7-jQx" secondAttribute="height" id="fOc-xv-ozU"/>
-                            <constraint firstAttribute="bottom" secondItem="gbw-9C-xcD" secondAttribute="bottom" constant="6" id="frv-ra-my4"/>
+                            <constraint firstAttribute="bottom" secondItem="gbw-9C-xcD" secondAttribute="bottom" constant="11" id="frv-ra-my4"/>
                             <constraint firstItem="Lz0-L7-jQx" firstAttribute="top" secondItem="HwT-44-FOv" secondAttribute="top" constant="58" id="jem-eJ-ij7"/>
                             <constraint firstItem="Lz0-L7-jQx" firstAttribute="leading" secondItem="HwT-44-FOv" secondAttribute="leading" constant="20" symbolic="YES" id="mCx-b7-OPZ"/>
                             <constraint firstItem="Tgk-nX-Qnp" firstAttribute="leading" secondItem="HwT-44-FOv" secondAttribute="leading" id="qvp-GE-fLS"/>
@@ -385,13 +402,18 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="Gtz-be-arh"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnLockAll" destination="MSC-Pk-GcL" id="YgS-Ag-SBQ"/>
                         <outlet property="btnRecord" destination="g0Q-j1-FKZ" id="3dN-6L-j1R"/>
                         <outlet property="btnReleaseAll" destination="peI-xr-swJ" id="jDB-S9-S6T"/>
+                        <outlet property="btnShowMovements" destination="6Rd-fJ-uq4" id="Fay-QP-OUG"/>
                         <outlet property="lblSpeed" destination="sbt-BY-Vq0" id="aQ7-oE-byA"/>
                         <outlet property="lblTorque" destination="IBJ-fC-dOb" id="ykf-4e-skc"/>
+                        <outlet property="movementToolBar" destination="Chr-pQ-NRw" id="OGZ-Fb-3LU"/>
                         <outlet property="sliderSpeed" destination="ieP-M0-bSx" id="rc6-vQ-7J8"/>
                         <outlet property="sliderTorque" destination="KcE-LG-nwF" id="DFy-dJ-I0t"/>
                     </connections>
