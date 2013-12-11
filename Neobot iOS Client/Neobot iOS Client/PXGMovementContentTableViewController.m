@@ -220,8 +220,7 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        //if ([self.delegate respondsToSelector:@selector(ax12:removedAtRow:)])
-        //    [self.delegate ax12:removedID removedAtRow:indexPath.row];
+        [self.delegate movementPositionsChanged];
     }
 }
 
@@ -233,9 +232,6 @@
     PXGAX12MovementSinglePosition* pos = [self.positions objectAtIndex:fromIndexPath.row];
     [self.positions removeObjectAtIndex:fromIndexPath.row];
     [self.positions insertObject:pos atIndex:toIndexPath.row];
-    
-    //if ([self.delegate respondsToSelector:@selector(ax12:movedFromRow:toRow:)])
-      //  [self.delegate ax12:movedID movedFromRow:fromIndexPath.row toRow:toIndexPath.row];
 }
 
 //Restrict move to original section
@@ -273,6 +269,22 @@
                                                      inView:cell.contentView
                                    permittedArrowDirections:UIPopoverArrowDirectionLeft
                                                    animated:YES];
+}
+
+- (IBAction)onEdit:(id)sender
+{
+    if (!self.tableView.editing)
+    {
+        self.btnEdit.style = UIBarButtonItemStyleDone;
+        self.btnEdit.title = NSLocalizedString(@"Done", nil);
+        [self.tableView setEditing:YES animated:YES];
+    }
+    else
+    {
+        self.btnEdit.style = UIBarButtonItemStyleBordered;
+        self.btnEdit.title = NSLocalizedString(@"Edit", nil);
+        [self.tableView setEditing:NO animated:YES];
+    }
 }
 
 @end

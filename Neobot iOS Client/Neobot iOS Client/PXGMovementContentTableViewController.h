@@ -17,11 +17,14 @@
 
 @interface PXGMovementContentTableViewController : UITableViewController <PXGPositionActionsViewControllerProtocol, PXGMovementSinglePositionViewControllerProtocol>
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSMutableArray* positions;
 @property (strong, nonatomic) NSMutableArray* ids;
 @property (weak, nonatomic) id<PXGMovementContentTableViewControllerProtocol> delegate;
 
 @property (strong, nonatomic) UIPopoverController* accessoryPopoverController;
+
+- (IBAction)onEdit:(id)sender;
 
 @end

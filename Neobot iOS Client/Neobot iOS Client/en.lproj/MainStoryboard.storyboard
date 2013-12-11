@@ -1082,8 +1082,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movement" id="jnq-2f-f44">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="A06-w6-W1m"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="A06-w6-W1m">
+                            <connections>
+                                <action selector="onEdit:" destination="MyE-cr-0Dh" id="uUJ-Gy-whs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnEdit" destination="A06-w6-W1m" id="og9-G7-BJy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bxf-4B-qua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1118,7 +1125,7 @@
                                             <rect key="frame" x="110" y="7" width="177" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                         </textField>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoC-z1-Jgc">
                                             <rect key="frame" x="288" y="11" width="17" height="21"/>
