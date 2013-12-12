@@ -15,6 +15,7 @@
 - (void)groupNameChanged:(NSString*)name;
 - (void)groupMovementsChanged;
 - (void)groupIdsChanged;
+- (void)otherDataChanged;
 @end
 
 @interface PXGGroupContentViewController : UITableViewController <PXGAX12ListTableViewControllerDelegate, PXGAskNameViewControllerProtocol, PXGMovementContentTableViewControllerProtocol>

@@ -10,11 +10,16 @@
 #import "PXGGroupContentViewController.h"
 #import "PXGAskNameViewController.h"
 
+@protocol PXGGroupTableViewControllerDelegate <NSObject>
+- (void)dataChanged;
+@end
+
 @interface PXGGroupTableViewController : UITableViewController <PXGAskNameViewControllerProtocol, PXGGroupContentViewControllerProtocol>
 
 @property (strong, nonatomic) NSMutableArray* groups;
 @property (nonatomic) BOOL enabled;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
+@property (weak, nonatomic) id<PXGGroupTableViewControllerDelegate> delegate;
 
 - (IBAction)onEdit:(id)sender;
 - (void)setEnabled:(BOOL)enabled;

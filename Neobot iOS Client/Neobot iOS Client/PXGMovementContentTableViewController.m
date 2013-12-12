@@ -229,6 +229,8 @@
     PXGAX12MovementSinglePosition* pos = [self.positions objectAtIndex:fromIndexPath.row];
     [self.positions removeObjectAtIndex:fromIndexPath.row];
     [self.positions insertObject:pos atIndex:toIndexPath.row];
+    
+    [self.delegate movementPositionsChanged];
 }
 
 //Restrict move to original section
@@ -287,6 +289,7 @@
 - (void)recordPositions:(NSArray*)positions forIds:(NSArray*)ids
 {
     //TODO
+    [self.delegate movementPositionsChanged];
 }
 
 @end

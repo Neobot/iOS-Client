@@ -90,11 +90,14 @@
         
         [self reloadCurrentRow];
     }
+    
+    [self.delegate otherDataChanged];
 }
 
 - (void)movementPositionsChanged
 {
     [self reloadCurrentRow];
+    [self.delegate otherDataChanged];
 }
 
 #pragma mark - Table view data source

@@ -89,6 +89,7 @@
     PXGAX12MovementGroup* group = [[PXGAX12MovementGroup alloc] initWithName:name andIds:[NSMutableArray array]];
     [self.groups addObject:group];
     [self.tableView reloadData];
+    [self.delegate dataChanged];
 }
 
 - (void)groupNameChanged:(NSString*)name
@@ -99,17 +100,25 @@
         group.name = name;
         
         [self reloadCurrentRow];
+        [self.delegate dataChanged];
     }
 }
 
 - (void)groupMovementsChanged
 {
     [self reloadCurrentRow];
+    [self.delegate dataChanged];
 }
 
 - (void)groupIdsChanged
 {
     [self reloadCurrentRow];
+    [self.delegate dataChanged];
+}
+
+- (void)otherDataChanged
+{
+    [self.delegate dataChanged];
 }
 
 #pragma mark - Table view data source
@@ -214,8 +223,7 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        //if ([self.delegate respondsToSelector:@selector(ax12:removedAtRow:)])
-        //    [self.delegate ax12:removedID removedAtRow:indexPath.row];
+        [self.delegate dataChanged];
     }
 }
 

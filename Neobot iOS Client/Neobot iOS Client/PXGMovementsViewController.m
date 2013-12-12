@@ -19,6 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasChanges = false;
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];
@@ -35,6 +36,8 @@
     if ([segue.identifier isEqualToString:@"navigationControllerSegue"])
     {
         self.movementNavigationController = (UINavigationController*)segue.destinationViewController;
+        PXGGroupTableViewController* groupController = (PXGGroupTableViewController*)self.movementNavigationController.topViewController;
+        groupController.delegate = self;
     }
 }
 
@@ -61,6 +64,8 @@
     PXGGroupTableViewController* groupController = (PXGGroupTableViewController*)[self.movementNavigationController visibleViewController];
     groupController.groups = self.movementManager.groups;
     
+    self.hasChanges = false;
+    
     [groupController.tableView reloadData];
 }
 
@@ -68,10 +73,25 @@
 {
     NSData* data = [[self.movementManager writeToString] dataUsingEncoding:NSASCIIStringEncoding];
     [[PXGCommInterface sharedInstance] setAX12MovementFile:data];
+    self.hasChanges = false;
 }
 
 - (IBAction)reloadMovements:(id)sender
 {
     [[PXGCommInterface sharedInstance] askAX12Movements];
 }
+
+- (void)dataChanged
+{
+    self.hasChanges = true;
+}
+
+- (void)setHasChanges:(BOOL)hasChanges
+{
+    _hasChanges = hasChanges;
+    
+    NSString* saveBtnText = hasChanges ? @"Save*" : @"Save";
+    [self.btnSave setTitle:saveBtnText forState:UIControlStateNormal];
+}
+
 @end
