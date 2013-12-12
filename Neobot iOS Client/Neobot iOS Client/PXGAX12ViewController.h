@@ -12,6 +12,12 @@
 #import "PXGAX12CollectionViewController.h"
 #import "PXGAX12ListTableViewController.h"
 
+@protocol PXGAX12ViewControllerDelegate <NSObject>
+- (void)recordPositions:(NSArray*)positions forIds:(NSArray*)ids;
+- (void)defaultSpeedChanged:(float)speed;
+- (void)defaultTorqueChanged:(float)torque;
+@end
+
 
 @interface PXGAX12ViewController : UIViewController <PXGConnectedViewDelegate, PXGServerInterfaceDelegate, PXGAX12ListTableViewControllerDelegate, PXGAX12CollectionViewControllerProtocol, UISplitViewControllerDelegate>
 
@@ -28,10 +34,15 @@
 
 @property (strong, nonatomic) UIPopoverController* movementPopoverController;
 
+@property (weak, nonatomic) id<PXGAX12ViewControllerDelegate> delegate;
+
+-(void)setRecordEnabled:(BOOL)enabled;
+
 - (IBAction)speedChanged;
 - (IBAction)torqueChanged;
 - (IBAction)onLockAll:(id)sender;
 - (IBAction)onReleaseAll:(id)sender;
 - (IBAction)onShowMovements:(id)sender;
+- (IBAction)onRecord:(id)sender;
 
 @end

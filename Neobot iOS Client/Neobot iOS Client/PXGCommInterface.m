@@ -464,5 +464,18 @@
     [_protocol writeMessage:messageData forInstruction:RUN_AX12_MVT];
 }
 
+- (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit toPositionIndex:(int)lastPositionIndex
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addString:groupName];
+    [serializer addString:movementName];
+    [serializer addFloat:speedLimit];
+    [serializer addInt8:(int8_t)lastPositionIndex];
+    
+    [_protocol writeMessage:messageData forInstruction:RUN_AX12_MVT];
+}
+
 
 @end

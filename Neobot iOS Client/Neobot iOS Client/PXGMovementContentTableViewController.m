@@ -30,12 +30,9 @@
 {
     [super viewDidLoad];
     _editedRow = -1;
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.maxSpeed = 100;
+    self.maxTorque = 100;
 }
 
 - (void)didReceiveMemoryWarning
@@ -285,6 +282,11 @@
         self.btnEdit.title = NSLocalizedString(@"Edit", nil);
         [self.tableView setEditing:NO animated:YES];
     }
+}
+
+- (void)recordPositions:(NSArray*)positions forIds:(NSArray*)ids
+{
+    //TODO
 }
 
 @end

@@ -11,6 +11,9 @@
 #import "PXGParametersKeys.h"
 
 @interface PXGAX12ViewController ()
+{
+    bool _recordEnabled;
+}
 
 @end
 
@@ -20,6 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _recordEnabled = false;
     
     self.splitViewController.delegate = self;
     
@@ -96,6 +101,12 @@
     [self.movementPopoverController presentPopoverFromBarButtonItem:self.btnShowMovements permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+- (IBAction)onRecord:(id)sender
+{
+    //TODO
+    [self.delegate recordPositions:[NSArray array] forIds:[NSArray array]];
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [self doLayoutForOrientation:toInterfaceOrientation];
@@ -110,7 +121,6 @@
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
     bool ax12Connected = status >= Controlled;
-    self.btnRecord.enabled = ax12Connected;
     self.btnLockAll.enabled = ax12Connected;
     self.btnReleaseAll.enabled = ax12Connected;
     self.sliderSpeed.enabled = ax12Connected;
@@ -120,6 +130,18 @@
         [self askAllAX12PositionsRecursively:YES];
     
     [self.ax12CollectionController setAX12ControlEnabled:status == Controlled];
+    [self refreshRecordEnabledState];
+}
+
+-(void)setRecordEnabled:(BOOL)enabled
+{
+    _recordEnabled = enabled;
+    [self refreshRecordEnabledState];
+}
+
+-(void)refreshRecordEnabledState
+{
+    self.btnRecord.enabled = self.btnLockAll.enabled && _recordEnabled;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -161,16 +183,18 @@
 
 - (IBAction)speedChanged
 {
-    int speed = self.sliderSpeed.value;
-    self.lblSpeed.text = [NSString stringWithFormat:@"%i%%", speed];
-    [[NSUserDefaults standardUserDefaults] setFloat:self.sliderSpeed.value forKey:AX12_MAX_SPEED];
+    float speed = self.sliderSpeed.value;
+    self.lblSpeed.text = [NSString stringWithFormat:@"%.2f%%", speed];
+    [[NSUserDefaults standardUserDefaults] setFloat:speed forKey:AX12_MAX_SPEED];
+    [self.delegate defaultSpeedChanged:speed];
 }
 
 - (IBAction)torqueChanged
 {
-    int torque = self.sliderTorque.value;
-    self.lblTorque.text = [NSString stringWithFormat:@"%i%%", torque];
-    [[NSUserDefaults standardUserDefaults] setFloat:self.sliderTorque.value forKey:AX12_MAX_TORQUE];
+    float torque = self.sliderTorque.value;
+    self.lblTorque.text = [NSString stringWithFormat:@"%.2f%%", torque];
+    [[NSUserDefaults standardUserDefaults] setFloat:torque forKey:AX12_MAX_TORQUE];
+    [self.delegate defaultTorqueChanged:torque];
 }
 
 - (void)setAllAX12Locked:(BOOL)locked
@@ -255,5 +279,7 @@
         ++i;
     }
 }
+
+
 
 @end

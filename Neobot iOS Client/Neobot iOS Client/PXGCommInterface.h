@@ -145,5 +145,6 @@ struct Ax12Info
 - (void)askAX12Movements;
 - (void)setAX12MovementFile:(NSData*)data;
 - (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit;
+- (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit toPositionIndex:(int)lastPositionIndex;
 
 @end

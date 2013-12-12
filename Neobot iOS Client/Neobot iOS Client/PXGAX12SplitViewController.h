@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGMovementsViewController.h"
+#import "PXGAX12ViewController.h"
 
-@interface PXGAX12SplitViewController : UISplitViewController
+@class PXGMovementContentTableViewController;
+
+@interface PXGAX12SplitViewController : UISplitViewController <PXGAX12ViewControllerDelegate, UINavigationControllerDelegate>
+
+@property (strong, nonatomic) PXGAX12ViewController* ax12Controller;
+@property (strong, nonatomic) PXGMovementsViewController* movementController;
+@property (weak, nonatomic) PXGMovementContentTableViewController* movementDetailsController;
+
 
 @end

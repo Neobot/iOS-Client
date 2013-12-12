@@ -25,6 +25,11 @@
 
 @property (strong, nonatomic) UIPopoverController* accessoryPopoverController;
 
+@property (nonatomic) float maxSpeed;
+@property (nonatomic) float maxTorque;
+
 - (IBAction)onEdit:(id)sender;
+
+- (void)recordPositions:(NSArray*)positions forIds:(NSArray*)ids;
 
 @end
