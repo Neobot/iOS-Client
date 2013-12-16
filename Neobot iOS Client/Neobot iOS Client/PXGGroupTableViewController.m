@@ -75,6 +75,7 @@
         controller.ids = group.ids;
         controller.movements = group.movements;
         controller.delegate = self;
+        controller.runDelegate = self.runDelegate;
     }
     else if ([segue.identifier isEqualToString:@"newGroupSegue"])
     {

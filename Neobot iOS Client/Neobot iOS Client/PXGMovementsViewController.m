@@ -9,9 +9,26 @@
 #import "PXGMovementsViewController.h"
 #import "PXGGroupTableViewController.h"
 
-@interface PXGMovementsViewController ()
+@interface MovementRunContext : NSObject
+
+@property (strong, nonatomic) NSString* movement;
+@property (strong, nonatomic) NSString* group;
+@property (nonatomic) int speed;
+@property (nonatomic) int lastPositionIndex;
 
 @end
+
+@implementation MovementRunContext
+@end
+
+////-------------
+
+@interface PXGMovementsViewController ()
+
+@property (strong, nonatomic) MovementRunContext* currentMovementContext;
+
+@end
+
 
 @implementation PXGMovementsViewController
 
@@ -28,7 +45,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.currentMovementContext = nil;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -38,6 +55,7 @@
         self.movementNavigationController = (UINavigationController*)segue.destinationViewController;
         PXGGroupTableViewController* groupController = (PXGGroupTableViewController*)self.movementNavigationController.topViewController;
         groupController.delegate = self;
+        groupController.runDelegate = self;
     }
 }
 
@@ -92,6 +110,70 @@
     
     NSString* saveBtnText = hasChanges ? @"Save*" : @"Save";
     [self.btnSave setTitle:saveBtnText forState:UIControlStateNormal];
+}
+
+- (void)askSaveMovement
+{
+    if (self.hasChanges)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do you want to save the movements ?"
+                                                        message:@"You need to upload the movements on the server before being able to run them."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Save", nil];
+        [alert show];
+    }
+    else
+    {
+        [self runCurrentMovementContext];
+    }
+}
+
+- (void)runCurrentMovementContext
+{
+    [[PXGCommInterface sharedInstance] runAX12Movement:self.currentMovementContext.movement
+                                             fromGroup:self.currentMovementContext.group
+                                        withSpeedLimit:self.currentMovementContext.speed
+                                       toPositionIndex:self.currentMovementContext.lastPositionIndex];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [alertView cancelButtonIndex] && self.currentMovementContext != nil)
+    {
+        [self saveMovements:nil];
+        [self runCurrentMovementContext];
+    }
+}
+
+- (void)runMovement:(NSString*)name fromGroup:(NSString*)group withSpeed:(float)speed
+{
+    if (self.currentMovementContext == nil)
+    {
+        self.currentMovementContext = [[MovementRunContext alloc] init];
+    }
+    
+    self.currentMovementContext.movement = name;
+    self.currentMovementContext.group = group;
+    self.currentMovementContext.speed = speed;
+    self.currentMovementContext.lastPositionIndex = -1;
+    
+    [self askSaveMovement];
+}
+
+- (void)runMovement:(NSString*)name fromGroup:(NSString*)group withSpeed:(float)speed until:(int)positionIndex
+{
+    if (self.currentMovementContext == nil)
+    {
+        self.currentMovementContext = [[MovementRunContext alloc] init];
+    }
+
+    self.currentMovementContext.movement = name;
+    self.currentMovementContext.group = group;
+    self.currentMovementContext.speed = speed;
+    self.currentMovementContext.lastPositionIndex = positionIndex;
+    
+    [self askSaveMovement];
 }
 
 @end

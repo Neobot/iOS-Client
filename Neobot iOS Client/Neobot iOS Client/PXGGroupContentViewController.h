@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSMutableArray* movements;
 @property (strong, nonatomic) NSMutableArray* ids;
 @property (weak, nonatomic) id<PXGGroupContentViewControllerProtocol> delegate;
+@property (weak, nonatomic) id<PXGMovementContentTableRunDelegate> runDelegate;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 - (IBAction)onEdit:(id)sender;

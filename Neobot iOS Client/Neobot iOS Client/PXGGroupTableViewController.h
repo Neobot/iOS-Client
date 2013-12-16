@@ -20,6 +20,7 @@
 @property (nonatomic) BOOL enabled;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (weak, nonatomic) id<PXGGroupTableViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<PXGMovementContentTableRunDelegate> runDelegate;
 
 - (IBAction)onEdit:(id)sender;
 - (void)setEnabled:(BOOL)enabled;

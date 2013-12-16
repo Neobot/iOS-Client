@@ -11,7 +11,7 @@
 #import "PXGAX12MovementManager.h"
 #import "PXGGroupTableViewController.h"
 
-@interface PXGMovementsViewController : UIViewController <PXGConnectedViewDelegate, PXGServerInterfaceDelegate, PXGGroupTableViewControllerDelegate>
+@interface PXGMovementsViewController : UIViewController <PXGConnectedViewDelegate, PXGServerInterfaceDelegate, PXGGroupTableViewControllerDelegate, PXGMovementContentTableRunDelegate>
 
 @property (strong, nonatomic) PXGAX12MovementManager* movementManager;
 @property (strong, nonatomic) UINavigationController* movementNavigationController;

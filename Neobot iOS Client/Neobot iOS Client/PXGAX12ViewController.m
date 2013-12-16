@@ -103,8 +103,16 @@
 
 - (IBAction)onRecord:(id)sender
 {
-    //TODO
-    [self.delegate recordPositions:[NSArray array] forIds:[NSArray array]];
+    NSMutableArray* ax12Ids = [NSMutableArray array];
+    NSMutableArray* ax12Positions = [NSMutableArray array];
+    for (PXGAX12Data* data in self.ax12CollectionController.ax12List)
+    {
+        [ax12Ids addObject:[NSNumber numberWithInt:data.ax12ID]];
+        [ax12Positions addObject:[NSNumber numberWithFloat:data.position]];
+    }
+    
+    
+    [self.delegate recordPositions:ax12Positions forIds:ax12Ids];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

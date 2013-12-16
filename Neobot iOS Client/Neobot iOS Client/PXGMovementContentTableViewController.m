@@ -8,6 +8,7 @@
 
 #import "PXGMovementContentTableViewController.h"
 #import "PXGAX12MovementManager.h"
+#import "PXGCommInterface.h"
 
 @interface PXGMovementContentTableViewController ()
 {
@@ -69,16 +70,37 @@
 
 - (void)runUntilHere
 {
-    PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
-    //TODO
+    [self.runDelegate runMovement:self.name fromGroup:self.groupName withSpeed:self.maxSpeed until:_editedRow];
     [self.accessoryPopoverController dismissPopoverAnimated:YES];
 }
 
 - (void)moveToPosition
 {
     PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
-    //TODO
+    
+    struct Ax12Info info[10];
+    int i = 0;
+    for (NSNumber* ax12IdNum in self.ids)
+    {
+        info[i].id = [ax12IdNum intValue];
+        info[i].angle = [[singlePos.ax12Positions objectAtIndex:i] floatValue];
+        info[i].speed = 100;
+        info[i].torque = self.maxTorque;
+        
+        ++i;
+        if (i >= 10)
+            break;
+    }
+    
+    [[PXGCommInterface sharedInstance] moveAX12:self.ids.count of:info atSmoothedMaxSpeed:self.maxSpeed];
+
+    
     [self.accessoryPopoverController dismissPopoverAnimated:YES];
+}
+
+- (IBAction)onRun:(id)sender
+{
+    [self.runDelegate runMovement:self.name fromGroup:self.groupName withSpeed:self.maxSpeed];
 }
 
 #pragma mark - Table view data source
@@ -288,7 +310,28 @@
 
 - (void)recordPositions:(NSArray*)positions forIds:(NSArray*)ids
 {
-    //TODO
+    NSMutableArray* pos = [NSMutableArray array];
+    for (NSNumber* ax12ID in self.ids)
+    {
+        int idIndex = [ids indexOfObject:ax12ID];
+        if (idIndex != NSNotFound)
+        {
+            [pos addObject:[positions objectAtIndex:idIndex]];
+        }
+        else
+        {
+            [pos addObject:[NSNumber numberWithFloat:0.0]];
+        }
+    }
+    
+    
+    PXGAX12MovementSinglePosition* singlePosition = [[PXGAX12MovementSinglePosition alloc] initWithSpeed:self.maxSpeed torque:self.maxTorque andPositions:pos];
+    
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:self.positions.count inSection:1];
+
+    [self.positions addObject:singlePosition];
+    
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.delegate movementPositionsChanged];
 }
 

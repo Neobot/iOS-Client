@@ -1034,10 +1034,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9TK-7d-kt8">
-                                    <rect key="frame" x="145" y="7" width="30" height="30"/>
+                                    <rect key="frame" x="145" y="10" width="30" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                     <state key="normal" title="Run"/>
+                                    <connections>
+                                        <action selector="onRun:" destination="MyE-cr-0Dh" eventType="touchUpInside" id="0uN-po-WL0"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>

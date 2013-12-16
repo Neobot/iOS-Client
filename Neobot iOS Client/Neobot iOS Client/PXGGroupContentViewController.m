@@ -8,6 +8,7 @@
 
 #import "PXGGroupContentViewController.h"
 #import "PXGAX12MovementManager.h"
+#import "PXGCommInterface.h"
 
 @interface PXGGroupContentViewController ()
 {
@@ -61,9 +62,11 @@
      
         PXGMovementContentTableViewController* controller = (PXGMovementContentTableViewController*)segue.destinationViewController;
         controller.name = mvt.name;
+        controller.groupName = self.name;
         controller.positions = mvt.positions;
         controller.ids = self.ids;
         controller.delegate = self;
+        controller.runDelegate = self.runDelegate;
     }
     else if ([segue.identifier isEqualToString:@"newMovementSegue"])
     {
