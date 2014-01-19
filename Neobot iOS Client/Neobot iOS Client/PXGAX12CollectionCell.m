@@ -13,6 +13,7 @@
 {
     int _id;
     bool _isTimeout;
+    bool _allowSpeedNotification;
 }
 
 @end
@@ -26,6 +27,8 @@
     {
        self.lblSpeed.text = @"0%";
         _isTimeout = false;
+        _allowSpeedNotification = true;
+        self.speedNotificationInterval = 0.1;
 
     }
     return self;
@@ -51,7 +54,18 @@
 - (IBAction)speedChanged:(PXGStickControlView *)sender
 {
     self.lblSpeed.text = [NSString stringWithFormat:@"%i%%", (int)sender.value];
-    [self.delegate speedChanged:sender.value forAX12:_id];
+    
+    if (_allowSpeedNotification)
+    {
+        _allowSpeedNotification = false;
+        [NSTimer scheduledTimerWithTimeInterval:self.speedNotificationInterval target:self selector:@selector(speedChangedTimeout:) userInfo:nil repeats:NO];
+        [self.delegate speedChanged:sender.value forAX12:_id];
+    }
+}
+
+- (void)speedChangedTimeout:(NSTimer*)timer
+{
+    _allowSpeedNotification = true;
 }
 
 - (IBAction)onSetPosition:(id)sender

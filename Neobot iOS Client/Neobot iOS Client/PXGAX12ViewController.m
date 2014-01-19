@@ -248,12 +248,13 @@
 
 - (void)speedChanged:(double)speed forAX12:(PXGAX12Data*)ax12
 {
+    //called every 100ms
+    
     struct Ax12Info info[1];
     info[0].id = ax12.ax12ID;
-    //TODO
-    //info[0].angle = command;
-    //info[0].speed = self.sliderSpeed.value;
-    //info[0].torque = self.sliderTorque.value;
+    info[0].angle = ax12.position + 5.0;
+    info[0].speed = 10.0;
+    info[0].torque = self.sliderTorque.value;
     
     [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
 }

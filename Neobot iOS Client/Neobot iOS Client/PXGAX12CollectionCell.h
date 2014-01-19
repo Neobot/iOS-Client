@@ -12,7 +12,7 @@
 
 @protocol PXGAX12CollectionCellProtocol <NSObject>
 
-- (void) speedChanged:(double)speed forAX12:(int)ax12ID;
+- (void) speedChanged:(double)speed forAX12:(int)ax12ID; //sent every 100 ms
 - (void) lockStatusChanged:(BOOL)locked forAX12:(int)ax12ID;
 - (void) commandDefined:(double)command forAX12:(int)ax12ID;
 
@@ -32,6 +32,7 @@
 @property (weak, nonatomic) UIPopoverController* setPositionPopoverController;
 
 @property (nonatomic) BOOL enabled;
+@property (nonatomic) NSTimeInterval speedNotificationInterval;
 
 
 - (void)setId:(int)ax12ID;
