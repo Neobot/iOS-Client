@@ -45,6 +45,7 @@
 		94344DF717F701FB006ABBCD /* PXGAX12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */; };
 		943DF58D180332D800630316 /* PXGSelectAngleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943DF58C180332D800630316 /* PXGSelectAngleViewController.m */; };
 		9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9440516C1826991C00E3671B /* PXGAX12MovementManager.m */; };
+		94431897188DB846005221B4 /* PXGSimpleScatterPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94431896188DB846005221B4 /* PXGSimpleScatterPlotViewController.m */; };
 		9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */; };
 		9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C579183113E50064C7F5 /* PXGMovementsViewController.m */; };
 		9448C5821831190D0064C7F5 /* PXGGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9448C5811831190D0064C7F5 /* PXGGroupTableViewController.m */; };
@@ -133,6 +134,8 @@
 		943DF58C180332D800630316 /* PXGSelectAngleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSelectAngleViewController.m; sourceTree = "<group>"; };
 		9440516B1826991C00E3671B /* PXGAX12MovementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12MovementManager.h; sourceTree = "<group>"; };
 		9440516C1826991C00E3671B /* PXGAX12MovementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12MovementManager.m; sourceTree = "<group>"; };
+		94431895188DB846005221B4 /* PXGSimpleScatterPlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSimpleScatterPlotViewController.h; sourceTree = "<group>"; };
+		94431896188DB846005221B4 /* PXGSimpleScatterPlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSimpleScatterPlotViewController.m; sourceTree = "<group>"; };
 		9448C5751831038D0064C7F5 /* PXGAX12SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12SplitViewController.h; sourceTree = "<group>"; };
 		9448C5761831038D0064C7F5 /* PXGAX12SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12SplitViewController.m; sourceTree = "<group>"; };
 		9448C578183113E50064C7F5 /* PXGMovementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMovementsViewController.h; sourceTree = "<group>"; };
@@ -589,6 +592,8 @@
 			children = (
 				944B4FB4188C23EC009B9E0B /* PXGOdometryViewController.h */,
 				944B4FB5188C23EC009B9E0B /* PXGOdometryViewController.m */,
+				94431895188DB846005221B4 /* PXGSimpleScatterPlotViewController.h */,
+				94431896188DB846005221B4 /* PXGSimpleScatterPlotViewController.m */,
 			);
 			name = Odometry;
 			sourceTree = "<group>";
@@ -719,6 +724,7 @@
 				9448C58B18316D3A0064C7F5 /* PXGMovementContentTableViewController.m in Sources */,
 				9425D38D1791565000C6E883 /* main.m in Sources */,
 				9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */,
+				94431897188DB846005221B4 /* PXGSimpleScatterPlotViewController.m in Sources */,
 				9425D3911791565000C6E883 /* PXGAppDelegate.m in Sources */,
 				9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */,
 				94F5335B18565ADE00FD5F53 /* PXGPositionActionsViewController.m in Sources */,

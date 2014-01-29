@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CPTGraphHostingView.h"
-#import "CPTPlot.h"
 
-@interface PXGOdometryViewController : UIViewController <CPTPlotDataSource>
 
-@property (weak, nonatomic) IBOutlet CPTGraphHostingView *xtHostingGraph;
+@interface PXGOdometryViewController : UIViewController
 
 @end
