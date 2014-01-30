@@ -10,13 +10,15 @@
 
 #import "CPTGraphHostingView.h"
 #import "CPTPlot.h"
+#import "CPTColor.h"
+
 
 @interface PXGSimpleScatterPlotViewController : UIViewController<CPTPlotDataSource>
 
 @property (weak, nonatomic) CPTGraphHostingView *graphHostingView;
 @property (strong, nonatomic) NSString *name;
 
-- (void)addPlot:(NSString*)name;
+- (void)addPlot:(NSString*)name withColor:(CPTColor*)color;
 - (void)addValue:(double)value toPlotIndex:(int)plotIndex;
 - (void)reloadData;
 

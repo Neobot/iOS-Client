@@ -2116,18 +2116,24 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="G1M-Se-yBc" kind="embed" id="gyZ-IA-Jh0"/>
+                                    <segue destination="G1M-Se-yBc" kind="embed" identifier="xGraphSegue" id="gyZ-IA-Jh0"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4G-QL-wjs">
                                 <rect key="frame" x="0.0" y="302" width="768" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="G1M-Se-yBc" kind="embed" identifier="yGraphSegue" id="QOX-Do-qLt"/>
+                                </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9B-pQ-Z8b">
                                 <rect key="frame" x="0.0" y="604" width="768" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="G1M-Se-yBc" kind="embed" identifier="thetaGraphSegue" id="zdk-zJ-ZCe"/>
+                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -2682,6 +2688,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="pLy-qv-dUj"/>
         <segue reference="lO7-PU-doR"/>
+        <segue reference="zdk-zJ-ZCe"/>
         <segue reference="H3M-1e-HST"/>
         <segue reference="KM3-Dh-bRh"/>
         <segue reference="puz-ht-Puq"/>

@@ -12,7 +12,6 @@
 #import "CPTTheme.h"
 #import "CPTScatterPlot.h"
 #import "CPTMutableLineStyle.h"
-#import "CPTColor.h"
 #import "CPTXYPlotSpace.h"
 #import "CPTMutablePlotRange.h"
 #import "CPTUtilities.h"
@@ -34,6 +33,17 @@
 
 @implementation PXGSimpleScatterPlotViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,7 +56,6 @@
     self.graph = [[CPTXYGraph alloc] initWithFrame:self.graphHostingView.bounds];
     self.graphHostingView.hostedGraph = self.graph;
 
-    self.name = @"aaa";
     self.graph.title = self.name;
     
     CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
@@ -85,16 +94,8 @@
     //CGFloat legendPadding = -(self.view.bounds.size.width / 8);
     self.graph.legendDisplacement = CGPointMake(-10.0, 50.0);
     
-    
-    [self addPlot:@"Robot"];
-    [self addPlotValue:1 toPlotIndex:0];
-    [self addPlotValue:5 toPlotIndex:0];
-    [self addPlotValue:4 toPlotIndex:0];
-    [self addPlotValue:9 toPlotIndex:0];
-    [self addPlotValue:7 toPlotIndex:0];
-    
     [self reloadData];
-    [self refreshPlotSpace];
+    
     
 }
 
@@ -104,7 +105,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) addPlot:(NSString*)name
+- (void) addPlot:(NSString*)name withColor:(CPTColor*)color
 {
     //robot plot
     CPTScatterPlot* plot = [[CPTScatterPlot alloc] init];
@@ -112,7 +113,7 @@
     
     CPTMutableLineStyle *lineStyle = [plot.dataLineStyle mutableCopy];
     lineStyle.lineWidth              = 3.f;
-    lineStyle.lineColor              = [CPTColor redColor];
+    lineStyle.lineColor              = color;
     plot.dataLineStyle = lineStyle;
     
     plot.dataSource = self;
@@ -134,8 +135,8 @@
     xRange.location = CPTDecimalFromFloat(0.f);
     xRange.length = xRangeEnd;
     [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
-    
     plotSpace.xRange = xRange;
+    
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
     NSDecimal yRangeEnd = CPTDecimalAdd(yRange.location, yRange.length);
     yRange.location = CPTDecimalFromFloat(0.f);
@@ -173,23 +174,16 @@
     y.visibleRange = yVisibleTickRange;
 }
 
-- (void) addPlotValue:(double)value toPlotIndex:(int)plotIndex
+- (void) addValue:(double)value toPlotIndex:(int)plotIndex
 {
     [[self.data objectAtIndex:plotIndex] addObject:[NSNumber numberWithDouble:value]];
 }
 
 - (NSUInteger) numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    NSUInteger result = 0;
-    
-    for (NSMutableArray* plotValues in self.data)
-    {
-        NSUInteger nbValues = plotValues.count;
-        if (nbValues > result)
-            result = nbValues;
-    }
-    
-    return result;
+
+    int plotIndex = [self.graph.allPlots indexOfObject:plot];
+    return [[self.data objectAtIndex:plotIndex] count];
 }
 
 -(NSNumber*)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
@@ -211,6 +205,7 @@
 - (void)reloadData
 {
     [self.graph reloadData];
+    [self refreshPlotSpace];
 }
 
 @end

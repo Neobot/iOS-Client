@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGCommInterface.h"
+
+@class PXGSimpleScatterPlotViewController;
 
 
-@interface PXGOdometryViewController : UIViewController
+@interface PXGOdometryViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate>
+
+@property (nonatomic, weak) PXGSimpleScatterPlotViewController* xGraphController;
+@property (nonatomic, weak) PXGSimpleScatterPlotViewController* yGraphController;
+@property (nonatomic, weak) PXGSimpleScatterPlotViewController* thetaGraphController;
 
 @end
