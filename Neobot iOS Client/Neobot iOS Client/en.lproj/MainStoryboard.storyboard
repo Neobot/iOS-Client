@@ -2108,7 +2108,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Sks-m6-UAr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1NW-Oc-BpP">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="955"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="906"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NF-YE-vd2">
@@ -2152,6 +2152,7 @@
                             <constraint firstItem="u9B-pQ-Z8b" firstAttribute="top" secondItem="Z4G-QL-wjs" secondAttribute="bottom" id="te4-Q0-2o9"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Odometry" image="Task Manager.png" id="awQ-gW-fXN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bpc-Fn-LWc" userLabel="First Responder" sceneMemberID="firstResponder"/>

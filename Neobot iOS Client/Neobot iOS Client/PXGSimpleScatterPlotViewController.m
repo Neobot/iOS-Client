@@ -95,8 +95,6 @@
     self.graph.legendDisplacement = CGPointMake(-10.0, 50.0);
     
     [self reloadData];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,8 +119,6 @@
     [self.graph addPlot:plot];
     [self.legend addPlot:plot];
     [self.data addObject:[NSMutableArray array]];
-    
-    [self refreshPlotSpace];
 }
 
 - (void) refreshPlotSpace
@@ -130,22 +126,36 @@
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     [plotSpace scaleToFitPlots:self.graph.allPlots];
 
+    
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-    NSDecimal xRangeEnd = CPTDecimalAdd(xRange.location, xRange.length);
-    xRange.location = CPTDecimalFromFloat(0.f);
-    xRange.length = xRangeEnd;
-    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
-    plotSpace.xRange = xRange;
-    
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-    NSDecimal yRangeEnd = CPTDecimalAdd(yRange.location, yRange.length);
-    yRange.location = CPTDecimalFromFloat(0.f);
-    yRange.length = yRangeEnd;
-    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
-    plotSpace.yRange = yRange;
     
-    plotSpace.globalXRange = xRange;
-    plotSpace.globalYRange = yRange;
+    if (CPTDecimalGreaterThanOrEqualTo(xRange.location, CPTDecimalFromCGFloat(0.0f)))
+    {
+        NSDecimal xRangeEnd = CPTDecimalAdd(xRange.location, xRange.length);
+        xRange.location = CPTDecimalFromFloat(0.f);
+        xRange.length = xRangeEnd;
+    }
+    
+    if (CPTDecimalGreaterThanOrEqualTo(yRange.location, CPTDecimalFromCGFloat(0.0f)))
+    {
+        NSDecimal yRangeEnd = CPTDecimalAdd(yRange.location, yRange.length);
+        yRange.location = CPTDecimalFromFloat(0.f);
+        yRange.length = yRangeEnd;
+    }
+    
+    CPTMutablePlotRange *xRange2 = [xRange mutableCopy];
+    CPTMutablePlotRange *yRange2 = [yRange mutableCopy];
+    
+    [xRange2 expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+    plotSpace.xRange = xRange2;
+    
+    [yRange2 expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+    plotSpace.yRange = yRange2;
+
+
+    plotSpace.globalXRange = xRange2;
+    plotSpace.globalYRange = yRange2;
     plotSpace.elasticGlobalXRange = YES;
     plotSpace.elasticGlobalYRange = YES;
     
@@ -172,6 +182,9 @@
     CPTMutablePlotRange* yVisibleTickRange = [y.visibleAxisRange mutableCopy];
     [yVisibleTickRange expandRangeByFactor:CPTDecimalFromCGFloat(0.98f)];
     y.visibleRange = yVisibleTickRange;
+    
+    
+    
 }
 
 - (void) addValue:(double)value toPlotIndex:(int)plotIndex
