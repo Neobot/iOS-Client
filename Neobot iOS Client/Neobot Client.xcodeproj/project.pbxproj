@@ -66,6 +66,7 @@
 		94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01EF17A4060C005A47F3 /* PXGTeleportViewController.m */; };
 		94AC01F317A41139005A47F3 /* PXGTools.c in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F217A41139005A47F3 /* PXGTools.c */; };
 		94AC01F617A41D55005A47F3 /* PXGCreatePointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */; };
+		94AD9FA918A6A172007B48D1 /* PXGSensorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */; };
 		94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */; };
 		94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */; };
 		94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */; };
@@ -251,6 +252,8 @@
 		94AC01F217A41139005A47F3 /* PXGTools.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc.preprocessed; fileEncoding = 4; path = PXGTools.c; sourceTree = "<group>"; };
 		94AC01F417A41D54005A47F3 /* PXGCreatePointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGCreatePointViewController.h; sourceTree = "<group>"; };
 		94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCreatePointViewController.m; sourceTree = "<group>"; };
+		94AD9FA718A6A172007B48D1 /* PXGSensorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSensorsViewController.h; sourceTree = "<group>"; };
+		94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSensorsViewController.m; sourceTree = "<group>"; };
 		94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGStringListViewController.h; sourceTree = "<group>"; };
 		94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStringListViewController.m; sourceTree = "<group>"; };
 		94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTrajectoriesViewController.h; sourceTree = "<group>"; };
@@ -587,15 +590,17 @@
 			path = ../CorePlotHeaders;
 			sourceTree = "<group>";
 		};
-		944B4FB7188C23F3009B9E0B /* Odometry */ = {
+		944B4FB7188C23F3009B9E0B /* Odometry / sensors */ = {
 			isa = PBXGroup;
 			children = (
 				944B4FB4188C23EC009B9E0B /* PXGOdometryViewController.h */,
 				944B4FB5188C23EC009B9E0B /* PXGOdometryViewController.m */,
+				94AD9FA718A6A172007B48D1 /* PXGSensorsViewController.h */,
+				94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */,
 				94431895188DB846005221B4 /* PXGSimpleScatterPlotViewController.h */,
 				94431896188DB846005221B4 /* PXGSimpleScatterPlotViewController.m */,
 			);
-			name = Odometry;
+			name = "Odometry / sensors";
 			sourceTree = "<group>";
 		};
 		94835D4717999D8F0024A789 /* Comm */ = {
@@ -623,7 +628,7 @@
 				9428504817F84F5500230DD2 /* Options */,
 				9428504917F84F6300230DD2 /* Remote Control */,
 				9428504A17F84F8900230DD2 /* AX-12 */,
-				944B4FB7188C23F3009B9E0B /* Odometry */,
+				944B4FB7188C23F3009B9E0B /* Odometry / sensors */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -727,6 +732,7 @@
 				94431897188DB846005221B4 /* PXGSimpleScatterPlotViewController.m in Sources */,
 				9425D3911791565000C6E883 /* PXGAppDelegate.m in Sources */,
 				9448C57A183113E50064C7F5 /* PXGMovementsViewController.m in Sources */,
+				94AD9FA918A6A172007B48D1 /* PXGSensorsViewController.m in Sources */,
 				94F5335B18565ADE00FD5F53 /* PXGPositionActionsViewController.m in Sources */,
 				9425D39D1791565000C6E883 /* PXGRemoteViewController.m in Sources */,
 				9433FE371795B0E70092A43B /* PXGCommProtocol.m in Sources */,

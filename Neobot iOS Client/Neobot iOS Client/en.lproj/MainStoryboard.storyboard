@@ -423,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="deU-WD-TIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-398" y="-1296"/>
+            <point key="canvasLocation" x="178" y="-192"/>
         </scene>
         <!--List Table View Controller - AX-12 List-->
         <scene sceneID="naK-HL-Dkh">
@@ -487,7 +487,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0I-tc-CaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1353" y="-2479"/>
+            <point key="canvasLocation" x="1929" y="-1375"/>
         </scene>
         <!--AddAX12 View Controller - Add AX-12-->
         <scene sceneID="Jk5-kQ-GVg">
@@ -529,7 +529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qal-x7-efv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756" y="-2473"/>
+            <point key="canvasLocation" x="2332" y="-1369"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cZ2-dd-ZmS">
@@ -545,7 +545,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKs-Ln-aZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602" y="-2070"/>
+            <point key="canvasLocation" x="1178" y="-966"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="70s-8X-eGQ">
@@ -684,7 +684,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBU-0C-oWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648" y="-1252"/>
+            <point key="canvasLocation" x="1224" y="-148"/>
         </scene>
         <!--Select Angle View Controller-->
         <scene sceneID="liU-oN-pkE">
@@ -750,7 +750,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUY-oo-Yvj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1522" y="-1490"/>
+            <point key="canvasLocation" x="2098" y="-386"/>
         </scene>
         <!--Group Table View Controller - AX-12 Movements-->
         <scene sceneID="4qX-tR-8uF">
@@ -827,7 +827,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPF-Nq-T8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55" y="-3313"/>
+            <point key="canvasLocation" x="521" y="-2209"/>
         </scene>
         <!--Ask Name View Controller - New-->
         <scene sceneID="BQ0-Gx-RZ7">
@@ -892,7 +892,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NpK-NK-2jx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="612" y="-4241"/>
+            <point key="canvasLocation" x="1188" y="-3137"/>
         </scene>
         <!--Group Content View Controller - Group-->
         <scene sceneID="tWe-ti-oPT">
@@ -1019,7 +1019,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YR1-jU-n7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="-3313"/>
+            <point key="canvasLocation" x="966" y="-2209"/>
         </scene>
         <!--Movement Content Table View Controller - Movement-->
         <scene sceneID="NMJ-A2-RQa">
@@ -1122,7 +1122,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bxf-4B-qua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="-3612"/>
+            <point key="canvasLocation" x="1574" y="-2508"/>
         </scene>
         <!--Movement Single Position View Controller - Position-->
         <scene sceneID="fhV-rR-HUX">
@@ -1194,7 +1194,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MD5-pW-1SJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1434" y="-3612"/>
+            <point key="canvasLocation" x="2010" y="-2508"/>
         </scene>
         <!--Position Actions View Controller-->
         <scene sceneID="IG0-mj-RKP">
@@ -1261,7 +1261,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgt-9P-Kuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1266" y="-3827"/>
+            <point key="canvasLocation" x="1842" y="-2723"/>
         </scene>
         <!--Movements View Controller-->
         <scene sceneID="Igu-UU-eej">
@@ -1323,7 +1323,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NF-cr-g13" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-899" y="-3359"/>
+            <point key="canvasLocation" x="-323" y="-2255"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ajP-gT-GwQ">
@@ -1342,7 +1342,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36A-pZ-Bfr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-470" y="-3313"/>
+            <point key="canvasLocation" x="106" y="-2209"/>
         </scene>
         <!--Split View Controller - AX-12-->
         <scene sceneID="aaP-KD-mNE">
@@ -1358,7 +1358,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRJ-4E-Esu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1476" y="-2044"/>
+            <point key="canvasLocation" x="-900" y="-940"/>
         </scene>
         <!--View Controller - Strategies-->
         <scene sceneID="jS0-A2-y4g">
@@ -2159,20 +2159,49 @@
             </objects>
             <point key="canvasLocation" x="-2100" y="-4670"/>
         </scene>
-        <!--View Controller - Sensors-->
+        <!--Sensors View Controller - Sensors-->
         <scene sceneID="poV-HL-Ee3">
             <objects>
-                <viewController id="6ac-eB-3vB" sceneMemberID="viewController">
+                <viewController id="6ac-eB-3vB" customClass="PXGSensorsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sOO-v7-hRf"/>
                         <viewControllerLayoutGuide type="bottom" id="6Y0-vj-1BV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V2w-2N-o4L">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="955"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="906"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-tN-E2s">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="453"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="tXJ-mh-umO" kind="embed" identifier="avoidingGraphSegue" id="0Ag-Lm-QgD"/>
+                                </connections>
+                            </containerView>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A7-Q7-gq4">
+                                <rect key="frame" x="0.0" y="453" width="768" height="453"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="tXJ-mh-umO" kind="embed" identifier="otherGraphSegue" id="IqJ-qn-5tl"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2A7-Q7-gq4" firstAttribute="top" secondItem="nbg-tN-E2s" secondAttribute="bottom" id="2ub-8O-08L"/>
+                            <constraint firstItem="nbg-tN-E2s" firstAttribute="leading" secondItem="V2w-2N-o4L" secondAttribute="leading" id="FcM-Jc-APO"/>
+                            <constraint firstAttribute="trailing" secondItem="nbg-tN-E2s" secondAttribute="trailing" id="N8g-Ak-EWT"/>
+                            <constraint firstItem="6Y0-vj-1BV" firstAttribute="top" secondItem="2A7-Q7-gq4" secondAttribute="bottom" id="eJs-4i-6ME"/>
+                            <constraint firstAttribute="trailing" secondItem="2A7-Q7-gq4" secondAttribute="trailing" id="fKy-b7-uhj"/>
+                            <constraint firstItem="nbg-tN-E2s" firstAttribute="top" secondItem="sOO-v7-hRf" secondAttribute="bottom" id="iPd-dP-gIE"/>
+                            <constraint firstItem="2A7-Q7-gq4" firstAttribute="leading" secondItem="V2w-2N-o4L" secondAttribute="leading" id="s7C-ps-KbH"/>
+                            <constraint firstItem="2A7-Q7-gq4" firstAttribute="height" secondItem="nbg-tN-E2s" secondAttribute="height" id="yMQ-8p-x0z"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" enabled="NO" title="Sensors" image="sensor.png" id="dwj-VR-4Eg"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <tabBarItem key="tabBarItem" title="Sensors" image="sensor.png" id="dwj-VR-4Eg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vco-jf-hOA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2669,6 +2698,25 @@
             </objects>
             <point key="canvasLocation" x="-1109" y="-4555"/>
         </scene>
+        <!--Simple Scatter Plot View Controller-->
+        <scene sceneID="bKU-3s-Zlo">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="tXJ-mh-umO" customClass="PXGSimpleScatterPlotViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lfK-RV-Htb"/>
+                        <viewControllerLayoutGuide type="bottom" id="akZ-Xn-3ON"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hcQ-Ko-ChP" customClass="CPTGraphHostingView">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="453"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tic-Er-o5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1024" y="-3193"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AX-12.png" width="80" height="112"/>
@@ -2690,6 +2738,7 @@
         <segue reference="pLy-qv-dUj"/>
         <segue reference="lO7-PU-doR"/>
         <segue reference="zdk-zJ-ZCe"/>
+        <segue reference="IqJ-qn-5tl"/>
         <segue reference="H3M-1e-HST"/>
         <segue reference="KM3-Dh-bRh"/>
         <segue reference="puz-ht-Puq"/>

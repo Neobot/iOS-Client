@@ -143,6 +143,7 @@
 
 - (void) refreshPlotSpace
 {
+   
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     [plotSpace scaleToFitPlots:self.graph.allPlots];
 
@@ -150,7 +151,7 @@
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
     
-    if (CPTDecimalGreaterThanOrEqualTo(xRange.location, CPTDecimalFromCGFloat(0.0f)))
+    if (CPTDecimalGreaterThan(xRange.location, CPTDecimalFromCGFloat(0.0f)))
     {
         NSDecimal xRangeEnd = CPTDecimalAdd(xRange.location, xRange.length);
         xRange.location = CPTDecimalFromFloat(0.f);
@@ -162,7 +163,7 @@
         xRange.length = CPTDecimalFromInt(self.maxValues);
     }
     
-    if (CPTDecimalGreaterThanOrEqualTo(yRange.location, CPTDecimalFromCGFloat(0.0f)))
+    if (CPTDecimalGreaterThan(yRange.location, CPTDecimalFromCGFloat(0.0f)))
     {
         NSDecimal yRangeEnd = CPTDecimalAdd(yRange.location, yRange.length);
         yRange.location = CPTDecimalFromFloat(0.f);

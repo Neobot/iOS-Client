@@ -146,6 +146,36 @@
             
             break;
         }
+        case AVOIDING_SENSORS:
+        {
+            NSMutableArray* values = [NSMutableArray array];
+            while (![serializer atEnd])
+            {
+                uint8_t value = [serializer takeInt8];
+                [values addObject:[NSNumber numberWithInt:value]];
+            }
+            
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                if ([robotDelegate respondsToSelector:@selector(didReceiveAvoidingSensorsValues:)])
+                    [robotDelegate didReceiveAvoidingSensorsValues:values];
+            
+            break;
+        }
+        case OTHER_SENSORS:
+        {
+            NSMutableArray* values = [NSMutableArray array];
+            while (![serializer atEnd])
+            {
+                uint8_t value = [serializer takeInt8];
+                [values addObject:[NSNumber numberWithInt:value]];
+            }
+            
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                if ([robotDelegate respondsToSelector:@selector(didReceiveOtherSensorsValues:)])
+                    [robotDelegate didReceiveOtherSensorsValues:values];
+            
+            break;
+        }
         case OPPONENT:
         {
             uint16_t x = [serializer takeInt16];
