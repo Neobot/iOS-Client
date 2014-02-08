@@ -17,9 +17,12 @@
 
 @property (weak, nonatomic) CPTGraphHostingView *graphHostingView;
 @property (strong, nonatomic) NSString *name;
+@property (nonatomic) int maxValues;
 
 - (void)addPlot:(NSString*)name withColor:(CPTColor*)color;
 - (void)addValue:(double)value toPlotIndex:(int)plotIndex;
+- (void)fillDataWith:(double)defaultValue forSize:(int)size;
 - (void)reloadData;
+
 
 @end

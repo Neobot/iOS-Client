@@ -36,14 +36,17 @@
     [self.xGraphController addPlot:@"Robot" withColor:[CPTColor redColor]];
     [self.xGraphController addPlot:@"Objective" withColor:[CPTColor blueColor]];
     self.xGraphController.name = @"X/t";
+    self.xGraphController.maxValues = 300;
 
     [self.yGraphController addPlot:@"Robot" withColor:[CPTColor redColor]];
     [self.yGraphController addPlot:@"Objective" withColor:[CPTColor blueColor]];
     self.yGraphController.name = @"Y/t";
+    self.yGraphController.maxValues = 300;
 
     [self.thetaGraphController addPlot:@"Robot" withColor:[CPTColor redColor]];
     [self.thetaGraphController addPlot:@"Objective" withColor:[CPTColor blueColor]];
     self.thetaGraphController.name = @"Theta/t";
+    self.thetaGraphController.maxValues = 300;
     
     _positionReceived = false;
     _objectiveReceived = false;

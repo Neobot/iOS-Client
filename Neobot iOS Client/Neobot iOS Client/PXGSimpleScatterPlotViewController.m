@@ -38,7 +38,7 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        
+        self.maxValues = -1;
     }
     return self;
 }
@@ -103,6 +103,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setName:(NSString *)name
+{
+    _name = name;
+    self.graph.title = _name;
+}
+
+- (void)fillDataWith:(double)defaultValue forSize:(int)size
+{
+    if (size > 0)
+    {
+        for (NSMutableArray* plotValues in self.data)
+        {
+            while (plotValues.count < size)
+            {
+                [plotValues addObject:[NSNumber numberWithDouble:defaultValue]];
+            }
+        }
+    }
+}
+
 - (void) addPlot:(NSString*)name withColor:(CPTColor*)color
 {
     //robot plot
@@ -135,6 +155,11 @@
         NSDecimal xRangeEnd = CPTDecimalAdd(xRange.location, xRange.length);
         xRange.location = CPTDecimalFromFloat(0.f);
         xRange.length = xRangeEnd;
+    }
+    
+    if (self.maxValues > 0)
+    {
+        xRange.length = CPTDecimalFromInt(self.maxValues);
     }
     
     if (CPTDecimalGreaterThanOrEqualTo(yRange.location, CPTDecimalFromCGFloat(0.0f)))
@@ -182,14 +207,17 @@
     CPTMutablePlotRange* yVisibleTickRange = [y.visibleAxisRange mutableCopy];
     [yVisibleTickRange expandRangeByFactor:CPTDecimalFromCGFloat(0.98f)];
     y.visibleRange = yVisibleTickRange;
-    
-    
-    
 }
 
 - (void) addValue:(double)value toPlotIndex:(int)plotIndex
 {
-    [[self.data objectAtIndex:plotIndex] addObject:[NSNumber numberWithDouble:value]];
+    NSMutableArray* values = [self.data objectAtIndex:plotIndex];
+    [values addObject:[NSNumber numberWithDouble:value]];
+    
+    while(values.count > self.maxValues)
+    {
+        [values removeObjectAtIndex:0];
+    }
 }
 
 - (NSUInteger) numberOfRecordsForPlot:(CPTPlot *)plot
