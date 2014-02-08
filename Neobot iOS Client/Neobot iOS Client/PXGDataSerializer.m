@@ -34,7 +34,7 @@ static CFByteOrder _defaultEndianness = CFByteOrderBigEndian;
 
 - (BOOL)atEnd
 {
-    return _pos >= [_data length] - 1;
+    return _pos > [_data length] - 1;
 }
 
 - (BOOL) checkDataLength:(int)length atPos:(int)position

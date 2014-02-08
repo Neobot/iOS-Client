@@ -33,10 +33,13 @@
     self.colors = @[[CPTColor redColor], [CPTColor blueColor], [CPTColor greenColor], [CPTColor yellowColor], [CPTColor grayColor], [CPTColor cyanColor]];
 	
     self.avoidingGraphController.name = @"Avoiding sensors";
-    self.avoidingGraphController.maxValues = 300;
+    self.avoidingGraphController.maxValues = 600;
+    [self.avoidingGraphController setYBoundMin:0 andMax:260];
     
     self.otherGraphController.name = @"Other sensors";
-    self.otherGraphController.maxValues = 300;
+    self.otherGraphController.maxValues = 600;
+    [self.otherGraphController setYBoundMin:0 andMax:260];
+
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
@@ -55,6 +58,7 @@
     if ([segue.identifier isEqualToString:@"avoidingGraphSegue"])
     {
         self.avoidingGraphController = controller;
+
     }
     else if ([segue.identifier isEqualToString:@"otherGraphSegue"])
     {

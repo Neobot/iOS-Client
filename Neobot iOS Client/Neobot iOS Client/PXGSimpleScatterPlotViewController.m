@@ -94,7 +94,7 @@
     //CGFloat legendPadding = -(self.view.bounds.size.width / 8);
     self.graph.legendDisplacement = CGPointMake(-10.0, 50.0);
     
-    [self reloadData];
+    [self refreshPlotSpace:true];
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,21 +141,65 @@
     [self.data addObject:[NSMutableArray array]];
 }
 
-- (void) refreshPlotSpace
+- (void)setYBoundMin:(double) min andMax:(double) max
 {
-   
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
-    [plotSpace scaleToFitPlots:self.graph.allPlots];
+    
+    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    yRange.location = CPTDecimalFromDouble(min);
+    yRange.length = CPTDecimalFromDouble(max - min);
+    
+    plotSpace.yRange = yRange;
+    
+    [self refreshPlotSpace:true];
+}
 
+- (void) refreshPlotSpace:(bool)forceChange
+{
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
+    
+    NSDecimal oldXLoc = plotSpace.xRange.location;
+    NSDecimal oldXLength = plotSpace.xRange.length;
+    
+    NSDecimal oldYLoc = plotSpace.yRange.location;
+    NSDecimal oldYLength = plotSpace.yRange.length;
+    
+    [plotSpace scaleToFitPlots:self.graph.allPlots];
+    
+    bool xChanged = forceChange || !CPTDecimalEquals(oldXLoc, plotSpace.xRange.location) || !CPTDecimalEquals(oldXLength, plotSpace.xRange.length);
+    bool yChanged = forceChange || !CPTDecimalEquals(oldYLoc, plotSpace.yRange.location) || !CPTDecimalEquals(oldYLength, plotSpace.yRange.length);
     
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
     
-    if (CPTDecimalGreaterThan(xRange.location, CPTDecimalFromCGFloat(0.0f)))
+    if (xChanged)
     {
         NSDecimal xRangeEnd = CPTDecimalAdd(xRange.location, xRange.length);
-        xRange.location = CPTDecimalFromFloat(0.f);
-        xRange.length = xRangeEnd;
+        if (CPTDecimalGreaterThan(xRange.location, CPTDecimalFromCGFloat(0.0f)))
+        {
+            xRange.location = CPTDecimalFromFloat(0.f);
+            xRange.length = xRangeEnd;
+        }
+        else if (CPTDecimalLessThan(xRangeEnd, CPTDecimalFromCGFloat(0.0f)))
+        {
+            xRange.length = CPTDecimalAbs(xRange.location);
+        }
+    }
+
+    
+    if (yChanged)
+    {
+        NSDecimal yRangeEnd = CPTDecimalAdd(yRange.location, yRange.length);
+        if (CPTDecimalGreaterThan(yRange.location, CPTDecimalFromCGFloat(0.0f)))
+        {
+            
+            yRange.location = CPTDecimalFromFloat(0.f);
+            yRange.length = yRangeEnd;
+        }
+        else if (CPTDecimalLessThan(yRangeEnd, CPTDecimalFromCGFloat(0.0f)))
+        {
+            yRange.length = CPTDecimalAbs(yRange.location);
+        }
     }
     
     if (self.maxValues > 0)
@@ -163,22 +207,20 @@
         xRange.length = CPTDecimalFromInt(self.maxValues);
     }
     
-    if (CPTDecimalGreaterThan(yRange.location, CPTDecimalFromCGFloat(0.0f)))
-    {
-        NSDecimal yRangeEnd = CPTDecimalAdd(yRange.location, yRange.length);
-        yRange.location = CPTDecimalFromFloat(0.f);
-        yRange.length = yRangeEnd;
-    }
-    
     CPTMutablePlotRange *xRange2 = [xRange mutableCopy];
     CPTMutablePlotRange *yRange2 = [yRange mutableCopy];
     
-    [xRange2 expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
-    plotSpace.xRange = xRange2;
+    if (xChanged)
+    {
+        [xRange2 expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+        plotSpace.xRange = xRange2;
+    }
     
-    [yRange2 expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
-    plotSpace.yRange = yRange2;
-
+    if (yChanged)
+    {
+        [yRange2 expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+        plotSpace.yRange = yRange2;
+    }
 
     plotSpace.globalXRange = xRange2;
     plotSpace.globalYRange = yRange2;
@@ -247,7 +289,7 @@
 - (void)reloadData
 {
     [self.graph reloadData];
-    [self refreshPlotSpace];
+    [self refreshPlotSpace:false];
 }
 
 @end

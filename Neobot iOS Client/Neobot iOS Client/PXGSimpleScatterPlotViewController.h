@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) int maxValues;
 
+- (void)setYBoundMin:(double) min andMax:(double) max;
+
 - (void)addPlot:(NSString*)name withColor:(CPTColor*)color;
 - (void)addValue:(double)value toPlotIndex:(int)plotIndex;
 - (void)fillDataWith:(double)defaultValue forSize:(int)size;
