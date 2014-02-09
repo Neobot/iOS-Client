@@ -8,6 +8,7 @@
 
 #import "PXGOdometryViewController.h"
 #import "PXGSimpleScatterPlotViewController.h"
+#import "PXGParametersKeys.h"
 
 @interface PXGOdometryViewController ()
 {
@@ -25,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.switchRecording setOn:[[NSUserDefaults standardUserDefaults] boolForKey:ODOMETRY_RECORD_ACTIVATED]];
     
     _lastPosX = -1;
     _lastPosY = -1;
@@ -85,31 +88,37 @@
 
 - (void)didReceiveRobotPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta direction:(uint8_t)direction
 {
-    double xd = x;
-    double yd = y;
-    
-    if (xd != _lastPosX || yd != _lastPosY || theta != _lastPosTheta)
+    if (self.switchRecording.isOn)
     {
-        _lastPosX = xd;
-        _lastPosY = yd;
-        _lastPosTheta = theta;
+        double xd = x;
+        double yd = y;
         
-        [self reloadGraphIfNeeded:&_positionReceived and:&_objectiveReceived];
+        if (xd != _lastPosX || yd != _lastPosY || theta != _lastPosTheta)
+        {
+            _lastPosX = xd;
+            _lastPosY = yd;
+            _lastPosTheta = theta;
+            
+            [self reloadGraphIfNeeded:&_positionReceived and:&_objectiveReceived];
+        }
     }
 }
 
 - (void)didReceiveRobotObjectiveX:(int16_t)x Y:(int16_t)y angle:(double)theta
 {
-    double xd = x;
-    double yd = y;
-    
-    if (xd != _lastObjX || yd != _lastObjY || theta != _lastObjTheta)
+    if (self.switchRecording.isOn)
     {
-        _lastObjX = xd;
-        _lastObjY = yd;
-        _lastObjTheta = theta;
+        double xd = x;
+        double yd = y;
         
-        [self reloadGraphIfNeeded:&_objectiveReceived and:&_positionReceived];
+        if (xd != _lastObjX || yd != _lastObjY || theta != _lastObjTheta)
+        {
+            _lastObjX = xd;
+            _lastObjY = yd;
+            _lastObjTheta = theta;
+            
+            [self reloadGraphIfNeeded:&_objectiveReceived and:&_positionReceived];
+        }
     }
 }
 
@@ -153,4 +162,8 @@
     [self.thetaGraphController reloadData];
 }
 
+- (IBAction)recordingStatusChanged:(UISwitch *)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:ODOMETRY_RECORD_ACTIVATED];
+}
 @end

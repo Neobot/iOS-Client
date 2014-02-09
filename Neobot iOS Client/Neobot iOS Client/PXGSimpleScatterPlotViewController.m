@@ -22,6 +22,7 @@
 #import "CPTLegend.h"
 #import "CPTLineCap.h"
 #import "CPTFill.h"
+#import "CPTLineStyle.h"
 
 @interface PXGSimpleScatterPlotViewController ()
 
@@ -59,9 +60,9 @@
     self.graph.title = self.name;
     
     CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
-    titleStyle.color = [CPTColor blackColor];
+    titleStyle.color = [CPTColor colorWithGenericGray:0.33];
     titleStyle.fontName = @"Helvetica-Bold";
-    titleStyle.fontSize = 16.0f;
+    titleStyle.fontSize = 17.0f;
     self.graph.titleTextStyle = titleStyle;
     self.graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
     //xGraph.titleDisplacement = CGPointMake(0.0f, 10.0f);
@@ -79,7 +80,10 @@
     plotSpace.allowsUserInteraction = YES;
     
     
-    [self.graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
+    //[self.graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];;
+    self.graph.fill = [CPTFill fillWithColor:[CPTColor colorWithGenericGray:.9]];
+    CPTMutableLineStyle* borderStyle = [CPTMutableLineStyle lineStyle];
+    self.graph.borderLineStyle = borderStyle;
     
     //legend
     self.legend = [[CPTLegend alloc] init];
@@ -228,6 +232,11 @@
     plotSpace.elasticGlobalYRange = YES;
     
     //axis
+    CPTMutableLineStyle *gridLineStyle = [CPTMutableLineStyle lineStyle];
+    gridLineStyle.lineColor = [CPTColor colorWithGenericGray:0.7];
+    gridLineStyle.lineWidth = .5f;
+    gridLineStyle.dashPattern = @[@2];
+    
     CPTLineCap* lineCap = [CPTLineCap sweptArrowPlotLineCap];
     lineCap.size = CGSizeMake(10, 10);
     lineCap.fill = [CPTFill fillWithColor:[CPTColor blackColor]];
@@ -241,6 +250,9 @@
     CPTMutablePlotRange* xVisibleTickRange = [x.visibleAxisRange mutableCopy];
     [xVisibleTickRange expandRangeByFactor:CPTDecimalFromCGFloat(0.98f)];
     x.visibleRange = xVisibleTickRange;
+    //x.majorGridLineStyle = gridLineStyle;
+    //x.minorGridLineStyle = gridLineStyle;
+    x.gridLinesRange = xVisibleTickRange;
     
     
     CPTXYAxis *y = axisSet.yAxis;
@@ -250,6 +262,9 @@
     CPTMutablePlotRange* yVisibleTickRange = [y.visibleAxisRange mutableCopy];
     [yVisibleTickRange expandRangeByFactor:CPTDecimalFromCGFloat(0.98f)];
     y.visibleRange = yVisibleTickRange;
+    //y.majorGridLineStyle = gridLineStyle;
+    //y.minorGridLineStyle = gridLineStyle;
+    y.gridLinesRange = yVisibleTickRange;
 }
 
 - (void) addValue:(double)value toPlotIndex:(int)plotIndex

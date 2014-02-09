@@ -28,4 +28,8 @@
 #define AX12_MAX_SPEED @"AX12MaxSpeed"
 #define AX12_MAX_TORQUE @"AX12MaxTorque"
 
+#define ODOMETRY_RECORD_ACTIVATED @"OdoRecord"
+#define SENSORS_RECORD_ACTIVATED @"SensorsRecord"
+
+
 #endif

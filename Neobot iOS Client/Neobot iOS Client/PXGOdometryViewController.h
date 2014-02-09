@@ -17,5 +17,7 @@
 @property (nonatomic, weak) PXGSimpleScatterPlotViewController* xGraphController;
 @property (nonatomic, weak) PXGSimpleScatterPlotViewController* yGraphController;
 @property (nonatomic, weak) PXGSimpleScatterPlotViewController* thetaGraphController;
+@property (weak, nonatomic) IBOutlet UISwitch *switchRecording;
+- (IBAction)recordingStatusChanged:(UISwitch *)sender;
 
 @end

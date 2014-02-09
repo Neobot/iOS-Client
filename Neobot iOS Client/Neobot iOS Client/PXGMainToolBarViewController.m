@@ -51,6 +51,11 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:AX12_MAX_TORQUE] == nil)
         [[NSUserDefaults standardUserDefaults] setFloat:50 forKey:AX12_MAX_TORQUE];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:ODOMETRY_RECORD_ACTIVATED] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:ODOMETRY_RECORD_ACTIVATED];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:SENSORS_RECORD_ACTIVATED] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SENSORS_RECORD_ACTIVATED];
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];

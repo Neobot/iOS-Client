@@ -8,6 +8,7 @@
 
 #import "PXGSensorsViewController.h"
 #import "PXGSimpleScatterPlotViewController.h"
+#import "PXGParametersKeys.h"
 
 #include "math.h"
 
@@ -26,6 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.switchRecord setOn:[[NSUserDefaults standardUserDefaults] boolForKey:SENSORS_RECORD_ACTIVATED]];
     
     _nbAvoiding = 0;
     _nbOther = 0;
@@ -72,14 +75,20 @@
 
 - (void)didReceiveAvoidingSensorsValues:(NSArray*)values
 {
-    [self addValues:values toGraph:self.avoidingGraphController withLoadedPlots:_nbAvoiding];
-    _nbAvoiding = MAX(_nbAvoiding, values.count);
+    if (self.switchRecord.isOn)
+    {
+        [self addValues:values toGraph:self.avoidingGraphController withLoadedPlots:_nbAvoiding];
+        _nbAvoiding = MAX(_nbAvoiding, values.count);
+    }
 }
 
 - (void)didReceiveOtherSensorsValues:(NSArray*)values
 {
-    [self addValues:values toGraph:self.otherGraphController withLoadedPlots:_nbOther];
-    _nbOther = MAX(_nbOther, values.count);
+    if (self.switchRecord.isOn)
+    {
+        [self addValues:values toGraph:self.otherGraphController withLoadedPlots:_nbOther];
+        _nbOther = MAX(_nbOther, values.count);
+    }
 }
 
 - (void)addValues:(NSArray*)values toGraph:(PXGSimpleScatterPlotViewController*)graphController withLoadedPlots:(int)nbExistingPlots
@@ -92,6 +101,7 @@
         if (nbExistingPlots <= numPlot)
         {
             [graphController addPlot:[NSString stringWithFormat:@"Sensor %i", numPlot] withColor:[self.colors objectAtIndex:numPlot]];
+            [graphController fillDataWith:0 forSize:graphController.maxValues];
             ++nbExistingPlots;
         }
         
@@ -104,4 +114,9 @@
 
 }
 
+- (IBAction)recordingStatusChanged:(UISwitch *)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:SENSORS_RECORD_ACTIVATED];
+
+}
 @end
