@@ -72,6 +72,11 @@
     UIViewController* optionsController = [self.storyboard instantiateViewControllerWithIdentifier:@"OptionsViewController"];
     self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsController];
     self.optionsPopoverController.delegate = self;
+    
+    UIViewController* autoStartController = [self.storyboard instantiateViewControllerWithIdentifier:@"AutoStartViewController"];
+    self.autoStartPopoverController = [[UIPopoverController alloc] initWithContentViewController:autoStartController];
+    self.autoStartPopoverController.delegate = self;
+    
 
     self.mainToolBar.delegate = self;
     
@@ -153,6 +158,15 @@
 - (IBAction)displayOptionsView:(id)sender
 {
     [self displayPopover:self.optionsPopoverController onButton:self.optionsBtn];
+}
+
+- (IBAction)displayParameters:(id)sender
+{
+}
+
+- (IBAction)displayAutoStart:(id)sender
+{
+    [self displayPopover:self.autoStartPopoverController onButton:self.autoStartBtn];
 }
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
