@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXGCommInterface.h"
+#import "PXGStringListViewController.h"
 
-@interface PXGAutoStartTableViewController : UITableViewController
+@interface PXGAutoStartTableViewController : UITableViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStringViewListControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *txtStrat;
+@property (weak, nonatomic) IBOutlet UITextField *txtRobotSerial;
+@property (weak, nonatomic) IBOutlet UITextField *txtAX12Serial;
+@property (weak, nonatomic) IBOutlet UITextField *txtStratType;
+
+- (IBAction)onSend:(id)sender;
+- (IBAction)onRefresh:(id)sender;
 
 @end

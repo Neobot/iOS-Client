@@ -175,15 +175,19 @@
     {
         case Lookup:
             self.lblStatus.text = NSLocalizedString(@"Lookup", nil);
+            self.autoStartBtn.enabled = NO;
             break;
         case Disconnected:
             self.lblStatus.text = NSLocalizedString(@"Disconnected", nil);
+            self.autoStartBtn.enabled = NO;
             break;
         case Connected:
             self.lblStatus.text = NSLocalizedString(@"Connected", nil);
+            self.autoStartBtn.enabled = YES;
             break;
         case Controlled:
             self.lblStatus.text = NSLocalizedString(@"Controlled", nil);
+            self.autoStartBtn.enabled = YES;
             break;
     }
 }
