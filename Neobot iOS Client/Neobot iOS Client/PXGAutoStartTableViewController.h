@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
 #import "PXGStringListViewController.h"
+#import "PXGListChoiceViewController.h"
 
-@interface PXGAutoStartTableViewController : UITableViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStringViewListControllerDelegate>
+@interface PXGAutoStartTableViewController : UITableViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate, PXGServerInterfaceDelegate, PXGStringViewListControllerDelegate, PXGListChoiceViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtStrat;
 @property (weak, nonatomic) IBOutlet UITextField *txtRobotSerial;

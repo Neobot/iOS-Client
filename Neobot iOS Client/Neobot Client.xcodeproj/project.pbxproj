@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		942049AD17B7C5F000B9E5AC /* PXGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */; };
 		942049AF17B7D47100B9E5AC /* Neobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 942049AE17B7D47100B9E5AC /* Neobot.png */; };
+		9425C7D518B10DCC00D40AE9 /* PXGListChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9425C7D418B10DCC00D40AE9 /* PXGListChoiceViewController.m */; };
 		9425D3811791565000C6E883 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9425D3801791565000C6E883 /* UIKit.framework */; };
 		9425D3831791565000C6E883 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9425D3821791565000C6E883 /* Foundation.framework */; };
 		9425D3851791565000C6E883 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9425D3841791565000C6E883 /* CoreGraphics.framework */; };
@@ -85,6 +86,8 @@
 		942049AB17B7C5EF00B9E5AC /* PXGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapViewController.h; sourceTree = "<group>"; };
 		942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMapViewController.m; sourceTree = "<group>"; };
 		942049AE17B7D47100B9E5AC /* Neobot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Neobot.png; sourceTree = "<group>"; };
+		9425C7D318B10DCC00D40AE9 /* PXGListChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGListChoiceViewController.h; sourceTree = "<group>"; };
+		9425C7D418B10DCC00D40AE9 /* PXGListChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGListChoiceViewController.m; sourceTree = "<group>"; };
 		9425D37D1791565000C6E883 /* Neobot Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neobot Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9425D3801791565000C6E883 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9425D3821791565000C6E883 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -296,6 +299,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9425C7D618B10F7400D40AE9 /* Tool View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9425C7D318B10DCC00D40AE9 /* PXGListChoiceViewController.h */,
+				9425C7D418B10DCC00D40AE9 /* PXGListChoiceViewController.m */,
+				94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */,
+				94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */,
+			);
+			name = "Tool View Controllers";
+			sourceTree = "<group>";
+		};
 		9425D3741791565000C6E883 = {
 			isa = PBXGroup;
 			children = (
@@ -369,8 +383,6 @@
 			children = (
 				94835D51179ABB860024A789 /* PXGCommViewController.h */,
 				94835D52179ABB860024A789 /* PXGCommViewController.m */,
-				94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */,
-				94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -638,6 +650,7 @@
 			children = (
 				94835D54179ABDA20024A789 /* PXGMainToolBarViewController.h */,
 				94835D55179ABDA30024A789 /* PXGMainToolBarViewController.m */,
+				9425C7D618B10F7400D40AE9 /* Tool View Controllers */,
 				9428504617F84F3500230DD2 /* Connection */,
 				9428504717F84F4B00230DD2 /* Log */,
 				9428504817F84F5500230DD2 /* Options */,
@@ -759,6 +772,7 @@
 				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
 				9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */,
 				94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */,
+				9425C7D518B10DCC00D40AE9 /* PXGListChoiceViewController.m in Sources */,
 				94FFA09718018BD0009AA63C /* PXGAX12ListTableViewController.m in Sources */,
 				94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */,
 				94344DF717F701FB006ABBCD /* PXGAX12ViewController.m in Sources */,

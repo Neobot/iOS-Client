@@ -1379,16 +1379,16 @@
             </objects>
             <point key="canvasLocation" x="-2844" y="-1313"/>
         </scene>
-        <!--View Controller-->
+        <!--List Choice View Controller-->
         <scene sceneID="vE5-3e-8X0">
             <objects>
-                <viewController id="Yru-fl-0og" sceneMemberID="viewController">
+                <viewController id="Yru-fl-0og" customClass="PXGListChoiceViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BEB-BI-mwB"/>
                         <viewControllerLayoutGuide type="bottom" id="XpL-iZ-Ddg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="k47-Ob-5Jq">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L1y-vm-H2I">
@@ -1402,7 +1402,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="TJq-ed-6kf"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="TJq-ed-6kf">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="szF-3T-guw">
+                            <connections>
+                                <action selector="onDone:" destination="Yru-fl-0og" id="Jrh-2Z-H3t"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pickerView" destination="L1y-vm-H2I" id="KhJ-Ir-KNS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HfL-Bg-Eav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1413,12 +1423,12 @@
             <objects>
                 <tableViewController id="FQF-uT-WEn" customClass="PXGStringListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0yi-Kv-0Ag">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="readOnly" id="fZ5-k0-TYQ">
-                                <rect key="frame" x="0.0" y="119" width="540" height="44"/>
+                                <rect key="frame" x="0.0" y="55" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZ5-k0-TYQ" id="8Qb-Y5-LMe">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -1426,7 +1436,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editable" id="xsw-wP-UfR">
-                                <rect key="frame" x="0.0" y="163" width="540" height="44"/>
+                                <rect key="frame" x="0.0" y="99" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xsw-wP-UfR" id="qao-4m-hH2">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -1458,6 +1468,7 @@
                             <outlet property="delegate" destination="FQF-uT-WEn" id="QZm-Wu-1wl"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="t7L-zU-hyr">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="AX9-5K-wyf">
                             <connections>
@@ -2077,7 +2088,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Yru-fl-0og" kind="push" id="yG2-Gx-S8t"/>
+                                            <segue destination="Yru-fl-0og" kind="push" identifier="strategyNameSegue" id="yG2-Gx-S8t"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -2186,7 +2197,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Yru-fl-0og" kind="push" id="77i-AK-GfL"/>
+                                            <segue destination="Yru-fl-0og" kind="push" identifier="strategyTypeSegue" id="77i-AK-GfL"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -3059,13 +3070,13 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="IqJ-qn-5tl"/>
         <segue reference="zdk-zJ-ZCe"/>
         <segue reference="pLy-qv-dUj"/>
         <segue reference="lO7-PU-doR"/>
+        <segue reference="IqJ-qn-5tl"/>
         <segue reference="KM3-Dh-bRh"/>
         <segue reference="H3M-1e-HST"/>
         <segue reference="mtt-DI-JeG"/>
-        <segue reference="yG2-Gx-S8t"/>
+        <segue reference="77i-AK-GfL"/>
     </inferredMetricsTieBreakers>
 </document>
