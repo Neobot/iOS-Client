@@ -9,24 +9,33 @@
 #import "PXGListChoiceViewController.h"
 
 @interface PXGListChoiceViewController ()
+{
+    NSUInteger _loadedIndex;
+}
 
 @end
 
 @implementation PXGListChoiceViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        _loadedIndex = NSNotFound;
     }
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    if (_loadedIndex != NSNotFound)
+    {
+        [self.pickerView selectRow:_loadedIndex inComponent:0 animated:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,4 +68,14 @@
     [self.delegate didSelectChoice:value];
     [((UINavigationController*)[self parentViewController])popViewControllerAnimated:YES];
 }
+
+- (void)setValue:(NSString*)value
+{
+    _loadedIndex = [self.choices indexOfObject:value];
+    if (self.pickerView != nil)
+    {
+        [self.pickerView selectRow:_loadedIndex inComponent:0 animated:NO];
+    }
+}
+
 @end

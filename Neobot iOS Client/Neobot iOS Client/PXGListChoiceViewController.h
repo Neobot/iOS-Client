@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
 - (IBAction)onDone:(id)sender;
+- (void)setValue:(NSString*)value;
 
 @end

@@ -13,8 +13,11 @@
 {
     NSArray* _availableSerialPorts;
     NSArray* _availableStrategies;
+    NSArray* _availableTypes;
     UITextField* _editedTextField;
     NSString* _editedRecentUserDefaultKey;
+    
+    bool _hasChanges;
 }
 
 @end
@@ -24,7 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _hasChanges = false;
     _availableSerialPorts = nil;
+    _availableTypes = @[@"Robot", @"Simulation", @"Reversed Simulation"];
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
@@ -87,19 +92,21 @@
     if ([segue.identifier isEqualToString:@"strategyNameSegue"])
     {
         controller.choices = _availableStrategies;
+        _editedTextField = self.txtStrat;
         
         found = true;
     }
     else if ([segue.identifier isEqualToString:@"strategyTypeSegue"])
     {
-        controller.choices = @[@"Robot", @"Simulation", @"Reversed Simulation"];
+        controller.choices = _availableTypes;
+        _editedTextField = self.txtStratType;
         
         found = true;
     }
     
-    
     if (found)
     {
+        [controller setValue:_editedTextField.text];
         controller.delegate = self;
     }
 
@@ -107,6 +114,14 @@
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
+}
+
+- (void)setHasChanges:(BOOL)hasChanges
+{
+    _hasChanges = hasChanges;
+    
+    NSString* saveBtnText = hasChanges ? @"Send*" : @"Send";
+    [self.btnSave setTitle:saveBtnText forState:UIControlStateNormal];
 }
 
 - (void)didReceiveSerialPortsInfo:(NSArray*)serialports
@@ -119,9 +134,33 @@
     _availableStrategies = names;
 }
 
+- (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled
+{
+    NSString* strategy = [_availableStrategies objectAtIndex:strategyNum];
+    self.txtStrat.text = strategy;
+    
+    self.txtRobotSerial.text = robotPort;
+    self.txtAX12Serial.text = ax12port;
+    
+    NSString* stratType;
+    if (!simulation)
+		stratType = [_availableTypes objectAtIndex:0];
+	else if (mirrorMode)
+		stratType = [_availableTypes objectAtIndex:1];
+	else
+		stratType = [_availableTypes objectAtIndex:2];
+    
+    self.txtStratType.text = stratType;
+    [self.swEnabled setOn:enabled];
+}
+
 - (void) didSelectString:(NSString*)string
 {
+    if ([string isEqualToString:_editedTextField.text])
+        return;
+    
     _editedTextField.text = string;
+    [self setHasChanges:YES];
     
     NSArray* recentValues = [[NSUserDefaults standardUserDefaults] arrayForKey:_editedRecentUserDefaultKey];
     NSMutableArray* newRecentsValues = [NSMutableArray arrayWithArray:recentValues];
@@ -137,14 +176,39 @@
 
 - (void) didSelectChoice:(NSString*)string
 {
+    if ([string isEqualToString:_editedTextField.text])
+        return;
+    
     _editedTextField.text = string;
+    [self setHasChanges:YES];
+}
+
+- (IBAction)onEnabledStateChanged:(id)sender
+{
+    [self setHasChanges:YES];
 }
 
 - (IBAction)onSend:(id)sender
 {
+    [self setHasChanges:NO];
+    
+    int stratIndex = [_availableStrategies indexOfObject:self.txtStrat.text];
+    int type = [_availableTypes indexOfObject:self.txtStratType.text];
+    bool simulation = type >= 1; //1 or 2
+    bool mirrored = type == 2;
+    
+    [[PXGCommInterface sharedInstance] setAutoStrategyWithStrategy:stratIndex
+                                                     withRobotPort:self.txtRobotSerial.text
+                                                      withAx12Port:self.txtAX12Serial.text
+                                                  inSimulationMode:simulation ? YES : NO
+                                                      inMirrorMode:mirrored ? YES : NO
+                                                         isEnabled:self.swEnabled.isOn];
 }
 
 - (IBAction)onRefresh:(id)sender
 {
+    [[PXGCommInterface sharedInstance] askAutoStrategyInfo];
+    [self setHasChanges:NO];
 }
+
 @end

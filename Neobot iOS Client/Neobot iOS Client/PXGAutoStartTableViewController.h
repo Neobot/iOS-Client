@@ -17,8 +17,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtRobotSerial;
 @property (weak, nonatomic) IBOutlet UITextField *txtAX12Serial;
 @property (weak, nonatomic) IBOutlet UITextField *txtStratType;
+@property (weak, nonatomic) IBOutlet UIButton *btnSave;
+@property (weak, nonatomic) IBOutlet UISwitch *swEnabled;
 
 - (IBAction)onSend:(id)sender;
 - (IBAction)onRefresh:(id)sender;
+- (IBAction)onEnabledStateChanged:(id)sender;
 
 @end

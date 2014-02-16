@@ -108,6 +108,7 @@
     [self changeConnectionStatusTo:Connected];
     [[PXGCommInterface sharedInstance] askStrategies];
     [[PXGCommInterface sharedInstance] askSerialPorts];
+    [[PXGCommInterface sharedInstance] askAutoStrategyInfo];
 }
 
 - (void) protocolDisconnectedWithError:(NSError *)error
@@ -282,6 +283,22 @@
                     [serverDelegate didReceiveAx12MovementsFileData:data];
             break;
 
+        }
+        case AUTO_STRATEGY_INFO:
+        {
+            int stratNum = [serializer takeInt8];
+            NSString* robotPort = [serializer takeString];
+            NSString* ax12Port = [serializer takeString];
+            
+            BOOL enabled, simu, mirror;
+            
+            [serializer takeBool:&enabled and:&simu and:&mirror];
+            
+            for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
+                if ([serverDelegate respondsToSelector:@selector(didReceiveAutoStrategyInfoForStrategy:withRobotPort:withax12Port:inSimulationMode:inMirrorMode:isEnabled:)])
+                    [serverDelegate didReceiveAutoStrategyInfoForStrategy:stratNum withRobotPort:robotPort withax12Port:ax12Port inSimulationMode:simu inMirrorMode:mirror isEnabled:enabled];
+            
+            break;
         }
             
         //BOTH
@@ -507,5 +524,22 @@
     [_protocol writeMessage:messageData forInstruction:RUN_AX12_MVT];
 }
 
+- (void)askAutoStrategyInfo
+{
+    [_protocol writeMessage:nil forInstruction:ASK_AUTO_STRATEGY_INFO];
+}
+
+- (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:strategyNum];
+    [serializer addString:robotPort];
+    [serializer addString:ax12port];
+    [serializer addBool:enabled and:simulation and:mirrorMode];
+    
+    [_protocol writeMessage:messageData forInstruction:SET_AUTO_STRATEGY];
+}
 
 @end
