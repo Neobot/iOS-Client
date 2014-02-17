@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIPopoverController* logPopoverController;
 @property (strong, nonatomic) UIPopoverController* optionsPopoverController;
 @property (strong, nonatomic) UIPopoverController* autoStartPopoverController;
+@property (strong, nonatomic) UIPopoverController* parametersPopoverController;
 @property (weak, nonatomic)   UITabBarController* tabBarController;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblStatus;

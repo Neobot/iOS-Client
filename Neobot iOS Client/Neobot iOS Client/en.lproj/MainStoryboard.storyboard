@@ -1962,6 +1962,62 @@
             </objects>
             <point key="canvasLocation" x="-5364" y="-1676"/>
         </scene>
+        <!--Table View Controller - Robot Parameters-->
+        <scene sceneID="w2a-h5-PdV">
+            <objects>
+                <tableViewController id="1aQ-e0-5ra" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="C2F-yN-Nje">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Rty-a3-T9V">
+                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rty-a3-T9V" id="X7f-04-m4t">
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBm-sp-HoG">
+                                            <rect key="frame" x="20" y="11" width="80" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="No value" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zf4-UM-8gA">
+                                            <rect key="frame" x="185" y="8" width="335" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Robot Parameters" id="no2-Xi-LpZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6kP-hS-oti" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4588" y="-844"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mTq-91-Yuv">
+            <objects>
+                <navigationController storyboardIdentifier="ParametersViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y83-SJ-uam" sceneMemberID="viewController">
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9p7-O9-Rx5">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1aQ-e0-5ra" kind="relationship" relationship="rootViewController" id="opa-dL-87o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0qK-vl-QP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5344" y="-844"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ays-7y-swd">
             <objects>
@@ -2461,7 +2517,7 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording activated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJX-p2-lHk">
-                                <rect key="frame" x="77" y="13" width="172" height="21"/>
+                                <rect key="frame" x="83" y="13" width="172" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="172" id="HW3-lT-aaT"/>
@@ -2484,7 +2540,7 @@
                             <constraint firstAttribute="trailing" secondItem="4NF-YE-vd2" secondAttribute="trailing" id="j33-md-KRe"/>
                             <constraint firstItem="u9B-pQ-Z8b" firstAttribute="leading" secondItem="1NW-Oc-BpP" secondAttribute="leading" id="kl7-t2-79M"/>
                             <constraint firstItem="Z4G-QL-wjs" firstAttribute="leading" secondItem="1NW-Oc-BpP" secondAttribute="leading" id="rbO-Fz-zgM"/>
-                            <constraint firstItem="RJX-p2-lHk" firstAttribute="leading" secondItem="dFI-rP-Sxx" secondAttribute="trailing" constant="8" symbolic="YES" id="tyD-gA-ji3"/>
+                            <constraint firstItem="RJX-p2-lHk" firstAttribute="leading" secondItem="dFI-rP-Sxx" secondAttribute="trailing" constant="14" id="tyD-gA-ji3"/>
                             <constraint firstAttribute="trailing" secondItem="Z4G-QL-wjs" secondAttribute="trailing" id="uu8-vu-wbm"/>
                             <constraint firstItem="u9B-pQ-Z8b" firstAttribute="top" secondItem="Z4G-QL-wjs" secondAttribute="bottom" id="v4A-EK-TP1"/>
                             <constraint firstItem="4NF-YE-vd2" firstAttribute="leading" secondItem="1NW-Oc-BpP" secondAttribute="leading" id="xVV-yi-iGs"/>

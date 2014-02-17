@@ -77,6 +77,11 @@
     self.autoStartPopoverController = [[UIPopoverController alloc] initWithContentViewController:autoStartController];
     self.autoStartPopoverController.delegate = self;
     
+    UIViewController* parametersController = [self.storyboard instantiateViewControllerWithIdentifier:@"ParametersViewController"];
+    self.parametersPopoverController = [[UIPopoverController alloc] initWithContentViewController:parametersController];
+    self.parametersPopoverController.delegate = self;
+
+    
 
     self.mainToolBar.delegate = self;
     
@@ -136,6 +141,15 @@
     }
 }
 
+- (void)tryDismissPopover:(UIPopoverController*)controller
+{
+    if (self.currentPopoverController == controller)
+    {
+        [controller dismissPopoverAnimated:YES];
+        self.currentPopoverController = nil;
+    }
+}
+
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     self.currentPopoverController = nil;
@@ -162,6 +176,7 @@
 
 - (IBAction)displayParameters:(id)sender
 {
+    [self displayPopover:self.parametersPopoverController onButton:self.parametersBtn];
 }
 
 - (IBAction)displayAutoStart:(id)sender
@@ -176,18 +191,27 @@
         case Lookup:
             self.lblStatus.text = NSLocalizedString(@"Lookup", nil);
             self.autoStartBtn.enabled = NO;
+            [self tryDismissPopover:self.autoStartPopoverController];
+            self.parametersBtn.enabled = NO;
+            [self tryDismissPopover:self.parametersPopoverController];
             break;
         case Disconnected:
             self.lblStatus.text = NSLocalizedString(@"Disconnected", nil);
             self.autoStartBtn.enabled = NO;
+            [self tryDismissPopover:self.autoStartPopoverController];
+            self.parametersBtn.enabled = NO;
+            [self tryDismissPopover:self.parametersPopoverController];
             break;
         case Connected:
             self.lblStatus.text = NSLocalizedString(@"Connected", nil);
             self.autoStartBtn.enabled = YES;
+            self.parametersBtn.enabled = NO;
+            [self tryDismissPopover:self.parametersPopoverController];
             break;
         case Controlled:
             self.lblStatus.text = NSLocalizedString(@"Controlled", nil);
             self.autoStartBtn.enabled = YES;
+            self.parametersBtn.enabled = YES;
             break;
     }
 }

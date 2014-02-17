@@ -150,5 +150,6 @@ struct Ax12Info
 - (void)askAutoStrategyInfo;
 - (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled;
 
+- (void)askParameters;
 
 @end

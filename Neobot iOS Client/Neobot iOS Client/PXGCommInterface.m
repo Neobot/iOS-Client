@@ -209,6 +209,30 @@
                     [robotDelegate didReceiveLog:logText];
             break;
         }
+        case PARAMETERS:
+        {
+            NSMutableArray* values = [NSMutableArray array];
+            uint8_t nbValues = [serializer takeInt8];
+            for(int i = 0; i < nbValues && ![serializer atEnd]; ++i)
+            {
+                float value = [serializer takeFloat];
+                [values addObject:[NSNumber numberWithFloat:value]];
+            }
+            
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                if ([robotDelegate respondsToSelector:@selector(didReceiveParametersValues:)])
+                    [robotDelegate didReceiveParametersValues:values];
+            break;
+        }
+        case PARAMETER_NAMES:
+        {
+            NSString* completeStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSArray* parameterNamesArray = [completeStr componentsSeparatedByString:@";;"];
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                if ([robotDelegate respondsToSelector:@selector(didReceiveParameterNames:)])
+                    [robotDelegate didReceiveParameterNames:parameterNamesArray];
+            break;
+        }
             
             
         //SERVER
@@ -540,6 +564,11 @@
     [serializer addBool:enabled and:simulation and:mirrorMode];
     
     [_protocol writeMessage:messageData forInstruction:SET_AUTO_STRATEGY];
+}
+
+- (void)askParameters
+{
+    [_protocol writeMessage:nil forInstruction:ASK_PARAMETERS];
 }
 
 @end
