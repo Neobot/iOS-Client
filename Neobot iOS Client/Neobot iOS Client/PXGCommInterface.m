@@ -229,8 +229,12 @@
             NSString* completeStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             NSArray* parameterNamesArray = [completeStr componentsSeparatedByString:@";;"];
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+            {
                 if ([robotDelegate respondsToSelector:@selector(didReceiveParameterNames:)])
+                {
                     [robotDelegate didReceiveParameterNames:parameterNamesArray];
+                }
+            }
             break;
         }
             
@@ -336,6 +340,7 @@
             {
                 [self changeConnectionStatusTo:Controlled];
                 [self askStrategyStatus];
+                [self askParameters];
             }
             else if (inst == DISCONNECT && result)
                 [self changeConnectionStatusTo:Connected];

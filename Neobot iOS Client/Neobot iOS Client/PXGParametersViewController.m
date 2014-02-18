@@ -9,6 +9,12 @@
 #import "PXGParametersViewController.h"
 
 @interface PXGParametersViewController ()
+{
+    BOOL _hasChanges;
+}
+
+@property (strong, nonatomic) NSArray* names;
+@property (strong, nonatomic) NSArray* values;
 
 @end
 
@@ -18,14 +24,10 @@
 {
     [super viewDidLoad];
     
+    _hasChanges = false;
+    
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,38 +44,97 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    if (section == 0)
+        return self.values.count;
+    
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"Cell";
+    static NSString *btnCellIdentifier = @"BtnCell";
     
-    // Configure the cell...
+    UITableViewCell *cell = nil;
+    
+    if (indexPath.section == 0)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        
+        UILabel* parameterNameLbl = (UILabel*)[cell viewWithTag:2];
+        parameterNameLbl.text = [self.names objectAtIndex:indexPath.row];
+        
+        UITextField* parameterValueTxt = (UITextField*)[cell viewWithTag:1];
+        parameterValueTxt.text = [NSString stringWithFormat:@"%f", [[self.values objectAtIndex:indexPath.row] floatValue]];
+        [parameterValueTxt addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventEditingChanged];
+
+    }
+    else if (indexPath.section == 1)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:btnCellIdentifier forIndexPath:indexPath];
+        
+        UIButton* btn = (UIButton*)[cell viewWithTag:1];
+        
+        if (indexPath.row == 0)
+        {
+            if (_hasChanges)
+                [btn setTitle:@"Send*" forState:UIControlStateNormal];
+            else
+                [btn setTitle:@"Send" forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(sendValues:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
+            [btn setTitle:@"Refresh" forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(refreshValues:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
     
     return cell;
+}
+
+#pragma mark Actions
+- (void) sendValues:(UIButton*)textField
+{
+    [self setHasChanges:NO];
+}
+
+- (void)refreshValues:(UIButton*)textField
+{
+    [[PXGCommInterface sharedInstance] askParameters];
+    [self setHasChanges:NO];
+}
+
+- (void)valueChanged:(UITextField*)textField
+{
+    [self setHasChanges:YES];
+}
+
+- (void)setHasChanges:(BOOL)hasChanges
+{
+    _hasChanges = hasChanges;
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
 #pragma mark Comm
 - (void)didReceiveParametersValues:(NSArray*)values
 {
-    
+    self.values = values;
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveParameterNames:(NSArray*)names
 {
-    
+    self.names = names;
+    [self.tableView reloadData];
 }
 
 @end
