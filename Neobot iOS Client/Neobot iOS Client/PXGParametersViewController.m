@@ -101,6 +101,19 @@
 #pragma mark Actions
 - (void) sendValues:(UIButton*)textField
 {
+    NSMutableArray* values = [NSMutableArray array];
+    for (NSIndexPath* path in [self.tableView indexPathsForVisibleRows])
+    {
+        if (path.section == 0)
+        {
+            UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:path];
+            UITextField* textField = (UITextField*)[cell viewWithTag:1];
+            float value = [textField.text floatValue];
+            [values addObject:[NSNumber numberWithFloat:value]];
+        }
+    }
+    
+    [[PXGCommInterface sharedInstance] sendParameters:values];
     [self setHasChanges:NO];
 }
 

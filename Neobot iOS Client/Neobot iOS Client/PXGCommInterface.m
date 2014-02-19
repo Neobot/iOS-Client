@@ -576,4 +576,19 @@
     [_protocol writeMessage:nil forInstruction:ASK_PARAMETERS];
 }
 
+- (void)sendParameters:(NSArray*)parameters
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:parameters.count];
+    for (NSNumber* num in parameters)
+    {
+        float value = [num floatValue];
+        [serializer addFloat:value];
+    }
+    
+    [_protocol writeMessage:messageData forInstruction:SET_PARAMETERS];
+}
+
 @end
