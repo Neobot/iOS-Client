@@ -265,7 +265,7 @@
     {
         [_serverPingTimer invalidate];
         _serverPingTimer = nil;
-        NSTimeInterval duration = abs([_serverPingStartedDate timeIntervalSinceNow]);
+        NSTimeInterval duration = fabs([_serverPingStartedDate timeIntervalSinceNow]);
         self.lblServerPing.text = [NSString stringWithFormat:@"%fs", duration];
         [self.tableView reloadData];
         self.btnPingServer.enabled = YES;
@@ -314,7 +314,7 @@
     {
         [_robotPingTimer invalidate];
         _robotPingTimer = nil;
-        NSTimeInterval duration = abs([_robotPingStartedDate timeIntervalSinceNow]);
+        NSTimeInterval duration = fabs([_robotPingStartedDate timeIntervalSinceNow]);
         self.lblRobotPing.text = [NSString stringWithFormat:@"%fs", duration];
         self.btnRobotPing.enabled = YES;
         
