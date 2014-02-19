@@ -146,6 +146,11 @@
 {
     for (PXGMapObject* object in self.objects)
     {
+        if (object.needPositionUpdate == YES)
+        {
+            [self updatePositionOfObject:object];
+        }
+        
         [object updateAnimationAtTimeStamp:[_displayLink timestamp]];
     }
 }
@@ -245,8 +250,7 @@
     robotPosition.y = y;
     robotPosition.theta = theta;
     
-    //The robot is always the first object
-    [self updatePositionOfObject:self.robot];
+    self.robot.needPositionUpdate = YES;
 }
 
 - (void)setObjectivePositionAtX:(double)x Y:(double)y theta:(double)theta
@@ -255,8 +259,7 @@
     targetPosition.x = x;
     targetPosition.y = y;
     
-    //The target is always the second object
-    [self updatePositionOfObject:self.target];
+    self.target.needPositionUpdate = YES;
 }
 
 #pragma mark Trajectory drawing

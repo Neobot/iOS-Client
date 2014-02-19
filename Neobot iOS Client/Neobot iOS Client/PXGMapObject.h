@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSString*  selectedImageName;
 @property (nonatomic)         double     selectionAnimationSpeed; //radian/s
 @property (strong, nonatomic) UIColor*   selectionAnimationColor;
+@property (nonatomic)         BOOL       needPositionUpdate;
 
 - (void)setBounds:(CGRect)bounds;
 - (void)updateAnimationAtTimeStamp:(CFTimeInterval)timestamp;

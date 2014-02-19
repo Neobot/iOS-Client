@@ -37,6 +37,7 @@
         self.selectedImageName = nil;
         self.selectable = NO;
         self.selected = NO;
+        self.needPositionUpdate = NO;
         
         _view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
         self.view.contentMode = UIViewContentModeScaleAspectFit;
