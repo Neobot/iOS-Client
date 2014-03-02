@@ -38,6 +38,10 @@
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
+    if(status == Controlled)
+    {
+        [[PXGCommInterface sharedInstance]  askParameters];
+    }
 }
 
 #pragma mark - Table view data source

@@ -247,6 +247,10 @@
     [self setIndicatorForCell:self.cellRobotSerialPort withControl:self.txtRobotSerialPort];
     [self setIndicatorForCell:self.cellAx12SerialPort withControl:self.txtAx12SerialPort];
     
+    if (status == Connected)
+    {
+        [[PXGCommInterface sharedInstance] askSerialPorts];
+    }
 }
 
 

@@ -114,6 +114,12 @@
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
+    if (status == Connected)
+    {
+        [[PXGCommInterface sharedInstance] askStrategies];
+        [[PXGCommInterface sharedInstance] askSerialPorts];
+        [[PXGCommInterface sharedInstance] askAutoStrategyInfo];
+    }
 }
 
 - (void)setHasChanges:(BOOL)hasChanges

@@ -50,9 +50,8 @@
 - (void)registerConnectedViewDelegate:(id<PXGConnectedViewDelegate>)connectedViewDelegate
 {
     [_connectedViewDelegates addObject:connectedViewDelegate];
-    for (id<PXGConnectedViewDelegate> viewDelegate in _connectedViewDelegates)
-        if ([viewDelegate respondsToSelector:@selector(connectionStatusChangedTo:)])
-            [viewDelegate connectionStatusChangedTo:self.connectionStatus];
+    if ([connectedViewDelegate respondsToSelector:@selector(connectionStatusChangedTo:)])
+        [connectedViewDelegate connectionStatusChangedTo:self.connectionStatus];
 }
 
 - (void)unregisterConnectedViewDelegate:(id<PXGConnectedViewDelegate>)connectedViewDelegate
@@ -106,9 +105,6 @@
 - (void) protocolConnected
 {
     [self changeConnectionStatusTo:Connected];
-    [[PXGCommInterface sharedInstance] askStrategies];
-    [[PXGCommInterface sharedInstance] askSerialPorts];
-    [[PXGCommInterface sharedInstance] askAutoStrategyInfo];
 }
 
 - (void) protocolDisconnectedWithError:(NSError *)error
@@ -339,8 +335,6 @@
             if (inst == CONNECT && result)
             {
                 [self changeConnectionStatusTo:Controlled];
-                [self askStrategyStatus];
-                [self askParameters];
             }
             else if (inst == DISCONNECT && result)
                 [self changeConnectionStatusTo:Connected];

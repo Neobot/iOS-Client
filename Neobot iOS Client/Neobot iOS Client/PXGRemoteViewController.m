@@ -72,7 +72,7 @@
     self.lblSpeedValue.hidden = !isPortrait;
 }
 
-- (void) connectionStatusChangedTo:(PXGConnectionStatus)status
+- (void) updateConnectionStatusGui:(PXGConnectionStatus)status
 {
     BOOL robotInteractioEnabled = status == Controlled && !_currentStrategyIsRunning;
     
@@ -87,6 +87,17 @@
     {
         self.lblPosition.text = @"Unknown";
         self.lblObjective.text = @"Unknown";
+    }
+}
+
+- (void) connectionStatusChangedTo:(PXGConnectionStatus)status
+{
+    [self updateConnectionStatusGui:status];
+    
+    if (status == Controlled || status == Connected)
+    {
+        [[PXGCommInterface sharedInstance] askStrategies];
+        [[PXGCommInterface sharedInstance]  askStrategyStatus];
     }
 }
 
@@ -238,14 +249,14 @@
     {
         [self setCurrentStrategyName: _strategyNames[_currentStrategy]];
         [self.btnStartStrategy setTitle:@"Stop" forState:UIControlStateNormal];
-        [self connectionStatusChangedTo:[[PXGCommInterface sharedInstance] connectionStatus]];
+        [self updateConnectionStatusGui:[[PXGCommInterface sharedInstance] connectionStatus]];
         self.btnStartStrategy.enabled = true;
     }
     else
     {
         [self setCurrentStrategyName:@"None"];
         [self.btnStartStrategy setTitle:@"Start" forState:UIControlStateNormal];
-        [self connectionStatusChangedTo:[[PXGCommInterface sharedInstance] connectionStatus]];
+        [self updateConnectionStatusGui:[[PXGCommInterface sharedInstance] connectionStatus]];
     }
 }
 
