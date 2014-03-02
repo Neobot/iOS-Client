@@ -239,6 +239,9 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        if (self.positions.count == 0)
+            [self.tableView reloadData]; //Reload all the table to update the footer view
+        
         [self.delegate movementPositionsChanged];
     }
 }
@@ -332,6 +335,10 @@
     [self.positions addObject:singlePosition];
     
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    if (self.positions.count == 1)
+        [self.tableView reloadData]; //Reload all the table to update the footer view
+    
     [self.delegate movementPositionsChanged];
 }
 

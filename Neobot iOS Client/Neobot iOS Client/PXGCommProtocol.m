@@ -161,6 +161,7 @@ typedef NS_ENUM(NSInteger, PXGMessageTag)
         case INSTRUCTION:
         {
             _currentMessageInstruction = [serializer takeInt8];
+            _currentMessageData = [NSData data];
             [self readDataWithTag:DATA];
             break;
         }
