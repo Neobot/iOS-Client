@@ -125,7 +125,15 @@
 {
     PXGAX12Data* ax12 = [self getAX12DataForID:ax12ID];
     ax12.position = position;
-    [self.collectionView reloadData];
+    
+    
+    NSInteger i = [self.ax12List indexOfObject:ax12];
+    if (i != NSNotFound)
+    {
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:i inSection:0];
+        PXGAX12CollectionCell* cell = (PXGAX12CollectionCell*)[self.collectionView cellForItemAtIndexPath:ip];
+        [cell setPosition:position];
+    }
 }
 
 - (void)setAX12ControlEnabled:(BOOL)enabled

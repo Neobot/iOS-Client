@@ -13,12 +13,25 @@
 {
     int _id;
     bool _isTimeout;
-    bool _allowSpeedNotification;
+    NSTimer* _speedNotificationTimer;
 }
 
 @end
 
 @implementation PXGAX12CollectionCell
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        self.lblSpeed.text = @"0%";
+        _isTimeout = false;
+        self.speedNotificationInterval = 0.1;
+        
+    }
+    return self;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -27,7 +40,6 @@
     {
        self.lblSpeed.text = @"0%";
         _isTimeout = false;
-        _allowSpeedNotification = true;
         self.speedNotificationInterval = 0.1;
 
     }
@@ -55,17 +67,23 @@
 {
     self.lblSpeed.text = [NSString stringWithFormat:@"%i%%", (int)sender.value];
     
-    if (_allowSpeedNotification)
+    if (_speedNotificationTimer != nil && sender.value == 0)
+        _speedNotificationTimer = nil;
+    
+    else if (_speedNotificationTimer == nil && sender.value != 0)
     {
-        _allowSpeedNotification = false;
-        [NSTimer scheduledTimerWithTimeInterval:self.speedNotificationInterval target:self selector:@selector(speedChangedTimeout:) userInfo:nil repeats:NO];
-        [self.delegate speedChanged:sender.value forAX12:_id];
+        [self sendSpeedValue:nil];
+        _speedNotificationTimer = [NSTimer scheduledTimerWithTimeInterval:self.speedNotificationInterval
+                                                                   target:self
+                                                                 selector:@selector(sendSpeedValue:)
+                                                                 userInfo:nil
+                                                                  repeats:YES];
     }
 }
 
-- (void)speedChangedTimeout:(NSTimer*)timer
+- (void)sendSpeedValue:(NSTimer*)timer
 {
-    _allowSpeedNotification = true;
+    [self.delegate speedChanged:self.stick.value forAX12:_id];
 }
 
 - (IBAction)onSetPosition:(id)sender

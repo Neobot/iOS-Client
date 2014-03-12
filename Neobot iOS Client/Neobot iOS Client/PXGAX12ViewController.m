@@ -250,13 +250,19 @@
 {
     //called every 100ms
     
-    struct Ax12Info info[1];
-    info[0].id = ax12.ax12ID;
-    info[0].angle = ax12.position + 5.0;
-    info[0].speed = 10.0;
-    info[0].torque = self.sliderTorque.value;
+    if (fabs(speed) > 50.0)
+    {
+        double dir = speed < 0 ? -1.0 : 1.0;
+        
+        struct Ax12Info info[1];
+        info[0].id = ax12.ax12ID;
+        info[0].angle = ax12.position + 5.0 * dir;
+        info[0].speed = 10.0;
+        info[0].torque = self.sliderTorque.value;
+        
+        [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
+    }
     
-    [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
 }
 
 - (void)lockStatusChanged:(BOOL)locked forAX12:(PXGAX12Data*)ax12
