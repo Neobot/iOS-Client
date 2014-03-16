@@ -250,17 +250,49 @@
 {
     //called every 100ms
     
-    if (fabs(speed) > 50.0)
+    double asbSpeed = fabs(speed);
+    
+    if (ax12.command < 0)
     {
-        double dir = speed < 0 ? -1.0 : 1.0;
-        
-        struct Ax12Info info[1];
-        info[0].id = ax12.ax12ID;
-        info[0].angle = ax12.position + 5.0 * dir;
-        info[0].speed = 10.0;
-        info[0].torque = self.sliderTorque.value;
-        
-        [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
+        ax12.command = ax12.position;
+    }
+    
+    if (speed == 0)
+    {
+        ax12.command = -1;
+    }
+    else if (asbSpeed > 5.0)
+    {
+        double diff = ax12.command - ax12.position;
+        if (fabs(diff) <= 20.0)
+        {
+            double rate = 0.0;
+            if (asbSpeed < 40)
+                rate = 2.0;
+            else if (asbSpeed < 70)
+                rate = 8;
+            else if (asbSpeed < 95)
+                rate = 20;
+            else
+                rate = 30;
+            
+            double dir = speed < 0 ? -1.0 : 1.0;
+            ax12.command = ax12.command + rate * dir;
+
+            struct Ax12Info info[1];
+            info[0].id = ax12.ax12ID;
+            info[0].angle = ax12.command;
+            info[0].speed = 10.0;
+            info[0].torque = self.sliderTorque.value;
+            
+            [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
+            
+            //NSLog(@"Angle sent: %f", ax12.command);
+        }
+        else
+        {
+            //NSLog(@"Too far, diff: %f", diff);
+        }
     }
     
 }
@@ -290,7 +322,10 @@
     for (NSNumber* num in ax12Ids)
     {
         double position = [[positions objectAtIndex:i] floatValue];
-        [self.ax12CollectionController setPosition:position forAx12:[num intValue]];
+        if (position >= 0 && position <= 300)
+        {
+            [self.ax12CollectionController setPosition:position forAx12:[num intValue]];
+        }
         ++i;
     }
 }

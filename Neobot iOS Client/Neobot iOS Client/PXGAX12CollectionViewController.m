@@ -105,7 +105,7 @@
 }
 
 - (void)speedChanged:(double)speed forAX12:(int)ax12ID
-{
+{    
     [self.delegate speedChanged:speed forAX12:[self getAX12DataForID:ax12ID]];
 }
 

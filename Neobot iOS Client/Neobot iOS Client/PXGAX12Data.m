@@ -26,11 +26,10 @@
 {
     int ax12ID = [[dictionnary objectForKey:@"id"] intValue];
     double position = [[dictionnary objectForKey:@"position"] doubleValue];
-    double command = [[dictionnary objectForKey:@"command"] boolValue];
     
     PXGAX12Data* ax12 = [self initWithId:ax12ID];
     ax12.position = position;
-    ax12.command = command;
+    ax12.command = -1;
     
     return ax12;
 }
@@ -43,8 +42,7 @@
 - (NSDictionary*)encodeToDictionary
 {
     return @{@"id": [NSNumber numberWithInt:self.ax12ID],
-             @"position": [NSNumber numberWithDouble:self.position],
-             @"command": [NSNumber numberWithBool:self.command]};
+             @"position": [NSNumber numberWithDouble:self.position]};
 }
 
 @end

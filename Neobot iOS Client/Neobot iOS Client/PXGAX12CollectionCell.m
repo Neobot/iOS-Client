@@ -27,21 +27,8 @@
     {
         self.lblSpeed.text = @"0%";
         _isTimeout = false;
-        self.speedNotificationInterval = 0.1;
+        self.speedNotificationInterval = 0.6;
         
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-       self.lblSpeed.text = @"0%";
-        _isTimeout = false;
-        self.speedNotificationInterval = 0.1;
-
     }
     return self;
 }
@@ -68,7 +55,10 @@
     self.lblSpeed.text = [NSString stringWithFormat:@"%i%%", (int)sender.value];
     
     if (_speedNotificationTimer != nil && sender.value == 0)
+    {
+        [self sendSpeedValue:nil];
         _speedNotificationTimer = nil;
+    }
     
     else if (_speedNotificationTimer == nil && sender.value != 0)
     {
@@ -83,7 +73,8 @@
 
 - (void)sendSpeedValue:(NSTimer*)timer
 {
-    [self.delegate speedChanged:self.stick.value forAX12:_id];
+    if (timer != nil)
+        [self.delegate speedChanged:self.stick.value forAX12:_id];
 }
 
 - (IBAction)onSetPosition:(id)sender
