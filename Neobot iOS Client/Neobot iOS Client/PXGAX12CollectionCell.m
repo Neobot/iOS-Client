@@ -43,9 +43,19 @@
 {
     _isTimeout = position < 0;
     if (_isTimeout)
-        self.lblPosition.text = [NSString stringWithFormat:@"Timeout"];
+        self.lblPosition.text = @"Timeout";
     else
         self.lblPosition.text = [NSString stringWithFormat:@"%.2f°", position];
+    
+    [self refreshState];
+}
+
+- (void)setLoad:(double)load
+{
+    if (_isTimeout)
+        self.lblLoad.text = @"";
+    else
+        self.lblLoad.text = [NSString stringWithFormat:@"%.2f", load];
     
     [self refreshState];
 }

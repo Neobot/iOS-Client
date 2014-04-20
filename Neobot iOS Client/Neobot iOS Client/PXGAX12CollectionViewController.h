@@ -28,7 +28,7 @@
 - (void)removeAx12:(int)ax12ID atRow:(int)row;
 - (void)moveAx12:(int)ax12ID fromRow:(int)fromRow toRow:(int)toRow;
 
-- (void)setPosition:(double)position forAx12:(int)ax12ID;
+- (void)setPosition:(double)position andLoad:(double)load forAx12:(int)ax12ID;
 
 - (void)setAX12ControlEnabled:(BOOL)enabled;
 

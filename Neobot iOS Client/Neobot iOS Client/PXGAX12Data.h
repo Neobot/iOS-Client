@@ -18,6 +18,7 @@
 - (NSDictionary*)encodeToDictionary;
 
 @property (nonatomic) int ax12ID;
+@property (nonatomic) double load;
 @property (nonatomic) double position;
 @property (nonatomic) double command;
 

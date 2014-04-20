@@ -84,7 +84,7 @@ struct Ax12Info
 - (void)didReceiveStatus:(BOOL)isRunning forStrategy:(int)strategyNum;
 - (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled;
 - (void)didReceiveSerialPortsInfo:(NSArray*)serialports;
-- (void)didReceivePositions:(NSArray*)positions forAx12:(NSArray*)ax12Ids;
+- (void)didReceivePositions:(NSArray*)positions withLoads:(NSArray*)loads forAx12:(NSArray*)ax12Ids;
 - (void)didReceiveAx12MovementsFileData:(NSData*)data;
 @end
 

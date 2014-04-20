@@ -284,20 +284,23 @@
             int nbAX12 = [serializer takeInt8];
             
             NSMutableArray* positions = [NSMutableArray array];
+            NSMutableArray* loads = [NSMutableArray array];
             NSMutableArray* ids = [NSMutableArray array];
             
             for(int i = 0; i < nbAX12 && ![serializer atEnd]; ++i)
             {
                 int ax12ID = [serializer takeInt8];
                 float position = [serializer takeFloat];
+                float load = [serializer takeFloat];
                 
                 [ids addObject:[NSNumber numberWithInt:ax12ID]];
                 [positions addObject:[NSNumber numberWithFloat:position]];
+                [loads addObject:[NSNumber numberWithFloat:load]];
             }
             
             for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
-                if ([serverDelegate respondsToSelector:@selector(didReceivePositions:forAx12:)])
-                    [serverDelegate didReceivePositions:positions forAx12:ids];
+                if ([serverDelegate respondsToSelector:@selector(didReceivePositions:withLoads:forAx12:)])
+                    [serverDelegate didReceivePositions:positions withLoads:loads forAx12:ids];
             break;
         }
         case AX12_MVT_FILE:

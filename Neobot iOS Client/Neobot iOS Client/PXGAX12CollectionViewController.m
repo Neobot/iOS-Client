@@ -57,6 +57,7 @@
     PXGAX12Data* data = [self.ax12List objectAtIndex:indexPath.row];
     [cell setId:data.ax12ID];
     [cell setPosition:data.position];
+    [cell setLoad:data.load];
     
     cell.delegate = self;
     cell.setPositionPopoverController = self.setPositionPopoverController;
@@ -121,10 +122,11 @@
     [self.delegate commandDefined:command forAX12:ax12];
 }
 
-- (void)setPosition:(double)position forAx12:(int)ax12ID
+- (void)setPosition:(double)position andLoad:(double)load forAx12:(int)ax12ID
 {
     PXGAX12Data* ax12 = [self getAX12DataForID:ax12ID];
     ax12.position = position;
+    ax12.load = load;
     
     
     NSInteger i = [self.ax12List indexOfObject:ax12];
@@ -133,6 +135,7 @@
         NSIndexPath* ip = [NSIndexPath indexPathForRow:i inSection:0];
         PXGAX12CollectionCell* cell = (PXGAX12CollectionCell*)[self.collectionView cellForItemAtIndexPath:ip];
         [cell setPosition:position];
+        [cell setLoad:load];
     }
 }
 

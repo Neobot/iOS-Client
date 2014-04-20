@@ -316,15 +316,16 @@
     [[PXGCommInterface sharedInstance] moveAX12:1 of:info];
 }
 
-- (void)didReceivePositions:(NSArray*)positions forAx12:(NSArray*)ax12Ids
+- (void)didReceivePositions:(NSArray*)positions withLoads:(NSArray*)loads forAx12:(NSArray*)ax12Ids
 {
     int i = 0;
     for (NSNumber* num in ax12Ids)
     {
         double position = [[positions objectAtIndex:i] floatValue];
+        double load = [[loads objectAtIndex:i] floatValue];
         if (position >= 0 && position <= 300)
         {
-            [self.ax12CollectionController setPosition:position forAx12:[num intValue]];
+            [self.ax12CollectionController setPosition:position andLoad:load forAx12:[num intValue]];
         }
         ++i;
     }

@@ -711,7 +711,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PXG;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Pixelgames;
 			};
 			buildConfigurationList = 9425D3781791565000C6E883 /* Build configuration list for PBXProject "Neobot Client" */;
@@ -898,10 +898,6 @@
 		9425D3AC1791565000C6E883 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -924,10 +920,6 @@
 		9425D3AD1791565000C6E883 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
