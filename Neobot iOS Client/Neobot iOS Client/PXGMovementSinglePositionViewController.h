@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol  PXGMovementSinglePositionViewControllerProtocol <NSObject>
--(void)positionChanged:(NSArray*)positions speed:(float)speed torque:(float)torque;
+-(void)positionChanged:(NSArray*)positions speed:(float)speed torque:(float)torque loadLimit:(float)load;
 @end
 
 @interface PXGMovementSinglePositionViewController : UITableViewController
 
 @property (nonatomic) float speed;
 @property (nonatomic) float torque;
+@property (nonatomic) float loadLimit;
 @property (strong, nonatomic) NSArray* positions;
 @property (strong, nonatomic) NSMutableArray* ids;
 

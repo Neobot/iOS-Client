@@ -52,20 +52,23 @@
         PXGMovementSinglePositionViewController* controller = (PXGMovementSinglePositionViewController*)segue.destinationViewController;
         controller.speed = singlePos.speed;
         controller.torque = singlePos.torque;
+        controller.loadLimit = singlePos.loadLimit;
         controller.ids = self.ids;
         controller.positions = singlePos.ax12Positions;
         controller.delegate = self;
     }
 }
 
--(void)positionChanged:(NSArray*)positions speed:(float)speed torque:(float)torque
+-(void)positionChanged:(NSArray*)positions speed:(float)speed torque:(float)torque loadLimit:(float)load
 {
     PXGAX12MovementSinglePosition* singlePos = [self.positions objectAtIndex:_editedRow];
     singlePos.speed = speed;
     singlePos.torque = torque;
+    singlePos.loadLimit = load;
     singlePos.ax12Positions = positions;
     
     [self reloadCurrentRow];
+    [self.delegate movementPositionsChanged];
 }
 
 - (void)runUntilHere
@@ -211,7 +214,10 @@
                 [posText appendFormat:@"%i°", (int)value];
             }
             cell.textLabel.text = posText;
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"speed: %.2f%%, torque: %.2f%%", singlePos.speed, singlePos.torque];
+            if (singlePos.loadLimit > 0)
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"s: %.2f%%, t: %.2f%% l: %.2f%%", singlePos.speed, singlePos.torque, singlePos.loadLimit];
+            else
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"s: %.2f%%, t: %.2f%%", singlePos.speed, singlePos.torque];
         }
     }
     
@@ -328,7 +334,7 @@
     }
     
     
-    PXGAX12MovementSinglePosition* singlePosition = [[PXGAX12MovementSinglePosition alloc] initWithSpeed:self.maxSpeed torque:self.maxTorque andPositions:pos];
+    PXGAX12MovementSinglePosition* singlePosition = [[PXGAX12MovementSinglePosition alloc] initWithSpeed:self.maxSpeed torque:self.maxTorque loadLimit:0.0 andPositions:pos];
     
     NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:self.positions.count inSection:1];
 

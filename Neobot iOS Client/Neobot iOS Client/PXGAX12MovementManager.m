@@ -60,7 +60,7 @@
                     [out appendFormat:@"%f;", value];
                 }
                 
-                [out appendFormat:@"%f;%f\n", singlePos.torque, singlePos.speed];
+                [out appendFormat:@"%f;%f;%f\n", singlePos.torque, singlePos.speed, singlePos.loadLimit];
 			}
 		}
 	}
@@ -127,10 +127,11 @@
 					}
 				}
                 
-				float torque = [[tokens objectAtIndex:tokenCount - 2] floatValue];
-				float maxSpeed = [[tokens objectAtIndex:tokenCount - 1] floatValue];
+				float torque = [[tokens objectAtIndex:tokenCount - 3] floatValue];
+				float maxSpeed = [[tokens objectAtIndex:tokenCount - 2] floatValue];
+                float loadLimit = [[tokens objectAtIndex:tokenCount - 1] floatValue];
                 
-                PXGAX12MovementSinglePosition* singlePos = [[PXGAX12MovementSinglePosition alloc] initWithSpeed:maxSpeed torque:torque andPositions:positions];
+                PXGAX12MovementSinglePosition* singlePos = [[PXGAX12MovementSinglePosition alloc] initWithSpeed:maxSpeed torque:torque loadLimit:loadLimit andPositions:positions];
 				[currentMovement.positions addObject:singlePos];
 			}
 		}
@@ -175,12 +176,13 @@
 #pragma mark SinglePosition
 @implementation PXGAX12MovementSinglePosition
 
-- (id)initWithSpeed:(float)speed torque:(float)torque andPositions:(NSArray*)positions
+- (id)initWithSpeed:(float)speed torque:(float)torque loadLimit:(float)loadLimit andPositions:(NSArray*)positions
 {
     if ((self = [super init]))
 	{
 		self.speed = speed;
         self.torque = torque;
+        self.loadLimit = loadLimit;
         self.ax12Positions = positions;
 	}
     

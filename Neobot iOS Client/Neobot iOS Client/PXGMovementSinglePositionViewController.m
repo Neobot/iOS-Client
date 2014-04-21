@@ -54,7 +54,7 @@
         case 0:
             return self.ids.count;
         case 1:
-            return 2;
+            return 3;
     }
     
     return 0;
@@ -89,10 +89,15 @@
             lbl.text = @"Speed";
             value = self.speed;
         }
-        else
+        else if (indexPath.row == 1)
         {
             lbl.text = @"Torque";
             value = self.torque;
+        }
+        else if (indexPath.row == 2)
+        {
+            lbl.text = @"Load Limit";
+            value = self.loadLimit;
         }
         
         txt.text = [NSString stringWithFormat:@"%.2f", value];
@@ -113,6 +118,7 @@
 {
     float speed = [[self textValueForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] floatValue];
     float torque = [[self textValueForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]] floatValue];
+    float load = [[self textValueForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]] floatValue];
     
     NSMutableArray* positions = [NSMutableArray array];
     int nbPositions = [self tableView:self.tableView numberOfRowsInSection:0];
@@ -122,7 +128,7 @@
         [positions addObject:[NSNumber numberWithFloat:pos]];
     }
     
-    [self.delegate positionChanged:positions speed:speed torque:torque];
+    [self.delegate positionChanged:positions speed:speed torque:torque loadLimit:load];
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

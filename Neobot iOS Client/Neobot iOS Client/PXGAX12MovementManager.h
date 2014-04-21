@@ -38,10 +38,11 @@
 
 @interface PXGAX12MovementSinglePosition : NSObject
 
-- (id)initWithSpeed:(float)speed torque:(float)torque andPositions:(NSArray*)positions;
+- (id)initWithSpeed:(float)speed torque:(float)torque loadLimit:(float)loadLimit andPositions:(NSArray*)positions;
 
 @property (nonatomic) float speed;
 @property (nonatomic) float torque;
+@property (nonatomic) float loadLimit;
 @property (strong, nonatomic) NSArray* ax12Positions;
 
 @end
