@@ -85,14 +85,18 @@
     int i = 0;
     for (NSNumber* ax12IdNum in self.ids)
     {
-        info[i].id = [ax12IdNum intValue];
-        info[i].angle = [[singlePos.ax12Positions objectAtIndex:i] floatValue];
-        info[i].speed = 100;
-        info[i].torque = self.maxTorque;
-        
-        ++i;
-        if (i >= 10)
-            break;
+        float angle = [[singlePos.ax12Positions objectAtIndex:i] floatValue];
+        if (angle >= 0)
+        {
+            info[i].id = [ax12IdNum intValue];
+            info[i].angle = angle;
+            info[i].speed = 100;
+            info[i].torque = self.maxTorque;
+            
+            ++i;
+            if (i >= 10)
+                break;
+        }
     }
     
     [[PXGCommInterface sharedInstance] moveAX12:self.ids.count of:info atSmoothedMaxSpeed:self.maxSpeed];
