@@ -55,7 +55,7 @@
     if (_isTimeout)
         self.lblLoad.text = @"";
     else
-        self.lblLoad.text = [NSString stringWithFormat:@"%.2f", load];
+        self.lblLoad.text = [NSString stringWithFormat:@"%.2f%%", load];
     
     [self refreshState];
 }
