@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
+#import "PXGColorCollectionViewController.h"
 
 @class PXGSimpleScatterPlotViewController;
 
 @interface PXGSensorsViewController : UIViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate>
 
 @property (nonatomic, weak) PXGSimpleScatterPlotViewController* avoidingGraphController;
-@property (nonatomic, weak) PXGSimpleScatterPlotViewController* otherGraphController;
+@property (nonatomic, weak) PXGColorCollectionViewController* colorCollectionController;
 @property (weak, nonatomic) IBOutlet UISwitch *switchRecord;
+
 - (IBAction)recordingStatusChanged:(UISwitch *)sender;
 
 @end

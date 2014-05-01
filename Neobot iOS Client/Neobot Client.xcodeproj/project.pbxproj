@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9402B26919128295001B732A /* PXGColorCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9402B26819128295001B732A /* PXGColorCollectionViewController.m */; };
 		942049AD17B7C5F000B9E5AC /* PXGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */; };
 		942049AF17B7D47100B9E5AC /* Neobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 942049AE17B7D47100B9E5AC /* Neobot.png */; };
 		9425C7D518B10DCC00D40AE9 /* PXGListChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9425C7D418B10DCC00D40AE9 /* PXGListChoiceViewController.m */; };
@@ -83,6 +84,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9402B26719128295001B732A /* PXGColorCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGColorCollectionViewController.h; sourceTree = "<group>"; };
+		9402B26819128295001B732A /* PXGColorCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGColorCollectionViewController.m; sourceTree = "<group>"; };
 		9405E88917A04A9300B718B3 /* PXGParametersKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXGParametersKeys.h; sourceTree = "<group>"; };
 		942049AB17B7C5EF00B9E5AC /* PXGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapViewController.h; sourceTree = "<group>"; };
 		942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMapViewController.m; sourceTree = "<group>"; };
@@ -625,10 +628,12 @@
 			children = (
 				944B4FB4188C23EC009B9E0B /* PXGOdometryViewController.h */,
 				944B4FB5188C23EC009B9E0B /* PXGOdometryViewController.m */,
-				94AD9FA718A6A172007B48D1 /* PXGSensorsViewController.h */,
-				94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */,
 				94431895188DB846005221B4 /* PXGSimpleScatterPlotViewController.h */,
 				94431896188DB846005221B4 /* PXGSimpleScatterPlotViewController.m */,
+				94AD9FA718A6A172007B48D1 /* PXGSensorsViewController.h */,
+				94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */,
+				9402B26719128295001B732A /* PXGColorCollectionViewController.h */,
+				9402B26819128295001B732A /* PXGColorCollectionViewController.m */,
 			);
 			name = "Odometry / sensors";
 			sourceTree = "<group>";
@@ -785,6 +790,7 @@
 				94835D421795D5B90024A789 /* PXGDataSerializer.m in Sources */,
 				9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */,
 				94835D45179849BE0024A789 /* PXGCommInterface.m in Sources */,
+				9402B26919128295001B732A /* PXGColorCollectionViewController.m in Sources */,
 				9425C7D518B10DCC00D40AE9 /* PXGListChoiceViewController.m in Sources */,
 				94FFA09718018BD0009AA63C /* PXGAX12ListTableViewController.m in Sources */,
 				94835D53179ABB860024A789 /* PXGCommViewController.m in Sources */,

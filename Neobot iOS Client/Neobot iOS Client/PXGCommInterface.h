@@ -43,6 +43,43 @@ typedef NS_ENUM(NSInteger, PXGTrajectoryType)
     AUTO = 13
 };
 
+typedef NS_ENUM(NSInteger, PXGRobotEventType)
+{
+    EventIsArrived = 0,
+    EventIsBlocked = 1
+};
+
+typedef NS_ENUM(NSInteger, PXGSensorType)
+{
+    SharpSensor = 0,
+    MicroswitchSensor = 1,
+    ColorSensor = 2
+};
+
+typedef NS_ENUM(NSInteger, PXGSharpState)
+{
+    SharpNothingDetected,
+    SharpObjectDetected,
+    SharpObjectVeryClose,
+};
+
+typedef NS_ENUM(NSInteger, PXGMicroswicthState)
+{
+    MicroswicthOn,
+    MicroswicthOff
+};
+
+typedef NS_ENUM(NSInteger, PXGColorState)
+{
+    ColorUnknown,
+    ColorRed,
+    ColorGreen,
+    ColorBlue,
+    ColorYellow,
+    ColorWhite,
+    ColorBlack
+};
+
 struct Ax12Info
 {
     uint8_t id;
@@ -57,8 +94,8 @@ struct Ax12Info
 - (void)didReceiveRobotPositionX:(int16_t)x  Y:(int16_t)y angle:(double)theta direction:(uint8_t)direction;
 - (void)didReceiveRobotObjectiveX:(int16_t)x Y:(int16_t)y angle:(double)theta;
 - (void)didReceiveAvoidingSensorsValues:(NSArray*)values;
-- (void)didReceiveMicroswitchsValues:(NSArray*)values;
-- (void)didReceiveOtherSensorsValues:(NSArray*)values;
+- (void)didReceiveRobotEvent:(PXGRobotEventType)event;
+- (void)didReceiveSensorEventForType:(PXGSensorType)sensorType withId:(int)sensorId andValue:(int)sensorValue;
 - (BOOL)didReceiveInitDone;
 - (BOOL)didReceiveStartSignalInMirrorMode:(BOOL)mirrored;
 - (BOOL)didReceivePing;
@@ -66,8 +103,6 @@ struct Ax12Info
 - (void)didReceiveOpponentPositionX:(int16_t)x  Y:(int16_t)y;
 - (BOOL)shouldRestartStrategy;
 - (void)shouldQuit;
-- (void)didReceiveArrivedToObjectiveStatus;
-- (void)didReceiveBlockedStatus;
 - (void)didReceiveLog:(NSString*) text;
 - (void)didReceiveParametersValues:(NSArray*)values;
 - (void)didReceiveParameterNames:(NSArray*)names;

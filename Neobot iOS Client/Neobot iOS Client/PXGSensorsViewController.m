@@ -39,11 +39,6 @@
     self.avoidingGraphController.maxValues = 600;
     [self.avoidingGraphController setYBoundMin:0 andMax:260];
     
-    self.otherGraphController.name = @"Other sensors";
-    self.otherGraphController.maxValues = 600;
-    [self.otherGraphController setYBoundMin:0 andMax:260];
-
-    
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
 }
@@ -56,16 +51,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    PXGSimpleScatterPlotViewController* controller = (PXGSimpleScatterPlotViewController*)segue.destinationViewController;
-    
     if ([segue.identifier isEqualToString:@"avoidingGraphSegue"])
     {
+        PXGSimpleScatterPlotViewController* controller = (PXGSimpleScatterPlotViewController*)segue.destinationViewController;
         self.avoidingGraphController = controller;
-
     }
-    else if ([segue.identifier isEqualToString:@"otherGraphSegue"])
+    else if ([segue.identifier isEqualToString:@"colorCollectionSegue"])
     {
-        self.otherGraphController = controller;
+        PXGColorCollectionViewController* controller = (PXGColorCollectionViewController*)segue.destinationViewController;
+        self.colorCollectionController = controller;
     }
 }
 
@@ -82,13 +76,24 @@
     }
 }
 
-- (void)didReceiveOtherSensorsValues:(NSArray*)values
+- (void)didReceiveSensorEventForType:(PXGSensorType)sensorType withId:(int)sensorId andValue:(int)sensorValue
 {
-    if (self.switchRecord.isOn)
-    {
-        [self addValues:values toGraph:self.otherGraphController withLoadedPlots:_nbOther];
-        _nbOther = MAX(_nbOther, values.count);
-    }
+    [self.colorCollectionController setColor:[self colorFromColorSensorState:sensorValue] forIndex:sensorId-1];
+}
+
+- (UIColor*)colorFromColorSensorState:(PXGColorState)state
+{
+    switch(state)
+	{
+		case ColorGreen: return [UIColor greenColor];
+		case ColorRed: return [UIColor redColor];
+		case ColorBlue: return [UIColor blueColor];
+		case ColorYellow: return [UIColor yellowColor];
+		case ColorWhite: return [UIColor whiteColor];
+		case ColorBlack:
+		default:
+			return [UIColor blackColor];
+	}
 }
 
 - (void)addValues:(NSArray*)values toGraph:(PXGSimpleScatterPlotViewController*)graphController withLoadedPlots:(int)nbExistingPlots

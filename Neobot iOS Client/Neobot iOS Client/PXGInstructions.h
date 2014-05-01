@@ -22,9 +22,8 @@
 #define DEST_REPLACE  2
 #define FLUSH  3
 #define SET_POS  10
-#define SERVO_ANGLE  20
-#define SERVO_POS  21
-#define GET_SENSOR  30
+#define ENABLE_SENSOR  20
+#define DISABLE_SENSOR  21
 #define SET_PARAMETERS  50
 #define ASK_PARAMETERS  51
 #define ACTIONS  60
@@ -32,12 +31,8 @@
 //microC -> PC
 #define COORD  100
 #define OPPONENT  101
-#define IS_ARRIVED  102
-#define IS_BLOCKED  103
 #define OBJECTIVE  104
 #define AVOIDING_SENSORS  110
-#define MICROSWITCHS  111
-#define OTHER_SENSORS  112
 
 #define INIT_DONE  120
 #define GO  121
@@ -46,6 +41,8 @@
 #define LOG  124
 #define PARAMETERS  125
 #define PARAMETER_NAMES  126
+#define EVENT 130
+#define SENSOR_EVENT 131
 
 //global
 #define PING  254

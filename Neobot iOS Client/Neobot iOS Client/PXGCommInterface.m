@@ -158,20 +158,22 @@
             
             break;
         }
-        case OTHER_SENSORS:
+        case EVENT:
         {
-            NSMutableArray* values = [NSMutableArray array];
-            while (![serializer atEnd])
-            {
-                uint8_t value = [serializer takeInt8];
-                [values addObject:[NSNumber numberWithInt:value]];
-            }
+            int8_t eventId = [serializer takeInt8];
+            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
+                if ([robotDelegate respondsToSelector:@selector(didReceiveRobotEvent:)])
+                    [robotDelegate didReceiveRobotEvent:eventId];
+        }
+        case SENSOR_EVENT:
+        {
+            int8_t sensorType = [serializer takeInt8];
+            int8_t sensorId = [serializer takeInt8];
+            int8_t sensorValue = [serializer takeInt8];
             
             for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                if ([robotDelegate respondsToSelector:@selector(didReceiveOtherSensorsValues:)])
-                    [robotDelegate didReceiveOtherSensorsValues:values];
-            
-            break;
+                if ([robotDelegate respondsToSelector:@selector(didReceiveSensorEventForType:withId:andValue:)])
+                    [robotDelegate didReceiveSensorEventForType:sensorType withId:sensorId andValue:sensorValue];
         }
         case OPPONENT:
         {
@@ -181,20 +183,6 @@
                  if ([robotDelegate respondsToSelector:@selector(didReceiveOpponentPositionX:Y:)])
                      [robotDelegate didReceiveOpponentPositionX:x Y:y];
             
-            break;
-        }
-        case IS_ARRIVED:
-        {
-            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                 if ([robotDelegate respondsToSelector:@selector(didReceiveArrivedToObjectiveStatus)])
-                     [robotDelegate didReceiveArrivedToObjectiveStatus];
-            break;
-        }
-        case IS_BLOCKED:
-        {
-            for (id<PXGRobotInterfaceDelegate> robotDelegate in _robotInterfaceDelegates)
-                 if ([robotDelegate respondsToSelector:@selector(didReceiveBlockedStatus)])
-                     [robotDelegate didReceiveBlockedStatus];
             break;
         }
         case LOG:
