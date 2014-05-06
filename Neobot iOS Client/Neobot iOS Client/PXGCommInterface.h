@@ -46,7 +46,9 @@ typedef NS_ENUM(NSInteger, PXGTrajectoryType)
 typedef NS_ENUM(NSInteger, PXGRobotEventType)
 {
     EventIsArrived = 0,
-    EventIsBlocked = 1
+    EventIsBlocked = 1,
+    EventQuit = 2,
+    EventRestart = 3
 };
 
 typedef NS_ENUM(NSInteger, PXGSensorType)
@@ -65,8 +67,8 @@ typedef NS_ENUM(NSInteger, PXGSharpState)
 
 typedef NS_ENUM(NSInteger, PXGMicroswicthState)
 {
-    MicroswicthOn,
-    MicroswicthOff
+    MicroswicthOff,
+    MicroswicthOn
 };
 
 typedef NS_ENUM(NSInteger, PXGColorState)
@@ -96,13 +98,10 @@ struct Ax12Info
 - (void)didReceiveAvoidingSensorsValues:(NSArray*)values;
 - (void)didReceiveRobotEvent:(PXGRobotEventType)event;
 - (void)didReceiveSensorEventForType:(PXGSensorType)sensorType withId:(int)sensorId andValue:(int)sensorValue;
-- (BOOL)didReceiveInitDone;
 - (BOOL)didReceiveStartSignalInMirrorMode:(BOOL)mirrored;
 - (BOOL)didReceivePing;
 - (void)didReceiveNoticeOfReceiptForInstruction:(uint8_t)instruction withResult:(BOOL)result;
 - (void)didReceiveOpponentPositionX:(int16_t)x  Y:(int16_t)y;
-- (BOOL)shouldRestartStrategy;
-- (void)shouldQuit;
 - (void)didReceiveLog:(NSString*) text;
 - (void)didReceiveParametersValues:(NSArray*)values;
 - (void)didReceiveParameterNames:(NSArray*)names;
