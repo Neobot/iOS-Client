@@ -65,6 +65,12 @@
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
+    if (status == Controlled)
+    {
+        [[PXGCommInterface sharedInstance] enableSensor:BothColorSensor withType:ColorSensor];
+        [[PXGCommInterface sharedInstance] enableSensor:AllMicroswitch withType:MicroswitchSensor];
+        [[PXGCommInterface sharedInstance] enableSensor:AllSharps withType:SharpSensor];
+    }
 }
 
 - (void)didReceiveAvoidingSensorsValues:(NSArray*)values

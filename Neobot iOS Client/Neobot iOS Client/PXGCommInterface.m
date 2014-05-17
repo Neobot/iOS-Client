@@ -400,6 +400,28 @@
     [_protocol writeMessage:messageData forInstruction:ACTIONS];
 }
 
+- (void)enableSensor:(int8_t)sensorId withType:(int8_t)type
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:type];
+    [serializer addInt8:sensorId];
+    
+    [_protocol writeMessage:messageData forInstruction:ENABLE_SENSOR];
+}
+
+- (void)disableSensor:(int8_t)sensorId withType:(int8_t)type
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:type];
+    [serializer addInt8:sensorId];
+    
+    [_protocol writeMessage:messageData forInstruction:DISABLE_SENSOR];
+}
+
 - (void)sendPingToServer
 {
     [_protocol writeMessage:nil forInstruction:PING_SERVER];

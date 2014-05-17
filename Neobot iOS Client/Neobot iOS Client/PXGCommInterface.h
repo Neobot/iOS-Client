@@ -96,6 +96,23 @@ typedef NS_ENUM(NSInteger, PXGColorState)
     ColorBlack
 };
 
+typedef NS_ENUM(NSInteger, ColorSensorId)
+{
+    BothColorSensor = 0,
+    LeftColorSensor = 1,
+    RightColorSensor = 2
+};
+
+typedef NS_ENUM(NSInteger, MicroswitchId)
+{
+    AllMicroswitch = 0
+};
+
+typedef NS_ENUM(NSInteger, SharpId)
+{
+    AllSharps = 0
+};
+
 struct Ax12Info
 {
     uint8_t id;
@@ -174,6 +191,8 @@ struct Ax12Info
 - (void)sendFlush;
 - (void)sendRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta withTrajectoryType:(PXGTrajectoryType)type withAsservType:(PXGAsservType)type withSpeed:(uint8_t)speed isStopPoint:(BOOL)isStopPoint;
 - (void)executeAction:(int8_t)actionId withParameter:(int8_t)parameter;
+- (void)enableSensor:(int8_t)sensorId withType:(int8_t)type;
+- (void)disableSensor:(int8_t)sensorId withType:(int8_t)type;
 
 #pragma mark Send to server instructions
 - (void)sendPingToServer;
