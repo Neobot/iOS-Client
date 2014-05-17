@@ -72,6 +72,7 @@
 		94AC01F317A41139005A47F3 /* PXGTools.c in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F217A41139005A47F3 /* PXGTools.c */; };
 		94AC01F617A41D55005A47F3 /* PXGCreatePointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */; };
 		94AD9FA918A6A172007B48D1 /* PXGSensorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */; };
+		94D5E8D019278F34003EC1BB /* PXGActionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D5E8CF19278F34003EC1BB /* PXGActionsTableViewController.m */; };
 		94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */; };
 		94F30F0517A6CF9700E1805D /* PXGTrajectoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */; };
 		94F30F0817AACAA900E1805D /* PXGTrajectoryEditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */; };
@@ -268,6 +269,8 @@
 		94AC01F517A41D55005A47F3 /* PXGCreatePointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGCreatePointViewController.m; sourceTree = "<group>"; };
 		94AD9FA718A6A172007B48D1 /* PXGSensorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSensorsViewController.h; sourceTree = "<group>"; };
 		94AD9FA818A6A172007B48D1 /* PXGSensorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSensorsViewController.m; sourceTree = "<group>"; };
+		94D5E8CE19278F34003EC1BB /* PXGActionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGActionsTableViewController.h; sourceTree = "<group>"; };
+		94D5E8CF19278F34003EC1BB /* PXGActionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGActionsTableViewController.m; sourceTree = "<group>"; };
 		94DEC88C179BD066003D8A15 /* PXGStringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGStringListViewController.h; sourceTree = "<group>"; };
 		94DEC88D179BD066003D8A15 /* PXGStringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStringListViewController.m; sourceTree = "<group>"; };
 		94F30F0317A6CF9700E1805D /* PXGTrajectoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGTrajectoriesViewController.h; sourceTree = "<group>"; };
@@ -426,6 +429,8 @@
 				94F30F0417A6CF9700E1805D /* PXGTrajectoriesViewController.m */,
 				94F30F0617AACAA900E1805D /* PXGTrajectoryEditionViewController.h */,
 				94F30F0717AACAA900E1805D /* PXGTrajectoryEditionViewController.m */,
+				94D5E8CE19278F34003EC1BB /* PXGActionsTableViewController.h */,
+				94D5E8CF19278F34003EC1BB /* PXGActionsTableViewController.m */,
 				942BBE6217B94AF000EFF044 /* Map */,
 			);
 			name = "Remote Control";
@@ -804,6 +809,7 @@
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
 				9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */,
 				9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */,
+				94D5E8D019278F34003EC1BB /* PXGActionsTableViewController.m in Sources */,
 				9448C5821831190D0064C7F5 /* PXGGroupTableViewController.m in Sources */,
 				94AC01ED17A2E863005A47F3 /* PXGStrategySelectionViewController.m in Sources */,
 				94AC01F017A4060C005A47F3 /* PXGTeleportViewController.m in Sources */,

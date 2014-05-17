@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTrajectory;
 @property (weak, nonatomic) IBOutlet UIButton *btnTeleport;
 @property (weak, nonatomic) IBOutlet UIButton *btnFlush;
+@property (weak, nonatomic) IBOutlet UIButton *btnActions;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblObjective;

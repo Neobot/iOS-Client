@@ -43,6 +43,20 @@ typedef NS_ENUM(NSInteger, PXGTrajectoryType)
     AUTO = 13
 };
 
+typedef NS_ENUM(NSInteger, RobotAction)
+{
+    NO_ACTION = -1,
+    ACTION_START_PUMP = 1,
+    ACTION_STOP_PUMP = 2
+};
+
+typedef NS_ENUM(NSInteger, PumpId)
+{
+    BothPump = 0,
+    LeftPump = 1,
+    RightPump = 2
+};
+
 typedef NS_ENUM(NSInteger, PXGRobotEventType)
 {
     EventIsArrived = 0,
@@ -159,6 +173,7 @@ struct Ax12Info
 - (void)sendTeleportRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta;
 - (void)sendFlush;
 - (void)sendRobotInX:(int16_t)x  Y:(int16_t)y angle:(double)theta withTrajectoryType:(PXGTrajectoryType)type withAsservType:(PXGAsservType)type withSpeed:(uint8_t)speed isStopPoint:(BOOL)isStopPoint;
+- (void)executeAction:(int8_t)actionId withParameter:(int8_t)parameter;
 
 #pragma mark Send to server instructions
 - (void)sendPingToServer;

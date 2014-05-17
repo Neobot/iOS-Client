@@ -389,6 +389,17 @@
     [_protocol writeMessage:messageData forInstruction:DEST_ADD];
 }
 
+- (void)executeAction:(int8_t)actionId withParameter:(int8_t)parameter
+{
+    NSMutableData* messageData = [NSMutableData data];
+    PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
+    
+    [serializer addInt8:actionId];
+    [serializer addInt8:parameter];
+
+    [_protocol writeMessage:messageData forInstruction:ACTIONS];
+}
+
 - (void)sendPingToServer
 {
     [_protocol writeMessage:nil forInstruction:PING_SERVER];

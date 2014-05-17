@@ -18,6 +18,7 @@
     
     UIPopoverController* _currentTeleportPopoverController;
     UIPopoverController* _currentTrajectoryPopoverController;
+    UIPopoverController* _currentActionsPopoverController;
 }
 
 @end
@@ -70,6 +71,16 @@
     self.speedSlider.hidden = !isPortrait;
     self.lblSpeedTitle.hidden = !isPortrait;
     self.lblSpeedValue.hidden = !isPortrait;
+    
+    if (_currentTrajectoryPopoverController && _currentTrajectoryPopoverController.isPopoverVisible)
+        [_currentTrajectoryPopoverController dismissPopoverAnimated:NO];
+    
+    if (_currentTeleportPopoverController && _currentTeleportPopoverController.isPopoverVisible)
+        [_currentTeleportPopoverController dismissPopoverAnimated:NO];
+    
+    if (_currentActionsPopoverController && _currentActionsPopoverController.isPopoverVisible)
+        [_currentActionsPopoverController dismissPopoverAnimated:NO];
+
 }
 
 - (void) updateConnectionStatusGui:(PXGConnectionStatus)status
@@ -79,6 +90,7 @@
     self.btnStartStrategy.enabled = robotInteractioEnabled;
     self.btnTeleport.enabled = robotInteractioEnabled;
     self.btnFlush.enabled = robotInteractioEnabled;
+    self.btnActions.enabled = robotInteractioEnabled;
     self.btnTrajectory.enabled = robotInteractioEnabled;
     self.speedSlider.enabled = robotInteractioEnabled;
     self.mapController.robotControlEnabled = robotInteractioEnabled;
@@ -115,6 +127,9 @@
         if (_currentTrajectoryPopoverController && _currentTrajectoryPopoverController.isPopoverVisible)
             [_currentTrajectoryPopoverController dismissPopoverAnimated:NO];
         
+        if (_currentActionsPopoverController && _currentActionsPopoverController.isPopoverVisible)
+            [_currentActionsPopoverController dismissPopoverAnimated:NO];
+        
         if (_currentTeleportPopoverController)
         {
             if (_currentTeleportPopoverController.isPopoverVisible)
@@ -131,6 +146,9 @@
         if (_currentTeleportPopoverController && _currentTeleportPopoverController.isPopoverVisible)
             [_currentTeleportPopoverController dismissPopoverAnimated:NO];
         
+        if (_currentActionsPopoverController && _currentActionsPopoverController.isPopoverVisible)
+            [_currentActionsPopoverController dismissPopoverAnimated:NO];
+        
         if (_currentTrajectoryPopoverController)
         {
             if (_currentTrajectoryPopoverController.isPopoverVisible)
@@ -142,6 +160,27 @@
         }
         else
             return YES;
+    }
+    else if ([identifier isEqualToString:@"ActionsPopoverSegue"])
+    {
+        if (_currentTeleportPopoverController && _currentTeleportPopoverController.isPopoverVisible)
+            [_currentTeleportPopoverController dismissPopoverAnimated:NO];
+        
+        if (_currentTrajectoryPopoverController && _currentTrajectoryPopoverController.isPopoverVisible)
+            [_currentTrajectoryPopoverController dismissPopoverAnimated:NO];
+        
+        if (_currentActionsPopoverController)
+        {
+            if (_currentActionsPopoverController.isPopoverVisible)
+                [_currentActionsPopoverController dismissPopoverAnimated:YES];
+            else
+                [_currentActionsPopoverController presentPopoverFromRect:self.btnActions.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+            return NO;
+        }
+        else
+            return YES;
+
     }
     
     return YES;
@@ -197,6 +236,11 @@
     {
         self.mapController = (PXGMapViewController*)segue.destinationViewController;
         self.mapController.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"ActionsPopoverSegue"])
+    {
+        UIStoryboardPopoverSegue* popoverSegue = (UIStoryboardPopoverSegue*)segue;
+        _currentActionsPopoverController = popoverSegue.popoverController;
     }
 }
 
