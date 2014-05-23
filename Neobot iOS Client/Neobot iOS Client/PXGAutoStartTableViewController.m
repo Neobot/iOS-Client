@@ -20,6 +20,8 @@
     bool _hasChanges;
 }
 
+@property (nonatomic) int delay;
+
 @end
 
 @implementation PXGAutoStartTableViewController
@@ -30,6 +32,7 @@
     _hasChanges = false;
     _availableSerialPorts = nil;
     _availableTypes = @[@"Robot", @"Simulation", @"Reversed Simulation"];
+    [self setDelayValue:20];
     
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
@@ -46,6 +49,15 @@
 {
     [self prepareStringSelectionSegue:segue sender:sender];
     [self prepareChoiceSelectionSegue:segue sender:sender];
+    
+    if ([segue.identifier isEqualToString:@"delaySelectionSegue"])
+    {
+        PXGSelectDelayViewController* controller = (PXGSelectDelayViewController*)segue.destinationViewController;
+        controller.delegate = self;
+        controller.min = 1;
+        controller.max = 999;
+        [controller setValue:self.delay animated:NO];
+    }
 }
 
 - (void)prepareStringSelectionSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -140,7 +152,7 @@
     _availableStrategies = names;
 }
 
-- (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled
+- (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled startingDelayInSeconds:(int)delay
 {
     NSString* strategy = [_availableStrategies objectAtIndex:strategyNum];
     self.txtStrat.text = strategy;
@@ -158,6 +170,20 @@
     
     self.txtStratType.text = stratType;
     [self.swEnabled setOn:enabled];
+    
+    [self setDelayValue:delay];
+}
+
+- (void)setDelayValue:(int)value
+{
+    self.delay = value;
+    self.lblDelay.text = [NSString stringWithFormat:@"%i second(s)", value];
+}
+
+- (void)delayValueSelected:(int)value
+{
+    [self setDelayValue:value];
+    [self setHasChanges:YES];
 }
 
 - (void) didSelectString:(NSString*)string
@@ -208,7 +234,8 @@
                                                       withAx12Port:self.txtAX12Serial.text
                                                   inSimulationMode:simulation ? YES : NO
                                                       inMirrorMode:mirrored ? YES : NO
-                                                         isEnabled:self.swEnabled.isOn];
+                                                         isEnabled:self.swEnabled.isOn
+                                            startingDelayInSeconds:self.delay];
 }
 
 - (IBAction)onRefresh:(id)sender

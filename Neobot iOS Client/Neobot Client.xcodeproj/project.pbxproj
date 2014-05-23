@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9402B26919128295001B732A /* PXGColorCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9402B26819128295001B732A /* PXGColorCollectionViewController.m */; };
+		941BCCA0192FAA6300C68CB1 /* PXGSelectDelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BCC9F192FAA6300C68CB1 /* PXGSelectDelayViewController.m */; };
 		942049AD17B7C5F000B9E5AC /* PXGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */; };
 		942049AF17B7D47100B9E5AC /* Neobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 942049AE17B7D47100B9E5AC /* Neobot.png */; };
 		9425C7D518B10DCC00D40AE9 /* PXGListChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9425C7D418B10DCC00D40AE9 /* PXGListChoiceViewController.m */; };
@@ -88,6 +89,8 @@
 		9402B26719128295001B732A /* PXGColorCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGColorCollectionViewController.h; sourceTree = "<group>"; };
 		9402B26819128295001B732A /* PXGColorCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGColorCollectionViewController.m; sourceTree = "<group>"; };
 		9405E88917A04A9300B718B3 /* PXGParametersKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXGParametersKeys.h; sourceTree = "<group>"; };
+		941BCC9E192FAA6300C68CB1 /* PXGSelectDelayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSelectDelayViewController.h; sourceTree = "<group>"; };
+		941BCC9F192FAA6300C68CB1 /* PXGSelectDelayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSelectDelayViewController.m; sourceTree = "<group>"; };
 		942049AB17B7C5EF00B9E5AC /* PXGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapViewController.h; sourceTree = "<group>"; };
 		942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGMapViewController.m; sourceTree = "<group>"; };
 		942049AE17B7D47100B9E5AC /* Neobot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Neobot.png; sourceTree = "<group>"; };
@@ -648,6 +651,8 @@
 			children = (
 				946FF87018AFE8EA00A4B112 /* PXGAutoStartTableViewController.h */,
 				946FF87118AFE8EA00A4B112 /* PXGAutoStartTableViewController.m */,
+				941BCC9E192FAA6300C68CB1 /* PXGSelectDelayViewController.h */,
+				941BCC9F192FAA6300C68CB1 /* PXGSelectDelayViewController.m */,
 			);
 			name = AutoStart;
 			sourceTree = "<group>";
@@ -779,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94F5335E18565DC000FD5F53 /* PXGMovementSinglePositionViewController.m in Sources */,
+				941BCCA0192FAA6300C68CB1 /* PXGSelectDelayViewController.m in Sources */,
 				9448C58B18316D3A0064C7F5 /* PXGMovementContentTableViewController.m in Sources */,
 				9425D38D1791565000C6E883 /* main.m in Sources */,
 				9448C5771831038D0064C7F5 /* PXGAX12SplitViewController.m in Sources */,

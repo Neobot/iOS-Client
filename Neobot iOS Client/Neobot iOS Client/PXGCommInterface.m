@@ -306,12 +306,13 @@
             NSString* ax12Port = [serializer takeString];
             
             BOOL enabled, simu, mirror;
-            
             [serializer takeBool:&enabled and:&simu and:&mirror];
             
+            int delay = [serializer takeInt8];
+            
             for (id<PXGServerInterfaceDelegate> serverDelegate in _serverInterfaceDelegates)
-                if ([serverDelegate respondsToSelector:@selector(didReceiveAutoStrategyInfoForStrategy:withRobotPort:withax12Port:inSimulationMode:inMirrorMode:isEnabled:)])
-                    [serverDelegate didReceiveAutoStrategyInfoForStrategy:stratNum withRobotPort:robotPort withax12Port:ax12Port inSimulationMode:simu inMirrorMode:mirror isEnabled:enabled];
+                if ([serverDelegate respondsToSelector:@selector(didReceiveAutoStrategyInfoForStrategy:withRobotPort:withax12Port:inSimulationMode:inMirrorMode:isEnabled:startingDelayInSeconds:)])
+                    [serverDelegate didReceiveAutoStrategyInfoForStrategy:stratNum withRobotPort:robotPort withax12Port:ax12Port inSimulationMode:simu inMirrorMode:mirror isEnabled:enabled startingDelayInSeconds:delay];
             
             break;
         }
@@ -576,7 +577,7 @@
     [_protocol writeMessage:nil forInstruction:ASK_AUTO_STRATEGY_INFO];
 }
 
-- (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled
+- (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled startingDelayInSeconds:(int)delay
 {
     NSMutableData* messageData = [NSMutableData data];
     PXGDataSerializer* serializer = [[PXGDataSerializer alloc] initWithData:messageData];
@@ -585,6 +586,7 @@
     [serializer addString:robotPort];
     [serializer addString:ax12port];
     [serializer addBool:enabled and:simulation and:mirrorMode];
+    [serializer addInt8:delay];
     
     [_protocol writeMessage:messageData forInstruction:SET_AUTO_STRATEGY];
 }

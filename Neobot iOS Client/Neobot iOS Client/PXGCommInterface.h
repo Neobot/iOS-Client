@@ -147,7 +147,7 @@ struct Ax12Info
 - (void)didReceiveFileNames:(NSArray*)filenames forStrategy:(int)strategyNum;
 - (void)didReceiveFileData:(NSData*)fileData forFile:(NSString*)filename forStrategy:(int)strategyNum;
 - (void)didReceiveStatus:(BOOL)isRunning forStrategy:(int)strategyNum;
-- (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled;
+- (void)didReceiveAutoStrategyInfoForStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withax12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled startingDelayInSeconds:(int)delay;
 - (void)didReceiveSerialPortsInfo:(NSArray*)serialports;
 - (void)didReceivePositions:(NSArray*)positions withLoads:(NSArray*)loads forAx12:(NSArray*)ax12Ids;
 - (void)didReceiveAx12MovementsFileData:(NSData*)data;
@@ -216,7 +216,7 @@ struct Ax12Info
 - (void)runAX12Movement:(NSString*)movementName fromGroup:(NSString*)groupName withSpeedLimit:(float)speedLimit toPositionIndex:(int)lastPositionIndex;
 
 - (void)askAutoStrategyInfo;
-- (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled;
+- (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled  startingDelayInSeconds:(int)delay;
 
 - (void)askParameters;
 - (void)sendParameters:(NSArray*)parameters;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="H60-qm-fuG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="H60-qm-fuG">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -1457,7 +1457,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HfL-Bg-Eav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4137" y="-5216"/>
+            <point key="canvasLocation" x="-4132" y="-5272"/>
+        </scene>
+        <!--Select Delay View Controller - Delay in seconds-->
+        <scene sceneID="ZXK-3C-93q">
+            <objects>
+                <viewController id="Zj0-u0-0Fz" customClass="PXGSelectDelayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eFH-t8-B9T"/>
+                        <viewControllerLayoutGuide type="bottom" id="iMP-AW-OSN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K31-3e-Bjh">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsb-BN-x1E">
+                                <rect key="frame" x="0.0" y="202" width="540" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Zj0-u0-0Fz" id="5tP-AV-yv2"/>
+                                    <outlet property="delegate" destination="Zj0-u0-0Fz" id="emG-6H-vmg"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zsb-BN-x1E" secondAttribute="trailing" id="TAs-pY-CLi"/>
+                            <constraint firstAttribute="centerY" secondItem="zsb-BN-x1E" secondAttribute="centerY" id="fXk-F8-Atr"/>
+                            <constraint firstAttribute="centerX" secondItem="zsb-BN-x1E" secondAttribute="centerX" id="p8A-y8-ZY3"/>
+                            <constraint firstItem="zsb-BN-x1E" firstAttribute="leading" secondItem="K31-3e-Bjh" secondAttribute="leading" id="puP-VR-CPp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Delay in seconds" id="X3P-gf-8QS">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Okw-4r-xKv">
+                            <connections>
+                                <action selector="onDone:" destination="Zj0-u0-0Fz" id="G5z-gt-St6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="picker" destination="zsb-BN-x1E" id="Maw-kt-6cG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LtM-mr-DWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3481" y="-4853"/>
         </scene>
         <!--String List View Controller-->
         <scene sceneID="E3t-ZN-DcL">
@@ -2360,10 +2404,50 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="8W6-fn-sCC">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fOM-Cd-DgK">
+                                        <rect key="frame" x="0.0" y="379" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fOM-Cd-DgK" id="ghs-go-SZL">
+                                            <rect key="frame" x="0.0" y="0.0" width="507" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starting Delay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0t-OF-pKe">
+                                                    <rect key="frame" x="20" y="11" width="108" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxx seconds" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrD-cn-zi6">
+                                                    <rect key="frame" x="376" y="11" width="111" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="111" id="S6e-yt-osv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I0t-OF-pKe" firstAttribute="top" secondItem="mrD-cn-zi6" secondAttribute="top" id="7nB-51-bvy"/>
+                                                <constraint firstAttribute="trailing" secondItem="mrD-cn-zi6" secondAttribute="trailing" constant="20" symbolic="YES" id="8kT-mj-AJJ"/>
+                                                <constraint firstItem="I0t-OF-pKe" firstAttribute="leading" secondItem="ghs-go-SZL" secondAttribute="leading" constant="20" symbolic="YES" id="PRk-pQ-p4n"/>
+                                                <constraint firstItem="I0t-OF-pKe" firstAttribute="centerY" secondItem="ghs-go-SZL" secondAttribute="centerY" id="RXe-VQ-uqN"/>
+                                                <constraint firstItem="mrD-cn-zi6" firstAttribute="bottom" secondItem="I0t-OF-pKe" secondAttribute="bottom" id="UWN-Rv-HUf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Zj0-u0-0Fz" kind="push" identifier="delaySelectionSegue" id="cEe-cK-Cx2"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="Dva-dB-Zma">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="joX-iG-dXi">
-                                        <rect key="frame" x="0.0" y="379" width="540" height="44"/>
+                                        <rect key="frame" x="0.0" y="443" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="joX-iG-dXi" id="F8j-qD-QuU">
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -2387,7 +2471,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="T6v-E7-pam">
-                                        <rect key="frame" x="0.0" y="423" width="540" height="44"/>
+                                        <rect key="frame" x="0.0" y="487" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T6v-E7-pam" id="74s-24-Kbx">
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -2417,6 +2501,7 @@
                     <navigationItem key="navigationItem" title="Auto-Start" id="Gmh-5F-DF2"/>
                     <connections>
                         <outlet property="btnSave" destination="UHf-rj-yYD" id="ozV-Vf-Qtl"/>
+                        <outlet property="lblDelay" destination="mrD-cn-zi6" id="JVk-XC-xOi"/>
                         <outlet property="swEnabled" destination="Bk0-oR-pNO" id="xAf-r4-nFo"/>
                         <outlet property="txtAX12Serial" destination="sU0-Jw-Bws" id="P0t-BX-bHA"/>
                         <outlet property="txtRobotSerial" destination="sNI-5N-tdB" id="hgb-iA-OUz"/>
@@ -3071,6 +3156,7 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="620"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uxx-hY-uRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
