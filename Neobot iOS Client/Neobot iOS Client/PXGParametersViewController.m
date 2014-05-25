@@ -84,7 +84,7 @@
         
         UIButton* btn = (UIButton*)[cell viewWithTag:1];
         
-        if (indexPath.row == 0)
+        if (indexPath.row == 1)
         {
             if (_hasChanges)
                 [btn setTitle:@"Send*" forState:UIControlStateNormal];
@@ -136,7 +136,7 @@
 {
     _hasChanges = hasChanges;
     
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 

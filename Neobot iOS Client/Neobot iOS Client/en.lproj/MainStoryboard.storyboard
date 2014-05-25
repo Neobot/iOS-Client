@@ -2446,32 +2446,8 @@
                             </tableViewSection>
                             <tableViewSection id="Dva-dB-Zma">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="joX-iG-dXi">
-                                        <rect key="frame" x="0.0" y="443" width="540" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="joX-iG-dXi" id="F8j-qD-QuU">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHf-rj-yYD">
-                                                    <rect key="frame" x="252" y="7" width="36" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Send">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="onSend:" destination="Zyn-71-VEG" eventType="touchUpInside" id="SMs-v0-84g"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerX" secondItem="UHf-rj-yYD" secondAttribute="centerX" id="KQn-CJ-RAI"/>
-                                                <constraint firstAttribute="centerY" secondItem="UHf-rj-yYD" secondAttribute="centerY" id="i3E-1b-cNa"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="T6v-E7-pam">
-                                        <rect key="frame" x="0.0" y="487" width="540" height="44"/>
+                                        <rect key="frame" x="0.0" y="443" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T6v-E7-pam" id="74s-24-Kbx">
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -2491,6 +2467,30 @@
                                             <constraints>
                                                 <constraint firstAttribute="centerX" secondItem="56p-k3-456" secondAttribute="centerX" id="00m-vL-32W"/>
                                                 <constraint firstAttribute="centerY" secondItem="56p-k3-456" secondAttribute="centerY" id="agP-Z5-SO0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="joX-iG-dXi">
+                                        <rect key="frame" x="0.0" y="487" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="joX-iG-dXi" id="F8j-qD-QuU">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHf-rj-yYD">
+                                                    <rect key="frame" x="252" y="7" width="36" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Send">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onSend:" destination="Zyn-71-VEG" eventType="touchUpInside" id="SMs-v0-84g"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="UHf-rj-yYD" secondAttribute="centerX" id="KQn-CJ-RAI"/>
+                                                <constraint firstAttribute="centerY" secondItem="UHf-rj-yYD" secondAttribute="centerY" id="i3E-1b-cNa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
