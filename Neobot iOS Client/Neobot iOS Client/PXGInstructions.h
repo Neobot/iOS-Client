@@ -83,3 +83,5 @@
 #define SET_AX12_MVT_FILE  218
 #define RUN_AX12_MVT  219
 #define LOCK_AX12  220
+#define RESET_PARAMETERS  221
+

@@ -596,6 +596,11 @@
     [_protocol writeMessage:nil forInstruction:ASK_PARAMETERS];
 }
 
+- (void)resetParameters
+{
+    [_protocol writeMessage:nil forInstruction:RESET_PARAMETERS];
+}
+
 - (void)sendParameters:(NSArray*)parameters
 {
     NSMutableData* messageData = [NSMutableData data];

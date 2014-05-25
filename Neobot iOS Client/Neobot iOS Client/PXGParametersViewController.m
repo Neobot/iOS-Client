@@ -56,7 +56,7 @@
     if (section == 0)
         return self.values.count;
     
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,7 +84,7 @@
         
         UIButton* btn = (UIButton*)[cell viewWithTag:1];
         
-        if (indexPath.row == 1)
+        if (indexPath.row == 2)
         {
             if (_hasChanges)
                 [btn setTitle:@"Send*" forState:UIControlStateNormal];
@@ -92,10 +92,15 @@
                 [btn setTitle:@"Send" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(sendValues:) forControlEvents:UIControlEventTouchUpInside];
         }
-        else
+        else if (indexPath.row == 1)
         {
             [btn setTitle:@"Refresh" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(refreshValues:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else if (indexPath.row == 0)
+        {
+            [btn setTitle:@"Reset" forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(resetValues:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     
@@ -127,6 +132,12 @@
     [self setHasChanges:NO];
 }
 
+- (void)resetValues:(UIButton*)textField
+{
+    [[PXGCommInterface sharedInstance] resetParameters];
+    [self setHasChanges:NO];
+}
+
 - (void)valueChanged:(UITextField*)textField
 {
     [self setHasChanges:YES];
@@ -136,7 +147,7 @@
 {
     _hasChanges = hasChanges;
     
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 

@@ -219,6 +219,7 @@ struct Ax12Info
 - (void)setAutoStrategyWithStrategy:(int)strategyNum withRobotPort:(NSString*)robotPort withAx12Port:(NSString*)ax12port inSimulationMode:(BOOL)simulation inMirrorMode:(BOOL)mirrorMode isEnabled:(BOOL)enabled  startingDelayInSeconds:(int)delay;
 
 - (void)askParameters;
+- (void)resetParameters;
 - (void)sendParameters:(NSArray*)parameters;
 
 @end
