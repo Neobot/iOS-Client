@@ -32,6 +32,9 @@
 {
     NSString* currentText = self.textView.text;
     self.textView.text = [NSString stringWithFormat:@"%@%@: \"%@\"\n", currentText, speaker, message];
+    [self.textView scrollRangeToVisible:NSMakeRange([self.textView.text length], 0)];
+    [self.textView setScrollEnabled:NO];
+    [self.textView setScrollEnabled:YES];
 }
 
 - (void)didReceiveLog:(NSString*) text
