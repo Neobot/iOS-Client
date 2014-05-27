@@ -23,6 +23,8 @@
 
 #define FOLLOW_THE_FINGER @"FollowFinger"
 #define FOLLOW_THE_FINGER_DELAY @"FollowFingerDelay"
+#define MOVEMENT_TYPE @"MovementType"
+
 
 #define AX12_LIST @"AX12List"
 #define AX12_MAX_SPEED @"AX12MaxSpeed"

@@ -46,6 +46,7 @@
 		9433FE411795BD720092A43B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433FE401795BD720092A43B /* CFNetwork.framework */; };
 		94344DF417F6F889006ABBCD /* PXGStickControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94344DF317F6F889006ABBCD /* PXGStickControlView.m */; };
 		94344DF717F701FB006ABBCD /* PXGAX12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */; };
+		943AD3451935179E0006CCDC /* PXGDeplacementTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943AD3441935179E0006CCDC /* PXGDeplacementTypeTableViewController.m */; };
 		943DF58D180332D800630316 /* PXGSelectAngleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943DF58C180332D800630316 /* PXGSelectAngleViewController.m */; };
 		9440516D1826991C00E3671B /* PXGAX12MovementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9440516C1826991C00E3671B /* PXGAX12MovementManager.m */; };
 		9440BF5818B28819006A4A91 /* PXGParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9440BF5718B28819006A4A91 /* PXGParametersViewController.m */; };
@@ -144,6 +145,8 @@
 		94344DF317F6F889006ABBCD /* PXGStickControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGStickControlView.m; sourceTree = "<group>"; };
 		94344DF517F701FB006ABBCD /* PXGAX12ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12ViewController.h; sourceTree = "<group>"; };
 		94344DF617F701FB006ABBCD /* PXGAX12ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12ViewController.m; sourceTree = "<group>"; };
+		943AD3431935179E0006CCDC /* PXGDeplacementTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGDeplacementTypeTableViewController.h; sourceTree = "<group>"; };
+		943AD3441935179E0006CCDC /* PXGDeplacementTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGDeplacementTypeTableViewController.m; sourceTree = "<group>"; };
 		943DF58B180332D800630316 /* PXGSelectAngleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSelectAngleViewController.h; sourceTree = "<group>"; };
 		943DF58C180332D800630316 /* PXGSelectAngleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSelectAngleViewController.m; sourceTree = "<group>"; };
 		9440516B1826991C00E3671B /* PXGAX12MovementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12MovementManager.h; sourceTree = "<group>"; };
@@ -411,6 +414,8 @@
 		9428504817F84F5500230DD2 /* Options */ = {
 			isa = PBXGroup;
 			children = (
+				943AD3431935179E0006CCDC /* PXGDeplacementTypeTableViewController.h */,
+				943AD3441935179E0006CCDC /* PXGDeplacementTypeTableViewController.m */,
 				94A423A717DCC14000D2E36B /* PXGOptionsViewController.h */,
 				94A423A817DCC14100D2E36B /* PXGOptionsViewController.m */,
 			);
@@ -811,6 +816,7 @@
 				943DF58D180332D800630316 /* PXGSelectAngleViewController.m in Sources */,
 				94835D56179ABDA30024A789 /* PXGMainToolBarViewController.m in Sources */,
 				94835D5C179AC9F80024A789 /* PXGLogViewController.m in Sources */,
+				943AD3451935179E0006CCDC /* PXGDeplacementTypeTableViewController.m in Sources */,
 				9448C5881831606A0064C7F5 /* PXGGroupContentViewController.m in Sources */,
 				94DEC88E179BD066003D8A15 /* PXGStringListViewController.m in Sources */,
 				9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */,

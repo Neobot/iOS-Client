@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PXGCommInterface.h"
+#import "PXGDeplacementTypeTableViewController.h"
 
 @interface PXGParametersViewController : UITableViewController <PXGConnectedViewDelegate, PXGRobotInterfaceDelegate>
 

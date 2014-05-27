@@ -57,6 +57,10 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:SENSORS_RECORD_ACTIVATED] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SENSORS_RECORD_ACTIVATED];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:MOVEMENT_TYPE] == nil)
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:MOVEMENT_TYPE];
+    
+    
     [[PXGCommInterface sharedInstance] registerConnectedViewDelegate:self];
     [[PXGCommInterface sharedInstance] registerRobotInterfaceDelegate:self];
     [[PXGCommInterface sharedInstance] registerServerInterfaceDelegate:self];

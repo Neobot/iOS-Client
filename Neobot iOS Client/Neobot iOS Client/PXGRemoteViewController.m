@@ -341,6 +341,8 @@
     int curentPointIndex = 0;
     int speed = self.speedSlider.value;
     
+    PXGAsservType mvtType = [[NSUserDefaults standardUserDefaults] integerForKey:MOVEMENT_TYPE];
+    
     for (NSDictionary* pointData in trajectoryPoints)
     { 
         ++curentPointIndex;
@@ -353,7 +355,7 @@
                                                       Y:y
                                                   angle:theta
                                      withTrajectoryType:AUTO
-                                         withAsservType:TURN_THEN_MOVE
+                                         withAsservType:mvtType
                                               withSpeed:speed
                                             isStopPoint:(curentPointIndex == nbPoints)];
     }
@@ -367,12 +369,13 @@
 - (void) sendMapPoint:(PXGRPoint*)point
 {
     int speed = self.speedSlider.value;
+    PXGAsservType mvtType = [[NSUserDefaults standardUserDefaults] integerForKey:MOVEMENT_TYPE];
 
     [[PXGCommInterface sharedInstance] sendRobotInX:point.x
         Y:point.y
         angle:point.theta
         withTrajectoryType:AUTO
-        withAsservType:TURN_THEN_MOVE
+        withAsservType:mvtType
         withSpeed:speed
         isStopPoint:YES];
     
@@ -385,6 +388,8 @@
     int curentPointIndex = 0;
     int speed = self.speedSlider.value;
     
+    PXGAsservType mvtType = [[NSUserDefaults standardUserDefaults] integerForKey:MOVEMENT_TYPE];
+    
     for (PXGRPoint* point in trajectoryPoints)
     {
         ++curentPointIndex;
@@ -393,7 +398,7 @@
                                                       Y:point.y
                                                   angle:point.theta
                                      withTrajectoryType:AUTO
-                                         withAsservType:TURN_THEN_MOVE
+                                         withAsservType:mvtType
                                               withSpeed:speed
                                             isStopPoint:(curentPointIndex == nbPoints)];
     }
