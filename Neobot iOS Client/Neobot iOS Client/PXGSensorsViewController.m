@@ -65,12 +65,8 @@
 
 - (void) connectionStatusChangedTo:(PXGConnectionStatus)status
 {
-    if (status == Controlled)
-    {
-        [[PXGCommInterface sharedInstance] enableSensor:BothColorSensor withType:ColorSensor];
-        [[PXGCommInterface sharedInstance] enableSensor:AllMicroswitch withType:MicroswitchSensor];
-        [[PXGCommInterface sharedInstance] enableSensor:AllSharps withType:SharpSensor];
-    }
+    self.btnEnableSensors.enabled = status == Controlled;
+    self.btnDisableSensors.enabled = status == Controlled;
 }
 
 - (void)didReceiveAvoidingSensorsValues:(NSArray*)values
@@ -129,5 +125,19 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:SENSORS_RECORD_ACTIVATED];
 
+}
+
+- (IBAction)onEnableSensors:(id)sender
+{
+    [[PXGCommInterface sharedInstance] enableSensor:BothColorSensor withType:ColorSensor];
+    [[PXGCommInterface sharedInstance] enableSensor:AllMicroswitch withType:MicroswitchSensor];
+    [[PXGCommInterface sharedInstance] enableSensor:AllSharps withType:SharpSensor];
+}
+
+- (IBAction)onDisableSensors:(id)sender
+{
+    [[PXGCommInterface sharedInstance] disableSensor:BothColorSensor withType:ColorSensor];
+    [[PXGCommInterface sharedInstance] disableSensor:AllMicroswitch withType:MicroswitchSensor];
+    [[PXGCommInterface sharedInstance] disableSensor:AllSharps withType:SharpSensor];
 }
 @end

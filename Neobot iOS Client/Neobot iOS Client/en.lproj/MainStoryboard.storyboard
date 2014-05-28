@@ -2900,19 +2900,43 @@
                                     <constraint firstItem="Sl8-Co-rGr" firstAttribute="top" secondItem="fbD-yq-L2Y" secondAttribute="bottom" constant="6" id="fys-21-Xpk"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-wz-1do">
+                                <rect key="frame" x="317" y="9" width="107" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Enable Sensors">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onEnableSensors:" destination="6ac-eB-3vB" eventType="touchUpInside" id="fmL-Xd-3MO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-34-3FE">
+                                <rect key="frame" x="451" y="9" width="111" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Disable Sensors">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDisableSensors:" destination="6ac-eB-3vB" eventType="touchUpInside" id="KTP-rk-Kbm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.97887203467153283" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2Ui-dB-LTh" secondAttribute="trailing" id="2ca-nX-oAN"/>
                             <constraint firstItem="nbg-tN-E2s" firstAttribute="leading" secondItem="V2w-2N-o4L" secondAttribute="leading" id="3Kr-r4-hBN"/>
                             <constraint firstItem="2Ui-dB-LTh" firstAttribute="top" secondItem="nbg-tN-E2s" secondAttribute="bottom" id="4H1-Go-Coa"/>
+                            <constraint firstItem="6Yx-34-3FE" firstAttribute="leading" secondItem="gQ9-wz-1do" secondAttribute="trailing" constant="27" id="95w-Hj-xEx"/>
                             <constraint firstItem="6Y0-vj-1BV" firstAttribute="top" secondItem="2Ui-dB-LTh" secondAttribute="bottom" id="JqZ-ps-9UR"/>
+                            <constraint firstItem="gQ9-wz-1do" firstAttribute="baseline" secondItem="6Yx-34-3FE" secondAttribute="baseline" id="MOM-Ll-XzJ"/>
                             <constraint firstItem="OFJ-we-Yvq" firstAttribute="leading" secondItem="j3s-pd-pay" secondAttribute="trailing" constant="14" id="coM-gv-XR7"/>
                             <constraint firstItem="j3s-pd-pay" firstAttribute="leading" secondItem="V2w-2N-o4L" secondAttribute="leading" constant="20" symbolic="YES" id="lkz-QM-63v"/>
                             <constraint firstItem="2Ui-dB-LTh" firstAttribute="leading" secondItem="V2w-2N-o4L" secondAttribute="leading" id="nJQ-oG-Cbr"/>
+                            <constraint firstItem="gQ9-wz-1do" firstAttribute="leading" secondItem="OFJ-we-Yvq" secondAttribute="trailing" constant="64" id="pAJ-C7-jc9"/>
                             <constraint firstAttribute="trailing" secondItem="nbg-tN-E2s" secondAttribute="trailing" id="pSm-c6-rdA"/>
                             <constraint firstItem="2Ui-dB-LTh" firstAttribute="height" secondItem="nbg-tN-E2s" secondAttribute="height" constant="-1" id="s4o-dV-pzs"/>
                             <constraint firstItem="j3s-pd-pay" firstAttribute="top" secondItem="sOO-v7-hRf" secondAttribute="bottom" constant="8" id="uKz-V4-EJF"/>
+                            <constraint firstItem="gQ9-wz-1do" firstAttribute="baseline" secondItem="OFJ-we-Yvq" secondAttribute="baseline" id="wg8-Da-pYH"/>
                             <constraint firstItem="j3s-pd-pay" firstAttribute="centerY" secondItem="OFJ-we-Yvq" secondAttribute="centerY" id="yyt-Mb-0Et"/>
                             <constraint firstItem="nbg-tN-E2s" firstAttribute="top" secondItem="j3s-pd-pay" secondAttribute="bottom" constant="8" id="ze5-d1-2v2"/>
                         </constraints>
@@ -2920,6 +2944,8 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Sensors" image="sensor.png" id="dwj-VR-4Eg"/>
                     <connections>
+                        <outlet property="btnDisableSensors" destination="6Yx-34-3FE" id="0hX-99-0S8"/>
+                        <outlet property="btnEnableSensors" destination="gQ9-wz-1do" id="8ej-rb-lG6"/>
                         <outlet property="switchRecord" destination="j3s-pd-pay" id="QMD-lM-K4b"/>
                     </connections>
                 </viewController>
