@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9402B26919128295001B732A /* PXGColorCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9402B26819128295001B732A /* PXGColorCollectionViewController.m */; };
+		9403430C19D9883300937BDB /* Table.png in Resources */ = {isa = PBXBuildFile; fileRef = 9403430B19D9883300937BDB /* Table.png */; };
 		941BCCA0192FAA6300C68CB1 /* PXGSelectDelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BCC9F192FAA6300C68CB1 /* PXGSelectDelayViewController.m */; };
 		942049AD17B7C5F000B9E5AC /* PXGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942049AC17B7C5F000B9E5AC /* PXGMapViewController.m */; };
 		942049AF17B7D47100B9E5AC /* Neobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 942049AE17B7D47100B9E5AC /* Neobot.png */; };
@@ -36,7 +37,6 @@
 		9428505017F8599600230DD2 /* PXGAX12CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428504F17F8599600230DD2 /* PXGAX12CollectionViewController.m */; };
 		9428505317F9E5D600230DD2 /* PXGAX12CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */; };
 		9428505617F9E78A00230DD2 /* PXGAX12Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 9428505517F9E78A00230DD2 /* PXGAX12Data.m */; };
-		9428505817FDB63000230DD2 /* Table2014.png in Resources */ = {isa = PBXBuildFile; fileRef = 9428505717FDB63000230DD2 /* Table2014.png */; };
 		942BBE5E17B9461C00EFF044 /* PXGRPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE5D17B9461C00EFF044 /* PXGRPoint.m */; };
 		942BBE6117B9473200EFF044 /* PXGMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 942BBE6017B9473200EFF044 /* PXGMapObject.m */; };
 		942BBE6517BBE1A100EFF044 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BBE6417BBE1A100EFF044 /* QuartzCore.framework */; };
@@ -89,6 +89,7 @@
 /* Begin PBXFileReference section */
 		9402B26719128295001B732A /* PXGColorCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGColorCollectionViewController.h; sourceTree = "<group>"; };
 		9402B26819128295001B732A /* PXGColorCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGColorCollectionViewController.m; sourceTree = "<group>"; };
+		9403430B19D9883300937BDB /* Table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table.png; sourceTree = "<group>"; };
 		9405E88917A04A9300B718B3 /* PXGParametersKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXGParametersKeys.h; sourceTree = "<group>"; };
 		941BCC9E192FAA6300C68CB1 /* PXGSelectDelayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGSelectDelayViewController.h; sourceTree = "<group>"; };
 		941BCC9F192FAA6300C68CB1 /* PXGSelectDelayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGSelectDelayViewController.m; sourceTree = "<group>"; };
@@ -129,7 +130,6 @@
 		9428505217F9E5D600230DD2 /* PXGAX12CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12CollectionCell.m; sourceTree = "<group>"; };
 		9428505417F9E78A00230DD2 /* PXGAX12Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGAX12Data.h; sourceTree = "<group>"; };
 		9428505517F9E78A00230DD2 /* PXGAX12Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGAX12Data.m; sourceTree = "<group>"; };
-		9428505717FDB63000230DD2 /* Table2014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table2014.png; sourceTree = "<group>"; };
 		942BBE5C17B9461C00EFF044 /* PXGRPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGRPoint.h; sourceTree = "<group>"; };
 		942BBE5D17B9461C00EFF044 /* PXGRPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGRPoint.m; sourceTree = "<group>"; };
 		942BBE5F17B9473200EFF044 /* PXGMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGMapObject.h; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				9433FE2F1792AED10092A43B /* Tab Images */,
-				9428505717FDB63000230DD2 /* Table2014.png */,
+				9403430B19D9883300937BDB /* Table.png */,
 				942049AE17B7D47100B9E5AC /* Neobot.png */,
 				9488274817D8FB400055C206 /* NeobotSelected.png */,
 				9488274617D3AEB40055C206 /* target.png */,
@@ -731,7 +731,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PXG;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Pixelgames;
 			};
 			buildConfigurationList = 9425D3781791565000C6E883 /* Build configuration list for PBXProject "Neobot Client" */;
@@ -758,6 +758,7 @@
 			files = (
 				94FFA09418016171009AA63C /* AX-12.png in Resources */,
 				9425D38B1791565000C6E883 /* InfoPlist.strings in Resources */,
+				9403430C19D9883300937BDB /* Table.png in Resources */,
 				9425D3931791565000C6E883 /* Default.png in Resources */,
 				9425D3951791565000C6E883 /* Default@2x.png in Resources */,
 				9425D3971791565000C6E883 /* Default-568h@2x.png in Resources */,
@@ -768,7 +769,6 @@
 				9425D3BC17915AEF00C6E883 /* Android.png in Resources */,
 				9425D3BD17915AEF00C6E883 /* File Transfer - Upload.png in Resources */,
 				9425D3BE17915AEF00C6E883 /* Games.png in Resources */,
-				9428505817FDB63000230DD2 /* Table2014.png in Resources */,
 				9425D3BF17915AEF00C6E883 /* Library.png in Resources */,
 				9425D3C017915AEF00C6E883 /* Network.png in Resources */,
 				9425D3C117915AEF00C6E883 /* sensor.png in Resources */,
@@ -887,7 +887,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};

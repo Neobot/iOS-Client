@@ -52,7 +52,7 @@
     
     [super viewDidLoad];
 
-    UIImage* tableImage = [UIImage imageNamed:@"Table2014.png"];
+    UIImage* tableImage = [UIImage imageNamed:@"Table.png"];
     _scene = [[UIImageView alloc] initWithImage:tableImage];
     self.scene.contentMode = UIViewContentModeScaleAspectFit;
     self.scene.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];

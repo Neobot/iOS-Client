@@ -289,9 +289,10 @@
 
 - (void)updateCurrentStrategyGui
 {
-    if (_currentStrategyIsRunning && _currentStrategy >= 0 && _currentStrategy < [_strategyNames count])
+    if (_currentStrategyIsRunning && _currentStrategy < [_strategyNames count])
     {
-        [self setCurrentStrategyName: _strategyNames[_currentStrategy]];
+        NSString* strName = _currentStrategy >= 0 ? _strategyNames[_currentStrategy] : @"Script";
+        [self setCurrentStrategyName: strName];
         [self.btnStartStrategy setTitle:@"Stop" forState:UIControlStateNormal];
         [self updateConnectionStatusGui:[[PXGCommInterface sharedInstance] connectionStatus]];
         self.btnStartStrategy.enabled = true;
